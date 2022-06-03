@@ -1,0 +1,58 @@
+require 'nvim-treesitter.install'.compilers = { "gcc" , "clang"}
+-- require 'nvim-treesitter.install'.compilers = { "clang"}
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"cpp", "c", "javascript", "java", "html", "cmake", "python"},-- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = {"markdown"}, -- List of parsers to ignore installing
+  enable = true,              -- false will disable the whole extension
+  autotag = {
+    enable = true,
+    filetypes = { "html", "js", "javascript", "javascriptreact", "svelte", "vue", "rescript"},
+  },
+  highlight = {
+    enable = true,
+    disable = {"markdown"},  -- list of language that will be disabled
+    additional_vim_regex_highlighting = true,
+  },
+  indent = {
+	  enable = true,
+  },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+    -- colors = {},
+    -- termcolors = {}
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+
+        -- Or you can define your own textobjects like this
+        -- ["iF"] = {
+        --   python = "(function_definition) @function",
+        --   cpp = "(function_definition) @function",
+        --   c = "(function_definition) @function",
+        --   java = "(method_declaration) @function",
+        -- },
+
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>a"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["<leader>A"] = "@parameter.inner",
+      },
+    },
+  },
+}
