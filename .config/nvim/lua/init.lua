@@ -15,6 +15,7 @@ require('dante/lualine') -- A fast but not fastest status line for neovim
 require('dante/comment') -- Comment plugin
 require('dante/indent-blankline') -- Show Indentation plugins
 require('stay-centered') -- Always make text centered
+require('dante/toggleterm') -- Terminal inside nvim
 require('dante/others') -- Some custom plugins configurations
 
 -- User Lua Configs

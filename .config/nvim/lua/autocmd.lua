@@ -12,7 +12,7 @@ cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]]) -- Comm
 cmd([[
     augroup YankHighlight
         autocmd!
-        autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
+        autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}
     augroup end
     ]])
 

@@ -94,3 +94,4 @@ o.foldlevel = 0
 -- Global Status Line
 o.laststatus = 3
 w.winbar="%f"
+o.guicursor ="n-v-c:block,i-ci-ve:hor25,r-cr:hor20,o:hor50"

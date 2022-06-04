@@ -113,6 +113,7 @@ packer.startup({
     if utils.getOS() == 'Linux' then
       use 'christoomey/vim-tmux-navigator' -- This is for using nvim with tmux
     end
+    use { 'akinsho/toggleterm.nvim' ,tag = 'v1*', config = function() require("toggleterm").setup() end}
 
 -- Browser Navigation Plugins =================================================
 		use 'tyru/open-browser.vim'
@@ -129,7 +130,6 @@ packer.startup({
 		use 'ntpeters/vim-better-whitespace' -- Shows and trailling whitespace
 		use 'tommcdo/vim-exchange' -- Easy text exchange operator for Vim
 		use 'matze/vim-move' -- Move lines up and down
-		use 'jeffkreeftmeijer/vim-numbertoggle' -- Switch absolute to relative number
 		use 'justinmk/vim-sneak' -- Find words using s
 		use 'wesq3/vim-windowswap' -- Exchange Windows with <leader>ww
 
@@ -138,7 +138,6 @@ packer.startup({
     use 'windwp/nvim-autopairs'
 
 		use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
-		use 'mbbill/undotree' -- See undos in a tree buffer
     use 'propet/toggle-fullscreen.nvim' -- Toggle fullScreen with <leader>m
 
     use {'iamcco/markdown-preview.nvim',
@@ -152,6 +151,7 @@ packer.startup({
 
 -- LANGUAGE SPECIFCS =====================================================================
     use 'sophacles/vim-processing' -- Processing plugin helper
+    use 'ixru/nvim-markdown' -- Fork of vim-markdown with extra functionality
 -- THEMES =====================================================================
 
 		use 'lifepillar/vim-gruvbox8'

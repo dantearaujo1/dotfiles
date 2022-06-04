@@ -15,8 +15,8 @@ local plug = { expr = true, noremap = false }
 
 -- MODIFIED KEYS ==============================================================
 
-util.map('n', ';' , ':' , nore)
 util.map('n', ':' , ';' , nore)
+util.map('n', ';' , ':' , nore)
 util.map('x', ';' , ':' , nore)
 util.map('x', ':' , ';' , nore)
 util.map('n', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mode
@@ -180,3 +180,16 @@ util.map('i', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : 
 
 util.map('s', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
 
+-- ================================================================|SNEAK|
+util.map('n', 'f' , '<Plug>Sneak_f', nore)
+util.map('n', 'F' , '<Plug>Sneak_F', nore)
+util.map('n', ':' , '<Plug>Sneak_;' , nore)
+-- ================================================================|MARKDOWNPREVIEW|
+util.map('n', 'ml' , '<Plug>Markdown_CreateLink', nore)
+util.map('n', 'mk' , '<Plug>Markdown_Checkbox', nore)
+--                       |<LEADER><LEADER>MAPPINGS|
+-- ================================================================|LIMELIGHT|
+util.map('n', '<leader><leader>l' , ':Limelight!!<CR>', nore)
+-- ================================================================|GOYO|
+util.map('n', '<leader><leader>g' , ':Goyo<CR>', nore)
+util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)

@@ -289,6 +289,11 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-markdown"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-markdown",
+    url = "https://github.com/ixru/nvim-markdown"
+  },
   ["nvim-notify"] = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-notify",
@@ -444,10 +449,11 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/toggle-fullscreen.nvim",
     url = "https://github.com/propet/toggle-fullscreen.nvim"
   },
-  undotree = {
+  ["toggleterm.nvim"] = {
+    config = { "\27LJ\2\0028\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0" },
     loaded = true,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/undotree",
-    url = "https://github.com/mbbill/undotree"
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
   },
   ["vim-argwrap"] = {
     loaded = true,
@@ -514,11 +520,6 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vim-nightfly-guicolors",
     url = "https://github.com/bluz71/vim-nightfly-guicolors"
   },
-  ["vim-numbertoggle"] = {
-    loaded = true,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vim-numbertoggle",
-    url = "https://github.com/jeffkreeftmeijer/vim-numbertoggle"
-  },
   ["vim-one"] = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vim-one",
@@ -562,6 +563,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\0028\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

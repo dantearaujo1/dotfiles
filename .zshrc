@@ -78,9 +78,11 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export PROCESSING_DIR="/home/devdante/dev/setup/processing"
+export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
+export GOLANG_3RD_DIR="$HOME/go/bin"
+export PROCESSING_DIR="$HOME/dev/setup/processing"
 export LOCALBINARIES="$HOME/.local/bin/"
-export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR
+export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$GOLANG_3RD_DIR
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
