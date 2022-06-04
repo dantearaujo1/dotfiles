@@ -79,10 +79,11 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
-export GOLANG_3RD_DIR="$HOME/go/bin"
+export GOPATH="$HOME/dev/setup/golang"
+export GOBIN="$GOPATH/bin"
 export PROCESSING_DIR="$HOME/dev/setup/processing"
 export LOCALBINARIES="$HOME/.local/bin/"
-export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$GOLANG_3RD_DIR
+export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOPATH:$GOBIN
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
@@ -150,3 +151,5 @@ alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias smd="~/dev/projects/processing/smd"
 alias tmux="TERM=screen-256color-bce tmux"
+alias lg="lazygit"
+alias cls="clear"

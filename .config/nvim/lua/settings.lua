@@ -48,8 +48,12 @@ o.scrolloff = 5                 -- How many lines from bottom to start scroll
 o.history = 500
 o.autowrite = true
 o.swapfile = false
-o.undodir= fn.expand('~/nvim/undodir')
 o.undofile = true
+if(require("utils").getOS() == "Linux")then
+  o.undodir = fn.expand('~/.config/nvim/undodir')
+else
+  o.undodir= fn.expand('~/nvim/undodir')
+end
 o.pumheight = 15  -- Maximum number of items to show in popup menu
 o.pumblend = 5  -- Psudo blend effect for popup menu
 o.shiftround = true
@@ -94,4 +98,4 @@ o.foldlevel = 0
 -- Global Status Line
 o.laststatus = 3
 w.winbar="%f"
-o.guicursor ="n-v-c:block,i-ci-ve:hor25,r-cr:hor20,o:hor50"
+o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
