@@ -1,19 +1,19 @@
--- local gps = require'nvim-gps'
--- gps.setup()
+local gps = require'nvim-gps'
+gps.setup()
 
 
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'horizon',
-    component_separators = {'', ''},
-    section_separators = {'', ''},
+    theme = 'auto',
+    -- component_separators = {'', ''},
+    -- section_separators = {'', ''},
     disabled_filetypes = {}
   },
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch'},
-    -- lualine_c = {'filename', {gps.get_location, cond = gps.is_available}},
+    lualine_c = {'filename', {gps.get_location, cond = gps.is_available}},
     lualine_x = {'filetype', 'fileformat', 'encoding'},
     lualine_y = {'progress'},
     lualine_z = {'location'}

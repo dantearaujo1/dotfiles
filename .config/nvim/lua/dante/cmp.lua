@@ -53,13 +53,13 @@ cmp.setup {
   -- You should specify your *installed* sources.
   sources = {
       { name = 'nvim_lsp' },
-      { name = 'path' },
-      { name = 'buffer' },
-      { name = 'calc' },
-      { name = 'spell' },
-      { name = 'tags' },
       { name = 'nvim_lua' },
       { name = 'luasnip' },
+      { name = 'path' },
+      { name = 'buffer' },
+      { name = 'spell' },
+      { name = 'tags' },
+      { name = 'calc' },
       { name = 'latex_symbols' },
     },
   formatting = {
