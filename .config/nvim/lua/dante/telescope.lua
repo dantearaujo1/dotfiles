@@ -43,7 +43,6 @@ telescope.setup {
       },
       bookmarks = {
         selected_browser = 'edge',
-        -- url_open_command = 'open',
         url_open_plugin = 'open_browser',
         full_path = true,
         firefox_profile_name = nil,

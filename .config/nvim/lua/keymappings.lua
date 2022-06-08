@@ -80,10 +80,10 @@ util.map('n', '<Leader>hl' , '(&hls && v:hlsearch ? ":nohls" : ":set hls")."\n"'
 
 -- Window Operations ==========================================================
 -- Change focus
-util.map('n', '<C-h>' , '<C-w>h', snore)
-util.map('n', '<C-l>' , '<C-w>l', snore)
-util.map('n', '<C-j>' , '<C-w>j', snore)
-util.map('n', '<C-k>' , '<C-w>k', snore)
+-- util.map('n', '<C-h>' , '<C-w>h', snore)
+-- util.map('n', '<C-l>' , '<C-w>l', snore)
+-- util.map('n', '<C-j>' , '<C-w>j', snore)
+-- util.map('n', '<C-k>' , '<C-w>k', snore)
 -- Resize Windows
 util.map('n', '<M-a>' , '<C-w>>', snore)
 util.map('n', '<M-d>' , '<C-w><', snore)
@@ -168,8 +168,8 @@ util.map('n', '<leader>z' , ':lua require("toggle-fullscreen"):toggle_fullscreen
 -- ================================================================|TREESITTER|
 
 -- ================================================================|PROCESSING|
-util.map('n', '<leader>r' , '"<Plug>(processing-run)"', plug)
-util.map('n', '<leader>pk' , '"<Plug>(processing-keyword)"', plug)
+util.map('n', '<leader>R' , '"<Plug>(processing-run)"', plug)
+util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="/tmp/vim-processing/%:p:h:t" --force --run<CR>', nore)
 
 -- " Change current working directory locally and print cwd after that
 util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR>', nore)

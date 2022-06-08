@@ -94,6 +94,7 @@ o.syntax = 'enable'
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 o.foldlevel = 0
+o.foldlevelstart = 20
 
 -- Global Status Line
 o.laststatus = 3

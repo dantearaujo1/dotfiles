@@ -132,8 +132,10 @@ packer.startup({
 
     if utils.getOS() == 'Linux' then
       use 'christoomey/vim-tmux-navigator' -- This is for using nvim with tmux
+      use 'preservim/vimux' -- Send commands to tmux from nvim
     end
     use { 'akinsho/toggleterm.nvim' ,tag = 'v1*', config = function() require("toggleterm").setup() end}
+		use 'skywind3000/asyncrun.vim' -- Make background activitys
 
 -- Browser Navigation Plugins =================================================
 		use 'tyru/open-browser.vim'

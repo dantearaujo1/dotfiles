@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/VisualStudioDark.vim",
     url = "https://github.com/Heorhiy/VisualStudioDark.vim"
   },
+  ["asyncrun.vim"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/asyncrun.vim",
+    url = "https://github.com/skywind3000/asyncrun.vim"
+  },
   badwolf = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/badwolf",
@@ -588,6 +593,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vim-windowswap",
     url = "https://github.com/wesq3/vim-windowswap"
+  },
+  vimux = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vimux",
+    url = "https://github.com/preservim/vimux"
   }
 }
 
@@ -599,13 +609,13 @@ time([[Config for toggleterm.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-cmp ]]
+vim.cmd [[ packadd cmp-vsnip ]]
 vim.cmd [[ packadd cmp-nvim-lua ]]
-vim.cmd [[ packadd friendly-snippets ]]
 vim.cmd [[ packadd cmp-calc ]]
-vim.cmd [[ packadd cmp-latex-symbols ]]
+vim.cmd [[ packadd friendly-snippets ]]
 vim.cmd [[ packadd cmp-nvim-lsp ]]
 vim.cmd [[ packadd cmp-path ]]
-vim.cmd [[ packadd cmp-vsnip ]]
+vim.cmd [[ packadd cmp-latex-symbols ]]
 vim.cmd [[ packadd cmp-emoji ]]
 vim.cmd [[ packadd cmp_luasnip ]]
 vim.cmd [[ packadd cmp-buffer ]]
