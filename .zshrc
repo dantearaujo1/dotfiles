@@ -76,14 +76,22 @@ plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
+# FZF - CONFIGURATIONS
+export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_CTRL_T_COMMAND="fd . ."
+export FZF_CTRL_T_OPTS=""
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+# MAN - CONFIGURATIONS
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
 # export MANPATH="/usr/local/man:$MANPATH"
 export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
 export GOPATH="$HOME/dev/setup/golang"
 export GOBIN="$GOPATH/bin"
 export PROCESSING_DIR="$HOME/dev/setup/processing"
 export LOCALBINARIES="$HOME/.local/bin/"
-export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOPATH:$GOBIN
+export MYSCRIPTS="$HOME/dev/scripts/"
+export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOPATH:$GOBIN:$MYSCRIPTS
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
@@ -150,6 +158,7 @@ alias zn="nvim ~/.config/nvim/lua/init.lua"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias smd="~/dev/projects/processing/smd"
-alias tmux="TERM=screen-256color-bce tmux"
+# alias tmux="TERM=screen-256color-bce tmux"
 alias lg="lazygit"
 alias cls="clear"
+alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs nvim"

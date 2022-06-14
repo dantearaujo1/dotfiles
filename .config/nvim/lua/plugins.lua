@@ -134,6 +134,7 @@ packer.startup({
       use 'christoomey/vim-tmux-navigator' -- This is for using nvim with tmux
       use 'preservim/vimux' -- Send commands to tmux from nvim
     end
+    use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
     use { 'akinsho/toggleterm.nvim' ,tag = 'v1*', config = function() require("toggleterm").setup() end}
 		use 'skywind3000/asyncrun.vim' -- Make background activitys
 
@@ -174,6 +175,11 @@ packer.startup({
 -- LANGUAGE SPECIFCS =====================================================================
     use 'sophacles/vim-processing' -- Processing plugin helper
     use 'ixru/nvim-markdown' -- Fork of vim-markdown with extra functionality
+    -- LATEX ========
+    if utils.getOS() == 'Linux' then
+      use 'lervag/vimtex'
+      use 'matze/vim-tex-fold'
+    end
 -- THEMES =====================================================================
 
 		use 'lifepillar/vim-gruvbox8'

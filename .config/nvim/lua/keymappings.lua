@@ -98,6 +98,8 @@ util.map('n','<leader>Q',':qa<CR>', snore)           -- Quit all opened buffers
 
 -- Terminal Operations ========================================================
 util.map('t', '<ESC>' , '<C-\\><C-n>', nore)
+util.map('n', '<leader>tc' , ':VimuxCloseRunner<CR>', nore)
+util.map('n', '<leader>to' , ':VimuxOpenRunner<CR>', nore)
 
 -- Plugins Keymaps ============================================================
 -- =================================================================|Telescope|
@@ -119,6 +121,7 @@ util.map('n', '<leader>fr' , ':Telescope repo list<CR>', nore)
 
 -- Custom Telescope functions
 util.map('n', '<leader>,' , ':lua require("dante.telescope").search_dotfiles()<CR>', nore)
+util.map('n', '<leader>fa' , ':lua require("dante.telescope").search_from_home()<CR>', nore)
 
 -- ===============================================================|OpenBrowser|
 util.map('n', '<leader>ob' , ':<C-u>call openbrowser#_keymap_smart_search("n")<CR>', nore)
@@ -169,7 +172,12 @@ util.map('n', '<leader>z' , ':lua require("toggle-fullscreen"):toggle_fullscreen
 
 -- ================================================================|PROCESSING|
 util.map('n', '<leader>R' , '"<Plug>(processing-run)"', plug)
-util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="/tmp/vim-processing/%:p:h:t" --force --run<CR>', nore)
+if(util.getOS() == "Linux")
+  then
+  util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="/tmp/vim-processing/%:p:h:t" --force --run<CR>', nore)
+else
+  util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="$TEMP\\vim-processing\\%:p:h:t" --force --run<CR>', nore)
+end
 
 -- " Change current working directory locally and print cwd after that
 util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR>', nore)

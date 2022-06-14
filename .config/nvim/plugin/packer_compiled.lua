@@ -584,15 +584,30 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
   },
+  ["vim-tex-fold"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vim-tex-fold",
+    url = "https://github.com/matze/vim-tex-fold"
+  },
   ["vim-tmux-navigator"] = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
     url = "https://github.com/christoomey/vim-tmux-navigator"
   },
+  ["vim-tpipeline"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vim-tpipeline",
+    url = "https://github.com/vimpostor/vim-tpipeline"
+  },
   ["vim-windowswap"] = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vim-windowswap",
     url = "https://github.com/wesq3/vim-windowswap"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   },
   vimux = {
     loaded = true,
@@ -610,9 +625,9 @@ time([[Config for toggleterm.nvim]], false)
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-cmp ]]
 vim.cmd [[ packadd cmp-vsnip ]]
-vim.cmd [[ packadd cmp-nvim-lua ]]
-vim.cmd [[ packadd cmp-calc ]]
 vim.cmd [[ packadd friendly-snippets ]]
+vim.cmd [[ packadd cmp-calc ]]
+vim.cmd [[ packadd cmp-nvim-lua ]]
 vim.cmd [[ packadd cmp-nvim-lsp ]]
 vim.cmd [[ packadd cmp-path ]]
 vim.cmd [[ packadd cmp-latex-symbols ]]
