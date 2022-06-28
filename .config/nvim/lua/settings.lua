@@ -91,12 +91,12 @@ o.syntax = 'enable'
 -- --------------------------------------------------------------------------
 -- Folding
 -- --------------------------------------------------------------------------
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
 o.foldlevel = 0
 o.foldlevelstart = 20
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Global Status Line
-o.laststatus = 3
-w.winbar="%f"
+o.laststatus = 0
+--w.winbar="%f"
 o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"

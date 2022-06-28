@@ -96,10 +96,14 @@ util.map('n','<leader>w',':update<CR>', snore)       -- Saves if modified and q
 util.map('n','<leader>q',':x<CR>', snore)            --
 util.map('n','<leader>Q',':qa<CR>', snore)           -- Quit all opened buffers
 
+util.map('n','<F3>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp
 -- Terminal Operations ========================================================
-util.map('t', '<ESC>' , '<C-\\><C-n>', nore)
+-- There's an keymap inside init.vim that handles terminals keybings for different
+-- Terminals types like toggleterm and lazygit
+-- util.map('t', '<ESC>' , '<C-\\><C-n>', nore)
 util.map('n', '<leader>tc' , ':VimuxCloseRunner<CR>', nore)
 util.map('n', '<leader>to' , ':VimuxOpenRunner<CR>', nore)
+
 
 -- Plugins Keymaps ============================================================
 -- =================================================================|Telescope|
