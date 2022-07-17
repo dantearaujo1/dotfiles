@@ -1,5 +1,6 @@
 lua require 'init'
 
+let g:tpipeline_cursormoved = 1
 
 function s:AddTerminalNavigation()
 

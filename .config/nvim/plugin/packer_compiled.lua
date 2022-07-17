@@ -115,75 +115,43 @@ _G.packer_plugins = {
     url = "https://github.com/bkad/camelcasemotion"
   },
   ["cmp-buffer"] = {
-    after_files = { "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-buffer/after/plugin/cmp_buffer.lua" },
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-buffer",
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
   ["cmp-calc"] = {
-    after_files = { "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-calc/after/plugin/cmp_calc.lua" },
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-calc",
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/cmp-calc",
     url = "https://github.com/hrsh7th/cmp-calc"
   },
   ["cmp-emoji"] = {
-    after_files = { "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-emoji/after/plugin/cmp_emoji.lua" },
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-emoji",
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/cmp-emoji",
     url = "https://github.com/hrsh7th/cmp-emoji"
   },
   ["cmp-latex-symbols"] = {
-    after_files = { "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-latex-symbols/after/plugin/cmp_latex.lua" },
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-latex-symbols",
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/cmp-latex-symbols",
     url = "https://github.com/kdheepak/cmp-latex-symbols"
   },
   ["cmp-nvim-lsp"] = {
-    after_files = { "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lsp/after/plugin/cmp_nvim_lsp.lua" },
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lsp",
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
   ["cmp-nvim-lua"] = {
-    after_files = { "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lua/after/plugin/cmp_nvim_lua.lua" },
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lua",
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
     url = "https://github.com/hrsh7th/cmp-nvim-lua"
   },
   ["cmp-path"] = {
-    after_files = { "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-path/after/plugin/cmp_path.lua" },
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-path",
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["cmp-vsnip"] = {
-    after_files = { "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-vsnip/after/plugin/cmp_vsnip.vim" },
-    load_after = {},
-    loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
-  },
   cmp_luasnip = {
-    after_files = { "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp_luasnip/after/plugin/cmp_luasnip.lua" },
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/cmp_luasnip",
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["elly.vim"] = {
@@ -202,10 +170,8 @@ _G.packer_plugins = {
     url = "https://github.com/hachy/eva01.vim"
   },
   ["friendly-snippets"] = {
-    load_after = {},
     loaded = true,
-    needs_bufread = false,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/opt/friendly-snippets",
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["glow.nvim"] = {
@@ -267,6 +233,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/material.vim",
     url = "https://github.com/kaicataldo/material.vim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvcode-color-schemes.vim"] = {
     loaded = true,
@@ -613,6 +584,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/vimux",
     url = "https://github.com/preservim/vimux"
+  },
+  ["winbar.nvim"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/winbar.nvim",
+    url = "https://github.com/fgheng/winbar.nvim"
   }
 }
 
@@ -621,20 +597,6 @@ time([[Defining packer_plugins]], false)
 time([[Config for toggleterm.nvim]], true)
 try_loadstring("\27LJ\2\0028\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
 time([[Config for toggleterm.nvim]], false)
--- Load plugins in order defined by `after`
-time([[Sequenced loading]], true)
-vim.cmd [[ packadd nvim-cmp ]]
-vim.cmd [[ packadd cmp-vsnip ]]
-vim.cmd [[ packadd friendly-snippets ]]
-vim.cmd [[ packadd cmp-calc ]]
-vim.cmd [[ packadd cmp-nvim-lua ]]
-vim.cmd [[ packadd cmp-nvim-lsp ]]
-vim.cmd [[ packadd cmp-path ]]
-vim.cmd [[ packadd cmp-latex-symbols ]]
-vim.cmd [[ packadd cmp-emoji ]]
-vim.cmd [[ packadd cmp_luasnip ]]
-vim.cmd [[ packadd cmp-buffer ]]
-time([[Sequenced loading]], false)
 if should_profile then save_profiles() end
 
 end)

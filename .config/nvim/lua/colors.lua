@@ -18,7 +18,6 @@ w.signcolumn = 'yes'				-- Set a Column before numbers
 o.colorcolumn = '80'                            -- Set the Color of Column
 cmd('colorscheme aurora')                    -- Setting the theme
 
-
 -- Diagnostics Signs
 vim.fn.sign_define('DiagnosticSignError', { text = "", texthl = "DiagnosticError" })
 vim.fn.sign_define('DiagnosticSignWarning', { text = "", texthl = "DiagnosticWarning" })

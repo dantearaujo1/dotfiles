@@ -63,44 +63,32 @@ packer.startup({
       }
 
     }
-     use 'onsails/lspkind-nvim' -- for symbols in completion
-     use 'ray-x/lsp_signature.nvim' -- for symbols in completion
+    use 'onsails/lspkind-nvim' -- for symbols in completion
+    use 'ray-x/lsp_signature.nvim' -- for symbols in completion
+    use 'jose-elias-alvarez/null-ls.nvim' -- for symbols in completion
+
 
 -- ============ COMPLETION PLUGINS ============================
-		use 'hrsh7th/nvim-cmp'
+	use 'hrsh7th/nvim-cmp'
     use { 'L3MON4D3/LuaSnip',
     }  -- Pluggin for snippets
-    use { 'rafamadriz/friendly-snippets', -- this is a group of snippets apart
-      after = 'nvim-cmp'
-    }
+    use { 'rafamadriz/friendly-snippets'}
 
     -- === Completion Sources for CMP
     use { 'saadparwaiz1/cmp_luasnip', -- Completion Source for luasnip
-      after = 'nvim-cmp'
     }
-    use { 'hrsh7th/cmp-nvim-lsp',
-      after = 'nvim-cmp'
-    }
+    use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-buffer',
-      after = 'nvim-cmp'
     }
     use { 'hrsh7th/cmp-path',
-      after = 'nvim-cmp'
     }
     use { 'hrsh7th/cmp-nvim-lua',
-      after = 'nvim-cmp'
-    }
-    use { 'hrsh7th/cmp-vsnip',
-      after = 'nvim-cmp'
     }
     use { 'hrsh7th/cmp-calc',
-      after = 'nvim-cmp'
     }
     use { 'hrsh7th/cmp-emoji',
-      after = 'nvim-cmp'
     }
     use { 'kdheepak/cmp-latex-symbols',
-      after = 'nvim-cmp'
     }
 
 -- ============  TELESCOPE PLUGINS & EXTENSIONS  ==============================
@@ -181,7 +169,8 @@ packer.startup({
       use 'matze/vim-tex-fold'
     end
 -- THEMES =====================================================================
-
+    -- Winbar ===========================
+		use 'fgheng/winbar.nvim'
 		use 'lifepillar/vim-gruvbox8'
 		use 'morhetz/gruvbox'
 		use 'sjl/badwolf'

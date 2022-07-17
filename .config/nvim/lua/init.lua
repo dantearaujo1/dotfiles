@@ -6,8 +6,9 @@ require('dante/nvim-autopairs') -- For completing pairs
 require('dante/lspkind') -- This is to put symbols in nvim-cmp
 
 require('dante/cmp') -- This is a completion system to use with lsp and sources
-require('dante/snippets') -- Custom Snippets created by me
 require('dante/nvim-lspconfig') -- Language System Protocol -- Universal
+require('dante/snippets') -- Custom Snippets created by me
+-- require('dante/null-ls') -- Language System Protocol -- Universal
 require('dante/telescope') -- Like a file explorer or FZF
 require('dante/treesitter') -- ColorHighlight for a lot of languages
 require('dante/nvim-dap') -- Another debugger Debug Adapter Protocol -- Universal
@@ -19,6 +20,7 @@ require('stay-centered') -- Always make text centered
 require('dante/toggleterm') -- Terminal inside nvim
 require('dante/latex')
 require('dante/others') -- Some custom plugins configurations
+require('dante/notify') -- Some custom plugins configurations
 
 -- User Lua Configs
 require('utils')

@@ -98,5 +98,7 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Global Status Line
 o.laststatus = 0
---w.winbar="%f"
+o.winbar= "%f"
 o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+
+vim.notify = require("notify")
