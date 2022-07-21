@@ -205,3 +205,5 @@ util.map('n', '<leader><leader>l' , ':Limelight!!<CR>', nore)
 -- ================================================================|GOYO|
 util.map('n', '<leader><leader>g' , ':Goyo<CR>', nore)
 util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
+-- ================================================================|COLORIZER|
+util.map('n', '<leader><leader>c' , ':HexokinaseToggle<CR>', nore)
