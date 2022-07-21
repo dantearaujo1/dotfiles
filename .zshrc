@@ -86,12 +86,12 @@ export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 # export MANPATH="/usr/local/man:$MANPATH"
 export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
-export GOPATH="$HOME/dev/setup/golang"
+export GOPATH="$HOME/dev/setup/golang/go"
 export GOBIN="$GOPATH/bin"
 export PROCESSING_DIR="$HOME/dev/setup/processing"
 export LOCALBINARIES="$HOME/.local/bin/"
 export MYSCRIPTS="$HOME/dev/scripts/"
-export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOPATH:$GOBIN:$MYSCRIPTS
+export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$MYSCRIPTS
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
