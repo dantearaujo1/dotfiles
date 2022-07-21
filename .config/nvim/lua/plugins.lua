@@ -50,6 +50,7 @@ packer.startup({
         use 'rcarriga/nvim-dap-ui' -- UI out of the box
       }
     }
+    use { 'Pocco81/dap-buddy.nvim', module = 'dap-install' }
 
 -- ============ LSP PLUGINS ==============================
 		use { 'neovim/nvim-lspconfig',
@@ -157,7 +158,9 @@ packer.startup({
 		use 'junegunn/goyo.vim'
 		use 'junegunn/limelight.vim'
     use 'ellisonleao/glow.nvim' -- Preview Markdown files with :Glow
-    use 'norcalli/nvim-colorizer.lua' -- Put some color in textcolor
+    use { 'RRethy/vim-hexokinase',
+          run = 'make hexokinase'
+        } -- Put some color in textcolor
 
 
 -- LANGUAGE SPECIFCS =====================================================================
@@ -171,6 +174,10 @@ packer.startup({
 -- THEMES =====================================================================
     -- Winbar ===========================
 		use 'fgheng/winbar.nvim'
+
+    -- ColorColumn ===========================
+		use 'xiyaowong/virtcolumn.nvim'
+
 		use 'lifepillar/vim-gruvbox8'
 		use 'morhetz/gruvbox'
 		use 'sjl/badwolf'
@@ -186,7 +193,6 @@ packer.startup({
 		use 'bignimbus/pop-punk.vim'
 		use 'yassinebridi/vim-purpura'
 		use 'hachy/eva01.vim'
-		use 'ryuta69/elly.vim'
 		use 'cocopon/iceberg.vim'
 		use 'Rigellute/rigel'
 		use 'CreaturePhil/vim-handmade-hero'
