@@ -199,6 +199,9 @@ util.map('n', ':' , '<Plug>Sneak_;' , nore)
 -- ================================================================|MARKDOWNPREVIEW|
 util.map('n', 'ml' , '<Plug>Markdown_CreateLink', nore)
 util.map('n', 'mk' , '<Plug>Markdown_Checkbox', nore)
+-- ================================================================|NVIM-UFO|
+-- util.map('n', 'zR' , ':lua require("ufo").openAllFolds<CR>', nore)
+-- util.map('n', 'zM' , ':lua require("ufo").closeAllFolds<CR>', nore)
 --                       |<LEADER><LEADER>MAPPINGS|
 -- ================================================================|LIMELIGHT|
 util.map('n', '<leader><leader>l' , ':Limelight!!<CR>', nore)

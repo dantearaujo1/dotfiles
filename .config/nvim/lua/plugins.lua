@@ -40,6 +40,7 @@ packer.startup({
         }
       }
 	use 'mattn/emmet-vim'
+	use { 'nvim-neorg/neorg' }
 
 -- ============ DEBUGGER PLUGINS ==============================
 
@@ -124,7 +125,7 @@ packer.startup({
       use 'preservim/vimux' -- Send commands to tmux from nvim
     end
     use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
-    use { 'akinsho/toggleterm.nvim' ,tag = 'v1*', config = function() require("toggleterm").setup() end}
+    use { 'akinsho/toggleterm.nvim' ,branch = 'main', config = function() require("toggleterm").setup() end}
 		use 'skywind3000/asyncrun.vim' -- Make background activitys
 
 -- Browser Navigation Plugins =================================================
@@ -133,7 +134,7 @@ packer.startup({
 
 -- Custom Pluggins ===========================================================
 
-    use 'rcarriga/nvim-notify' -- A notify menu for various things (Debug best)
+    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
     use 'folke/todo-comments.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
     use "arnamak/stay-centered.nvim" -- autocmds for always stay centered
@@ -158,9 +159,6 @@ packer.startup({
 		use 'junegunn/goyo.vim'
 		use 'junegunn/limelight.vim'
     use 'ellisonleao/glow.nvim' -- Preview Markdown files with :Glow
-    use { 'RRethy/vim-hexokinase',
-          run = 'make hexokinase'
-        } -- Put some color in textcolor
 
 
 -- LANGUAGE SPECIFCS =====================================================================
@@ -171,6 +169,11 @@ packer.startup({
       use 'lervag/vimtex'
       use 'matze/vim-tex-fold'
     end
+-- UI Pluggins ===========================================================
+    use { 'RRethy/vim-hexokinase',
+          run = 'make hexokinase'
+        } -- Put some color in textcolor
+    use 'rcarriga/nvim-notify' -- A notify menu for various things (Debug best)
 -- THEMES =====================================================================
     -- Winbar ===========================
 		use 'fgheng/winbar.nvim'

@@ -236,6 +236,11 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/material.vim",
     url = "https://github.com/kaicataldo/material.vim"
   },
+  neorg = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/neorg",
+    url = "https://github.com/nvim-neorg/neorg"
+  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -321,6 +326,11 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow",
     url = "https://github.com/p00f/nvim-ts-rainbow"
   },
+  ["nvim-ufo"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-ufo",
+    url = "https://github.com/kevinhwang91/nvim-ufo"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -365,6 +375,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
+  },
+  ["promise-async"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/promise-async",
+    url = "https://github.com/kevinhwang91/promise-async"
   },
   rigel = {
     loaded = true,

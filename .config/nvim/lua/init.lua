@@ -19,6 +19,7 @@ require('dante/toggleterm') -- Terminal inside nvim
 require('dante/latex')
 require('dante/others') -- Some custom plugins configurations
 require('dante/notify') -- Some custom plugins configurations
+require('dante/neorg') -- Some custom plugins configurations
 
 -- User Lua Configs
 require('utils')
