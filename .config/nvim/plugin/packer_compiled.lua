@@ -236,10 +236,20 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/material.vim",
     url = "https://github.com/kaicataldo/material.vim"
   },
+  ["neo-tree.nvim"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
+    url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
+  },
   neorg = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/neorg",
     url = "https://github.com/nvim-neorg/neorg"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -326,11 +336,6 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow",
     url = "https://github.com/p00f/nvim-ts-rainbow"
   },
-  ["nvim-ufo"] = {
-    loaded = true,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-ufo",
-    url = "https://github.com/kevinhwang91/nvim-ufo"
-  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -375,11 +380,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
-  },
-  ["promise-async"] = {
-    loaded = true,
-    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/promise-async",
-    url = "https://github.com/kevinhwang91/promise-async"
   },
   rigel = {
     loaded = true,

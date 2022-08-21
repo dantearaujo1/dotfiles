@@ -92,17 +92,11 @@ o.syntax = 'enable'
 -- Folding
 -- --------------------------------------------------------------------------
 -- Old Folding
--- o.foldlevel = 0
--- o.foldlevelstart = 20
--- opt.foldmethod = "expr"
--- opt.foldexpr = "nvim_treesitter#foldexpr()"
--- New Folding for UFO FOLDings
+o.foldlevel = 0
+o.foldlevelstart = 20
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-o.foldcolumn = '1'
-o.foldlevel = 99
-o.foldlevelstart = -1
-o.foldenable = true
-require('ufo').setup()
 
 -- Global Status Line
 o.laststatus = 0

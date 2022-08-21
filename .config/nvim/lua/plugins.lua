@@ -133,8 +133,14 @@ packer.startup({
 		use 'tyru/open-browser-github.vim' -- Open github page in browser <leader>og
 
 -- Custom Pluggins ===========================================================
-
-    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+    use({ "nvim-neo-tree/neo-tree.nvim",
+      branch = "v2.x",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "kyazdani42/nvim-web-devicons",
+        "MunifTanjim/nui.nvim",
+        }
+    }) -- File explorer
     use 'folke/todo-comments.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
     use "arnamak/stay-centered.nvim" -- autocmds for always stay centered
