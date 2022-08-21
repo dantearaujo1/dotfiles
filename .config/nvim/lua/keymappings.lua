@@ -207,3 +207,7 @@ util.map('n', '<leader><leader>g' , ':Goyo<CR>', nore)
 util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
 -- ================================================================|COLORIZER|
 util.map('n', '<leader><leader>c' , ':HexokinaseToggle<CR>', nore)
+-- ================================================================|NEOTREE|
+util.map('n', '<leader><leader>e' , ':NeoTreeShowToggle<CR>', nore)
+-- ================================================================|LAZYGIT|
+util.map('n',"<leader>git", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
