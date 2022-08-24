@@ -110,10 +110,10 @@ packer.startup({
     use 'nvim-telescope/telescope-project.nvim' -- Switch between projects
     use 'nvim-telescope/telescope-file-browser.nvim' -- File Browser Extension
     use 'LinArcX/telescope-env.nvim' -- File Browser Extension
-		use {'nvim-telescope/telescope-fzf-native.nvim',
-      run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-    }
-    if utils.getOS() == 'Linux' then
+    use {'nvim-telescope/telescope-fzf-native.nvim',
+run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+}
+    if (utils.getOS() == 'Linux') then
       use 'nvim-telescope/telescope-media-files.nvim' --  See media in telescope
       utils.map('n','<leader>fm', ':lua require("telescope").extensions.media_files.media_files()<CR>', {noremap = true})
     end
@@ -123,8 +123,8 @@ packer.startup({
     if utils.getOS() == 'Linux' then
       use 'christoomey/vim-tmux-navigator' -- This is for using nvim with tmux
       use 'preservim/vimux' -- Send commands to tmux from nvim
+      use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
     end
-    use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
     use { 'akinsho/toggleterm.nvim' ,branch = 'main', config = function() require("toggleterm").setup() end}
 		use 'skywind3000/asyncrun.vim' -- Make background activitys
 
@@ -163,7 +163,7 @@ packer.startup({
     use 'tpope/vim-surround' -- Change surroundings (parentheses, brackets ...)
     use 'windwp/nvim-autopairs'
 
-		use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
+use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
     use 'propet/toggle-fullscreen.nvim' -- Toggle fullScreen with <leader>m
 
     use {'iamcco/markdown-preview.nvim',
