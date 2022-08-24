@@ -141,6 +141,13 @@ packer.startup({
         "MunifTanjim/nui.nvim",
         }
     }) -- File explorer
+    use {
+      's1n7ax/nvim-window-picker',
+      tag = 'v1.*',
+      config = function()
+          require'window-picker'.setup()
+      end,
+    }
     use 'folke/todo-comments.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
     use "arnamak/stay-centered.nvim" -- autocmds for always stay centered

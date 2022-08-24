@@ -17,9 +17,10 @@ require('dante/indent-blankline') -- Show Indentation plugins
 require('stay-centered') -- Always make text centered
 require('dante/toggleterm') -- Terminal inside nvim
 require('dante/latex')
+require('dante/notify') -- Notify UI of plugins
+require('dante/neorg') -- Org files for organization
+require('dante/emmet') -- Emmet for html and css
 require('dante/others') -- Some custom plugins configurations
-require('dante/notify') -- Some custom plugins configurations
-require('dante/neorg') -- Some custom plugins configurations
 
 -- User Lua Configs
 require('utils')

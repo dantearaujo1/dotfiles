@@ -209,6 +209,7 @@ util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
 util.map('n', '<leader><leader>c' , ':HexokinaseToggle<CR>', nore)
 -- ================================================================|NEOTREE|
 util.map('n', '<leader><leader>e' , ':NeoTreeShowToggle<CR>', nore)
+util.map('n', '<leader><leader>de' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
 -- ================================================================|LAZYGIT|
 util.map('n',"<leader>git", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 util.map('n',"<leader>lgd", "<cmd>lua _lazygit_dotfiles_toggle()<CR>", {noremap = true, silent = true})
