@@ -180,7 +180,7 @@ if(util.getOS() == "Linux")
   then
   util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="/tmp/vim-processing/%:p:h:t" --force --run<CR>', nore)
 else
-  util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="$TEMP\\vim-processing\\%:p:h:t" --force --run<CR>', nore)
+  util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output="$TEMP\\vim-processing\\%:p:h:t" --force --run<CR>', nore)
 end
 
 -- " Change current working directory locally and print cwd after that
