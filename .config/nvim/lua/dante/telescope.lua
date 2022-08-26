@@ -161,7 +161,8 @@ M.search_from_home = function()
   if system_name == "Windows" then
     require("telescope.builtin").find_files({
       prompt_title = "< DANTE  - Windows>",
-      cwd = "D:\\Code",
+      cwd = "~/",
+      hidden = true,
     })
   elseif system_name == "Linux" then
     require("telescope.builtin").find_files({
@@ -175,7 +176,8 @@ M.search_dotfiles = function()
   if system_name == "Windows" then
     require("telescope.builtin").find_files({
       prompt_title = "< NVIM RC - DANTE  - Windows>",
-      cwd = "~/nvim",
+      cwd = "~\\.config\\nvim",
+      search_dirs = {"lua"},
     })
   elseif system_name == "Linux" then
     require("telescope.builtin").find_files({

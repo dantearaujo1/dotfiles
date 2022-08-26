@@ -80,10 +80,13 @@ util.map('n', '<Leader>hl' , '(&hls && v:hlsearch ? ":nohls" : ":set hls")."\n"'
 
 -- Window Operations ==========================================================
 -- Change focus
--- util.map('n', '<C-h>' , '<C-w>h', snore)
--- util.map('n', '<C-l>' , '<C-w>l', snore)
--- util.map('n', '<C-j>' , '<C-w>j', snore)
--- util.map('n', '<C-k>' , '<C-w>k', snore)
+if(util.getOS() == "Linux") then
+else
+  util.map('n', '<C-h>' , '<C-w>h', snore)
+  util.map('n', '<C-l>' , '<C-w>l', snore)
+  util.map('n', '<C-j>' , '<C-w>j', snore)
+  util.map('n', '<C-k>' , '<C-w>k', snore)
+end
 -- Resize Windows
 util.map('n', '<M-a>' , '<C-w>>', snore)
 util.map('n', '<M-d>' , '<C-w><', snore)
@@ -101,8 +104,11 @@ util.map('n','<F3>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp
 -- There's an keymap inside init.vim that handles terminals keybings for different
 -- Terminals types like toggleterm and lazygit
 -- util.map('t', '<ESC>' , '<C-\\><C-n>', nore)
-util.map('n', '<leader>tc' , ':VimuxCloseRunner<CR>', nore)
-util.map('n', '<leader>to' , ':VimuxOpenRunner<CR>', nore)
+if(util.getOS() == "Linux") then
+  util.map('n', '<leader>tc' , ':VimuxCloseRunner<CR>', nore)
+  util.map('n', '<leader>to' , ':VimuxOpenRunner<CR>', nore)
+else
+end
 
 
 -- Plugins Keymaps ============================================================
@@ -180,7 +186,7 @@ if(util.getOS() == "Linux")
   then
   util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="/tmp/vim-processing/%:p:h:t" --force --run<CR>', nore)
 else
-  util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="$TEMP\\vim-processing\\%:p:h:t" --force --run<CR>', nore)
+  util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output="$TEMP\\vim-processing\\%:p:h:t" --force --run<CR>', nore)
 end
 
 -- " Change current working directory locally and print cwd after that
