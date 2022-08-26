@@ -52,7 +52,7 @@ o.undofile = true
 if(require("utils").getOS() == "Linux")then
   o.undodir = fn.expand('~/.config/nvim/undodir')
 else
-  o.undodir= fn.expand('~/nvim/undodir')
+  o.undodir= fn.expand('~/.config/nvim/undodir')
 end
 o.pumheight = 15  -- Maximum number of items to show in popup menu
 o.pumblend = 5  -- Psudo blend effect for popup menu

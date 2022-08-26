@@ -346,6 +346,12 @@ _G.packer_plugins = {
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-web-nonicons",
     url = "https://github.com/yamatsum/nvim-web-nonicons"
   },
+  ["nvim-window-picker"] = {
+    config = { "\27LJ\2\2;\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18window-picker\frequire\0" },
+    loaded = true,
+    path = "/home/devdante/.local/share/nvim/site/pack/packer/start/nvim-window-picker",
+    url = "https://github.com/s1n7ax/nvim-window-picker"
+  },
   ["oceanic-next"] = {
     loaded = true,
     path = "/home/devdante/.local/share/nvim/site/pack/packer/start/oceanic-next",
@@ -647,6 +653,10 @@ end
 time([[Config for toggleterm.nvim]], true)
 try_loadstring("\27LJ\2\0028\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
 time([[Config for toggleterm.nvim]], false)
+-- Config for: nvim-window-picker
+time([[Config for nvim-window-picker]], true)
+try_loadstring("\27LJ\2\2;\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18window-picker\frequire\0", "config", "nvim-window-picker")
+time([[Config for nvim-window-picker]], false)
 if should_profile then save_profiles() end
 
 end)
