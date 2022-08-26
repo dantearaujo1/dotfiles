@@ -183,9 +183,15 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
       use 'matze/vim-tex-fold'
     end
 -- UI Pluggins ===========================================================
-    use { 'RRethy/vim-hexokinase',
-          run = 'make hexokinase'
-        } -- Put some color in textcolor
+    if (utils.getOS() == 'Linux') then
+      use { 'RRethy/vim-hexokinase',
+            run = 'make hexokinase'
+          } -- Put some color in textcolor
+    else
+      use { 'RRethy/vim-hexokinase',
+            run = 'mingw32-make hexokinase'
+          } -- Put some color in textcolor
+    end
     use 'rcarriga/nvim-notify' -- A notify menu for various things (Debug best)
 -- THEMES =====================================================================
     -- Winbar ===========================
