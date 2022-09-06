@@ -48,6 +48,9 @@ util.map('n', '0' , 'g0' , snore)
 util.map('n', 'Y' , 'y$' , nore)
 util.map('n', '<leader>Y' , '"+y$' , nore) -- Yank line to system clipboard
 util.map('n', '<leader>y' , '"+y' , nore) -- Yank to system clipboard
+if(util.getOS() == "Linux") then
+  util.map('v', '<leader>cp' , ':\'<,\'>w !clip.exe<CR>' , nore) -- Yank to system clipboard inside visual mode and wsl
+end
 
 -- Go to start or end of line easier
 util.map('n', 'H' , '^' , nore)
@@ -186,6 +189,9 @@ if(util.getOS() == "Linux")
   then
   util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="/tmp/vim-processing/%:p:h:t" --force --run<CR>', nore)
 else
+  -- local output_dir = "\"" .. vim.fn.expand("$TEMP") .. "\\vim-procesisng\\" .. sketch_name .. "\""
+  -- util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=bottom -close processing-java --sketch=".. sketch_path .. " ".. sketch_path .. "--output=" .. output_dir .. " --force --run<CR>", nore)
+
   util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output=vim-processing/%:p:h:t --force --run<CR>", nore)
 end
 
