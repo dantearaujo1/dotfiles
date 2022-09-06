@@ -72,11 +72,11 @@ cmp.setup {
       mode = 'symbol',
       maxwidth = 50,
       menu = ({
-        buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
         latex_symbols = "[Latex]",
+        buffer = "[Buffer]",
       })
       -- before = function (entry, vim_item)
         -- ...
