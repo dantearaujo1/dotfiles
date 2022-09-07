@@ -1,2 +1,32 @@
 .dotfiles
 Configurations/
+.config/.dbus-keyrings/
+.config/.gem/
+.config/.git-for-windows-updater
+.config/.gitconfig
+.config/.gitignore
+.config/.ssh/
+.config/.viminfo
+.config/configstore/
+.config/lazygit/
+.config/nvim/lesshst
+.config/nvim/node-client.log
+.config/nvim/nvim-data/
+.config/nvim/nvim/
+.config/nvim/undodir/
+.config/nvim/plugin/
+.config/scoop/
+.config/user_aliases.cmd
+.gitconfig
+3D Modeling/
+Android/
+Databases/
+GameEngines/
+Git/
+Installed Languages/
+NodeJS/
+Package Managers/
+Projects/
+Scripts/
+Terminals/
+Tools/
