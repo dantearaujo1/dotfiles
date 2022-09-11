@@ -24,21 +24,11 @@ packer.startup({
 	 use {'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
       }
-  use { 'nvim-treesitter/nvim-treesitter-textobjects',
-        requires = {
-          'nvim-treesitter/nvim-treesitter', -- Text objects for ts
-        }
-      }
-  use { 'p00f/nvim-ts-rainbow',
-        requires = {
-          'nvim-treesitter/nvim-treesitter', -- Raibow parenthesis for ts
-        }
-      }
-  use { 'windwp/nvim-ts-autotag',
-        requires = {
-          'nvim-treesitter/nvim-treesitter', -- Auto tag for html,javascript...
-        }
-      }
+  use { 'nvim-treesitter/nvim-treesitter-textobjects'}
+  use { 'p00f/nvim-ts-rainbow'}
+  use { 'windwp/nvim-ts-autotag'}
+
+	use 'David-Kunz/markid'
 	use 'mattn/emmet-vim'
 	use { 'nvim-neorg/neorg' }
 
@@ -54,17 +44,8 @@ packer.startup({
     use { 'Pocco81/dap-buddy.nvim', module = 'dap-install' }
 
 -- ============ LSP PLUGINS ==============================
-		use { 'neovim/nvim-lspconfig',
-      requires = {
-
-      }
-    }
-    use { 'williamboman/nvim-lsp-installer',
-      requires = {
-        'neovim/nvim-lspconfig'
-      }
-
-    }
+		use { 'neovim/nvim-lspconfig'}
+    use { 'williamboman/nvim-lsp-installer'}
     use 'onsails/lspkind-nvim' -- for symbols in completion
     use 'ray-x/lsp_signature.nvim' -- for symbols in completion
     use 'jose-elias-alvarez/null-ls.nvim' -- for symbols in completion
@@ -72,26 +53,18 @@ packer.startup({
 
 -- ============ COMPLETION PLUGINS ============================
 	use 'hrsh7th/nvim-cmp'
-    use { 'L3MON4D3/LuaSnip',
-    }  -- Pluggin for snippets
-    use { 'rafamadriz/friendly-snippets'}
+  use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
 
-    -- === Completion Sources for CMP
-    use { 'saadparwaiz1/cmp_luasnip', -- Completion Source for luasnip
-    }
-    use { 'hrsh7th/cmp-nvim-lsp' }
-    use { 'hrsh7th/cmp-buffer',
-    }
-    use { 'hrsh7th/cmp-path',
-    }
-    use { 'hrsh7th/cmp-nvim-lua',
-    }
-    use { 'hrsh7th/cmp-calc',
-    }
-    use { 'hrsh7th/cmp-emoji',
-    }
-    use { 'kdheepak/cmp-latex-symbols',
-    }
+  -- === Completion Sources for CMP
+  use 'saadparwaiz1/cmp_luasnip' -- Completion Source for luasnip
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-nvim-lua'
+  use 'hrsh7th/cmp-calc'
+  use 'hrsh7th/cmp-emoji'
+  use 'kdheepak/cmp-latex-symbols'
 
 -- ============  TELESCOPE PLUGINS & EXTENSIONS  ==============================
 
@@ -113,14 +86,14 @@ packer.startup({
     use {'nvim-telescope/telescope-fzf-native.nvim',
 run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
 }
-    if (utils.getOS() == 'Linux') then
+    if (util.getOS() == 'Linux') then
       use 'nvim-telescope/telescope-media-files.nvim' --  See media in telescope
-      utils.map('n','<leader>fm', ':lua require("telescope").extensions.media_files.media_files()<CR>', {noremap = true})
+      util.map('n','<leader>fm', ':lua require("telescope").extensions.media_files.media_files()<CR>', {noremap = true})
     end
 
 -- Terminal ============================================
 
-    if utils.getOS() == 'Linux' then
+    if util.getOS() == 'Linux' then
       use 'christoomey/vim-tmux-navigator' -- This is for using nvim with tmux
       use 'preservim/vimux' -- Send commands to tmux from nvim
       use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
@@ -178,14 +151,14 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
     use 'sophacles/vim-processing' -- Processing plugin helper
     use 'ixru/nvim-markdown' -- Fork of vim-markdown with extra functionality
     -- LATEX ========
-    if utils.getOS() == 'Linux' then
+    if util.getOS() == 'Linux' then
       use 'lervag/vimtex'
       use 'matze/vim-tex-fold'
     end
 -- UI Pluggins ===========================================================
     use 'nvim-colortils/colortils.nvim' -- ColorPicker
 
-    if (utils.getOS() == 'Linux') then
+    if (util.getOS() == 'Linux') then
       use { 'RRethy/vim-hexokinase',
             run = 'make hexokinase'
           } -- Put some color in textcolor
@@ -196,6 +169,7 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
     end
     use 'rcarriga/nvim-notify' -- A notify menu for various things (Debug best)
 -- THEMES =====================================================================
+
     -- Winbar ===========================
 		use 'fgheng/winbar.nvim'
 

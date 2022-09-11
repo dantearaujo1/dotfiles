@@ -1,12 +1,12 @@
 require 'nvim-treesitter.install'.compilers = { "gcc" , "clang"}
--- require 'nvim-treesitter.install'.compilers = { "clang"}
+
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"cpp", "c", "javascript", "java", "html", "cmake", "python", "norg"},-- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = {"cpp", "c", "javascript", "java", "html", "cmake", "python"},-- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {"markdown"}, -- List of parsers to ignore installing
   enable = true,              -- false will disable the whole extension
   autotag = {
     enable = true,
-    filetypes = { "html", "js", "javascript", "javascriptreact", "svelte", "vue", "rescript"},
+    filetypes = { "html", "js", "javascript", "javascriptreact", "svelte", "vue", "rescript", "typescript"},
   },
   highlight = {
     enable = true,
@@ -82,6 +82,10 @@ require'nvim-treesitter.configs'.setup {
         ["[M"] = "@function.outer",
         ["[]"] = "@class.outer",
       },
-    }
+    },
+    markid = {enable = true}
   },
 }
+
+
+
