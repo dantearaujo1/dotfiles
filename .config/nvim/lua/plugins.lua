@@ -24,13 +24,13 @@ packer.startup({
 	 use {'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
       }
-  use { 'nvim-treesitter/nvim-treesitter-textobjects'}
-  use { 'p00f/nvim-ts-rainbow'}
-  use { 'windwp/nvim-ts-autotag'}
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'p00f/nvim-ts-rainbow'
+  use 'windwp/nvim-ts-autotag'
 
 	use 'David-Kunz/markid'
+  use 'nvim-neorg/neorg'
 	use 'mattn/emmet-vim'
-	use { 'nvim-neorg/neorg' }
 
 -- ============ DEBUGGER PLUGINS ==============================
 
@@ -44,8 +44,8 @@ packer.startup({
     use { 'Pocco81/dap-buddy.nvim', module = 'dap-install' }
 
 -- ============ LSP PLUGINS ==============================
-		use { 'neovim/nvim-lspconfig'}
-    use { 'williamboman/nvim-lsp-installer'}
+		use 'neovim/nvim-lspconfig'
+    use 'williamboman/nvim-lsp-installer'
     use 'onsails/lspkind-nvim' -- for symbols in completion
     use 'ray-x/lsp_signature.nvim' -- for symbols in completion
     use 'jose-elias-alvarez/null-ls.nvim' -- for symbols in completion
@@ -98,7 +98,7 @@ run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --con
       use 'preservim/vimux' -- Send commands to tmux from nvim
       use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
     end
-    use { 'akinsho/toggleterm.nvim' ,branch = 'main', config = function() require("toggleterm").setup() end}
+    use { 'akinsho/toggleterm.nvim', branch = 'main', config = function() require("toggleterm").setup() end}
 		use 'skywind3000/asyncrun.vim' -- Make background activitys
 
 -- Browser Navigation Plugins =================================================
