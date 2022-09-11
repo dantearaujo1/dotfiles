@@ -6,9 +6,6 @@ local o = vim.o -- For Global Options
 local w = vim.wo -- For Window Local Options
 -- local b = vim.bo -- For the Buffer local options
 
--- --------------------------------------------------------------------------
--- Colorscheme
--- --------------------------------------------------------------------------
 
 o.termguicolors = true
 g.termguicolors = true
@@ -16,7 +13,56 @@ o.guifont = 'Hack Nerd Font Mono:h12'       -- Set GUI Font
 w.cursorline = true
 w.signcolumn = 'yes'				-- Set a Column before numbers
 o.colorcolumn = '80'                            -- Set the Color of Column
-cmd('colorscheme aurora')                    -- Setting the theme
+-- --------------------------------------------------------------------------
+-- Colorscheme
+-- --------------------------------------------------------------------------
+require('nvim-tundra').setup({
+  transparent_background = false,
+  editor = {
+    search = {},
+    substitute = {},
+  },
+  syntax = {
+    booleans = { bold = true, italic = true },
+    comments = { bold = true, italic = true },
+    conditionals = {},
+    constants = { bold = true },
+    functions = {},
+    keywords = {},
+    loops = {},
+    numbers = { bold = true },
+    operators = { bold = true },
+    punctuation = {},
+    strings = {},
+    types = { italic = true },
+  },
+  diagnostics = {
+    errors = {},
+    warnings = {},
+    information = {},
+    hints = {},
+  },
+  plugins = {
+    lsp = true,
+    treesitter = true,
+    cmp = true,
+    context = true,
+    dbui = true,
+    gitsigns = true,
+    telescope = true,
+  },
+  overwrite = {
+    colors = {},
+    highlights = {},
+  },
+})
+
+vim.opt.background = 'dark'
+-- cmd('colorscheme aurora')                    -- Setting the last used theme
+cmd('colorscheme tundra')                    -- Setting the theme
+-- --------------------------------------------------------------------------
+
+
 
 -- Diagnostics Signs
 vim.fn.sign_define('DiagnosticSignError', { text = "", texthl = "DiagnosticError" })

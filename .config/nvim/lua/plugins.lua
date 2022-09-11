@@ -203,6 +203,7 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
 		use 'xiyaowong/virtcolumn.nvim'
 
 		use 'lifepillar/vim-gruvbox8'
+		use 'sam4llis/nvim-tundra'
 		use 'morhetz/gruvbox'
 		use 'sjl/badwolf'
 		use 'ajmwagar/vim-deus'
