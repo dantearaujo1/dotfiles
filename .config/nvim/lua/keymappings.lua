@@ -185,15 +185,16 @@ util.map('n', '<leader>z' , ':lua require("toggle-fullscreen"):toggle_fullscreen
 
 -- ================================================================|PROCESSING|
 util.map('n', '<leader>R' , '"<Plug>(processing-run)"', plug)
-if(util.getOS() == "Linux")
-  then
-  util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="/tmp/vim-processing/%:p:h:t" --force --run<CR>', nore)
-else
-  -- local output_dir = "\"" .. vim.fn.expand("$TEMP") .. "\\vim-procesisng\\" .. sketch_name .. "\""
-  -- util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=bottom -close processing-java --sketch=".. sketch_path .. " ".. sketch_path .. "--output=" .. output_dir .. " --force --run<CR>", nore)
 
-  util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output=vim-processing/%:p:h:t --force --run<CR>", nore)
-end
+-- if(util.getOS() == "Linux")
+--   then
+--   util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="/tmp/vim-processing/%:p:h:t" --force --run<CR>', nore)
+-- else
+--   -- local output_dir = "\"" .. vim.fn.expand("$TEMP") .. "\\vim-procesisng\\" .. sketch_name .. "\""
+--   -- util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=bottom -close processing-java --sketch=".. sketch_path .. " ".. sketch_path .. "--output=" .. output_dir .. " --force --run<CR>", nore)
+--
+--   util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output=vim-processing/%:p:h:t --force --run<CR>", nore)
+-- end
 
 -- " Change current working directory locally and print cwd after that
 util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR>', nore)
