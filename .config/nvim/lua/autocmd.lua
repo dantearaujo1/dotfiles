@@ -25,15 +25,3 @@ api.nvim_create_autocmd("BufEnter", {
   pattern = "*.js"
 })
 
-local command_option = '';
-if (util.getOS() == "Linux") then
-  command_option =  "lua require('utils').map('n','<localleader>r',':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output=\"/tmp/vim-processing/%:p:h:t\" --force --run<CR>', {noremap = true})"
-else
-  command_option =  "lua require('utils').map('n','<localleader>r',':AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output=" .. vim.fn.expand("$TEMP") .. "\"/vim-processing/%:p:h:t\" --force --run<CR>', {noremap = true})"
-end
-
-api.nvim_create_autocmd("BufEnter", {
-  command = command_option,
-  group = asyncGrp,
-  pattern = "*.pde"
-})
