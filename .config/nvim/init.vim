@@ -2,6 +2,8 @@ lua require 'init'
 
 if has('unix')
 	let g:tpipeline_cursormoved = 1
+  let &t_fe = "\<Esc>[?1004h"
+  let &t_fd = "\<Esc>[?1004l"
 
 	function s:AddTerminalNavigation()
 
