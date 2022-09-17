@@ -146,6 +146,8 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
 		use 'junegunn/limelight.vim'
     use 'ellisonleao/glow.nvim' -- Preview Markdown files with :Glow
     use 'vim-scripts/ReplaceWithRegister' -- Preview Markdown files with :Glow
+    use 'psliwka/vim-smoothie' -- Preview Markdown files with :Glow
+    use 'uga-rosa/ccc.nvim' -- Color Picker
 
 
 -- LANGUAGE SPECIFCS =====================================================================
@@ -157,7 +159,7 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
       use 'matze/vim-tex-fold'
     end
 -- UI Pluggins ===========================================================
-    use 'nvim-colortils/colortils.nvim' -- ColorPicker
+    -- use 'nvim-colortils/colortils.nvim' -- ColorPicker
 
     if (util.getOS() == 'Linux') then
       use { 'RRethy/vim-hexokinase',

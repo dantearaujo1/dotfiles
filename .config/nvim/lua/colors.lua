@@ -10,6 +10,7 @@ o.guifont = 'Hack Nerd Font Mono:h12'       -- Set GUI Font
 w.cursorline = true
 w.signcolumn = 'yes'				-- Set a Column before numbers
 o.colorcolumn = '80'                            -- Set the Color of Column
+--
 -- --------------------------------------------------------------------------
 -- Colorscheme
 -- --------------------------------------------------------------------------
@@ -58,8 +59,6 @@ o.colorcolumn = '80'                            -- Set the Color of Column
 vim.opt.background = 'dark'
 cmd('colorscheme dracula')                    -- Setting the theme
 -- --------------------------------------------------------------------------
-
-
 
 -- Diagnostics Signs
 vim.fn.sign_define('DiagnosticSignError', { text = "", texthl = "DiagnosticError" })

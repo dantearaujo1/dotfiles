@@ -218,6 +218,7 @@ util.map('n', '<leader><leader>g' , ':Goyo<CR>', nore)
 util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
 -- ================================================================|COLORIZER|
 util.map('n', '<leader><leader>c' , ':HexokinaseToggle<CR>', nore)
+util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
 -- ================================================================|NEOTREE|
 util.map('n', '<leader><leader>e' , ':NeoTreeShowToggle<CR>', nore)
 util.map('n', '<leader><leader>de' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
