@@ -1,10 +1,7 @@
 local cmd = vim.cmd -- Execute Vim Commands
--- local fn = vim.fn -- Call Vim functions
 local g = vim.g -- Access Global Variables
--- local opt = vim.opt -- to vim.o.Options
 local o = vim.o -- For Global Options
 local w = vim.wo -- For Window Local Options
--- local b = vim.bo -- For the Buffer local options
 
 
 o.termguicolors = true
@@ -57,8 +54,8 @@ o.colorcolumn = '80'                            -- Set the Color of Column
 --   },
 -- })
 
-vim.opt.background = 'dark'
 -- cmd('colorscheme aurora')                    -- Setting the last used theme
+vim.opt.background = 'dark'
 cmd('colorscheme dracula')                    -- Setting the theme
 -- --------------------------------------------------------------------------
 
