@@ -21,9 +21,9 @@ packer.startup({
 		use 'wbthomason/packer.nvim'
 
 -- ============ SYNTAX PLUGINS ==============================
-	 use {'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-      }
+  use {'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate',
+    }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'p00f/nvim-ts-rainbow'
   use 'windwp/nvim-ts-autotag'
@@ -134,7 +134,7 @@ run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --con
 
     use 'numToStr/Comment.nvim' -- Better comment than tpope
     use 'tpope/vim-surround' -- Change surroundings (parentheses, brackets ...)
-    use 'windwp/nvim-autopairs'
+    use 'windwp/nvim-autopairs' -- Auto close () [] {} <Tags>
 
 use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
     use 'propet/toggle-fullscreen.nvim' -- Toggle fullScreen with <leader>m
@@ -145,6 +145,7 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
 		use 'junegunn/goyo.vim'
 		use 'junegunn/limelight.vim'
     use 'ellisonleao/glow.nvim' -- Preview Markdown files with :Glow
+    use 'vim-scripts/ReplaceWithRegister' -- Preview Markdown files with :Glow
 
 
 -- LANGUAGE SPECIFCS =====================================================================
