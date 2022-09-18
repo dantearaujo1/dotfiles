@@ -68,6 +68,9 @@ telescope.setup {
 end
     },
     pickers = {
+      colorscheme = {
+        enable_preview = true
+      },
       find_files = {
           on_input_filter_cb = function(prompt)
             local find_colon = string.find(prompt, ":")

@@ -100,6 +100,7 @@ run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --con
     end
     use { 'akinsho/toggleterm.nvim', branch = 'main', config = function() require("toggleterm").setup() end}
 		use 'skywind3000/asyncrun.vim' -- Make background activitys
+		use 'skywind3000/asynctasks.vim' -- Make tasks for background commands
 
 -- Browser Navigation Plugins =================================================
 		use 'tyru/open-browser.vim'
@@ -148,7 +149,7 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
     use 'vim-scripts/ReplaceWithRegister' -- Preview Markdown files with :Glow
     use 'psliwka/vim-smoothie' -- Preview Markdown files with :Glow
     use 'uga-rosa/ccc.nvim' -- Color Picker
-
+    use 'anuvyklack/hydra.nvim' -- Hydra mode for creating new modes
 
 -- LANGUAGE SPECIFCS =====================================================================
     use 'sophacles/vim-processing' -- Processing plugin helper
@@ -191,7 +192,6 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
 		use 'rakr/vim-one'
 		use 'kaicataldo/material.vim'
 		use 'Lokaltog/vim-monotone'
-		use 'AlessandroYorba/Alduin'
 		use 'bignimbus/pop-punk.vim'
 		use 'yassinebridi/vim-purpura'
 		use 'hachy/eva01.vim'

@@ -115,31 +115,14 @@ end
 
 
 -- Plugins Keymaps ============================================================
--- =================================================================|Telescope|
-util.map('n', '<leader>fe' , ':Telescope file_browser<CR>', nore)
-util.map('n', '<leader>fE' , ':Telescope env<CR>', nore)
-util.map('n', '<leader>fp' , ':Telescope project<CR>', nore)
-util.map('n', '<leader>fP' , ':lua require("telescope").extensions.packer.packer(opts)<CR>', nore)
-util.map('n', '<leader>fo' , ':Telescope bookmarks<CR>', nore)
-util.map('n', '<leader>ff' , ':Telescope find_files<CR>', nore)
-util.map('n', '<leader>fc' , ':Telescope colorscheme<CR>', nore)
-util.map('n', '<leader>fq' , ':Telescope quickfix<CR>', nore)
-util.map('n', '<leader>fk' , ':Telescope keymaps<CR>', nore)
-util.map('n', '<leader>fg' , ':Telescope live_grep<CR>', nore)
-util.map('n', '<leader>fG' , ':Telescope git_files<CR>', nore)
-util.map('n', '<leader>fb' , ':Telescope buffers<CR>', nore)
-util.map('n', '<leader>fbt' , ':Telescope builtin<CR>', nore)
-util.map('n', '<leader>fh' , ':Telescope help_tags<CR>', nore)
-util.map('n', '<leader>fr' , ':Telescope repo list<CR>', nore)
-
--- Custom Telescope functions
-util.map('n', '<leader>,' , ':lua require("dante.telescope").search_dotfiles()<CR>', nore)
-util.map('n', '<leader>fa' , ':lua require("dante.telescope").search_from_home()<CR>', nore)
+-- =================================================================|HYDRA|
+-- All my hydra heads are inside this file
+require('dante/hydra')
 
 -- ===============================================================|OpenBrowser|
 util.map('n', '<leader>ob' , ':<C-u>call openbrowser#_keymap_smart_search("n")<CR>', nore)
-util.map('v', '<leader>ob' , ':<C-u>call openbrowser#_keymap_smart_search("v")<CR>', nore)
 util.map('n', '<leader>og' , 'yi\' :OpenGithubProject <C-R>"<CR>', nore)
+util.map('v', '<leader>ob' , ':<C-u>call openbrowser#_keymap_smart_search("v")<CR>', nore)
 
 -- ===========================================================|CamelCaseMotion|
 util.map('n', '<localleader>w' , '"<Plug>CamelCaseMotion_w"', plug)
