@@ -1,4 +1,5 @@
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true
@@ -14,10 +15,11 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gH', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '[d', vim.diagnostic.goto_next, bufopts)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, bufopts)
-  vim.keymap.set('n', '[D', vim.diagnostic.open_float, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<localleader>d', vim.diagnostic.open_float, bufopts)
+  -- Workspace keymaps
   vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wl', function()
@@ -32,7 +34,6 @@ end
 
 local lsp_installer = require("nvim-lsp-installer")
 
--- ATTENTION PUTH ALL PATHS WITH \\ in WINDOWS
 lsp_installer.on_server_ready(function(server)
     local opts = {}
     if server.name == "clangd" then

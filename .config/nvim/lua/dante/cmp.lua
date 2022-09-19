@@ -19,17 +19,17 @@ cmp.setup {
   },
   -- You must set mapping if you want.
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
   },
   mapping = {
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
+    ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
+      select = false,
     }),
 
     ['<Tab>'] = cmp.mapping(function(fallback)
@@ -55,17 +55,19 @@ cmp.setup {
   },
 
   -- You should specify your *installed* sources.
-  sources = {
+  sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'nvim_lua' },
       { name = 'luasnip' },
-      { name = 'path' },
-      { name = 'buffer' },
-      { name = 'spell' },
-      { name = 'tags' },
-      { name = 'calc' },
-      { name = 'latex_symbols' },
-    },
+      { name = 'nvim_lua' },
+      -- { name = 'path' },
+      -- { name = 'buffer' },
+      -- { name = 'spell' },
+      -- { name = 'tags' },
+      -- { name = 'calc' },
+      -- { name = 'latex_symbols' },
+    },{
+    {name = 'buffer'},
+    }),
   formatting = {
     format = lspkind.cmp_format({
       -- with_text = true, Deprecated
@@ -75,8 +77,8 @@ cmp.setup {
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
-        latex_symbols = "[Latex]",
-        buffer = "[Buffer]",
+        -- latex_symbols = "[Latex]",
+        -- buffer = "[Buffer]",
       })
       -- before = function (entry, vim_item)
         -- ...
