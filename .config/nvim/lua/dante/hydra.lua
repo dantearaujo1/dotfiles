@@ -62,6 +62,7 @@ _t_:  Find Todos
 _u_:  Undotree
 _/_:  In File          _?_:  Search History
 _;_:  Commands History _,_:  Search dotfiles
+_<F5>_: AsyncTasks List
 ^
 _<Enter>_: Telescope  _<Esc>_
 ]]
@@ -105,6 +106,7 @@ Hydra({
       { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'search in file' } },
       { '?', cmd 'Telescope search_history',  { desc = 'search history' } },
       { ';', cmd 'Telescope command_history', { desc = 'command-line history' } },
+      { '<F5>', cmd 'Telescope asynctasks all', { desc = 'List of AsyncTasks' } },
       { ',', ':lua require("dante.telescope").search_dotfiles()<CR>', { desc = 'Show nvim dotfiles' } },
       { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },
       { '<Esc>', nil, { exit = true, nowait = true } },

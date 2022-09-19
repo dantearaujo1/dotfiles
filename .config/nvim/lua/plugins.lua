@@ -83,6 +83,7 @@ packer.startup({
     use 'nvim-telescope/telescope-project.nvim' -- Switch between projects
     use 'nvim-telescope/telescope-file-browser.nvim' -- File Browser Extension
     use 'LinArcX/telescope-env.nvim' -- File Browser Extension
+    use 'GustavoKatel/telescope-asynctasks.nvim' -- AsyncTask UI List Integration
     use {'nvim-telescope/telescope-fzf-native.nvim',
 run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
 }
