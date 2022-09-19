@@ -111,10 +111,10 @@ end
 
 -- Plugins Keymaps ============================================================
 -- =================================================================|AsyncRun|
-util.map('n', '<F5>' , 'AsyncTask file-run', nore)
-util.map('n', '<F6>' , 'AsyncTask file-build', nore)
-util.map('n', '<F7>' , 'AsyncTask project-run', nore)
-util.map('n', '<F7>' , 'AsyncTask project-build', nore)
+util.map('n', '<F5>' , 'AsyncTask file-run<CR>', nore)
+util.map('n', '<F6>' , 'AsyncTask file-build<CR>', nore)
+util.map('n', '<F7>' , 'AsyncTask project-run<CR>', nore)
+util.map('n', '<F7>' , 'AsyncTask project-build<CR>', nore)
 -- =================================================================|HYDRA|
 -- All my hydra heads are inside this file
 require('dante/hydra')
