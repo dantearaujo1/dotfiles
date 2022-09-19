@@ -15,13 +15,15 @@ Hydra({
   mode = 'n',
   body = '<leader>w',
   heads = {
-    {'h', '<c-w>h', {desc = 'Go to Left Buffer'}},
-    {'j', '<c-w>j', {desc = 'Go to Down Buffer'}},
-    {'k', '<c-w>k', {desc = 'Go to Up Buffer'}},
-    {'l', '<c-w>l', {desc = 'Go to Right Buffer'}},
+    {'h', '<C-w><', {desc = 'Expand Buffer Right'}},
+    {'j', '<C-w>-', {desc = 'Expand Buffer Up'}},
+    {'k', '<c-w>+', {desc = 'Expand Buffer Bottom'}},
+    {'l', '<c-w>>', {desc = 'Expand Buffer Left'}},
+    {'z', ':lua require("toggle-fullscreen"):toggle_fullscreen()<CR>', {desc = 'Make Buffer FullScreen'}},
   }
 
 })
+-- ================================================================|LAZYGIT|
 Hydra({
   name = "Git Operations",
   hint = [[Git Mode]],
@@ -36,10 +38,8 @@ Hydra({
   mode = 'n',
   body = '<leader>g',
   heads = {
-    {'h', '<c-w>h', {desc = 'Go to Left Buffer'}},
-    {'j', '<c-w>j', {desc = 'Go to Down Buffer'}},
-    {'k', '<c-w>k', {desc = 'Go to Up Buffer'}},
-    {'l', '<c-w>l', {desc = 'Go to Right Buffer'}},
+    {'g', '<cmd>lua _lazygit_toggle()<CR>', {desc = 'Lazygit'}},
+    {'d', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc = 'Dotfiles Git'}},
   }
 
 })

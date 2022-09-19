@@ -90,11 +90,6 @@ else
   util.map('n', '<C-j>' , '<C-w>j', snore)
   util.map('n', '<C-k>' , '<C-w>k', snore)
 end
--- Resize Windows
-util.map('n', '<M-a>' , '<C-w>>', snore)
-util.map('n', '<M-d>' , '<C-w><', snore)
-util.map('n', '<M-s>' , '<C-w>+', snore)
-util.map('n', '<M-w>' , '<C-w>-', snore)
 -- Open Command Window
 util.map('n', 'q;' , 'q:', nore)
 -- Save & Quit Operations
@@ -115,6 +110,11 @@ end
 
 
 -- Plugins Keymaps ============================================================
+-- =================================================================|AsyncRun|
+util.map('n', '<F5>' , 'AsyncTask file-run', nore)
+util.map('n', '<F6>' , 'AsyncTask file-build', nore)
+util.map('n', '<F7>' , 'AsyncTask project-run', nore)
+util.map('n', '<F7>' , 'AsyncTask project-build', nore)
 -- =================================================================|HYDRA|
 -- All my hydra heads are inside this file
 require('dante/hydra')
@@ -158,14 +158,6 @@ util.map('x', '<localleader>e' , '"<Plug>CamelCaseMotion_ie"', plug)
   util.map('n', '<leader>de' , ":lua require'dap'.set_exception_breakpoints({'all'})<CR>", snore)
 -- end
 
--- =============================================================|TODO-COMMENTS|
-util.map('n', '<leader>ft' , ':TodoTelescope<CR>', nore)
-
--- =========================================================|TOGGLE-FULLSCREEN|
-util.map('n', '<leader>z' , ':lua require("toggle-fullscreen"):toggle_fullscreen()<CR>', nore)
-
--- ================================================================|TREESITTER|
-
 -- ================================================================|PROCESSING|
 util.map('n', '<leader>R' , '"<Plug>(processing-run)"', plug)
 
@@ -193,6 +185,7 @@ util.map('n', ':' , '<Plug>Sneak_;' , nore)
 -- ================================================================|MARKDOWNPREVIEW|
 util.map('n', 'ml' , '<Plug>Markdown_CreateLink', nore)
 util.map('n', 'mk' , '<Plug>Markdown_Checkbox', nore)
+
 --                       |<LEADER><LEADER>MAPPINGS|
 -- ================================================================|LIMELIGHT|
 util.map('n', '<leader><leader>l' , ':Limelight!!<CR>', nore)
@@ -205,6 +198,3 @@ util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
 -- ================================================================|NEOTREE|
 util.map('n', '<leader><leader>e' , ':NeoTreeShowToggle<CR>', nore)
 util.map('n', '<leader><leader>de' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
--- ================================================================|LAZYGIT|
-util.map('n',"<leader>git", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-util.map('n',"<leader>lgd", "<cmd>lua _lazygit_dotfiles_toggle()<CR>", {noremap = true, silent = true})
