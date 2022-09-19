@@ -20,6 +20,7 @@ require('dante/latex')
 require('dante/notify') -- Notify UI of plugins
 require('dante/neorg') -- Org files for organization
 require('dante/emmet') -- Emmet for html and css
+require('dante/asynctasks')
 require('dante/others') -- Some custom plugins configurations
 
 -- User Lua Configs
@@ -32,4 +33,3 @@ require('colors')
 
 -- Dante Plugins
 require('dante/processing')
-require('dante/colorizer') -- color some text

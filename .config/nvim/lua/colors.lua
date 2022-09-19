@@ -57,6 +57,7 @@ o.colorcolumn = '80'                            -- Set the Color of Column
 
 -- cmd('colorscheme aurora')                    -- Setting the last used theme
 vim.opt.background = 'dark'
+vim.g.Hexokinase_highlighters = {'virtual','backgroundfull'}
 cmd('colorscheme dracula')                    -- Setting the theme
 -- --------------------------------------------------------------------------
 
