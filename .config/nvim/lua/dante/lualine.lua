@@ -2,6 +2,9 @@ local gps = require'nvim-gps'
 local hydra = require("hydra.statusline")
 gps.setup()
 
+local function hello()
+  return hydra.get_name()
+end
 
 require'lualine'.setup {
   options = {
@@ -23,7 +26,7 @@ require'lualine'.setup {
     }
   },
   sections = {
-    lualine_a = {'mode',{hydra.get_name, cond = hydra.is_active}},
+    lualine_a = {'mode',{ hydra.get_name, cond = hydra.is_active }},
     -- lualine_a = {hydra_status.get_name()},
     lualine_b = {'branch'},
     lualine_c = {'filename', {gps.get_location, cond = gps.is_available}},

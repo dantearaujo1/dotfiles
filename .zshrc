@@ -154,6 +154,13 @@ export EDITOR='nvim'
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias ta='tmux attach -t'
+alias tad='tmux attach -d -t'
+alias ts='tmux new-session -s'
+alias tl='tmux list-sessions'
+alias tksv='tmux kill-server'
+alias tkss='tmux kill-session -t'
+alias tmuxconf='$EDITOR $ZSH_TMUX_CONFIG'
 alias zz="nvim ~/.zshrc"
 alias zZ="source ~/.zshrc"
 alias zb="nvim ~/.bashrc"

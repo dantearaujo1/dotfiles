@@ -91,7 +91,6 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias nvim=~/nvim.appimage
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -125,3 +124,4 @@ export NVM_DIR="$HOME/.nvm"
 export PROCESSING_DIR="$HOME/dev/setup/processing/"
 export PATH=$PROCESSING_DIR:$PATH
 . "$HOME/.cargo/env"
+export DISPLAY=:0
