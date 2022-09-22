@@ -58,8 +58,8 @@ util.map('n', 'L' , 'g_' , nore)
 util.map('x', 'H' , '^' , nore)
 util.map('x', 'L' , 'g_' , nore)
 -- Find and replace (like Sublime Text 3)
-util.map('n', '<C-s>', ':%s/', nore)
-util.map('x', '<C-s>', ':%s/', nore)
+util.map('x', '<M-s>', ':%s/', nore)
+util.map('n', '<M-s>', ':%s/', nore)
 
 -- CTRL-O and CTRL-I Movements
 util.map('n', '<leader>j', '<C-o>', nore)
