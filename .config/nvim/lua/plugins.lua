@@ -29,7 +29,13 @@ packer.startup({
   use 'windwp/nvim-ts-autotag'
 
 	use 'David-Kunz/markid'
-  use 'nvim-neorg/neorg'
+  use { 'nvim-neorg/neorg',
+      requires = {
+        'max397574/neorg-contexts',
+        'max397574/neorg-kanban',
+        'nvim-neorg/neorg-telescope',
+      }
+    }
 	use 'mattn/emmet-vim'
 
 -- ============ DEBUGGER PLUGINS ==============================
