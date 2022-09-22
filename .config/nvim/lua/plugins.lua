@@ -126,7 +126,7 @@ run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --con
     }
     use 'folke/todo-comments.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
-    use "arnamak/stay-centered.nvim" -- autocmds for always stay centered
+    use 'arnamak/stay-centered.nvim' -- autocmds for always stay centered
 
 		use 'foosoft/vim-argwrap' -- Strenght argument wrapping and unwrapping
 		use 'ntpeters/vim-better-whitespace' -- Shows and trailling whitespace
