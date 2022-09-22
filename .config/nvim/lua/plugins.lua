@@ -145,8 +145,8 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
     use {'iamcco/markdown-preview.nvim',
           run = function() vim.fn["mkdp#util#install"]() end,
     }
-		use 'junegunn/goyo.vim'
-		use 'junegunn/limelight.vim'
+		use 'folke/zen-mode.nvim' -- Distraction Free
+		use 'folke/twilight.nvim' -- Dim buffers
     use 'ellisonleao/glow.nvim' -- Preview Markdown files with :Glow
     use 'vim-scripts/ReplaceWithRegister' -- Preview Markdown files with :Glow
     use 'psliwka/vim-smoothie' -- Preview Markdown files with :Glow
