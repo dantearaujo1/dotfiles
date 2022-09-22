@@ -48,24 +48,6 @@ telescope.setup {
         hidden_files = true,
         theme = "dropdown"
       },
-      function()
-	if (util.getOS() == 'Linux') then
-		fzf = {
-		fuzzy = true,                    -- false will only do exact matching
-		override_generic_sorter = true, -- override the generic sorter
-		override_file_sorter = true,     -- override the file sorter
-		case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-		      }
-	      end
-      end,
-      function()
-	if (util.getOS() == 'Linux') then
-		media_files = {
-		  filetypes = {"png", "webp", "jpg", "jpeg", "pdf", "webm"},
-		  find_cmd = "rg"
-		}
-	end
-end
     },
     pickers = {
       colorscheme = {
@@ -142,11 +124,26 @@ end
     -- load_extension, somewhere after setup function:
 }
 if (util.getOS() == 'Linux') then
+  telescope.setup{
+    extensions ={
+        fzf = {
+          fuzzy = true,                    -- false will only do exact matching
+          override_generic_sorter = true, -- override the generic sorter
+          override_file_sorter = true,     -- override the file sorter
+          case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+        },
+        media_files = {
+        filetypes = {"png", "webp", "jpg", "jpeg", "pdf", "webm"},
+        find_cmd = "rg"
+        }
+    }
+  }
 	require('telescope').load_extension('file_browser')
 	require('telescope').load_extension('media_files')
 	require('telescope').load_extension('fzf')
 end
 require('telescope').load_extension('packer')
+require('telescope').load_extension('live_grep_args')
 require('telescope').load_extension('project')
 require('telescope').load_extension('env')
 require('telescope').load_extension('repo')

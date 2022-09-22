@@ -86,7 +86,8 @@ packer.startup({
     use 'GustavoKatel/telescope-asynctasks.nvim' -- AsyncTask UI List Integration
     use {'nvim-telescope/telescope-fzf-native.nvim',
 run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-}
+    }
+    use { "nvim-telescope/telescope-live-grep-args.nvim" }
     if (util.getOS() == 'Linux') then
       use 'nvim-telescope/telescope-media-files.nvim' --  See media in telescope
       util.map('n','<leader>fm', ':lua require("telescope").extensions.media_files.media_files()<CR>', {noremap = true})

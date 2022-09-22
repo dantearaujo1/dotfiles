@@ -49,7 +49,7 @@ local hint = [[
 _b_:  File buffers     _B_:  Show builtins
 _cc_: Colorscheme      _cm_: Execute command
 _e_:  File browser     _E_:  Enviroment variables
-_f_:  Find Files
+_f_:  Find Files       _F_:  Live grep Args
 _g_:  Live grep        _G_:  Git Files
 _h_:  Help Tags        _H_:  Home Browser
 _k_:  Keymaps
@@ -88,6 +88,7 @@ Hydra({
       { 'e', cmd 'Telescope file_browser', { desc = 'Enter in directory mode'}},
       { 'E', cmd 'Telescope env', {desc = 'See Enviroment Variables'} },
       { 'f', cmd 'Telescope find_files', {desc = 'Look for a file'} },
+      { 'F', cmd 'Telescope live_grep_args', {desc = 'Look for a string inside file in a folder'} },
       { 'g', cmd 'Telescope live_grep', {desc = 'Search for a string inside files'}},
       { 'G', cmd 'Telescope git_files', {desc='Show git files'} },
       { 'h', cmd 'Telescope help_tags', { desc = 'Vim help' } },
