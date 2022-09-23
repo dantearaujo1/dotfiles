@@ -133,14 +133,21 @@ run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --con
     use 'folke/todo-comments.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
     use 'arnamak/stay-centered.nvim' -- autocmds for always stay centered
+    use { 'echasnovski/mini.nvim',
+        config = function()
+            require("mini.align").setup()
+            require("mini.cursorword").setup()
+            require("mini.ai").setup()
+          end,
+    } -- Bundle of mini modules [Using for mini-align]
 
-		use 'foosoft/vim-argwrap' -- Strenght argument wrapping and unwrapping
 		use 'ntpeters/vim-better-whitespace' -- Shows and trailling whitespace
+    use 'foosoft/vim-argwrap' -- Strenght argument wrapping and unwrapping
 		use 'tommcdo/vim-exchange' -- Easy text exchange operator for Vim
 		use 'matze/vim-move' -- Move lines up and down
 		use 'justinmk/vim-sneak' -- Find words using s
-		use 'wesq3/vim-windowswap' -- Exchange Windows with <leader>ww
 
+    use 'wesq3/vim-windowswap' -- Exchange Windows with <leader>ww
     use 'numToStr/Comment.nvim' -- Better comment than tpope
     use 'tpope/vim-surround' -- Change surroundings (parentheses, brackets ...)
     use 'windwp/nvim-autopairs' -- Auto close () [] {} <Tags>
