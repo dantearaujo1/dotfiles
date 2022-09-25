@@ -56,6 +56,9 @@ if(util.getOS() == "Linux") then
   util.map('v', '<leader>cp' , ':\'<,\'>w !clip.exe<CR>' , nore) -- Yank to system clipboard inside visual mode and wsl
 end
 
+-- Help files vertical split
+util.map('n', '<F1>' , ':vert help ' , nore)
+
 -- Go to start or end of line easier
 util.map('n', 'H' , '^' , nore)
 util.map('n', 'L' , 'g_' , nore)
