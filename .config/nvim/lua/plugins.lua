@@ -29,6 +29,8 @@ packer.startup({
   use 'windwp/nvim-ts-autotag'
 
 	use 'David-Kunz/markid'
+
+if (util.getOS() == 'Linux') then
   use { 'nvim-neorg/neorg',
       requires = {
         'max397574/neorg-contexts',
@@ -36,6 +38,7 @@ packer.startup({
         'nvim-neorg/neorg-telescope',
       }
     }
+end
 	use 'mattn/emmet-vim'
 
 -- ============ DEBUGGER PLUGINS ==============================
