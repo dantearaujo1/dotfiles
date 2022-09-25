@@ -25,6 +25,7 @@ packer.startup({
       run = ':TSUpdate',
     }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'yioneko/nvim-yati' -- Better indent tree-sitter plugin
   use 'p00f/nvim-ts-rainbow'
   use 'windwp/nvim-ts-autotag'
 
