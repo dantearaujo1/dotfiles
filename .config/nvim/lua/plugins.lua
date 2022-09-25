@@ -170,7 +170,7 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
     use 'uga-rosa/ccc.nvim' -- Color Picker
     use 'anuvyklack/hydra.nvim' -- Hydra mode for creating new modes
 
--- LANGUAGE SPECIFCS =====================================================================
+-- Language Specifics =====================================================================
     use 'sophacles/vim-processing' -- Processing plugin helper
     use 'ixru/nvim-markdown' -- Fork of vim-markdown with extra functionality
     -- LATEX ========
@@ -178,6 +178,8 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
       use 'lervag/vimtex'
       use 'matze/vim-tex-fold'
     end
+    -- JSON ========
+    use 'gennaro-tedesco/nvim-jqx' -- Browse and preview json files
 -- UI Pluggins ===========================================================
     -- use 'nvim-colortils/colortils.nvim' -- ColorPicker
 

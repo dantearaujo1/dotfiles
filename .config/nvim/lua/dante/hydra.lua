@@ -40,6 +40,7 @@ Hydra({
   heads = {
     {'g', '<cmd>lua _lazygit_toggle()<CR>', {desc = 'Lazygit'}},
     {'d', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc = 'Dotfiles Git'}},
+    { '<Esc>', nil, { exit = true, nowait = true, desc= 'Exit' } },
   }
 
 })
