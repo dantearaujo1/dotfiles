@@ -99,7 +99,8 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- Global Status Line
-o.laststatus = 0
+--o.ls = 0 -- last status */
+--o.ch = 0 -- command Height */
 o.winbar= "%f"
 o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
