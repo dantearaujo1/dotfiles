@@ -125,7 +125,6 @@ util.map('n', '<F8>' , ':AsyncTask project-build<CR>', nore)
 util.map('n', '<F8>' , ':AsyncTask project-init<CR>', nore)
 -- =================================================================|HYDRA|
 -- All my hydra heads are inside this file
-require('dante/hydra')
 
 -- ===============================================================|OpenBrowser|
 util.map('n', '<leader>ob' , ':<C-u>call openbrowser#_keymap_smart_search("n")<CR>', nore)
