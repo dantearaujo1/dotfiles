@@ -23,7 +23,6 @@ Hydra({
   }
 
 })
--- ================================================================|LAZYGIT|
 Hydra({
   name = "Git Operations",
   hint = [[Git Mode]],
