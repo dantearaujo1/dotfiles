@@ -18,6 +18,8 @@ require('stay-centered') -- Always make text centered
 require('dante/toggleterm') -- Terminal inside nvim
 require('dante/latex')
 require('dante/notify') -- Notify UI of plugins
+require('dante/emmet') -- Emmet for html and css
+require('dante/asynctasks')
 
 local util = require'utils'
 
@@ -25,8 +27,6 @@ if (util.getOS() == 'Linux') then
 	require('dante/neorg') -- Org files for organization
 end
 
-require('dante/emmet') -- Emmet for html and css
-require('dante/asynctasks')
 require('dante/others') -- Some custom plugins configurations
 
 -- User Lua Configs
@@ -36,6 +36,7 @@ require('keymappings')
 require('variables')
 require('autocmd')
 require('colors')
+require('dante/hydra')
 
 -- Dante Plugins
 require('dante/processing')
