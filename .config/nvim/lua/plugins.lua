@@ -235,6 +235,8 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
 		use 'kyazdani42/blue-moon'
 		use 'mhartington/oceanic-next'
 		use 'Iron-E/nvim-highlite'
+-- My Pluggins ===========================================================
+    use '~/dev/projects/lua/neovim/project-creator'
 
 -- STATUS LINE PLUGINS ========================================================
 		use 'hoob3rt/lualine.nvim'
