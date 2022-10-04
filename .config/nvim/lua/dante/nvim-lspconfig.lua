@@ -24,7 +24,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<localleader>d', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<localleader>gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<localleader>h', vim.lsp.buf.signature_help, bufopts)
-  -- Workspace keymaps
+  -- -- Workspace keymaps
   vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wl', function()
@@ -32,7 +32,7 @@ local on_attach = function(client, bufnr)
   end, bufopts)
   vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<localleader>f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<localleader>f', vim.lsp.buf.format, bufopts)
 end
 
 local lsp_installer = require("nvim-lsp-installer")
