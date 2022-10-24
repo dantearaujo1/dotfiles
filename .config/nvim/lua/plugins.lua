@@ -184,6 +184,8 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
     end
     -- JSON ========
     use 'gennaro-tedesco/nvim-jqx' -- Browse and preview json files
+    -- GIT ========
+    use 'lewis6991/gitsigns.nvim' -- Super fast git decorations implemented purely in Lua/Teal
 -- UI Pluggins ===========================================================
     -- use 'nvim-colortils/colortils.nvim' -- ColorPicker
 
