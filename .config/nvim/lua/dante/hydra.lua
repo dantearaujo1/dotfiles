@@ -37,8 +37,11 @@ Hydra({
   mode = 'n',
   body = '<leader>g',
   heads = {
-    {'g', '<cmd>lua _lazygit_toggle()<CR>', {desc = 'Lazygit'}},
-    {'d', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc = 'Dotfiles Git'}},
+    {'t', '<cmd>lua _lazygit_toggle()<CR>', {desc = 'Lazygit'}},
+    {'T', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc = 'Dotfiles Git'}},
+
+    {'do', ':DiffviewOpen<CR>', {desc = 'Open Diff View'}},
+    {'dc', ':DiffviewClose<CR>', {desc = 'Close Diff View'}},
     { '<Esc>', nil, { exit = true, nowait = true, desc= 'Exit' } },
   }
 
