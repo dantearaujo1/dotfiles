@@ -32,13 +32,17 @@ packer.startup({
 	use 'David-Kunz/markid'
 
 if (util.getOS() == 'Linux') then
-  use { 'nvim-neorg/neorg',
-      requires = {
-        'max397574/neorg-contexts',
-        'max397574/neorg-kanban',
-        'nvim-neorg/neorg-telescope',
-      }
-    }
+  use {
+    'nvim-neorg/neorg',
+	ft ="norg",
+	after = {"nvim-treesitter"},
+  config = {"require('dante/neorg')"},
+  requires = {
+    'max397574/neorg-contexts',
+    'max397574/neorg-kanban',
+    'nvim-neorg/neorg-telescope',
+  },
+  }
 end
 	use 'mattn/emmet-vim'
 
