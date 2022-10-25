@@ -1,4 +1,5 @@
 local cmp = require('cmp')
+local utils = require('utils')
 local luasnip = require'luasnip'
 local lspkind = require('lspkind')
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
@@ -89,4 +90,9 @@ cmp.setup {
   }
 }
 
-require("luasnip/loaders/from_vscode").load({ "D:/Code/Configurations/nvim/nvim-data/site/pack/packer/start/friendly-snippets/snippets"})
+local OS = utils.getOS()
+if OS == "Windows" then
+  require("luasnip/loaders/from_vscode").load({ "D:/Code/Configurations/nvim/nvim-data/site/pack/packer/start/friendly-snippets/snippets"})
+elseif OS == "Linux" then
+  require("luasnip/loaders/from_vscode").load({ "~/.local/share/nvim/site/pack/packer/start/friendly-snippets/snippets"})
+end
