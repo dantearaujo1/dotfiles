@@ -1,3 +1,4 @@
+local navic = require("nvim-navic")
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 capabilities.textDocument.foldingRange = {
@@ -14,6 +15,9 @@ vim.keymap.set('n', '<localleader>q', vim.diagnostic.setloclist, options)
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client,bufnr)
+  end
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -35,43 +39,55 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<localleader>f', vim.lsp.buf.format, bufopts)
 end
 
-local lsp_installer = require("nvim-lsp-installer")
+local MASON_LSP_DEFAULT_SETTINGS = {
+    -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
+    -- This setting has no relation with the `automatic_installation` setting.
+    ensure_installed = {},
 
-lsp_installer.on_server_ready(function(server)
-    local opts = {}
-    if server.name == "clangd" then
-      opts.on_attach = on_attach
-      opts.capabilities = capabilities
-    elseif server.name == "omnisharp" then
-      opts.on_attach = on_attach
-      opts.capabilities = capabilities
-    elseif server.name == "cmake" then
-      opts.on_attach = on_attach
-      opts.capabilities = capabilities
-      opts.initial_options = {
-        buildDirectory="build",
+    -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
+    -- This setting has no relation with the `ensure_installed` setting.
+    -- Can either be:
+    --   - false: Servers are not automatically installed.
+    --   - true: All servers set up via lspconfig are automatically installed.
+    --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
+    --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
+    automatic_installation = false,
+}
+require("mason").setup()
+require("mason-lspconfig").setup(MASON_LSP_DEFAULT_SETTINGS)
+require("mason-lspconfig").setup_handlers {
+    -- The first entry (without a key) will be the default handler
+    -- and will be called for each installed server that doesn't have
+    -- a dedicated handler.
+    function (server_name) -- default handler (optional)
+      require("lspconfig")[server_name].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
       }
-    elseif server.name == "sumneko_lua" then
-      opts.on_attach = on_attach
-      opts.capabilities = capabilities
-      opts.settings = {
-        Lua = {
+    end,
+    ["sumneko_lua"] = function ()
+        require("lspconfig").sumneko_lua.setup {
+          on_attach = on_attach,
+          capabilities = capabilities,
+          settings = {
+            Lua = {
               runtime = {
                 version = 'LuaJIT',
                 path = vim.split(package.path, ';')
               },
               diagnostics = {
-                globals = {'vim'},
+                globals = {'vim','use', 'require'},
               },
               workspace = {
                 maxPreload = 100000,
                 preloadFileSize = 100000,
                 library = {
-                  [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/love2d"] = true,
-                  [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Jass"] = false,
-                  [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/OpenResty"] = false,
-                  [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/example"] = false,
-                  [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Cocos4.0"] = false,
+                  vim.api.nvim_get_runtime_file("",true),
+                  -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/love2d"] = false,
+                  -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Jass"] = false,
+                  -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/OpenResty"] = false,
+                  -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/example"] = false,
+                  -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Cocos4.0"] = false,
                 },
                 checkThirdParty = false,
               },
@@ -79,23 +95,12 @@ lsp_installer.on_server_ready(function(server)
                 enable = false,
               },
             }
-      }
-    elseif server.name == "jdtls" then
-      opts.on_attach = on_attach
-      opts.capabilities = capabilities
-      opts.filetypes = {'java'}
-    elseif server.name == "tsserver" then
-      opts.on_attach = on_attach
-      opts.capabilities = capabilities
-    else
-      opts.on_attach = on_attach
-      opts.capabilities = capabilities
+          }
+        }
     end
+}
 
-    -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
-    server:setup(opts)
-    vim.cmd [[ do User LspAttachBuffers ]]
-end)
+
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {

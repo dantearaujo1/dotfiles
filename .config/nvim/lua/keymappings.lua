@@ -206,7 +206,8 @@ util.map('n', '<leader><leader>de' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR
 
 -- ================================================================
 util.map('i', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
-
 util.map('s', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
+
 util.map( 'n', '<leader>J', ':lua require("trevj").format_at_cursor()<CR>', {noremap = true, silent = true})
 util.map( 'n', '<leader>k', '<C-i>', {noremap = true, silent = true})
+

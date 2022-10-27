@@ -1,11 +1,7 @@
-local gps = require'nvim-gps'
 local hydra = require('hydra.statusline')
-gps.setup()
+local hydra_status = require("hydra.statusline").get_name()
+local navic = require("nvim-navic")
 
-local function hello()
-  return [[HYDRA]]
-  -- return hydra.get_name()
-end
 
 require'lualine'.setup {
   options = {
@@ -27,9 +23,9 @@ require'lualine'.setup {
     }
   },
   sections = {
-    lualine_a = {'mode',"require'hydra.statusline'.get_name()"},
+    lualine_a = {'mode',hydra_status},
     lualine_b = {'branch'},
-    lualine_c = {'filename', {gps.get_location, cond = gps.is_available}},
+    lualine_c = {{navic.get_location, cond = navic.is_available} },
     lualine_x = {'filetype', 'fileformat', 'encoding'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
