@@ -21,9 +21,19 @@ local MASON_DAP_DEFAULT_SETTINGS = {
 	-- 	- false: Dap is not automatically configured.
 	-- 	- true: Dap is automatically configured.
 	-- 	- {adapters: {ADAPTER: {}, }, configurations: {ADAPTER: {}, }}. Allows overriding default configuration.
-    automatic_setup = false,
+    automatic_setup = true,
 }
 --require("dap").setup()
 require("mason-nvim-dap").setup(MASON_DAP_DEFAULT_SETTINGS)
 require'nvim-dap-virtual-text'.setup()
 require('dapui').setup()
+
+require 'mason-nvim-dap'.setup_handlers {
+    function(source_name)
+      -- all sources with no handler get passed here
+
+
+      -- Keep original functionality of `automatic_setup = true`
+      require('mason-nvim-dap.automatic_setup')(source_name)
+    end,
+}

@@ -55,6 +55,8 @@ end
         'neovim/nvim-lspconfig',
         'mfussenegger/nvim-dap',
         'jayp0521/mason-nvim-dap.nvim',
+        'jose-elias-alvarez/null-ls.nvim',
+        "jayp0521/mason-null-ls.nvim",
         requires = {
           use 'nvim-telescope/telescope-dap.nvim', -- Telescope to find variables
           use 'theHamsta/nvim-dap-virtual-text', -- Virtual text showing variables info
@@ -66,7 +68,6 @@ end
       -- for symbols in completion
       use 'ray-x/lsp_signature.nvim'
       -- for symbols in completion
-      use 'jose-elias-alvarez/null-ls.nvim'
       -- for symbols in completion
       -- ============ COMPLETION PLUGINS ============================
       use 'hrsh7th/nvim-cmp'
@@ -125,7 +126,7 @@ end
       -- This is for using nvim with tmux
       use 'preservim/vimux'
       -- Send commands to tmux from nvim
-      use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
+      -- use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
           end
       use { 'akinsho/toggleterm.nvim', branch = 'main', config = function() require("toggleterm").setup() end}
       use 'skywind3000/asyncrun.vim'
