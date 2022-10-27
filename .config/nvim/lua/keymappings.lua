@@ -6,7 +6,11 @@ local function t(str)
 end
 
 g.mapleader = ' '
-g.maplocalleader = 'ç'
+if util.getOS() == 'Windows' then
+  g.maplocalleader = 'ç'
+else
+  g.maplocalleader = '\\'
+end
 
 local snore = { noremap = true , silent = true}
 local sxnore = { noremap = true , silent = true, expr = true}
