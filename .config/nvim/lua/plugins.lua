@@ -155,6 +155,7 @@ run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --con
 		-- use 'justinmk/vim-sneak' -- Find words using s -- Using leap now
 		use 'ggandor/leap.nvim' -- Find words with label using s or gs
     use 'vim-scripts/ReplaceWithRegister' -- Preview Markdown files with :Glow
+    use { 'AckslD/nvim-trevJ.lua', config = 'require("trevj").setup()' } -- Do the oposite of J in neovim
 
     use 'wesq3/vim-windowswap' -- Exchange Windows with <leader>ww
     use 'numToStr/Comment.nvim' -- Better comment than tpope
@@ -187,7 +188,6 @@ run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --con
     use 'lewis6991/gitsigns.nvim' -- Super fast git decorations implemented purely in Lua/Teal
     use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' } -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
 -- UI Pluggins ===========================================================
-    -- use 'nvim-colortils/colortils.nvim' -- ColorPicker
 
     if (util.getOS() == 'Linux') then
       use { 'RRethy/vim-hexokinase',
