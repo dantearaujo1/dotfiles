@@ -22,18 +22,19 @@ local plug = { expr = true, noremap = false }
 util.map('n', ';' , ':' , nore)
 util.map('x', ';' , ':' , nore)
 -- Make Sneak ; works
-util.map('n', ':', '<Plug>SneakNext')
-util.map('x', ':', '<Plug>SneakNext')
-util.map('o', ':', '<Plug>SneakNext')
+-- util.map('n', ':', '<Plug>SneakNext')
+-- util.map('x', ':', '<Plug>SneakNext')
+-- util.map('o', ':', '<Plug>SneakNext')
 -- util.map('n', ':' , ';' , nore)
 -- util.map('x', ':' , ';' , nore)
 util.map('n', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mode
 
 
 -- Commands Shortcuts =========================================================
-
 util.map('n', '<leader>w' , ':update<CR>' , snore)
 util.map('n', '<leader>ll' , ':luafile %<CR> <bar> :lua print("This file was sourced!")<CR>' , nore)
+-- " Change current working directory locally and print cwd after that
+util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR>', nore)
 util.map('n', '<leader>v' , '`[V`]' , snore) -- Reselect last pasted text
 -- " Use sane regex expression (see `:h magic` for more info)
 util.map('n', '/' , "/\\v" , nore)
@@ -89,6 +90,8 @@ util.map('n', ']Q' , ':clast<CR>zv', nore)
 util.map('n', '<localleader>x' , ':windo close <bar> cclose<CR>', nore)
 -- " Close a buffer and switching to another buffer, do not close the window
 util.map('n', '<localleader>d' , ':bprevious <bar> bdelete #<CR>', nore)
+util.map('n', '<localleader>[' , ':bprevious <CR>', nore)
+util.map('n', '<localleader>]' , ':bnext <CR>', nore)
 -- " Toggle search highlight
 util.map('n', '<Leader>hl' , '(&hls && v:hlsearch ? ":nohls" : ":set hls")."\n"', {expr = true, silent = true, noremap = true})
 
@@ -129,7 +132,9 @@ util.map('n', '<F8>' , ':AsyncTask project-build<CR>', nore)
 util.map('n', '<F8>' , ':AsyncTask project-init<CR>', nore)
 -- =================================================================|HYDRA|
 -- All my hydra heads are inside this file
-
+-- require('dante/hydra')
+-- =================================================================|LEAP|
+require('leap').add_default_mappings()
 -- ===============================================================|OpenBrowser|
 util.map('n', '<leader>ob' , ':<C-u>call openbrowser#_keymap_smart_search("n")<CR>', nore)
 util.map('n', '<leader>og' , 'yi\' :OpenGithubProject <C-R>"<CR>', nore)
@@ -180,28 +185,17 @@ else
   util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output=" .. vim.fn.expand("$TEMP") .. "\\vim-processing/%:p:h:t --force --run<CR>", nore)
 end
 
--- " Change current working directory locally and print cwd after that
-util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR>', nore)
 
 -- ================================================================|MARKDOWN|
 util.map('n', '<leader>p' , ':Glow<CR>', nore)
-util.map('i', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
-
-util.map('s', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
-
--- ================================================================|SNEAK|
-util.map('n', 'f' , '<Plug>Sneak_f', nore)
-util.map('n', 'F' , '<Plug>Sneak_F', nore)
-util.map('n', ':' , '<Plug>Sneak_;' , nore)
--- ================================================================|MARKDOWNPREVIEW|
 util.map('n', 'ml' , '<Plug>Markdown_CreateLink', nore)
 util.map('n', 'mk' , '<Plug>Markdown_Checkbox', nore)
 
---                       |<LEADER><LEADER>MAPPINGS|
--- ================================================================|LIMELIGHT|
-util.map('n', '<leader><leader>l' , ':Limelight!!<CR>', nore)
--- ================================================================|GOYO|
-util.map('n', '<leader><leader>g' , ':Goyo<CR>', nore)
+-- ================================================================|SNEAK|
+-- util.map('n', 'f' , '<Plug>Sneak_f', nore)
+-- util.map('n', 'F' , '<Plug>Sneak_F', nore)
+--util.map('n', ':' , '<Plug>Sneak_;' , nore)
+
 util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
 -- ================================================================|COLORIZER|
 util.map('n', '<leader><leader>c' , ':HexokinaseToggle<CR>', nore)
@@ -209,3 +203,8 @@ util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
 -- ================================================================|NEOTREE|
 util.map('n', '<leader><leader>e' , ':NeoTreeShowToggle<CR>', nore)
 util.map('n', '<leader><leader>de' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
+
+-- ================================================================
+util.map('i', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
+
+util.map('s', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})

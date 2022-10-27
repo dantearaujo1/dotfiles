@@ -186,5 +186,20 @@ M.search_dotfiles = function()
     })
   end
 end
+M.grep_dotfiles = function()
+  local system_name = util.getOS()
+  if system_name == "Windows" then
+    require("telescope.builtin").live_grep({
+      prompt_title = "< GREP NVIM RC - DANTE  - Windows>",
+      cwd = "~\\.config\\nvim",
+      search_dirs = {"lua"},
+    })
+  elseif system_name == "Linux" then
+    require("telescope.builtin").live_grep({
+      prompt_title = "< GREP NVIM RC - DANTE - Linux >",
+      cwd = "~/.config/nvim",
+    })
+  end
+end
 
 return M

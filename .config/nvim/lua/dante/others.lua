@@ -5,3 +5,4 @@ vim.g.tpipeline_clearstl = 1
 local ccc =require("ccc")
 ccc.setup({})
 
+require "lsp_signature".setup()

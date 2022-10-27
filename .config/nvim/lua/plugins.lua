@@ -28,8 +28,7 @@ packer.startup({
   use 'yioneko/nvim-yati' -- Better indent tree-sitter plugin
   use 'p00f/nvim-ts-rainbow'
   use 'windwp/nvim-ts-autotag'
-
-	use 'David-Kunz/markid'
+	use 'David-Kunz/markid' -- Tree-sitter plugin for correct colors of parameters
 
 if (util.getOS() == 'Linux') then
   use {
@@ -151,16 +150,18 @@ run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --con
 
 		use 'ntpeters/vim-better-whitespace' -- Shows and trailling whitespace
     use 'foosoft/vim-argwrap' -- Strenght argument wrapping and unwrapping
-		use 'tommcdo/vim-exchange' -- Easy text exchange operator for Vim
+    use 'tommcdo/vim-exchange' -- Easy text exchange operator for Vim
 		use 'matze/vim-move' -- Move lines up and down
-		use 'justinmk/vim-sneak' -- Find words using s
+		-- use 'justinmk/vim-sneak' -- Find words using s -- Using leap now
+		use 'ggandor/leap.nvim' -- Find words with label using s or gs
+    use 'vim-scripts/ReplaceWithRegister' -- Preview Markdown files with :Glow
 
     use 'wesq3/vim-windowswap' -- Exchange Windows with <leader>ww
     use 'numToStr/Comment.nvim' -- Better comment than tpope
     use 'tpope/vim-surround' -- Change surroundings (parentheses, brackets ...)
     use 'windwp/nvim-autopairs' -- Auto close () [] {} <Tags>
 
-use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
+    use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
     use 'propet/toggle-fullscreen.nvim' -- Toggle fullScreen with <leader>m
 
     use {'iamcco/markdown-preview.nvim',
@@ -169,8 +170,6 @@ use 'bkad/camelcasemotion' -- Plugin for movin in camelcase with localleader
 		use 'folke/zen-mode.nvim' -- Distraction Free
 		use 'folke/twilight.nvim' -- Dim buffers
     use 'ellisonleao/glow.nvim' -- Preview Markdown files with :Glow
-    use 'vim-scripts/ReplaceWithRegister' -- Preview Markdown files with :Glow
-    use 'psliwka/vim-smoothie' -- Preview Markdown files with :Glow
     use 'uga-rosa/ccc.nvim' -- Color Picker
     use 'anuvyklack/hydra.nvim' -- Hydra mode for creating new modes
 

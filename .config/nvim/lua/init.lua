@@ -22,11 +22,6 @@ require('dante/emmet') -- Emmet for html and css
 require('dante/asynctasks')
 require('dante/git')
 
-local util = require'utils'
-
-if (util.getOS() == 'Linux') then
-	--require('dante/neorg') -- Org files for organization
-end
 
 require('dante/others') -- Some custom plugins configurations
 
