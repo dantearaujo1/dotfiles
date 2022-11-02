@@ -237,6 +237,15 @@ end
                 } -- Put some color in textcolor
           end
       use 'rcarriga/nvim-notify'
+--      use { 'folke/noice.nvim',
+            --config = function ()
+              --require("noice").setup()
+            --end,
+            --requires = {
+              --"MunifTanjim/nui.nvim",
+              --"rcarriga/nvim-notify",
+      --}
+       --   }
       -- A notify menu for various things (Debug best)
       -- THEMES =====================================================================
       -- Winbar ===========================
