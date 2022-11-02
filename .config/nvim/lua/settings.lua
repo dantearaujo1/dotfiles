@@ -84,7 +84,7 @@ o.inccommand='split'          -- Shows the effects of a command in a window
 -- Memory, CPU
 -- --------------------------------------------------------------------------
 b.synmaxcol = 240
-o.lazyredraw = true
+o.lazyredraw = false
 o.syntax = 'enable'
 
 
