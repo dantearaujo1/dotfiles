@@ -1,7 +1,11 @@
 require('neorg').setup {
   load = {
     ["core.defaults"] = {},
-    ["core.norg.concealer"] = {},
+    ["core.norg.concealer"] = {
+      config = {
+        markup = true,
+      }
+    },
     ["core.norg.completion"] = {
       config = {
         engine = 'nvim-cmp',

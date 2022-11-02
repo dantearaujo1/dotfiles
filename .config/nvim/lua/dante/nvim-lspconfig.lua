@@ -34,8 +34,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+
   vim.keymap.set('n', '<localleader>f', vim.lsp.buf.format, bufopts)
 end
 
@@ -104,15 +103,15 @@ require("mason-lspconfig").setup_handlers {
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- virtual_text = {
-      -- prefix = ">>",
-      -- spacing = 2
-    -- },
+    virtual_text = {
+      prefix = ">>",
+      spacing = 2
+    },
     virtual_text = false,
     checkCurrentLine = true,
     signs = true,
     update_in_insert = false,
-  }
+ }
 )
 
 
