@@ -175,15 +175,13 @@ util.map('x', '<localleader>e' , '"<Plug>CamelCaseMotion_ie"', plug)
 -- end
 
 -- ================================================================|PROCESSING|
-util.map('n', '<leader>R' , '"<Plug>(processing-run)"', plug)
 
-if(util.getOS() == "Linux")
-  then
-  util.map('n', '<leader>r' , ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=%:p:h --output="/tmp/vim-processing/%:p:h:t" --force --run<CR>', nore)
+if(util.getOS() == "Linux") then
+  util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=tmux -close processing-java --sketch=$(VIM_FILEDIR) --output=/tmp/vim-processing/$(VIM_FILENOEXT) --force --run<CR>", { noremap = true, expr = false })
 else
-
-  util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output=" .. vim.fn.expand("$TEMP") .. "\\vim-processing/%:p:h:t --force --run<CR>", nore)
+util.map('n', '<leader>r' , ":AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output=" .. vim.fn.expand("$TEMP") .. "\\vim-processing/%:p:h:t --force --run<CR>", nore)
 end
+util.map('n', '<leader>R' , '"<Plug>(processing-run)"', plug)
 
 
 -- ================================================================|MARKDOWN|
@@ -198,11 +196,11 @@ util.map('n', 'mk' , '<Plug>Markdown_Checkbox', nore)
 
 util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
 -- ================================================================|COLORIZER|
-util.map('n', '<leader><leader>c' , ':HexokinaseToggle<CR>', nore)
+util.map('n', '<leader>CC' , ':HexokinaseToggle<CR>', nore)
 util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
 -- ================================================================|NEOTREE|
-util.map('n', '<leader><leader>e' , ':NeoTreeShowToggle<CR>', nore)
-util.map('n', '<leader><leader>de' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
+util.map('n', '<leader>e' , ':NeoTreeShowToggle<CR>', nore)
+util.map('n', '<leader>E' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
 
 -- ================================================================
 util.map('i', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
@@ -210,4 +208,5 @@ util.map('s', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : 
 
 util.map( 'n', '<leader>J', ':lua require("trevj").format_at_cursor()<CR>', {noremap = true, silent = true})
 util.map( 'n', '<leader>k', '<C-i>', {noremap = true, silent = true})
+
 
