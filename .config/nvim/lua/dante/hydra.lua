@@ -116,3 +116,47 @@ Hydra({
       { '<Esc>', nil, { exit = true, nowait = true } },
    }
 })
+
+local load_operations = Hydra({
+  name = "Packer Load Operation",
+  hint = [[Load Plugins]],
+  config = {
+    color = 'teal',
+    invoke_on_body = true,
+    hint = {
+        position = 'middle',
+        border = 'rounded',
+    },
+  },
+  heads = {
+    {'n', ':PackerLoad neorg<CR>', {desc = 'Load Neorg'}},
+
+    { '<Esc>', nil, { exit = true, nowait = true, desc= 'Exit' } },
+  }
+
+})
+Hydra({
+  name = "Packer Operation",
+  hint = [[Packer]],
+  config = {
+    color = 'teal',
+    invoke_on_body = true,
+    hint = {
+        position = 'middle',
+        border = 'rounded',
+    },
+  },
+  mode = 'n',
+  body = '<leader>P',
+  heads = {
+    {'c', ':PackerClean ', {desc = 'Remove folders from removed plugins'}},
+    {'l', ':PackerLoad ', {desc = 'Load a given plugin'}},
+    {'i', ':PackerInstall ', {desc = 'Install a given plugin'}},
+    {'s', ':PackerSync<CR>', {desc = 'Sync all plugins'}},
+    {'S', ':PackerStatus<CR>', {desc = 'Show plugins status'}},
+    {'q', function() load_operations:activate() end, {desc = 'Load specific plugins menu'}},
+
+    { '<Esc>', nil, { exit = true, nowait = true, desc= 'Exit' } },
+  }
+
+})
