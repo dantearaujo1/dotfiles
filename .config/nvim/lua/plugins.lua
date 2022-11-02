@@ -129,11 +129,11 @@ end
       -- use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
           end
       use { 'akinsho/toggleterm.nvim', branch = 'main', config = function() require("toggleterm").setup() end}
+    -- Make background activitys
       use 'skywind3000/asyncrun.vim'
-      -- Make background activitys
+    -- Make tasks for background commands
       use 'skywind3000/asynctasks.vim'
-      -- Make tasks for background commands
-      -- Browser Navigation Plugins =================================================
+    -- Browser Navigation Plugins =================================================
       use 'tyru/open-browser.vim'
       use 'tyru/open-browser-github.vim'
       -- Open github page in browser <leader>og
