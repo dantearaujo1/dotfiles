@@ -133,8 +133,8 @@ if (util.getOS() == 'Linux') then
           case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
         },
         media_files = {
-        filetypes = {"png", "webp", "jpg", "jpeg", "pdf", "webm"},
-        find_cmd = "rg"
+          filetypes = {"png", "webp", "jpg", "jpeg", "pdf", "webm"},
+          find_cmd = "rg"
         }
     }
   }

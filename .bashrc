@@ -124,4 +124,3 @@ export NVM_DIR="$HOME/.nvm"
 export PROCESSING_DIR="$HOME/dev/setup/processing/"
 export PATH=$PROCESSING_DIR:$PATH
 . "$HOME/.cargo/env"
-export DISPLAY=:0

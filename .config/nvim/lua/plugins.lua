@@ -178,7 +178,6 @@ end
       use 'ggandor/leap.nvim'
       -- Find words with label using s or gs
       use 'vim-scripts/ReplaceWithRegister'
-      -- Preview Markdown files with :Glow
       use {
             'AckslD/nvim-trevJ.lua',
             config = 'require("trevj").setup()',
@@ -212,30 +211,34 @@ end
       -- Language Specifics =====================================================================
       use 'sophacles/vim-processing'
       -- Processing plugin helper
-      use 'ixru/nvim-markdown' -- Fork of vim-markdown with extra functionality
           -- LATEX ========
-          if util.getOS() == 'Linux' then
-      use 'lervag/vimtex'
-      use 'matze/vim-tex-fold'
-          end
+      if util.getOS() == 'Linux' then
+        use 'lervag/vimtex'
+        use 'matze/vim-tex-fold'
+      end
       -- JSON ========
       use 'gennaro-tedesco/nvim-jqx'
       -- Browse and preview json files
       -- GIT ========
       use 'lewis6991/gitsigns.nvim'
       -- Super fast git decorations implemented purely in Lua/Teal
-      use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' } -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+      use {
+        'sindrets/diffview.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+      } -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
       -- UI Pluggins ===========================================================
 
-          if (util.getOS() == 'Linux') then
-            use { 'RRethy/vim-hexokinase',
-                  run = 'make hexokinase'
-                } -- Put some color in textcolor
-          else
-            use { 'RRethy/vim-hexokinase',
-                  run = 'mingw32-make hexokinase'
-                } -- Put some color in textcolor
-          end
+      if (util.getOS() == 'Linux') then
+        use {
+          'RRethy/vim-hexokinase',
+          run = 'make hexokinase',
+        } -- Put some color in textcolor
+      else
+        use {
+          'RRethy/vim-hexokinase',
+          run = 'mingw32-make hexokinase',
+        } -- Put some color in textcolor
+      end
       use 'rcarriga/nvim-notify'
 --      use { 'folke/noice.nvim',
             --config = function ()
@@ -248,8 +251,6 @@ end
        --   }
       -- A notify menu for various things (Debug best)
       -- THEMES =====================================================================
-      -- Winbar ===========================
-      use 'fgheng/winbar.nvim'
       -- ColorColumn ===========================
       use "EdenEast/nightfox.nvim"
       use 'xiyaowong/virtcolumn.nvim'
@@ -263,7 +264,7 @@ end
       use 'sickill/vim-monokai'
       use 'whatyouhide/vim-gotham'
       use 'rakr/vim-one'
-      use 'kaicataldo/material.vim'
+      use 'marko-cerovac/material.nvim'
       use 'Lokaltog/vim-monotone'
       use 'bignimbus/pop-punk.vim'
       use 'yassinebridi/vim-purpura'
