@@ -115,8 +115,8 @@ Hydra({
       { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },
       { '<Esc>', nil, { exit = true, nowait = true } },
    }
-})
 
+})
 local load_operations = Hydra({
   name = "Packer Load Operation",
   hint = [[Load Plugins]],
@@ -149,12 +149,12 @@ Hydra({
   mode = 'n',
   body = '<leader>P',
   heads = {
-    {'c', ':PackerClean ', {desc = 'Remove folders from removed plugins'}},
-    {'l', ':PackerLoad ', {desc = 'Load a given plugin'}},
-    {'i', ':PackerInstall ', {desc = 'Install a given plugin'}},
+    {'c', ':PackerClean<CR>', {desc = 'Remove folders from removed plugins'}},
+    {'i', ':PackerInstall<CR>', {desc = 'Install plugins'}},
     {'s', ':PackerSync<CR>', {desc = 'Sync all plugins'}},
     {'S', ':PackerStatus<CR>', {desc = 'Show plugins status'}},
     {'q', function() load_operations:activate() end, {desc = 'Load specific plugins menu'}},
+    {'Q', ':PackerLoad ', {desc = 'Load a given plugin'}},
 
     { '<Esc>', nil, { exit = true, nowait = true, desc= 'Exit' } },
   }
