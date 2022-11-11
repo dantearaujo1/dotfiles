@@ -28,6 +28,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<localleader>d', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<localleader>gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<localleader>h', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<localleader>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<localleader>rn', vim.lsp.buf.rename, bufopts)
   -- -- Workspace keymaps
   vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
@@ -41,7 +43,7 @@ end
 local MASON_LSP_DEFAULT_SETTINGS = {
     -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
     -- This setting has no relation with the `automatic_installation` setting.
-    ensure_installed = {},
+    ensure_installed = {'tsserver','sumneko_lua','clangd'},
 
     -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
     -- This setting has no relation with the `ensure_installed` setting.
@@ -78,11 +80,11 @@ require("mason-lspconfig").setup_handlers {
                 globals = {'vim','use', 'require'},
               },
               workspace = {
-                maxPreload = 100000,
-                preloadFileSize = 100000,
+                -- maxPreload = 100000,
+                -- preloadFileSize = 100000,
                 library = {
                   vim.api.nvim_get_runtime_file("",true),
-                  -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/love2d"] = false,
+                  [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/love2d"] = true,
                   -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Jass"] = false,
                   -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/OpenResty"] = false,
                   -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/example"] = false,
@@ -103,10 +105,10 @@ require("mason-lspconfig").setup_handlers {
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = {
-      prefix = ">>",
-      spacing = 2
-    },
+    -- virtual_text = {
+    --   prefix = ">>",
+    --   spacing = 2
+    -- },
     virtual_text = false,
     checkCurrentLine = true,
     signs = true,
