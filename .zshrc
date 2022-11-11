@@ -183,6 +183,7 @@ alias explorer="xdg-open"
 alias emulator="/mnt/d/Code/Android/Sdk/emulator/emulator.exe"
 alias adb="/mnt/d/Code/Android/Sdk/platform-tools/adb.exe"
 alias rdp="sudo /etc/init.d/xrdp start"
+alias ustart="~/dev/scripts/vncstart.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
