@@ -61,7 +61,7 @@ require('Comment').setup({
 
     ---Pre-hook, called before commenting the line
     ---@type fun(ctx: CommentCtx):string
-    pre_hook = nil,
+    pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 
     ---Post-hook, called after commenting is done
     ---@type fun(ctx: CommentCtx)

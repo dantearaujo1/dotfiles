@@ -9,7 +9,7 @@ capabilities.textDocument.foldingRange = {
 local options = { noremap=true, silent=true  }
 vim.keymap.set('n', '[d', vim.diagnostic.goto_next, options)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, options)
-vim.keymap.set('n', '<localleader>d', vim.diagnostic.open_float, options)
+vim.keymap.set('n', '<localleader>o', vim.diagnostic.open_float, options)
 vim.keymap.set('n', '<localleader>q', vim.diagnostic.setloclist, options)
 
 local on_attach = function(client, bufnr)
@@ -25,7 +25,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', '<localleader>d', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<localleader>gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<localleader>h', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<localleader>ca', vim.lsp.buf.code_action, bufopts)
@@ -80,8 +80,8 @@ require("mason-lspconfig").setup_handlers {
                 globals = {'vim','use', 'require'},
               },
               workspace = {
-                -- maxPreload = 100000,
-                -- preloadFileSize = 100000,
+                maxPreload = 100000,
+                preloadFileSize = 100000,
                 library = {
                   vim.api.nvim_get_runtime_file("",true),
                   [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/love2d"] = true,

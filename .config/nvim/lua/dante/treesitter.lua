@@ -86,7 +86,11 @@ require'nvim-treesitter.configs'.setup {
         ["[]"] = "@class.outer",
       },
     },
-    markid = {enable = true}
+    markid = {enable = true},
+    context_commentstring = {
+      enable = true,
+      enable_autocmd = false,
+    }
   },
 }
 

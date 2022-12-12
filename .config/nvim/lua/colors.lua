@@ -4,12 +4,14 @@ local o = vim.o -- For Global Options
 local w = vim.wo -- For Window Local Options
 
 
-o.termguicolors = true
 g.termguicolors = true
+g.virtcolumn_char = '▕'
+g.virtcolumn_priority = 10
+o.colorcolumn = '81'                            -- Set the Color of Column
 o.guifont = 'Hack Nerd Font Mono:h12'       -- Set GUI Font
+o.termguicolors = true
 w.cursorline = true
 w.signcolumn = 'yes'				-- Set a Column before numbers
-o.colorcolumn = '80'                            -- Set the Color of Column
 --
 -- --------------------------------------------------------------------------
 -- Colorscheme
@@ -58,7 +60,7 @@ o.colorcolumn = '80'                            -- Set the Color of Column
 -- cmd('colorscheme aurora')                    -- Setting the last used theme
 vim.opt.background = 'dark'
 vim.g.Hexokinase_highlighters = {'virtual','backgroundfull'}
-cmd('colorscheme dracula')                    -- Setting the theme
+cmd('colorscheme gruvbox8_hard')                    -- Setting the theme
 -- --------------------------------------------------------------------------
 
 -- Diagnostics Signs
@@ -73,3 +75,4 @@ vim.api.nvim_command [[autocmd ColorScheme * :hi DiagnosticWarning guifg=Yellow 
 vim.api.nvim_command [[autocmd ColorScheme * :hi DiagnosticInfo guifg=White ctermfg=White]]
 vim.api.nvim_command [[autocmd ColorScheme * :hi DiagnosticHint guifg=Green ctermfg=Green]]
 
+-- require("virt-column").setup()

@@ -15,10 +15,10 @@ Hydra({
   mode = 'n',
   body = '<leader>w',
   heads = {
-    {'h', '<C-w><', {desc = 'Expand Buffer Right'}},
+    {'h', '<C-w><', {desc = 'Expand Buffer Left'}},
     {'j', '<C-w>-', {desc = 'Expand Buffer Up'}},
     {'k', '<c-w>+', {desc = 'Expand Buffer Bottom'}},
-    {'l', '<c-w>>', {desc = 'Expand Buffer Left'}},
+    {'l', '<c-w>>', {desc = 'Expand Buffer Right'}},
     {'z', ':lua require("toggle-fullscreen"):toggle_fullscreen()<CR>', {desc = 'Make Buffer FullScreen'}},
   }
 

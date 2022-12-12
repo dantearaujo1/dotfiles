@@ -25,6 +25,7 @@ packer.startup({
       run = ':TSUpdate',
     }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'JoosepAlviste/nvim-ts-context-commentstring' -- Know comment based on context
   use 'yioneko/nvim-yati' -- Better indent tree-sitter plugin
   use 'p00f/nvim-ts-rainbow'
   use 'windwp/nvim-ts-autotag'
@@ -92,51 +93,35 @@ end
       		}
       -- Plugins
       use 'nvim-telescope/telescope-packer.nvim'
-      -- require('telescope').extensions.packer.plugins(opts)
       use 'cljoly/telescope-repo.nvim'
-      -- This is to look for gh repos readme in telescope
       use 'xiyaowong/telescope-emoji.nvim'
-      -- :Telescope emoji
       use 'dhruvmanila/telescope-bookmarks.nvim'
-      -- Open browser favorites inside neovim
       use 'nvim-telescope/telescope-symbols.nvim'
-      -- :Telescope symbols
       use 'nvim-telescope/telescope-project.nvim'
-      -- Switch between projects
       use 'nvim-telescope/telescope-file-browser.nvim'
-      -- File Browser Extension
       use 'LinArcX/telescope-env.nvim'
-      -- File Browser Extension
       use 'GustavoKatel/telescope-asynctasks.nvim'
-      -- AsyncTask UI List Integration
       use {'nvim-telescope/telescope-fzf-native.nvim',
       run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
           }
       use { "nvim-telescope/telescope-live-grep-args.nvim" }
           if (util.getOS() == 'Linux') then
       use 'nvim-telescope/telescope-media-files.nvim'
-      --  See media in telescope
       util.map('n','<leader>fm', ':lua require("telescope").extensions.media_files.media_files()<CR>', {noremap = true})
           end
 
       -- Terminal ============================================
-
           if util.getOS() == 'Linux' then
       use 'christoomey/vim-tmux-navigator'
-      -- This is for using nvim with tmux
       use 'preservim/vimux'
-      -- Send commands to tmux from nvim
       -- use 'vimpostor/vim-tpipeline' -- Tmux status line with vim
           end
       use { 'akinsho/toggleterm.nvim', branch = 'main', config = function() require("toggleterm").setup() end}
-    -- Make background activitys
       use 'skywind3000/asyncrun.vim'
-    -- Make tasks for background commands
       use 'skywind3000/asynctasks.vim'
     -- Browser Navigation Plugins =================================================
       use 'tyru/open-browser.vim'
       use 'tyru/open-browser-github.vim'
-      -- Open github page in browser <leader>og
       -- Custom Pluggins ===========================================================
       use({ "nvim-neo-tree/neo-tree.nvim",
             branch = "v2.x",
@@ -146,7 +131,6 @@ end
               "MunifTanjim/nui.nvim",
               }
           })
-      -- File explorer
       use {
             's1n7ax/nvim-window-picker',
             tag = 'v1.*',

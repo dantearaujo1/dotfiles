@@ -23,8 +23,6 @@ util.map('n', ';' , ':' , nore)
 util.map('x', ';' , ':' , nore)
 -- Make Sneak ; works
 -- util.map('n', ':', '<Plug>SneakNext')
--- util.map('x', ':', '<Plug>SneakNext')
--- util.map('o', ':', '<Plug>SneakNext')
 util.map('n', ':' , ';' , nore)
 util.map('x', ':' , ';' , nore)
 util.map('n', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mode
