@@ -212,6 +212,12 @@ end
 
       use 'rcarriga/nvim-notify'
       use 'karb94/neoscroll.nvim'
+      use {
+        "nvim-zh/colorful-winsep.nvim",
+        config = function ()
+            require('colorful-winsep').setup()
+        end
+      }
 
 --      use { 'folke/noice.nvim',
             --config = function ()
