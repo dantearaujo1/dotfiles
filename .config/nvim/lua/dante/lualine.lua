@@ -1,4 +1,4 @@
-local hydra_status = require('hydra.statusline')
+local hydra = require('hydra.statusline')
 local navic = require("nvim-navic")
 
 
@@ -22,7 +22,7 @@ require'lualine'.setup {
     }
   },
   sections = {
-    lualine_a = {'mode', { hydra_status.get_name , cond = hydra_status.is_active} },
+    lualine_a = {'mode'},
     lualine_b = {'branch'},
     lualine_c = {{navic.get_location, cond = navic.is_available} },
     lualine_x = {'filetype', 'fileformat', 'encoding'},

@@ -4,11 +4,11 @@ local o = vim.o -- For Global Options
 local w = vim.wo -- For Window Local Options
 
 
-g.termguicolors = true
 g.virtcolumn_char = '▕'
 g.virtcolumn_priority = 10
 o.colorcolumn = '81'                            -- Set the Color of Column
 o.guifont = 'Hack Nerd Font Mono:h12'       -- Set GUI Font
+g.termguicolors = true
 o.termguicolors = true
 w.cursorline = true
 w.signcolumn = 'yes'				-- Set a Column before numbers
@@ -58,21 +58,10 @@ w.signcolumn = 'yes'				-- Set a Column before numbers
 -- })
 
 -- cmd('colorscheme aurora')                    -- Setting the last used theme
-vim.opt.background = 'dark'
-vim.g.Hexokinase_highlighters = {'virtual','backgroundfull'}
-cmd('colorscheme gruvbox8_hard')                    -- Setting the theme
+-- vim.opt.background = 'dark'
+vim.g.gruvbox_baby_background_color = 'dark'
+vim.g.gruvbox_baby_telescope_theme = 1
+vim.g.gruvbox_baby_transparent_mode = 1
+cmd('colorscheme vscode')                    -- Setting the theme
 -- --------------------------------------------------------------------------
 
--- Diagnostics Signs
-vim.fn.sign_define('DiagnosticSignError', { text = "", texthl = "DiagnosticError" })
-vim.fn.sign_define('DiagnosticSignWarning', { text = "", texthl = "DiagnosticWarning" })
-vim.fn.sign_define('DiagnosticSignInfo', { text = "", texthl = "DiagnosticInfo" })
-vim.fn.sign_define('DiagnosticSignHint', { text = "", texthl = "DiagnosticHint" })
-
--- LSPSAGA Colors
-vim.api.nvim_command [[autocmd ColorScheme * :hi DiagnosticError guifg=Red ctermfg=Red]]
-vim.api.nvim_command [[autocmd ColorScheme * :hi DiagnosticWarning guifg=Yellow ctermfg=Yellow]]
-vim.api.nvim_command [[autocmd ColorScheme * :hi DiagnosticInfo guifg=White ctermfg=White]]
-vim.api.nvim_command [[autocmd ColorScheme * :hi DiagnosticHint guifg=Green ctermfg=Green]]
-
--- require("virt-column").setup()

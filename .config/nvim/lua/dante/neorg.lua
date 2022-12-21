@@ -3,6 +3,7 @@ require('neorg').setup {
     ["core.defaults"] = {},
     ["core.norg.concealer"] = {
       config = {
+        markup_preset = "safe",
         markup = true,
       }
     },

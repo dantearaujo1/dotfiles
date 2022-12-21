@@ -68,8 +68,6 @@ end
       use 'onsails/lspkind-nvim'
       -- for symbols in completion
       use 'ray-x/lsp_signature.nvim'
-      -- for symbols in completion
-      -- for symbols in completion
       -- ============ COMPLETION PLUGINS ============================
       use 'hrsh7th/nvim-cmp'
       use 'L3MON4D3/LuaSnip'
@@ -212,18 +210,9 @@ end
       } -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
       -- UI Pluggins ===========================================================
 
-      if (util.getOS() == 'Linux') then
-        use {
-          'RRethy/vim-hexokinase',
-          run = 'make hexokinase',
-        } -- Put some color in textcolor
-      else
-        use {
-          'RRethy/vim-hexokinase',
-          run = 'mingw32-make hexokinase',
-        } -- Put some color in textcolor
-      end
       use 'rcarriga/nvim-notify'
+      use 'karb94/neoscroll.nvim'
+
 --      use { 'folke/noice.nvim',
             --config = function ()
               --require("noice").setup()
@@ -233,46 +222,38 @@ end
               --"rcarriga/nvim-notify",
       --}
        --   }
-      -- A notify menu for various things (Debug best)
+
       -- THEMES =====================================================================
       -- ColorColumn ===========================
-      use "EdenEast/nightfox.nvim"
       use 'xiyaowong/virtcolumn.nvim'
-      use 'lifepillar/vim-gruvbox8'
-      use 'sam4llis/nvim-tundra'
-      use 'morhetz/gruvbox'
-      use 'sjl/badwolf'
-      use 'ajmwagar/vim-deus'
-      use 'YorickPeterse/happy_hacking.vim'
-      use 'lifepillar/vim-solarized8'
-      use 'sickill/vim-monokai'
-      use 'whatyouhide/vim-gotham'
-      use 'rakr/vim-one'
-      use 'marko-cerovac/material.nvim'
-      use 'Lokaltog/vim-monotone'
-      use 'bignimbus/pop-punk.vim'
-      use 'yassinebridi/vim-purpura'
-      use 'hachy/eva01.vim'
-      use 'cocopon/iceberg.vim'
-      use 'Rigellute/rigel'
-      use 'CreaturePhil/vim-handmade-hero'
-      use 'EdenEast/Revolution.vim'
-      use 'Heorhiy/VisualStudioDark.vim'
+      -- ICONS THEMES==================================================
       use 'ryanoasis/vim-devicons'
       use 'yamatsum/nvim-web-nonicons'
       use 'kyazdani42/nvim-web-devicons'
       -- TREESITTER SUPORTED THEMES==================================================
+      use {'luisiacc/gruvbox-baby', branch = 'main'}
+      use 'Abstract-IDE/Abstract-cs'
+      use 'Mofiqul/vscode.nvim'
+      use 'ray-x/aurora'
+      use 'ofirgall/ofirkai.nvim'
       use 'bluz71/vim-nightfly-guicolors'
       use 'bluz71/vim-moonfly-colors'
       use 'christianchiarulli/nvcode-color-schemes.vim'
       use 'sainnhe/sonokai'
+      use 'sainnhe/gruvbox-material'
+      use 'sainnhe/edge'
       use 'kyazdani42/blue-moon'
       use 'mhartington/oceanic-next'
       use 'Iron-E/nvim-highlite'
+      use {'nxvu699134/vn-night.nvim'}
+      use 'rockerBOO/boo-colorscheme-nvim'
+      use ({ 'projekt0n/github-nvim-theme' })
+      -- CLI Pluggins ===========================================================
+      use 'ianding1/leetcode.vim'
       -- My Pluggins ===========================================================
       use '~/dev/projects/lua/neovim/project-creator'
       -- STATUS LINE PLUGINS ========================================================
-      use 'hoob3rt/lualine.nvim'
+      use 'nvim-lualine/lualine.nvim'
       use {'SmiteshP/nvim-navic', requires = "neovim/nvim-lspconfig"}
       end,
       config = {

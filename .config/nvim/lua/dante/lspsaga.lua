@@ -32,5 +32,4 @@ saga.init_lsp_saga {
   rename_prompt_prefix = '➤',
 }
 
-require "lsp_signature".setup()
 

@@ -94,6 +94,7 @@ o.syntax = 'enable'
 -- Old Folding
 o.foldlevel = 0
 o.foldlevelstart = 20
+vim.opt.conceallevel = 2
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]

@@ -61,10 +61,10 @@ _o_:  Old files        _O_:  Show Options
 _p_:  Projects         _P_:  Packer Opts
 _q_:  Show Quick Fix
 _r_:  RepoList         _R_:  Resume
-_t_:  Find Todos
+_t_:  Find Todos       _T_: AsyncTasks List
 _/_:  In File          _?_:  Search History
 _;_:  Commands History _,_:  Search dotfiles
-_<F5>_: AsyncTasks List _<_:  Grep dotfiles
+ _<_:  Grep dotfiles
 ^
 _<Enter>_: Telescope  _<Esc>_
 ]]
@@ -105,11 +105,11 @@ Hydra({
       { 'r', cmd 'Telescope repo list' },
       { 'R', cmd 'Telescope resume' },
       { 't', cmd 'TodoTelescope' },
+      { 'T', cmd 'Telescope asynctasks all', { desc = 'List of AsyncTasks' } },
       { 'u', cmd 'silent! %foldopen! | UndotreeToggle', { desc = 'undotree' }},
       { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'search in file' } },
       { '?', cmd 'Telescope search_history',  { desc = 'search history' } },
       { ';', cmd 'Telescope command_history', { desc = 'command-line history' } },
-      { '<F5>', cmd 'Telescope asynctasks all', { desc = 'List of AsyncTasks' } },
       { ',', ':lua require("dante.telescope").search_dotfiles()<CR>', { desc = 'Show nvim dotfiles' } },
       { '<', ':lua require("dante.telescope").grep_dotfiles()<CR>', { desc = 'Grep inside nvim dotfiles' } },
       { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },

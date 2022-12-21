@@ -53,6 +53,7 @@ util.map('n', '0' , 'g0' , snore)
 
 -- Yank to the end of line
 util.map('n', 'Y' , 'y$' , nore)
+util.map('n', 'Y' , 'y$' , nore)
 util.map('n', '<leader>Y' , '"+y$' , nore) -- Yank line to system clipboard
 util.map('n', '<leader>y' , '"+y' , nore) -- Yank to system clipboard
 if(util.getOS() == "Linux") then
@@ -123,10 +124,10 @@ end
 
 -- Plugins Keymaps ============================================================
 -- =================================================================|AsyncRun|
+util.map('n', '<F4>' , ':AsyncTask file-build<CR>', nore)
 util.map('n', '<F5>' , ':AsyncTask file-run<CR>', nore)
-util.map('n', '<F6>' , ':AsyncTask file-build<CR>', nore)
+util.map('n', '<F6>' , ':AsyncTask project-build<CR>', nore)
 util.map('n', '<F7>' , ':AsyncTask project-run<CR>', nore)
-util.map('n', '<F8>' , ':AsyncTask project-build<CR>', nore)
 util.map('n', '<F8>' , ':AsyncTask project-init<CR>', nore)
 -- =================================================================|HYDRA|
 -- All my hydra heads are inside this file
