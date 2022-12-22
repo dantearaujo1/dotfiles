@@ -218,6 +218,13 @@ end
             require('colorful-winsep').setup()
         end
       }
+      use {"shortcuts/no-neck-pain.nvim", tag = "*" }
+
+      -- Using nvim inside browser WHAT????
+      use {
+        'glacambre/firenvim',
+        run = function() vim.fn['firenvim#install'](0) end
+      }
 
 --      use { 'folke/noice.nvim',
             --config = function ()

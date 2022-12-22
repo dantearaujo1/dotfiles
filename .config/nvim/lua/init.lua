@@ -25,6 +25,7 @@ else
   require('dante/emmet') -- Emmet for html and css
   require('dante/asynctasks')
   require('dante/git')
+  require('dante/firenvim') -- Browser Configurations for Firenvim
 
 
   require('dante/others') -- Some custom plugins configurations
