@@ -98,7 +98,7 @@ export MANWIDTH=999
 export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
 export GOPATH="$HOME/dev/setup/golang/go"
 export GOBIN="$GOPATH/bin"
-export PROCESSING_DIR="$HOME/dev/setup/processing"
+export PROCESSING_DIR="$HOME/dev/setup/processing/processing-4.1.2"
 export LOCALBINARIES="$HOME/.local/bin/"
 export MYSCRIPTS="$HOME/dev/scripts/"
 export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$MYSCRIPTS
@@ -157,6 +157,7 @@ export EDITOR='nvim'
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias f='nvim "$(fzf)"'
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
 alias ts='tmux new-session -s'
@@ -172,7 +173,7 @@ alias zsh="nvim ~/.bashrc"
 alias zt="nvim ~/.tmux.conf"
 alias zT="source ~/.tmux.conf"
 alias zn="nvim ~/.config/nvim/lua/init.lua"
-alias ohmyzsh="nvim ~/.oh-my-zsh"
+alias ohmyzsh="nvim ~/.oh-my-zsh/oh-my-zsh.sh"
 alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias smd="~/dev/projects/processing/smd"
 alias lg="lazygit"
