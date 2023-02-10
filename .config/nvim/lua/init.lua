@@ -14,6 +14,7 @@ else
 	end
 	vim.opt.rtp:prepend(lazypath)
 
+  vim.g.mapleader = ' ' -- Lazy is asking to define leader before loading lazy
 	require('lazy').setup("plugins")
 
   -- Custom Plugins Configurations
