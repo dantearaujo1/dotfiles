@@ -1,7 +1,20 @@
 if vim.g.vscode then
 
 else
-  require('plugins')
+	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+	if not vim.loop.fs_stat(lazypath) then
+	  vim.fn.system({
+	    "git",
+	    "clone",
+	    "--filter=blob:none",
+	    "https://github.com/folke/lazy.nvim.git",
+	    "--branch=stable", -- latest stable release
+	    lazypath,
+	  })
+	end
+	vim.opt.rtp:prepend(lazypath)
+
+	require('lazy').setup("plugins")
 
   -- Custom Plugins Configurations
   require('dante/nvim-autopairs') -- For completing pairs
@@ -25,7 +38,7 @@ else
   require('dante/emmet') -- Emmet for html and css
   require('dante/asynctasks')
   require('dante/git')
-  require('dante/firenvim') -- Browser Configurations for Firenvim
+  -- require('dante/firenvim') -- Browser Configurations for Firenvim
 
 
   require('dante/others') -- Some custom plugins configurations
@@ -43,3 +56,13 @@ else
   require('dante/processing')
 
 end
+
+
+
+-- So there are some enviroment configurations to set the nvim path
+-- We have the variable where neovim folder is located and its called: XDG_CONFIG_HOME
+-- There is a variable where our data folder is located at and its called: XDG_DATA_HOME
+-- To retrieve these paths we should call vim.fn.stdpath('place') place being config or data
+-- local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+
+-- util.map('n','<leader>fm', ':lua require("telescope").extensions.media_files.media_files()<CR>', {noremap = true})

@@ -139,10 +139,9 @@ if (util.getOS() == 'Linux') then
     }
   }
 	require('telescope').load_extension('file_browser')
-	require('telescope').load_extension('media_files')
+	--require('telescope').load_extension('media_files')
 	require('telescope').load_extension('fzf')
 end
-require('telescope').load_extension('packer')
 require('telescope').load_extension('live_grep_args')
 require('telescope').load_extension('project')
 require('telescope').load_extension('env')
@@ -168,6 +167,16 @@ M.search_from_home = function()
     require("telescope.builtin").find_files({
       prompt_title = "< DANTE - Linux >",
       cwd = "~/",
+    })
+  end
+end
+M.search_notes = function()
+  local system_name = util.getOS()
+  if system_name == "Windows" then
+  elseif system_name == "Linux" then
+    require("telescope.builtin").find_files({
+      prompt_title = "< DANTE - Linux >",
+      cwd = "~/dev/notes",
     })
   end
 end
