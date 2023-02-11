@@ -208,4 +208,7 @@ util.map('s', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : 
 util.map( 'n', '<leader>J', ':lua require("trevj").format_at_cursor()<CR>', {noremap = true, silent = true})
 util.map( 'n', '<leader>k', '<C-i>', {noremap = true, silent = true})
 
+util.map( 'n', 'zR', ':lua require("ufo").openAllFolds()<CR>', {noremap = true, silent = true})
+util.map( 'n', 'zM', ':lua require("ufo").closeAllFolds()<CR>', {noremap = true, silent = true})
+
 
