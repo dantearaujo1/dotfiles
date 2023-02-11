@@ -92,12 +92,14 @@ o.syntax = 'enable'
 -- Folding
 -- --------------------------------------------------------------------------
 -- Old Folding
-o.foldlevel = 0
-o.foldlevelstart = 20
-vim.opt.conceallevel = 2
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+o.foldcolumn = '1'
+o.foldlevel = 99
+o.foldlevelstart = 99
+o.foldenable = true
 o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+o.foldmethod = "expr"
+o.foldexpr = "nvim_treesitter#foldexpr()"
+o.conceallevel = 2
 
 -- Global Status Line
 --o.ls = 0 -- last status */
@@ -106,3 +108,30 @@ o.winbar= "%f"
 o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 vim.notify = require("notify")
+
+-- o.numberwidth = 4
+-- o.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
+vim.o.statuscolumn = '%= '
+  .. '%s' -- sign column FIXME: figure out how to put on the other side without having to do a lot of shifting
+  .. '%{%' -- evaluate this, and then evaluate what it returns
+    .. '&number ?'
+      .. '(v:relnum ?'
+	    .. 'printf("%"..len(line("$")).."s", v:relnum)' -- when showing relative numbers, make sure to pad so things don't shift as you move the cursor
+      .. ':'
+		.. 'v:lnum'
+      .. ')'
+	.. ':'
+      .. '""'
+	.. ' ' -- space between lines and fold
+  .. '%}'
+  .. '%= '
+  .. '%#FoldColumn#' -- highlight group for fold
+  .. '%{' -- expression for showing fold expand/colapse
+    .. 'foldlevel(v:lnum) > foldlevel(v:lnum - 1)' -- any folds?
+      .. '? (foldclosed(v:lnum) == -1' -- currently open?
+        .. '? ""' -- point down
+        .. ':  ""' -- point to right
+  	.. ')'
+  	.. ': " "' -- blank for no fold, or inside fold
+  .. '}'
+  .. '%= ' -- spacing between end of column and start of tex
