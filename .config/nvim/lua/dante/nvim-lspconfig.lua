@@ -125,6 +125,9 @@ require("mason-lspconfig").setup_handlers {
         capabilities = capabilities,
       }
     end,
+    ["clangd"] = function ()
+      require("clangd_extensions").setup()
+    end,
     ["sumneko_lua"] = function ()
         require("lspconfig").sumneko_lua.setup {
           on_attach = on_attach,
