@@ -2,10 +2,10 @@ local util = require('utils')
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-
-
 return {
 
+	-- ============ SPEED UP PLUGINS ==============================
+	{ 'nathom/filetype.nvim' }, -- New method of filetype that is faster
 	-- ============ SYNTAX PLUGINS ==============================
 	{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
 	{ "nvim-treesitter/nvim-treesitter-textobjects" },
@@ -36,8 +36,8 @@ return {
       'theHamsta/nvim-dap-virtual-text', -- Virtual text showing variables info
       'rcarriga/nvim-dap-ui' -- UI out of the box
     },
-	},
 	-- 'williamboman/nvim-lsp-installer'
+  },
 	{ 'onsails/lspkind-nvim' },
 	{ 'ray-x/lsp_signature.nvim' }, -- for symbols in completion
 
@@ -46,8 +46,7 @@ return {
 	{ 'L3MON4D3/LuaSnip' },
 	{ 'rafamadriz/friendly-snippets' },
 	-- === Completion Sources for CMP
-	{ 'saadparwaiz1/cmp_luasnip' },
-	-- Completion Source for luasnip
+	{ 'saadparwaiz1/cmp_luasnip' }, -- Completion Source for luasnip
 	{ 'hrsh7th/cmp-nvim-lsp' },
 	{ 'hrsh7th/cmp-buffer' },
 	{ 'hrsh7th/cmp-path' },
@@ -79,14 +78,25 @@ return {
 	},
 	{ "nvim-telescope/telescope-live-grep-args.nvim" },
 
-	-- Terminal ============================================
+	-- Terminal ==================================================================
 	{ 'akinsho/toggleterm.nvim', branch = 'main', config = function() require("toggleterm").setup() end},
 	{ 'skywind3000/asyncrun.vim' },
 	{ 'skywind3000/asynctasks.vim' },
-	-- Browser Navigation Plugins =================================================
+	-- Browser Navigation Plugins ==================================================
+	{
+    'xiyaowong/link-visitor.nvim',
+    config = function()
+      require('link-visitor').setup()
+    end
+  },
 	{ 'tyru/open-browser.vim' },
-	{ 'tyru/open-browser-github.vim' },
-	-- Custom Pluggins ===========================================================
+	{
+    'tyru/open-browser-github.vim',
+    dependencies = {
+      'tyru/open-browser.vim'
+    }
+  },
+	-- Custom Pluggins =============================================================
 	{
     "nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
@@ -118,9 +128,19 @@ return {
 	{ 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace
 	{ 'foosoft/vim-argwrap' }, -- Strenght argument wrapping and unwrapping
 	{ 'tommcdo/vim-exchange' }, -- Easy text exchange operator for Vim
-	{ 'matze/vim-move' }, -- Move lines up and down
-	-- use 'justinmk/vim-sneak' -- Find words using s -- Using leap now
+  {
+    'booperlv/nvim-gomove',
+    config = function()
+      require('gomove').setup{}
+    end
+  }, -- Move lines up and down
 	{ 'ggandor/leap.nvim' },
+	{
+    'ggandor/flit.nvim',
+    config = function()
+      require('flit').setup({})
+    end
+  },
 	{ 'vim-scripts/ReplaceWithRegister' }, -- Find words with label using s or gs
 	{
     'AckslD/nvim-trevJ.lua', -- Do the oposite of J in neovim
@@ -142,20 +162,64 @@ return {
 	{ 'uga-rosa/ccc.nvim' }, -- Color Picker
 	{ 'anuvyklack/hydra.nvim' }, -- Hydra mode for creating new modes
 
-	-- Language Specifics =====================================================================
+	-- Language Specifics ==========================================================
+	-- Processing ========
 	{ 'sophacles/vim-processing' }, -- Processing plugin helper
 	-- LATEX ========
-	{ 'lervag/vimtex' },
-	{ 'matze/vim-tex-fold' },
+  {
+    'lervag/vimtex',
+    enabled = function() return util.getOS() == "Linux" end
+  },
+  {
+    'matze/vim-tex-fold',
+    enabled = function() return util.getOS() == "Linux" end
+  },
 	-- JSON ========
 	{ 'gennaro-tedesco/nvim-jqx' }, -- Browse and preview json files
 	-- GIT ========
 	{ 'lewis6991/gitsigns.nvim' }, -- Super fast git decorations implemented purely in Lua/Teal
 	{ 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim', }, -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+	-- C++ ========
+  { 'p00f/clangd_extensions.nvim' }, -- C++ clangd lsp defaults
+	-- CLI Pluggins ===========================================================
+	{ 'ianding1/leetcode.vim', lazy=true  },
 	-- UI Pluggins ===========================================================
-
-	'rcarriga/nvim-notify',
-	'karb94/neoscroll.nvim',
+  {
+    "nacro90/numb.nvim",
+    config = function ()
+      require('numb').setup()
+    end
+  },
+  {
+    'kevinhwang91/nvim-ufo',
+    dependencies = 'kevinhwang91/promise-async',
+    config = function ()
+      require('ufo').setup()
+    end
+  },
+  {
+    'luukvbaal/statuscol.nvim',
+    config = function ()
+      require('statuscol').setup(
+        {
+          foldfunc = "builtin",
+          setopt = true
+        }
+      )
+    end
+  },
+  {
+    'j-hui/fidget.nvim',
+		config = function ()
+			require('fidget').setup()
+		end
+  }, -- Lsp progress handler
+  { 'karb94/neoscroll.nvim' },
+	{
+    'rcarriga/nvim-notify',
+    lazy = false,
+    priority = 1000,
+  },
 	{
     "nvim-zh/colorful-winsep.nvim",
 		config = function ()
@@ -182,12 +246,22 @@ return {
 	--   }
 
 	-- THEMES =====================================================================
+	-- Dashboard ===========================
+	{
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup{}
+    end,
+    dependencies = {
+    }
+  },
 	-- ColorColumn ===========================
-	{ 'xiyaowong/virtcolumn.nvim', lazy=true },
+	{ 'xiyaowong/virtcolumn.nvim' },
 	-- ICONS THEMES==================================================
-	{ 'ryanoasis/vim-devicons', lazy=true },
-	{ 'yamatsum/nvim-web-nonicons', lazy=true },
-	{ 'kyazdani42/nvim-web-devicons', lazy=true },
+	{ 'ryanoasis/vim-devicons' },
+	{ 'yamatsum/nvim-web-nonicons' },
+	{ 'kyazdani42/nvim-web-devicons' },
 	-- TREESITTER SUPORTED THEMES==================================================
 	{'luisiacc/gruvbox-baby', branch = 'main', lazy=true },
 	{ 'Abstract-IDE/Abstract-cs', lazy=true },
@@ -203,11 +277,9 @@ return {
 	{ 'kyazdani42/blue-moon', lazy=true },
 	{ 'mhartington/oceanic-next', lazy=true },
 	{ 'Iron-E/nvim-highlite', lazy=true },
-	{'nxvu699134/vn-night.nvim', lazy=true },
-	'rockerBOO/boo-colorscheme-nvim', lazy=true ,
+	{ 'nxvu699134/vn-night.nvim', lazy=true },
+  { 'rockerBOO/boo-colorscheme-nvim', lazy=true },
 	{ 'projekt0n/github-nvim-theme', lazy=true },
-	-- CLI Pluggins ===========================================================
-	{ 'ianding1/leetcode.vim', lazy=true  },
 	-- My Pluggins ===========================================================
 	--'~/dev/projects/lua/neovim/project-creator',
 	-- STATUS LINE PLUGINS ========================================================
@@ -219,14 +291,6 @@ return {
   },
   {
     'preservim/vimux',
-    enabled = function() return util.getOS() == "Linux" end
-  },
-  {
-    'lervag/vimtex',
-    enabled = function() return util.getOS() == "Linux" end
-  },
-  {
-    'matze/vim-tex-fold',
     enabled = function() return util.getOS() == "Linux" end
   },
   -- { 'vimpostor/vim-tpipeline' }, Tmux status line with vim
