@@ -14,3 +14,6 @@ ccc.setup({
 
 local neoscroll = require('neoscroll')
 neoscroll.setup()
+
+vim.g.better_whitespace_filetypes_blacklist = { "dashboard" }
+vim.g.indent_blankline_filetype_exclude = { "dashboard" }
