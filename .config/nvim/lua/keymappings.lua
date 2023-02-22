@@ -126,7 +126,7 @@ end
 -- =================================================================|AsyncRun|
 util.map('n', '<F4>' , ':AsyncTask file-build<CR>', nore)
 util.map('n', '<F5>' , ':AsyncTask file-run<CR>', nore)
-util.map('n', '<F6>' , ':AsyncTask project-build<CR>', nore)
+util.map('n', '<F6>' , ':AsyncTask project-b&r<CR>', nore)
 util.map('n', '<F7>' , ':AsyncTask project-run<CR>', nore)
 util.map('n', '<F8>' , ':AsyncTask project-init<CR>', nore)
 -- =================================================================|HYDRA|

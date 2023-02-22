@@ -158,7 +158,12 @@ return {
 	},
 	{ 'folke/zen-mode.nvim' }, -- Distraction Free
 	{ 'folke/twilight.nvim' }, -- Dim buffers
-	{ 'ellisonleao/glow.nvim' }, -- Preview Markdown files with :Glow
+	{
+    'ellisonleao/glow.nvim',
+    enabled = function() return util.getOS() == "Linux" end,
+		config = true ,
+    cmd = "Glow",
+  }, -- Preview Markdown files with :Glow
 	{ 'uga-rosa/ccc.nvim' }, -- Color Picker
 	{ 'anuvyklack/hydra.nvim' }, -- Hydra mode for creating new modes
 
@@ -179,8 +184,24 @@ return {
 	-- GIT ========
 	{ 'lewis6991/gitsigns.nvim' }, -- Super fast git decorations implemented purely in Lua/Teal
 	{ 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim', }, -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+	-- Java ========
+  {'mfussenegger/nvim-jdtls'}, -- Java JDTLS helpers
 	-- C++ ========
   { 'p00f/clangd_extensions.nvim' }, -- C++ clangd lsp defaults
+  {
+    'madskjeldgaard/cppman.nvim', -- Interface for the cppman cli tool
+    dependencies = {
+      { 'MunifTanjim/nui.nvim' }
+    },
+    enabled = function () return util.getOS() == "Linux" end,
+    config = function()
+      local cppman = require"cppman"
+      cppman.setup()
+      vim.keymap.set("n","<leader>cm", function() cppman.open_cppman_for(vim.fn.expand("<cword>")) end )
+      vim.keymap.set("n","<leader>cn", function() cppman.input() end )
+    end
+
+  },
 	-- CLI Pluggins ===========================================================
 	{ 'ianding1/leetcode.vim', lazy=true  },
 	-- UI Pluggins ===========================================================
