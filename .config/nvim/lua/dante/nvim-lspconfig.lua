@@ -102,7 +102,7 @@ end
 local MASON_LSP_DEFAULT_SETTINGS = {
   -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
   -- This setting has no relation with the `automatic_installation` setting.
-  ensure_installed = { 'clangd', 'rust_analyzer', 'pyright', 'gopls', 'tsserver', 'sumneko_lua', 'clangd' },
+  ensure_installed = { 'clangd', 'rust_analyzer', 'pyright', 'gopls', 'tsserver', 'lua_ls', 'clangd' },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -139,8 +139,8 @@ require("mason-lspconfig").setup_handlers {
     --     root_dir = vim.fs.dirname(vim.fs.find({'.gradlew', '.git', 'mnvw'}, {upward = true})[0]),
     -- })
   end,
-  ["sumneko_lua"] = function()
-    require("lspconfig").sumneko_lua.setup {
+  ["lua_ls"] = function()
+    require("lspconfig").lua_ls.setup {
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
