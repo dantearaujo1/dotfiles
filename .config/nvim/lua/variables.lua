@@ -3,7 +3,7 @@ local eval = vim.api.nvim_eval
 local utility = require('utils')
 
 if utility.getOS() == "Windows" then
-	g.python3_host_prog = 'D:\\Code\\Languages\\Python\\Python38\\python'
+	g.python3_host_prog = 'D:\\Code\\Installed Languages\\Python\\Python 3.8\\python'
 elseif utility.getOS() == "Linux" then
 	g.python3_host_prog = '/usr/bin/python3.8'
 elseif utility.getOS() == "macOS" then

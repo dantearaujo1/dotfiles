@@ -109,8 +109,8 @@ o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 vim.notify = require("notify")
 
--- o.numberwidth = 4
--- o.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
+o.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
+o.numberwidth = 4
 vim.o.statuscolumn = '%= '
   .. '%s' -- sign column FIXME: figure out how to put on the other side without having to do a lot of shifting
   .. '%{%' -- evaluate this, and then evaluate what it returns
