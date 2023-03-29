@@ -32,7 +32,7 @@ util.map('n', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mo
 util.map('n', '<leader>w' , ':update<CR>' , snore)
 util.map('n', '<leader>ll' , ':luafile %<CR> <bar> :lua print("This file was sourced!")<CR>' , nore)
 -- " Change current working directory locally and print cwd after that
-util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR>', nore)
+util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR> :Neotree .<CR>', nore)
 util.map('n', '<leader>v' , '`[V`]' , snore) -- Reselect last pasted text
 -- " Use sane regex expression (see `:h magic` for more info)
 util.map('n', '/' , "/\\v" , nore)
@@ -70,7 +70,7 @@ util.map('x', 'H' , '^' , nore)
 util.map('x', 'L' , 'g_' , nore)
 -- Find and replace (like Sublime Text 3)
 util.map('x', '<M-s>', ':%s/', nore)
-util.map('n', '<M-s>', ':%s/', nore)
+util.map('n', '<M-S>', ':s/', nore)
 
 -- CTRL-O and CTRL-I Movements
 util.map('n', '<leader>j', '<C-o>', nore)
@@ -114,7 +114,10 @@ util.map('n','<F3>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp
 -- Terminal Operations ========================================================
 -- There's an keymap inside init.vim that handles terminals keybings for different
 -- Terminals types like toggleterm and lazygit
--- util.map('t', '<ESC>' , '<C-\\><C-n>', nore)
+util.map('n','<c-t>','<Cmd> exe v:count1 . "ToggleTerm"<CR>', nore)
+util.map('i','<c-t>','<Esc><Cmd> exe v:count1 . "ToggleTerm"<CR>', nore)
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
 if(util.getOS() == "Linux") then
   util.map('n', '<leader>tc' , ':VimuxCloseRunner<CR>', nore)
   util.map('n', '<leader>to' , ':VimuxOpenRunner<CR>', nore)

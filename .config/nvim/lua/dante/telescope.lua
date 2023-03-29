@@ -36,7 +36,6 @@ telescope.setup {
         },
       },
       bookmarks = {
-        selected_browser = 'edge',
         url_open_plugin = 'open_browser',
         full_path = true,
         firefox_profile_name = nil,
@@ -47,6 +46,22 @@ telescope.setup {
         },
         hidden_files = true,
         theme = "dropdown"
+      },
+      lazy = {
+          -- Optional theme (the extension doesn't set a default theme)
+          theme = "ivy",
+          -- Whether or not to show the icon in the first column
+          show_icon = true,
+          -- Mappings for the actions
+          mappings = {
+            open_in_browser = "<C-o>",
+            open_in_file_browser = "<M-b>",
+            open_in_find_files = "<C-f>",
+            open_in_live_grep = "<C-g>",
+            open_plugins_picker = "<C-b>", -- Works only after having called first another action
+            open_lazy_root_find_files = "<C-r>f",
+            open_lazy_root_live_grep = "<C-r>g",
+          },
       },
     },
     pickers = {
@@ -138,10 +153,9 @@ if (util.getOS() == 'Linux') then
         }
     }
   }
-	require('telescope').load_extension('file_browser')
-	--require('telescope').load_extension('media_files')
 	require('telescope').load_extension('fzf')
 end
+require('telescope').load_extension('file_browser')
 require('telescope').load_extension('live_grep_args')
 require('telescope').load_extension('project')
 require('telescope').load_extension('env')
@@ -150,6 +164,7 @@ require('telescope').load_extension('dap')
 require('telescope').load_extension('bookmarks')
 require('telescope').load_extension('emoji')
 require('telescope').load_extension('notify')
+require('telescope').load_extension('lazy')
 -- :Telescope symbols
 
 local M = {

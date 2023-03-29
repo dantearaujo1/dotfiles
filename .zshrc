@@ -98,7 +98,7 @@ export MANWIDTH=999
 export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
 export GOPATH="$HOME/dev/setup/golang/go"
 export GOBIN="$GOPATH/bin"
-export PROCESSING_DIR="$HOME/dev/setup/processing/processing-4.1.2"
+export PROCESSING_DIR="$HOME/dev/setup/processing/processing-4.2"
 export LOCALBINARIES="$HOME/.local/bin/"
 export MYSCRIPTS="$HOME/dev/scripts/"
 export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$MYSCRIPTS
@@ -185,6 +185,7 @@ alias emulator="/mnt/d/Code/Android/Sdk/emulator/emulator.exe"
 alias adb="/mnt/d/Code/Android/Sdk/platform-tools/adb.exe"
 alias rdp="sudo /etc/init.d/xrdp start"
 alias ustart="~/dev/scripts/vncstart.sh"
+export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0 #Exporting Display to XServer
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -56,6 +56,7 @@ _f_:  Find Files       _F_:  Live grep Args
 _g_:  Live grep        _G_:  Git Files
 _h_:  Help Tags        _H_:  Home Browser
 _k_:  Keymaps
+_l_:  Lazy Plugs
 _n_:  Notes
 _m_:  Bookmarks
 _o_:  Old files        _O_:  Show Options
@@ -97,6 +98,7 @@ Hydra({
       { 'h', cmd 'Telescope help_tags', { desc = 'Vim help' } },
       { 'H', ':lua require("dante.telescope").search_from_home()<CR>', { desc = 'Look files from our home path' } },
       { 'k', cmd 'Telescope keymaps', {desc = "Show keymapping"}},
+      { 'l', cmd 'Telescope lazy', {desc = "Show Plugins installed with Lazy"}},
       { 'n', cmd ':lua require("dante.telescope").search_notes()<CR>', { desc = 'Search Notes' } },
       { 'm', cmd 'Telescope bookmarks', { desc = 'Show url bookmarks' } },
       { 'o', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },

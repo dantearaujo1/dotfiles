@@ -1,3 +1,6 @@
+local dap = require('dap')
+local dapui = require('dapui')
+
 local MASON_DAP_DEFAULT_SETTINGS = {
     -- A list of adapters to install if they're not already installed.
     -- This setting has no relation with the `automatic_installation` setting.
@@ -26,7 +29,7 @@ local MASON_DAP_DEFAULT_SETTINGS = {
 --require("dap").setup()
 require("mason-nvim-dap").setup(MASON_DAP_DEFAULT_SETTINGS)
 require'nvim-dap-virtual-text'.setup()
-require('dapui').setup({
+dapui.setup({
   icons = { expanded = "▾", collapsed = "▸" },
   mappings = {
     -- Use a table to apply multiple mappings
@@ -65,6 +68,16 @@ require('dapui').setup({
   },
   windows = { indent = 1 },
 })
+
+dap.listeners.after.event_initialized["dapui_config"] = function ()
+  dapui.open()
+end
+dap.listeners.after.event_terminated["dapui_config"] = function ()
+  dapui.close()
+end
+dap.listeners.after.event_exited["dapui_config"] = function ()
+  dapui.close()
+end
 
 require 'mason-nvim-dap'.setup_handlers {
     function(source_name)

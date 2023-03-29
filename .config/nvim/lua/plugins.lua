@@ -3,9 +3,8 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 
 return {
-
 	-- ============ SPEED UP PLUGINS ==============================
-	{ 'nathom/filetype.nvim' }, -- New method of filetype that is faster
+	-- { 'nathom/filetype.nvim' }, -- New method of filetype that is faster NOT WORKING
 	-- ============ SYNTAX PLUGINS ==============================
 	{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
 	{ "nvim-treesitter/nvim-treesitter-textobjects" },
@@ -20,15 +19,15 @@ return {
 
 
 	-- ============ LSP PLUGINS ==============================
-	{ 'theHamsta/nvim-dap-virtual-text' }, -- Virtual text showing variables info
-	{ 'rcarriga/nvim-dap-ui' }, -- UI out of the box
-	{ 'nvim-telescope/telescope-dap.nvim' }, -- Telescope to find variables
-	{ 'williamboman/mason.nvim' },
-	{ 'williamboman/mason-lspconfig.nvim' },
-	{ 'neovim/nvim-lspconfig' },
-	{ 'mfussenegger/nvim-dap' },
-	{ 'jayp0521/mason-nvim-dap.nvim' },
-	{ 'jose-elias-alvarez/null-ls.nvim' },
+  { 'theHamsta/nvim-dap-virtual-text' }, -- Virtual text showing variables info
+  { 'rcarriga/nvim-dap-ui' }, -- UI out of the box
+  { 'nvim-telescope/telescope-dap.nvim' }, -- Telescope to find variables
+  { 'williamboman/mason.nvim' },
+  { 'williamboman/mason-lspconfig.nvim' },
+  { 'neovim/nvim-lspconfig' },
+  { 'mfussenegger/nvim-dap' },
+  { 'jayp0521/mason-nvim-dap.nvim' },
+  { 'jose-elias-alvarez/null-ls.nvim' },
   {
     "jayp0521/mason-null-ls.nvim",
     dependencies = {
@@ -36,24 +35,27 @@ return {
       'theHamsta/nvim-dap-virtual-text', -- Virtual text showing variables info
       'rcarriga/nvim-dap-ui' -- UI out of the box
     },
-	-- 'williamboman/nvim-lsp-installer'
   },
-	{ 'onsails/lspkind-nvim' },
-	{ 'ray-x/lsp_signature.nvim' }, -- for symbols in completion
 
+	-- ============ SERVER PLUGINS ==============================
+  {
+    'barrett-ruth/live-server.nvim',
+    enabled = function() return util.getOS() == "Linux" end,
+		config = true ,
+  },
 	-- ============ COMPLETION PLUGINS ============================
-	{ 'hrsh7th/nvim-cmp' },
-	{ 'L3MON4D3/LuaSnip' },
-	{ 'rafamadriz/friendly-snippets' },
-	-- === Completion Sources for CMP
-	{ 'saadparwaiz1/cmp_luasnip' }, -- Completion Source for luasnip
-	{ 'hrsh7th/cmp-nvim-lsp' },
-	{ 'hrsh7th/cmp-buffer' },
-	{ 'hrsh7th/cmp-path' },
-	{ 'hrsh7th/cmp-nvim-lua' },
-	{ 'hrsh7th/cmp-calc' },
-	{ 'hrsh7th/cmp-emoji' },
-	{ 'kdheepak/cmp-latex-symbols' },
+  { 'hrsh7th/nvim-cmp' },
+  { 'L3MON4D3/LuaSnip' },
+  { 'rafamadriz/friendly-snippets' },
+	-- -- -- === Completion Sources for CMP
+   { 'saadparwaiz1/cmp_luasnip' }, -- Completion Source for luasnip
+   { 'hrsh7th/cmp-nvim-lsp' },
+   { 'hrsh7th/cmp-buffer' },
+   { 'hrsh7th/cmp-path' },
+   { 'hrsh7th/cmp-nvim-lua' },
+   { 'hrsh7th/cmp-calc' },
+   { 'hrsh7th/cmp-emoji' },
+   { 'kdheepak/cmp-latex-symbols' },
 	-- ============  TELESCOPE PLUGINS & EXTENSIONS  ==============================
 	{
     'nvim-telescope/telescope.nvim',
@@ -70,6 +72,7 @@ return {
 	{ 'nvim-telescope/telescope-symbols.nvim' },
 	{ 'nvim-telescope/telescope-project.nvim' },
 	{ 'nvim-telescope/telescope-file-browser.nvim' },
+  { 'tsakirist/telescope-lazy.nvim' },
 	{ 'LinArcX/telescope-env.nvim' },
 	{ 'GustavoKatel/telescope-asynctasks.nvim' },
 	{
@@ -99,10 +102,12 @@ return {
 	-- Custom Pluggins =============================================================
 	{
     "nvim-neo-tree/neo-tree.nvim",
+
+
 		branch = "v2.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"kyazdani42/nvim-web-devicons",
+			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		}
 	},
@@ -206,6 +211,26 @@ return {
 	{ 'ianding1/leetcode.vim', lazy=true  },
 	-- UI Pluggins ===========================================================
   {
+    'folke/trouble.nvim',
+    config = function()
+      require('trouble').setup()
+    end
+  },
+   { 'onsails/lspkind-nvim' },
+	{ 'ray-x/lsp_signature.nvim' }, -- for symbols in completion
+  {
+    "glepnir/lspsaga.nvim",
+    event = "BufRead",
+    config = function()
+        require("dante/lspsaga")
+    end,
+    dependencies = {
+      {"nvim-tree/nvim-web-devicons"},
+      --Please make sure you install markdown and markdown_inline parser
+      {"nvim-treesitter/nvim-treesitter"}
+    }
+  },
+  {
     "nacro90/numb.nvim",
     config = function ()
       require('numb').setup()
@@ -282,7 +307,7 @@ return {
 	-- ICONS THEMES==================================================
 	{ 'ryanoasis/vim-devicons' },
 	{ 'yamatsum/nvim-web-nonicons' },
-	{ 'kyazdani42/nvim-web-devicons' },
+	{ 'nvim-tree/nvim-web-devicons' },
 	-- TREESITTER SUPORTED THEMES==================================================
 	{'luisiacc/gruvbox-baby', branch = 'main', lazy=true },
 	{ 'Abstract-IDE/Abstract-cs', lazy=true },
@@ -302,7 +327,16 @@ return {
   { 'rockerBOO/boo-colorscheme-nvim', lazy=true },
 	{ 'projekt0n/github-nvim-theme', lazy=true },
 	-- My Pluggins ===========================================================
-	--'~/dev/projects/lua/neovim/project-creator',
+  {
+    '~/dev/projects/lua/neovim/project-creator',
+    dev = true,
+    enabled = function() return util.getOS() == "Linux" end
+  },
+  {
+    '~/dev/projects/lua/neovim/nomodor',
+    dev = true,
+    enabled = function() return util.getOS() == "Linux" end
+  },
 	-- STATUS LINE PLUGINS ========================================================
 	{ 'nvim-lualine/lualine.nvim' },
 	{'SmiteshP/nvim-navic', dependencies = "neovim/nvim-lspconfig"},

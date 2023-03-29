@@ -15,7 +15,11 @@ else
 	vim.opt.rtp:prepend(lazypath)
 
   vim.g.mapleader = ' ' -- Lazy is asking to define leader before loading lazy
-	require('lazy').setup("plugins")
+	require('lazy').setup("plugins",
+    {
+      dev = {
+        path = '~/dev/projects/lua/neovim/'
+    }})
 
   -- Custom Plugins Configurations
   require('dante/nvim-autopairs') -- For completing pairs
@@ -39,6 +43,7 @@ else
   require('dante/emmet') -- Emmet for html and css
   require('dante/asynctasks')
   require('dante/git')
+
   -- require('dante/firenvim') -- Browser Configurations for Firenvim
 
 
@@ -57,13 +62,3 @@ else
   require('dante/processing')
 
 end
-
-
-
--- So there are some enviroment configurations to set the nvim path
--- We have the variable where neovim folder is located and its called: XDG_CONFIG_HOME
--- There is a variable where our data folder is located at and its called: XDG_DATA_HOME
--- To retrieve these paths we should call vim.fn.stdpath('place') place being config or data
--- local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
--- util.map('n','<leader>fm', ':lua require("telescope").extensions.media_files.media_files()<CR>', {noremap = true})

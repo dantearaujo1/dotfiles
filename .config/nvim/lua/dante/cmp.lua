@@ -20,8 +20,8 @@ cmp.setup {
   },
   -- You must set mapping if you want.
   window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = {
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -78,8 +78,8 @@ cmp.setup {
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
-        -- latex_symbols = "[Latex]",
-        -- buffer = "[Buffer]",
+        latex_symbols = "[Latex]",
+        buffer = "[Buffer]",
       })
       -- before = function (entry, vim_item)
         -- ...
@@ -102,13 +102,13 @@ cmp.setup {
 }
 
 cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
+  -- mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
   }
 })
 cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
+  -- mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
@@ -118,8 +118,8 @@ cmp.setup.cmdline(':', {
 
 local OS = utils.getOS()
 if OS == "Windows" then
-  require("luasnip/loaders/from_vscode").load({ "D:/Code/Configurations/nvim/nvim-data/site/pack/packer/start/friendly-snippets/snippets"})
+  require("luasnip.loaders.from_vscode").load({ "D:/Code/Configurations/nvim/nvim-data/site/pack/packer/start/friendly-snippets/snippets"})
 elseif OS == "Linux" then
-  require("luasnip/loaders/from_vscode").load({ "~/.local/share/nvim/site/pack/packer/start/friendly-snippets/snippets"})
+  require("luasnip.loaders.from_vscode").load({ "~/.local/share/nvim/lazy/friendly-snippets/snippets"})
 end
 
