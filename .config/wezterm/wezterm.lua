@@ -15,6 +15,7 @@ end
 -- For example, changing the color scheme:
 config.color_scheme = 'Palenight (Gogh)'
 config.font = wezterm.font 'JetBrains Mono'
+config.default_prog = {'wsl.exe', '-d', 'Ubuntu'}
 
 -- and finally, return the configuration to wezterm
 return config
