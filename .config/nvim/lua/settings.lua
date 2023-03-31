@@ -8,7 +8,18 @@ local b = vim.bo -- For the Buffer local options
 
 local utils = require('utils')
 
-
+vim.g.clipboard = {
+  name = "win32yank-wsl",
+  copy = {
+    ["+"] = "win32yank.exe -i --crlf",
+    ["*"] = "win32yank.exe -i --crlf"
+  },
+  paste = {
+    ["+"] = "win32yank.exe -o --crlf",
+    ["*"] = "win32yank.exe -o --crlf"
+  },
+  cache_enable = 0,
+}
 -- --------------------------------------------------------------------------
 -- Tabs, Indents
 -- --------------------------------------------------------------------------
