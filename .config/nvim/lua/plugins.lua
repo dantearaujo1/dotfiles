@@ -356,7 +356,7 @@ return {
   {
     'nvim-neorg/neorg',
       ft ="norg",
-      config = {"require('dante/neorg')"},
+      opts = {"require('dante/neorg')"},
       enabled = function() return util.getOS() == "Linux" end,
       dependencies = {
         { 'max397574/neorg-contexts' },
