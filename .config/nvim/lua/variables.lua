@@ -5,7 +5,7 @@ local utility = require('utils')
 if utility.getOS() == "Windows" then
 	g.python3_host_prog = 'D:\\Code\\Installed Languages\\Python\\Python 3.8\\python'
 elseif utility.getOS() == "Linux" then
-	g.python3_host_prog = '/usr/bin/python3.8'
+	g.python3_host_prog = '/usr/bin/python3.10'
 elseif utility.getOS() == "macOS" then
 end
 
