@@ -184,6 +184,8 @@ return {
     'matze/vim-tex-fold',
     enabled = function() return util.getOS() == "Linux" end
   },
+	-- HTTP ========
+	{ 'BlackLight/nvim-http' }, -- Run HTTP request directly in your editor
 	-- JSON ========
 	{ 'gennaro-tedesco/nvim-jqx' }, -- Browse and preview json files
 	-- GIT ========
@@ -246,10 +248,17 @@ return {
   {
     'luukvbaal/statuscol.nvim',
     config = function ()
+      local builtin = require("statuscol.builtin")
       require('statuscol').setup(
         {
-          foldfunc = "builtin",
-          setopt = true
+          relculright = true,
+          segments = {
+            {text = {builtin.foldfunc}, click = "v:lua.ScFa"},
+            {text = {"%s"}, click = "v:lua.ScSa"},
+            {text = {builtin.lnumfunc, " "}, click = "v:lua.ScLa"}
+          },
+          -- foldfunc = "builtin",
+          -- setopt = true
         }
       )
     end
