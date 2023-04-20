@@ -7,9 +7,11 @@ end
 
 g.mapleader = ' '
 if util.getOS() == 'Windows' then
-  g.maplocalleader = 'ç'
+  -- g.maplocalleader = 'ç'
+  g.maplocalleader = ','
 else
-  g.maplocalleader = '\\'
+  -- g.maplocalleader = '\\'
+  g.maplocalleader = ','
 end
 
 local snore = { noremap = true , silent = true}

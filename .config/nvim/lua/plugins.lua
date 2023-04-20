@@ -10,7 +10,8 @@ return {
 	{ "nvim-treesitter/nvim-treesitter-textobjects" },
 	{ 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Know comment based on context
 	{ 'yioneko/nvim-yati' }, -- Better indent tree-sitter plugin
-	{ 'p00f/nvim-ts-rainbow' },
+	-- { 'p00f/nvim-ts-rainbow' },
+  { 'HiPhish/nvim-ts-rainbow2' },
 	{ 'windwp/nvim-ts-autotag' },
 	{ 'David-Kunz/markid' }, -- Tree-sitter plugin for correct colors of parameters
 	{ 'mattn/emmet-vim' },
@@ -26,7 +27,7 @@ return {
   { 'williamboman/mason-lspconfig.nvim' },
   { 'neovim/nvim-lspconfig' },
   { 'mfussenegger/nvim-dap' },
-  { 'jayp0521/mason-nvim-dap.nvim' },
+  { 'jay-babu/mason-nvim-dap.nvim' },
   { 'jose-elias-alvarez/null-ls.nvim' },
   {
     "jayp0521/mason-null-ls.nvim",
@@ -118,6 +119,7 @@ return {
 			require'window-picker'.setup()
 		end,
 	},
+	{ 'wesq3/vim-windowswap' }, -- Exchange Windows
 	{ 'folke/todo-comments.nvim' },
 	{ 'lukas-reineke/indent-blankline.nvim' },
 	{ 'arnamak/stay-centered.nvim' }, -- autocmds for always stay centered
@@ -146,27 +148,44 @@ return {
       require('flit').setup({})
     end
   },
-	{ 'vim-scripts/ReplaceWithRegister' }, -- Find words with label using s or gs
+	{ 'vim-scripts/ReplaceWithRegister' }, -- Replace with gr
 	{
     'AckslD/nvim-trevJ.lua', -- Do the oposite of J in neovim
     config = 'require("trevj").setup()',
 	},
-	{ 'wesq3/vim-windowswap' }, -- Exchange Windows with <leader>ww
 	{ 'numToStr/Comment.nvim' }, -- Better comment than tpope
-	{ 'tpope/vim-surround' }, -- Change surroundings (parentheses, brackets ...)
+	-- { 'tpope/vim-surround' }, -- Change surroundings (parentheses, brackets ...)
+	{
+    'kylechui/nvim-surround',
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+  }, -- Change surroundings Not tpope anymore
 	{ 'windwp/nvim-autopairs' }, -- Auto close () [] {} <Tags>
 	{ 'bkad/camelcasemotion' }, -- Plugin for movin in camelcase with localleader
-	{ 'propet/toggle-fullscreen.nvim' }, -- Toggle fullScreen with <leader>m
+	{ 'propet/toggle-fullscreen.nvim' }, -- Toggle fullScreen with <leader>z
 	{
     'iamcco/markdown-preview.nvim',
 		build = function() vim.fn["mkdp#util#install"]() end,
+    event = "VeryLazy",
 	},
-	{ 'folke/zen-mode.nvim' }, -- Distraction Free
-	{ 'folke/twilight.nvim' }, -- Dim buffers
+	{
+    'folke/zen-mode.nvim',
+    event = "VeryLazy",
+  }, -- Distraction Free
+	{
+    'folke/twilight.nvim',
+    event = "VeryLazy",
+  }, -- Dim buffers
 	{
     'ellisonleao/glow.nvim',
     enabled = function() return util.getOS() == "Linux" end,
 		config = true ,
+    event = "VeryLazy",
     cmd = "Glow",
   }, -- Preview Markdown files with :Glow
 	{ 'uga-rosa/ccc.nvim' }, -- Color Picker
@@ -178,16 +197,30 @@ return {
 	-- LATEX ========
   {
     'lervag/vimtex',
+    event = "VeryLazy",
     enabled = function() return util.getOS() == "Linux" end
   },
   {
     'matze/vim-tex-fold',
+    event = "VeryLazy",
     enabled = function() return util.getOS() == "Linux" end
   },
+  {
+    'aspeddro/pandoc.nvim' ,
+    config = function ()
+      require'pandoc'.setup()
+    end
+  },
 	-- HTTP ========
-	{ 'BlackLight/nvim-http' }, -- Run HTTP request directly in your editor
+	{
+    'BlackLight/nvim-http',
+    event = "VeryLazy",
+  }, -- Run HTTP request directly in your editor
 	-- JSON ========
-	{ 'gennaro-tedesco/nvim-jqx' }, -- Browse and preview json files
+	{
+    'gennaro-tedesco/nvim-jqx',
+    event = "VeryLazy",
+  }, -- Browse and preview json files
 	-- GIT ========
 	{ 'lewis6991/gitsigns.nvim' }, -- Super fast git decorations implemented purely in Lua/Teal
 	{ 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim', }, -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
@@ -210,7 +243,11 @@ return {
 
   },
 	-- CLI Pluggins ===========================================================
-	{ 'ianding1/leetcode.vim', lazy=true  },
+	{
+    'ianding1/leetcode.vim',
+    event = "VeryLazy",
+    lazy=true,
+  },
 	-- UI Pluggins ===========================================================
   {
     'folke/trouble.nvim',
@@ -366,6 +403,7 @@ return {
     'nvim-neorg/neorg',
       ft ="norg",
       opts = {"require('dante/neorg')"},
+      event = 'VeryLazy',
       enabled = function() return util.getOS() == "Linux" end,
       dependencies = {
         { 'max397574/neorg-contexts' },
