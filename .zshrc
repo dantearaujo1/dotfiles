@@ -1,6 +1,6 @@
-# if [ -z "$TMUX" ]; then
-#   exec tmux new-session -A -s workspace
-# fi
+if [ -z "$TMUX" ]; then
+  exec tmux new-session -A -s workspace
+fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -92,16 +92,20 @@ export FZF_CTRL_T_COMMAND="fd . ."
 export FZF_CTRL_T_OPTS=""
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 # MAN - CONFIGURATIONS
-export MANPAGER='nvim +Man!'
-export MANWIDTH=999
+# export MANPAGER='nvim +Man!'
+# export MANWIDTH=999
 # export MANPATH="/usr/local/man:$MANPATH"
-export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
-export GOPATH="$HOME/dev/setup/golang/go"
-export GOBIN="$GOPATH/bin"
-export PROCESSING_DIR="$HOME/dev/setup/processing/processing-4.2"
-export LOCALBINARIES="$HOME/.local/bin/"
+if [[ $(whoami) = 'devdante-wsl' ]]; then
+  export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
+  export GOPATH="$HOME/dev/setup/golang/go"
+  export GOBIN="$GOPATH/bin"
+  export PROCESSING_DIR="$HOME/dev/setup/processing/processing-4.2"
+  export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$MYSCRIPTS
+fi
+
 export MYSCRIPTS="$HOME/dev/scripts/"
-export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$MYSCRIPTS
+export LOCALBINARIES="$HOME/.local/bin/"
+export PATH=$LOCALBINARIES:$PATH:$MYSCRIPTS
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
@@ -136,7 +140,6 @@ if uname -r | grep -q 'Microsoft'; then
   PATH=$(REMOVE_PART="/mnt/d/Code/Text Editors/Neovim 64/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
   PATH=$(REMOVE_PART="/mnt/d/Code/Package Managers/chocolatey" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
   PATH=$(REMOVE_PART="/mnt/d/Code/Android/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/home/devdante/Development/Processing/processing4/build/linux/work" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
 
 fi
 
@@ -181,11 +184,14 @@ alias lgd="lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cls="clear"
 alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 alias explorer="xdg-open"
-alias emulator="/mnt/d/Code/Android/Sdk/emulator/emulator.exe"
-alias adb="/mnt/d/Code/Android/Sdk/platform-tools/adb.exe"
+if [[ $(whoami) = 'devdante-wsl' ]]; then
+  alias emulator="/mnt/d/Code/Android/Sdk/emulator/emulator.exe"
+  alias adb="/mnt/d/Code/Android/Sdk/platform-tools/adb.exe"
+fi
 alias rdp="sudo /etc/init.d/xrdp start"
 alias ustart="~/dev/scripts/vncstart.sh"
-export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0 #Exporting Display to XServer
+
+#export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0 #Exporting Display to XServer
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
