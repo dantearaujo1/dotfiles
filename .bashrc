@@ -1,7 +1,9 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+if [[ -x "$(command -v zsh)" ]]; then
+  exec bash -c zsh
+fi
 # for examples
-bash -c zsh
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -122,5 +124,5 @@ export NVM_DIR="$HOME/.nvm"
 
 
 . "$HOME/.cargo/env"
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
-export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
+# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
+# export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
