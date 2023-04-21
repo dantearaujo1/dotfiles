@@ -1,7 +1,9 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 if [[ -x "$(command -v zsh)" ]]; then
-  exec bash -c zsh
+  exec zsh
+else
+  exec bash
 fi
 # for examples
 # If not running interactively, don't do anything

@@ -1,5 +1,5 @@
 if [ -z "$TMUX" ]; then
-  exec tmux new-session -A -s workspace
+   exec tmux new-session -A -s workspace
 fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -95,12 +95,15 @@ export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 # export MANPAGER='nvim +Man!'
 # export MANWIDTH=999
 # export MANPATH="/usr/local/man:$MANPATH"
-if [[ $(whoami) = 'devdante-wsl' ]]; then
+if [[ $(whoami) = 'devdante-wsl-ubuntu' ]]; then
   export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
   export GOPATH="$HOME/dev/setup/golang/go"
   export GOBIN="$GOPATH/bin"
   export PROCESSING_DIR="$HOME/dev/setup/processing/processing-4.2"
   export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$MYSCRIPTS
+fi
+if [[ $(whoami) = 'devdante-wsl-kali' ]]; then
+
 fi
 
 export MYSCRIPTS="$HOME/dev/scripts/"
@@ -150,6 +153,7 @@ fi
 #   export EDITOR='mvim'
 # fi
 export EDITOR='nvim'
+
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
