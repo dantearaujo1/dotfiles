@@ -1,7 +1,7 @@
 require 'nvim-treesitter.install'.compilers = { "gcc" , "clang"}
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"cpp", "c", "javascript", "java", "html", "cmake", "python", 'lua', 'help', 'rust', 'markdown', 'markdown_inline'},-- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = {"cpp", "c", "javascript", "java", "html", "cmake", "python", 'lua','rust', 'markdown', 'markdown_inline'},-- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {}, -- List of parsers to ignore installing
   enable = true,              -- false will disable the whole extension
   autotag = {
