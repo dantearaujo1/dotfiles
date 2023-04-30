@@ -3,7 +3,9 @@
 if [[ -x "$(command -v zsh)" ]]; then
   exec zsh
 else
-  exec bash
+alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" '
+PS1='[\u@\h \W]\$ '
+eval "$(starship init bash)"
 fi
 # for examples
 # If not running interactively, don't do anything
@@ -125,6 +127,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
 # export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
