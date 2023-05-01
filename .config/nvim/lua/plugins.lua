@@ -104,7 +104,9 @@ return {
 	{
     "nvim-neo-tree/neo-tree.nvim",
 
-
+    keys = {
+      {"<leader>e","<cmd>NeoTreeShowToggle<CR>"}
+    },
 		branch = "v2.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -401,15 +403,28 @@ return {
   },
   {
     'nvim-neorg/neorg',
+      run = ":Neorg sync-parsers",
       ft ="norg",
-      opts = {"require('dante/neorg')"},
-      event = 'VeryLazy',
-      enabled = function() return util.getOS() == "Linux" end,
-      dependencies = {
-        { 'max397574/neorg-contexts' },
-        { 'max397574/neorg-kanban' },
-        { 'nvim-neorg/neorg-telescope' },
-        {"nvim-treesitter"},
+      opts = {
+        load = {
+          ["core.defaults"] = {},
+          ["core.dirman"] = {
+            config = {
+              workspaces = {
+                work = "~/notes/work",
+                home = "~/notes",
+              },
+		    default_workspace = "home",
+            }
+          },
+          ["core.completion"] = {
+            config = {
+              engine = "nvim-cmp",
+              name = "[Neorg]",
+            },
+          },
+          ["core.concealer"] = {},
+        },
       },
   },
 }
