@@ -203,8 +203,8 @@ util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
 util.map('n', '<leader>CC' , ':HexokinaseToggle<CR>', nore)
 util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
 -- ================================================================|NEOTREE|
-util.map('n', '<leader>e' , ':NeoTreeShowToggle<CR>', nore)
-util.map('n', '<leader>E' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
+-- util.map('n', '<leader>e' , ':NeoTreeShowToggle<CR>', nore)
+-- util.map('n', '<leader>E' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
 
 -- ================================================================
 util.map('i', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
