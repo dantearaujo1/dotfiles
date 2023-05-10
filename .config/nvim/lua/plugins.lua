@@ -10,7 +10,6 @@ return {
 	{ "nvim-treesitter/nvim-treesitter-textobjects" },
 	{ 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Know comment based on context
 	{ 'yioneko/nvim-yati' }, -- Better indent tree-sitter plugin
-	-- { 'p00f/nvim-ts-rainbow' },
   { 'HiPhish/nvim-ts-rainbow2' },
 	{ 'windwp/nvim-ts-autotag' },
 	{ 'David-Kunz/markid' }, -- Tree-sitter plugin for correct colors of parameters
@@ -134,7 +133,7 @@ return {
 			  require("mini.ai").setup()
 		end,
 	},
-	{ 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace
+  { 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace
 	{ 'foosoft/vim-argwrap' }, -- Strenght argument wrapping and unwrapping
 	{ 'tommcdo/vim-exchange' }, -- Easy text exchange operator for Vim
   {
@@ -147,16 +146,15 @@ return {
 	{
     'ggandor/flit.nvim',
     config = function()
-      require('flit').setup({})
+      require('flit').setup()
     end
   },
 	{ 'vim-scripts/ReplaceWithRegister' }, -- Replace with gr
 	{
-    'AckslD/nvim-trevJ.lua', -- Do the oposite of J in neovim
-    config = 'require("trevj").setup()',
-	},
+    'AckslD/nvim-trevJ.lua',
+    -- Do the oposite of J in neovim config = 'require("trevj").setup()',
+  },
 	{ 'numToStr/Comment.nvim' }, -- Better comment than tpope
-	-- { 'tpope/vim-surround' }, -- Change surroundings (parentheses, brackets ...)
 	{
     'kylechui/nvim-surround',
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -195,7 +193,10 @@ return {
 
 	-- Language Specifics ==========================================================
 	-- Processing ========
-	{ 'sophacles/vim-processing' }, -- Processing plugin helper
+	{
+    'sophacles/vim-processing',
+    ft='pde',
+  }, -- Processing plugin helper
 	-- LATEX ========
   {
     'lervag/vimtex',
@@ -381,6 +382,10 @@ return {
     enabled = function() return util.getOS() == "Linux" end
   },
   {
+    '~/dev/projects/lua/neovim/nepsAcademyIntegration',
+    dev = true,
+  },
+  {
     '~/dev/projects/lua/neovim/nomodor',
     dev = true,
     enabled = function() return util.getOS() == "Linux" end
@@ -390,12 +395,19 @@ return {
 	{'SmiteshP/nvim-navic', dependencies = "neovim/nvim-lspconfig"},
   {
     'christoomey/vim-tmux-navigator',
-    enabled = function() return util.getOS() == "Linux" end
+    -- enabled = function() return util.getOS() == 'Linux' end
+    enabled = function() return not vim.fn.executable('tmux') end
   },
   {
     'preservim/vimux',
-    enabled = function() return util.getOS() == "Linux" end
+    enabled = function() return not vim.fn.executable('tmux') end
   },
+  -- Not working
+  -- {
+  --   'knubie/vim-kitty-navigator',
+  --   build = {'cp ./*.py ~/.config/kitty/'},
+  --   enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end
+  -- },
   -- { 'vimpostor/vim-tpipeline' }, Tmux status line with vim
   {
     'nvim-telescope/telescope-media-files.nvim',

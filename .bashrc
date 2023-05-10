@@ -1,11 +1,13 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+﻿# ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 if [[ -x "$(command -v zsh)" ]]; then
   exec zsh
 else
 alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" '
-PS1='[\u@\h \W]\$ '
-eval "$(starship init bash)"
+if [[ "$(echo $TERM)" == "xterm-kitty" ]];then
+  alias icat='kitty +kitten icat'
+fi
+
 fi
 # for examples
 # If not running interactively, don't do anything
@@ -127,6 +129,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+export EDITOR="nvim"
+# User configuration
+# FZF - CONFIGURATIONS
+export FZF_DEFAULT_COMMAND="fd . $HOME --hidden"
+export FZF_CTRL_T_COMMAND="fd . ."
+export FZF_CTRL_T_OPTS=""
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+
 #. "$HOME/.cargo/env"
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
 # export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

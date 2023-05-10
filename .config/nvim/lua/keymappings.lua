@@ -99,6 +99,16 @@ util.map('n', '<Leader>hl' , '(&hls && v:hlsearch ? ":nohls" : ":set hls")."\n"'
 -- Window Operations ==========================================================
 -- Change focus
 if(util.getOS() == "Linux") then
+  if (util.getUser() == "devdante-archlinux-hd") then
+    -- util.map('n', '<C-h>' , ':lua KittyNavigateLeft', snore)
+    -- util.map('n', '<C-l>' , ':lua KittyNavigateRight', snore)
+    -- util.map('n', '<C-j>' , ':lua KittyNavigateDown', snore)
+    -- util.map('n', '<C-k>' , ':lua KittyNavigateUp', snore)
+    util.map('n', '<C-h>' , '<C-w>h', snore)
+    util.map('n', '<C-l>' , '<C-w>l', snore)
+    util.map('n', '<C-j>' , '<C-w>j', snore)
+    util.map('n', '<C-k>' , '<C-w>k', snore)
+  end
 else
   util.map('n', '<C-h>' , '<C-w>h', snore)
   util.map('n', '<C-l>' , '<C-w>l', snore)
@@ -138,7 +148,7 @@ util.map('n', '<F8>' , ':AsyncTask project-init<CR>', nore)
 -- All my hydra heads are inside this file
 -- require('dante/hydra')
 -- =================================================================|LEAP|
-require('leap').add_default_mappings()
+-- require('leap').add_default_mappings()
 -- ===============================================================|OpenBrowser|
 util.map('n', '<leader>ob' , ':<C-u>call openbrowser#_keymap_smart_search("n")<CR>', nore)
 util.map('n', '<leader>og' , 'yi\' :OpenGithubProject <C-R>"<CR>', nore)

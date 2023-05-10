@@ -2,7 +2,7 @@ local dap = require('dap')
 local dapui = require('dapui')
 
 local MASON_DAP_DEFAULT_SETTINGS = {
-  ensure_installed = {},
+  ensure_installed = {"python", },
   automatic_installation = true,
   automatic_setup = true,
   handlers = {

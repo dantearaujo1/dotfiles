@@ -1,6 +1,7 @@
-if [ -z "$TMUX" ]; then
-   exec tmux new-session -A -s workspace
-fi
+# Created by newuser for 5.9
+# if [ -z "$TMUX" ]; then
+   # exec tmux new-session -A -s workspace
+# fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -12,7 +13,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/devdante/.oh-my-zsh"
+export ZSH="/home/$(whoami)/.oh-my-zsh"
 # zsh -c 'su devdante'
 
 # Set name of the theme to load --- if set to "random", it will
@@ -81,7 +82,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases)
+plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python vi-mode colorize)
 
 source $ZSH/oh-my-zsh.sh
 
