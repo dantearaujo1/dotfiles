@@ -5,7 +5,7 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p11k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -107,6 +107,9 @@ if [[ $(whoami) = 'devdante-wsl-kali' ]]; then
 
 fi
 
+export GOPATH="$HOME/.go"
+# export GOBIN="$GOPATH/bin"
+
 export MYSCRIPTS="$HOME/dev/scripts/"
 export LOCALBINARIES="$HOME/.local/bin/"
 export PATH=$LOCALBINARIES:$PATH:$MYSCRIPTS
@@ -197,6 +200,7 @@ alias rdp="sudo /etc/init.d/xrdp start"
 alias ustart="~/dev/scripts/vncstart.sh"
 
 #export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0 #Exporting Display to XServer
-
+# eval "$(starship init zsh)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

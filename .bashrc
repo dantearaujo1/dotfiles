@@ -1,14 +1,5 @@
 ﻿# ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-if [[ -x "$(command -v zsh)" ]]; then
-  exec zsh
-else
-alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" '
-if [[ "$(echo $TERM)" == "xterm-kitty" ]];then
-  alias icat='kitty +kitten icat'
-fi
-
-fi
 # for examples
 # If not running interactively, don't do anything
 case $- in
@@ -136,9 +127,20 @@ export FZF_DEFAULT_COMMAND="fd . $HOME --hidden"
 export FZF_CTRL_T_COMMAND="fd . ."
 export FZF_CTRL_T_OPTS=""
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export GOPATH="$HOME/.go"
 
 #. "$HOME/.cargo/env"
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0 #GWSL
 # export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
+
+if [[ -x "$(command -v zsh)" ]]; then
+  exec zsh
+else
+alias dotfiles='git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" '
+if [[ "$(echo $TERM)" == "xterm-kitty" ]];then
+  alias icat='kitty +kitten icat'
+fi
+
+fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
