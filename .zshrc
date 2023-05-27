@@ -111,6 +111,10 @@ fi
 if [[ $(whoami) = 'devdante-wsl-kali' ]]; then
 
 fi
+if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
+  export PAGER=nvimpager
+  alias addtheme=kitty +kitten themes
+fi
 
 export GOPATH="$HOME/.go"
 # export GOBIN="$GOPATH/bin"
@@ -173,6 +177,12 @@ export EDITOR='nvim'
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+if [ -d "$HOME/.config/hypr/" ];then
+  alias binds='nvim ~/.config/hypr/binds.conf'
+  alias monitors='nvim ~/.config/hypr/monitors.conf'
+  alias initapps='nvim ~/.config/hypr/apps.conf'
+
+fi
 alias f='nvim "$(fzf)"'
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
@@ -204,6 +214,8 @@ fi
 alias rdp="sudo /etc/init.d/xrdp start"
 alias ustart="~/dev/scripts/vncstart.sh"
 
+pdf() {zathura $1 & disown}
+mgdir() {mkdir $@ && cd ${@:$#}}
 #export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0 #Exporting Display to XServer
 # eval "$(starship init zsh)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
