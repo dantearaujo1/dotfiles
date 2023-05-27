@@ -38,11 +38,14 @@ else
    require('dante/indent-blankline') -- Show Indentation plugins
    require('stay-centered') -- Always make text centered
    require('dante/toggleterm') -- Terminal inside nvim
+   require('dante/minis') --
    require('dante/latex')
    require('dante/notify') -- Notify UI of plugins
    require('dante/emmet') -- Emmet for html and css
    require('dante/asynctasks')
    require('dante/git')
+   require('dante/dashboard')
+   require('dante/smartcolumn')
 
   -- require('dante/firenvim') -- Browser Configurations for Firenvim
 
@@ -62,3 +65,4 @@ else
   require('dante/processing')
 
 end
+
