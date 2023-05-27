@@ -15,13 +15,6 @@ cmd([[au BufWritePre * :%s/\s\+$//e]])
 --     augroup END
 --   ]]
 -- )
-local disableCC = api.nvim_create_augroup("dashboard_autocmds", {clear = true})
-api.nvim_create_autocmd("BufEnter", {
-  command = "set cc=0",
-  group = disableCC,
-  pattern = "dashboard"
-})
-
 -- Highlight on Yank
 local yankGrp = api.nvim_create_augroup("YankHighlight", {clear = true})
 api.nvim_create_autocmd("TextYankPost", {
