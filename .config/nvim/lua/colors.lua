@@ -4,9 +4,6 @@ local o = vim.o -- For Global Options
 local w = vim.wo -- For Window Local Options
 
 
-g.virtcolumn_char = '▕'
-g.virtcolumn_priority = 10
-o.colorcolumn = '81'                            -- Set the Color of Column
 o.guifont = 'Hack Nerd Font Mono:h12'       -- Set GUI Font
 g.termguicolors = true
 o.termguicolors = true
