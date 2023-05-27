@@ -100,10 +100,10 @@ util.map('n', '<Leader>hl' , '(&hls && v:hlsearch ? ":nohls" : ":set hls")."\n"'
 -- Change focus
 if(util.getOS() == "Linux") then
   if (util.getUser() == "devdante-archlinux-hd") then
-    -- util.map('n', '<C-h>' , ':lua KittyNavigateLeft', snore)
-    -- util.map('n', '<C-l>' , ':lua KittyNavigateRight', snore)
-    -- util.map('n', '<C-j>' , ':lua KittyNavigateDown', snore)
-    -- util.map('n', '<C-k>' , ':lua KittyNavigateUp', snore)
+    -- util.map('n', '<C-h>' , ':KittyNavigateLeft<CR>', snore)
+    -- util.map('n', '<C-l>' , ':KittyNavigateRight<CR>', snore)
+    -- util.map('n', '<C-j>' , ':KittyNavigateDown<CR>', snore)
+    -- util.map('n', '<C-k>' , ':KittyNavigateUp<CR>', snore)
     util.map('n', '<C-h>' , '<C-w>h', snore)
     util.map('n', '<C-l>' , '<C-w>l', snore)
     util.map('n', '<C-j>' , '<C-w>j', snore)
