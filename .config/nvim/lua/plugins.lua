@@ -131,6 +131,8 @@ return {
 			  require("mini.align").setup()
 			  require("mini.cursorword").setup()
 			  require("mini.ai").setup()
+			  require("mini.hipatterns").setup()
+			  require("mini.indentscope").setup()
 		end,
 	},
   { 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace
@@ -353,6 +355,7 @@ return {
   },
 	-- ColorColumn ===========================
 	{ 'xiyaowong/virtcolumn.nvim' },
+	{ 'm4xshen/smartcolumn.nvim' },
 	-- ICONS THEMES==================================================
 	{ 'ryanoasis/vim-devicons' },
 	{ 'yamatsum/nvim-web-nonicons' },
@@ -409,6 +412,23 @@ return {
   --   enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end
   -- },
   -- { 'vimpostor/vim-tpipeline' }, Tmux status line with vim
+  {
+    'hermitmaster/nvim-kitty-navigator',
+    build = './install',
+    enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end,
+    config = function()
+      require('nvim-kitty-navigator').setup {}
+    end
+  },
+  {
+    'edluffy/hologram.nvim',
+    enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end,
+    config = function()
+      require('hologram').setup {
+        auto_display = true
+      }
+    end
+  },
   {
     'nvim-telescope/telescope-media-files.nvim',
     enabled = function() return util.getOS() == "Linux" end
