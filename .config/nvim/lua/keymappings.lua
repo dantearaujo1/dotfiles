@@ -23,15 +23,12 @@ local plug = { expr = true, noremap = false }
 
 util.map('n', ';' , ':' , nore)
 util.map('x', ';' , ':' , nore)
--- Make Sneak ; works
--- util.map('n', ':', '<Plug>SneakNext')
 util.map('n', ':' , ';' , nore)
 util.map('x', ':' , ';' , nore)
 util.map('n', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mode
 
 
 -- Commands Shortcuts =========================================================
-util.map('n', '<leader>w' , ':update<CR>' , snore)
 util.map('n', '<leader>ll' , ':luafile %<CR> <bar> :lua print("This file was sourced!")<CR>' , nore)
 -- " Change current working directory locally and print cwd after that
 util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR> :Neotree .<CR>', nore)
@@ -41,6 +38,7 @@ util.map('n', '/' , "/\\v" , nore)
 
 -- Put ; in the end of line
 util.map('n', '<leader>;' , 'A;' , nore)
+util.map('n', '<localleader>q' , ':<C-u>call asyncrun#quickfix_toggle(10)<CR>' , nore)
 
 -- Turn off navigation with arrows
 util.map('n', '<Up>' , '<nop>' , nore)
@@ -54,7 +52,6 @@ util.map('n', '^' , 'g^' , snore)
 util.map('n', '0' , 'g0' , snore)
 
 -- Yank to the end of line
-util.map('n', 'Y' , 'y$' , nore)
 util.map('n', 'Y' , 'y$' , nore)
 util.map('n', '<leader>Y' , '"+y$' , nore) -- Yank line to system clipboard
 util.map('n', '<leader>y' , '"+y' , nore) -- Yank to system clipboard
@@ -72,19 +69,16 @@ util.map('x', 'H' , '^' , nore)
 util.map('x', 'L' , 'g_' , nore)
 -- Find and replace (like Sublime Text 3)
 util.map('x', '<M-s>', ':%s/', nore)
-util.map('n', '<M-S>', ':s/', nore)
+util.map('n', '<M-r>', ':s/', nore)
+util.map('n', '<M-r>', ':%s/', nore)
 
 -- CTRL-O and CTRL-I Movements
 util.map('n', '<leader>j', '<C-o>', nore)
 util.map('n', '<leader>k', '<C-i>', nore)
 
 --  Navigation in the location and quickfix list
--- util.map('n', '<C-k>' , ':lprevious<CR>zv', nore)
--- util.map('n', '<C-j>' , ':lnext<CR>zv', nore)
 util.map('n', ']L' , ':llast<CR>zv', nore)
 util.map('n', '[L' , ':lfirst<CR>zv', nore)
--- util.map('n', '<leader>k' , ':cprevious<CR>zv', nore)
--- util.map('n', '<leader>j' , ':cnext<CR>zv', nore)
 util.map('n', '[Q' , ':cfirst<CR>zv', nore)
 util.map('n', ']Q' , ':clast<CR>zv', nore)
 -- " Close location list or quickfix list if they are present,
@@ -95,19 +89,22 @@ util.map('n', '<localleader>[' , ':bprevious <CR>', nore)
 util.map('n', '<localleader>]' , ':bnext <CR>', nore)
 -- " Toggle search highlight
 util.map('n', '<Leader>hl' , '(&hls && v:hlsearch ? ":nohls" : ":set hls")."\n"', {expr = true, silent = true, noremap = true})
+-- Open Command Window
+util.map('n', 'q;' , 'q:', nore)
+util.map('n','<F2>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp
 
 -- Window Operations ==========================================================
 -- Change focus
 if(util.getOS() == "Linux") then
   if (util.getUser() == "devdante-archlinux-hd") then
-    -- util.map('n', '<C-h>' , ':KittyNavigateLeft<CR>', snore)
-    -- util.map('n', '<C-l>' , ':KittyNavigateRight<CR>', snore)
-    -- util.map('n', '<C-j>' , ':KittyNavigateDown<CR>', snore)
-    -- util.map('n', '<C-k>' , ':KittyNavigateUp<CR>', snore)
-    util.map('n', '<C-h>' , '<C-w>h', snore)
-    util.map('n', '<C-l>' , '<C-w>l', snore)
-    util.map('n', '<C-j>' , '<C-w>j', snore)
-    util.map('n', '<C-k>' , '<C-w>k', snore)
+    util.map('n', '<C-h>' , ':KittyNavigateLeft<CR>', snore)
+    util.map('n', '<C-l>' , ':KittyNavigateRight<CR>', snore)
+    util.map('n', '<C-j>' , ':KittyNavigateDown<CR>', snore)
+    util.map('n', '<C-k>' , ':KittyNavigateUp<CR>', snore)
+    -- util.map('n', '<C-h>' , '<C-w>h', snore)
+    -- util.map('n', '<C-l>' , '<C-w>l', snore)
+    -- util.map('n', '<C-j>' , '<C-w>j', snore)
+    -- util.map('n', '<C-k>' , '<C-w>k', snore)
   end
 else
   util.map('n', '<C-h>' , '<C-w>h', snore)
@@ -115,38 +112,28 @@ else
   util.map('n', '<C-j>' , '<C-w>j', snore)
   util.map('n', '<C-k>' , '<C-w>k', snore)
 end
--- Open Command Window
-util.map('n', 'q;' , 'q:', nore)
--- Save & Quit Operations
-util.map('n','<leader>w',':update<CR>', snore)       -- Saves if modified and q
-util.map('n','<leader>q',':x<CR>', snore)            --
-util.map('n','<leader>Q',':qa<CR>', snore)           -- Quit all opened buffers
 
-util.map('n','<F3>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp
 -- Terminal Operations ========================================================
--- There's an keymap inside init.vim that handles terminals keybings for different
--- Terminals types like toggleterm and lazygit
 util.map('n','<c-t>','<Cmd> exe v:count1 . "ToggleTerm"<CR>', nore)
 util.map('i','<c-t>','<Esc><Cmd> exe v:count1 . "ToggleTerm"<CR>', nore)
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 if(util.getOS() == "Linux") then
-  util.map('n', '<leader>tc' , ':VimuxCloseRunner<CR>', nore)
-  util.map('n', '<leader>to' , ':VimuxOpenRunner<CR>', nore)
-else
+  if(util.getUser() == "devdante-wsl-ubuntu") then
+    util.map('n', '<leader>tc' , ':VimuxCloseRunner<CR>', nore)
+    util.map('n', '<leader>to' , ':VimuxOpenRunner<CR>', nore)
+  end
 end
 
 
 -- Plugins Keymaps ============================================================
 -- =================================================================|AsyncRun|
-util.map('n', '<F4>' , ':AsyncTask file-build<CR>', nore)
-util.map('n', '<F5>' , ':AsyncTask file-run<CR>', nore)
+util.map('n', '<F3>' , ':AsyncTask file-build<CR>', nore)
+util.map('n', '<F4>' , ':AsyncTask file-run<CR>', nore)
+util.map('n', '<F5>' , ':AsyncTask file-b&r<CR>', nore)
 util.map('n', '<F6>' , ':AsyncTask project-b&r<CR>', nore)
 util.map('n', '<F7>' , ':AsyncTask project-run<CR>', nore)
 util.map('n', '<F8>' , ':AsyncTask project-init<CR>', nore)
--- =================================================================|HYDRA|
--- All my hydra heads are inside this file
--- require('dante/hydra')
 -- =================================================================|LEAP|
 -- require('leap').add_default_mappings()
 -- ===============================================================|OpenBrowser|
@@ -171,7 +158,7 @@ util.map('x', '<localleader>e' , '"<Plug>CamelCaseMotion_ie"', plug)
   -- =======================================================================|DAP|
   util.map('n', '<leader>db' , ":lua require'dap'.toggle_breakpoint()<CR>", snore)
   util.map('n', '<leader>dc' , ":lua require'dap'.continue()<CR>", snore)
-  util.map('n', '<leader>dC' , ":lua require'dap'.close()<CR>", snore)
+  util.map('n', '<leader>ds' , ":lua require'dap'.terminate()<CR>", snore)
   util.map('n', '<leader>dj' , ":lua require'dap'.step_into()<CR>", snore)
   util.map('n', '<leader>do' , ":lua require'dap'.step_over()<CR>", snore)
   util.map('n', '<leader>dk' , ":lua require'dap'.step_out()<CR>", snore)
@@ -214,14 +201,13 @@ util.map('n', '<leader>CC' , ':HexokinaseToggle<CR>', nore)
 util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
 -- ================================================================|NEOTREE|
 -- util.map('n', '<leader>e' , ':NeoTreeShowToggle<CR>', nore)
--- util.map('n', '<leader>E' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
+util.map('n', '<leader>E' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
 
 -- ================================================================
 util.map('i', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
 util.map('s', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
 
 util.map( 'n', '<leader>J', ':lua require("trevj").format_at_cursor()<CR>', {noremap = true, silent = true})
-util.map( 'n', '<leader>k', '<C-i>', {noremap = true, silent = true})
 
 util.map( 'n', 'zR', ':lua require("ufo").openAllFolds()<CR>', {noremap = true, silent = true})
 util.map( 'n', 'zM', ':lua require("ufo").closeAllFolds()<CR>', {noremap = true, silent = true})
