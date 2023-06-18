@@ -18,6 +18,8 @@ return {
 	-- ============ DEBUGGER PLUGINS ==============================
 
 
+	-- ============ REPL PLUGINS ==============================
+  { 'milanglacier/yarepl.nvim', config = true },
 	-- ============ LSP PLUGINS ==============================
   { 'theHamsta/nvim-dap-virtual-text' }, -- Virtual text showing variables info
   { 'rcarriga/nvim-dap-ui' }, -- UI out of the box
@@ -33,9 +35,10 @@ return {
     dependencies = {
       'nvim-telescope/telescope-dap.nvim', -- Telescope to find variables
       'theHamsta/nvim-dap-virtual-text', -- Virtual text showing variables info
-      'rcarriga/nvim-dap-ui' -- UI out of the box
+      'rcarriga/nvim-dap-ui' --
     },
   },
+  { "folke/neodev.nvim", opts = {} },
 
 	-- ============ SERVER PLUGINS ==============================
   {
@@ -133,6 +136,7 @@ return {
 			  require("mini.ai").setup()
 			  require("mini.hipatterns").setup()
 			  require("mini.indentscope").setup()
+			  -- require("mini.animate").setup()
 		end,
 	},
   { 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace
@@ -148,7 +152,7 @@ return {
 	{
     'ggandor/flit.nvim',
     config = function()
-      require('flit').setup()
+      require('flit').setup({labeled_modes="nv"})
     end
   },
 	{ 'vim-scripts/ReplaceWithRegister' }, -- Replace with gr
@@ -247,7 +251,11 @@ return {
     end
 
   },
-	-- CLI Pluggins ===========================================================
+	-- DATABASE Specifics =========================================================
+  {'tpope/vim-dadbod'},-- Vim plugin to interact with databases {Mongo,JQ,Postgre}
+  {'kristijanhusak/vim-dadbod-ui'},-- User Interface for dadbod
+  {'kristijanhusak/vim-dadbod-completion'},-- Completion for dadbod
+	-- CLI Pluggins ===============================================================
 	{
     'ianding1/leetcode.vim',
     event = "VeryLazy",
@@ -262,15 +270,15 @@ return {
   },
    { 'onsails/lspkind-nvim' },
 	{ 'ray-x/lsp_signature.nvim' }, -- for symbols in completion
+	{ 'ElPiloto/significant.nvim' }, -- Animate columnSigns
   {
     "glepnir/lspsaga.nvim",
     event = "BufRead",
-    config = function()
-        require("dante/lspsaga")
-    end,
+    -- config = function()
+    --     require("dante/lspsaga")
+    -- end,
     dependencies = {
       {"nvim-tree/nvim-web-devicons"},
-      --Please make sure you install markdown and markdown_inline parser
       {"nvim-treesitter/nvim-treesitter"}
     }
   },
@@ -406,29 +414,30 @@ return {
     enabled = function() return not vim.fn.executable('tmux') end
   },
   -- Not working
-  -- {
-  --   'knubie/vim-kitty-navigator',
-  --   build = {'cp ./*.py ~/.config/kitty/'},
-  --   enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end
-  -- },
+  {
+    'knubie/vim-kitty-navigator',
+    build = {'cp ./*.py ~/.config/kitty/'},
+    enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end
+  },
   -- { 'vimpostor/vim-tpipeline' }, Tmux status line with vim
-  {
-    'hermitmaster/nvim-kitty-navigator',
-    build = './install',
-    enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end,
-    config = function()
-      require('nvim-kitty-navigator').setup {}
-    end
-  },
-  {
-    'edluffy/hologram.nvim',
-    enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end,
-    config = function()
-      require('hologram').setup {
-        auto_display = true
-      }
-    end
-  },
+  -- {
+  --   'hermitmaster/nvim-kitty-navigator',
+  --   build = './install',
+  --   enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end,
+  --   lazy = false,
+  --   config = function()
+  --     require('nvim-kitty-navigator').setup {}
+  --   end
+  -- },
+  -- {
+  --   'edluffy/hologram.nvim',
+  --   enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end,
+  --   config = function()
+  --     require('hologram').setup {
+  --       auto_display = true
+  --     }
+  --   end
+  -- },
   {
     'nvim-telescope/telescope-media-files.nvim',
     enabled = function() return util.getOS() == "Linux" end
