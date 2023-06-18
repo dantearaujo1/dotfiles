@@ -85,7 +85,7 @@ HIST_STAMPS="dd/mm/yyyy"
 if [ -z "$TMUX" ]; then
   plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python vi-mode colorize)
 else
-  plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python vi-mode colorize)
+  plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize)
 
 fi
 
@@ -114,6 +114,7 @@ fi
 if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
   export PAGER=nvimpager
   alias addtheme=kitty +kitten themes
+  alias icat='kitty +kitten icat'
 fi
 
 export GOPATH="$HOME/.go"
@@ -181,6 +182,9 @@ if [ -d "$HOME/.config/hypr/" ];then
   alias binds='nvim ~/.config/hypr/binds.conf'
   alias monitors='nvim ~/.config/hypr/monitors.conf'
   alias initapps='nvim ~/.config/hypr/apps.conf'
+  alias rules='nvim ~/.config/hypr/ruleswindow.conf'
+  alias hypr='nvim ~/.config/hypr/hyprland.conf'
+  alias o='xdg-open'
 
 fi
 alias f='nvim "$(fzf)"'
