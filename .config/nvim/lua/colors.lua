@@ -56,7 +56,7 @@ w.signcolumn = 'yes'				-- Set a Column before numbers
 
 -- cmd('colorscheme aurora')                    -- Setting the last used theme
 -- vim.opt.background = 'dark'
-cmd('colorscheme gruvbox-baby')                    -- Setting the theme
+cmd('colorscheme retrobox')                    -- Setting the theme
 vim.g.gruvbox_baby_background_color = 'dark'
 vim.g.gruvbox_baby_telescope_theme = 1
 vim.g.gruvbox_baby_transparent_mode = 1

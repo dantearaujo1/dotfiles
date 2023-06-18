@@ -60,14 +60,14 @@ cmp.setup {
       { name = 'luasnip' },
       { name = 'nvim_lua' },
       { name = 'neorg' },
-      -- { name = 'path' },
-      -- { name = 'buffer' },
+      { name = 'path', keyword_length = 2  },
+      { name = 'buffer', keyword_length = 4 },
+      { name = 'latex_symbols', keyword_length = 2  },
       -- { name = 'spell' },
       -- { name = 'tags' },
       -- { name = 'calc' },
-      -- { name = 'latex_symbols' },
     },{
-    {name = 'buffer'},
+    -- {name = 'buffer'},
     }),
   formatting = {
     format = lspkind.cmp_format({
@@ -101,7 +101,7 @@ cmp.setup {
 }
 
 cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
+  -- mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
   }

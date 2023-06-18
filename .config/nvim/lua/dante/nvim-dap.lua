@@ -20,6 +20,7 @@ dapui.setup({
     remove = "d",
     edit = "e",
     repl = "r",
+    toggle = "<Leader><Leader>t"
   },
   sidebar = {
     -- You can change the order of elements in the sidebar
@@ -54,10 +55,10 @@ dapui.setup({
 dap.listeners.after.event_initialized["dapui_config"] = function ()
   dapui.open()
 end
-dap.listeners.after.event_terminated["dapui_config"] = function ()
+dap.listeners.before.event_terminated["dapui_config"] = function ()
   dapui.close()
 end
-dap.listeners.after.event_exited["dapui_config"] = function ()
+dap.listeners.before.event_exited["dapui_config"] = function ()
   dapui.close()
 end
 

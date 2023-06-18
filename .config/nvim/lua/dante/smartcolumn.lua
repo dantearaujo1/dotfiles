@@ -2,7 +2,7 @@ local smart = require("smartcolumn")
 
 local config = {
    colorcolumn = "81",
-   disabled_filetypes = { "help", "text", "markdown","dashboard","Lazy", "Scratch" },
+   disabled_filetypes = { "help", "text", "markdown","dashboard","lazy", "mason" },
    custom_colorcolumn = {},
    scope = "file",
 }
