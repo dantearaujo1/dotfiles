@@ -8,7 +8,7 @@ if utils.getOS() == 'Linux' then
   config_dir = jdtls_dir .. '/config_linux'
   java_bin = '/usr/bin/java'
   runtime_one =  { name = 'JavaSE-17' , path = '/usr/lib/jvm/java-17-openjdk-amd64/' }
-  runtime_two = { name = 'JavaSE-11' , path = '/usr/lib/jvm/java-11-openjdk-amd64/' }
+  -- runtime_two = { name = 'JavaSE-11' , path = '/usr/lib/jvm/java-11-openjdk-amd64/' }
 else
   config_dir = jdtls_dir .. '/config_win'
   runtime_one =  { name = '' , path = '' }
@@ -176,6 +176,7 @@ config['on_attach'] = function(client, bufnr)
   vim.keymap.set('n', '<leader>ec', ':lua require("jdtls").extract_constant()<CR>', bufopts)
   vim.keymap.set('v', '<leader>em', ':lua require("jdtls").extract_method(true)<CR>', bufopts)
   vim.keymap.set('v', '<leader>ca', ':lua vim.lsp.buf.range_code_action()<CR>', bufopts)
+  require("jdtls.setup").add_commands()
 end
 --
 -- This starts a new client & server,
