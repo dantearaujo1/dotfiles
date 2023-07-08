@@ -13,10 +13,12 @@ telescope.setup {
     },
 		mappings = {
 			i = {
-				["<C-j>"] = "move_selection_next",
-				["<C-k>"] = "move_selection_previous",
-				["<C-n>"] = false,
-				["<C-p>"] = false,
+				-- ["<C-j>"] = "move_selection_next",
+				-- ["<C-k>"] = "move_selection_previous",
+				-- ["<C-n>"] = false,
+				-- ["<C-p>"] = false,
+				["<C-n>"] = "move_selection_next",
+				["<C-p>"] = "move_selection_previous",
 			},
 			n = {
 

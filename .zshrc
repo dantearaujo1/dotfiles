@@ -82,11 +82,14 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-if [ -z "$TMUX" ]; then
-  plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python vi-mode colorize)
+if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
+    plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize poetry)
 else
-  plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize)
-
+  if [ -z "$TMUX" ]; then
+      plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python vi-mode colorize)
+  else
+    plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python colorize)
+  fi
 fi
 
 source $ZSH/oh-my-zsh.sh

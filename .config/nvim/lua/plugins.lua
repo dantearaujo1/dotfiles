@@ -7,8 +7,7 @@ return {
 	-- { 'nathom/filetype.nvim' }, -- New method of filetype that is faster NOT WORKING
 	-- ============ SYNTAX PLUGINS ==============================
 	{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-	{ "nvim-treesitter/nvim-treesitter-textobjects" },
-	{ 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Know comment based on context
+	{ "nvim-treesitter/nvim-treesitter-textobjects" }, { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Know comment based on context
 	{ 'yioneko/nvim-yati' }, -- Better indent tree-sitter plugin
   { 'HiPhish/nvim-ts-rainbow2' },
 	{ 'windwp/nvim-ts-autotag' },
@@ -116,7 +115,15 @@ return {
 			"MunifTanjim/nui.nvim",
 		}
 	},
-
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require'oil'.setup()
+    end,
+  },
 	{
     's1n7ax/nvim-window-picker',
 		config = function()
@@ -315,6 +322,7 @@ return {
   },
   {
     'j-hui/fidget.nvim',
+    tag = "legacy",
 		config = function ()
 			require('fidget').setup()
 		end
@@ -407,11 +415,11 @@ return {
   {
     'christoomey/vim-tmux-navigator',
     -- enabled = function() return util.getOS() == 'Linux' end
-    enabled = function() return not vim.fn.executable('tmux') end
+    enabled = function() return not (vim.fn.executable('tmux') and string.find(vim.fn.expandcmd('$TERM'),'xterm-kitty')) end
   },
   {
     'preservim/vimux',
-    enabled = function() return not vim.fn.executable('tmux') end
+    enabled = function() return vim.fn.executable('tmux') end
   },
   -- Not working
   {

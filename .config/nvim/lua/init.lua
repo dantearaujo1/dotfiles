@@ -28,7 +28,7 @@ else
   require('dante/cmp') -- This is a completion system to use with lsp and sources
   require('dante/nvim-lspconfig') -- Language System Protocol -- Universal
   require('dante/nvim-dap') -- Another debugger Debug Adapter Protocol -- Universal
-  -- require('dante/null-ls') -- Another debugger Debug Adapter Protocol -- Universal
+  require('dante/null-ls') -- Another debugger Debug Adapter Protocol -- Universal
   require('dante/snippets') -- Custom Snippets created by me
   require('dante/telescope') -- Like a file explorer or FZF
   require('dante/treesitter') -- ColorHighlight for a lot of languages

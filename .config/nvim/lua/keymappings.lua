@@ -69,8 +69,8 @@ util.map('x', 'H' , '^' , nore)
 util.map('x', 'L' , 'g_' , nore)
 -- Find and replace (like Sublime Text 3)
 util.map('x', '<M-s>', ':%s/', nore)
-util.map('n', '<M-r>', ':s/', nore)
-util.map('n', '<M-r>', ':%s/', nore)
+util.map('n', '<C-r>', ':s/', nore)
+util.map('n', '<C-S>', ':%s/', nore)
 
 -- CTRL-O and CTRL-I Movements
 util.map('n', '<leader>j', '<C-o>', nore)
@@ -94,13 +94,21 @@ util.map('n', 'q;' , 'q:', nore)
 util.map('n','<F2>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp
 
 -- Window Operations ==========================================================
+-- Tab Operation
+util.map('n', '<leader>1' , 'gT', nore)
+util.map('n', '<leader>2' , 'gt', nore)
+
 -- Change focus
 if(util.getOS() == "Linux") then
   if (util.getUser() == "devdante-archlinux-hd") then
-    util.map('n', '<C-h>' , ':KittyNavigateLeft<CR>', snore)
-    util.map('n', '<C-l>' , ':KittyNavigateRight<CR>', snore)
-    util.map('n', '<C-j>' , ':KittyNavigateDown<CR>', snore)
-    util.map('n', '<C-k>' , ':KittyNavigateUp<CR>', snore)
+    -- util.map('n', '<C-h>' , ':KittyNavigateLeft<CR>', snore)
+    -- util.map('n', '<C-l>' , ':KittyNavigateRight<CR>', snore)
+    -- util.map('n', '<C-j>' , ':KittyNavigateDown<CR>', snore)
+    -- util.map('n', '<C-k>' , ':KittyNavigateUp<CR>', snore)
+    util.map('n', '<C-h>' , ':TmuxNavigateLeft<CR>', snore)
+    util.map('n', '<C-l>' , ':TmuxNavigateRight<CR>', snore)
+    util.map('n', '<C-j>' , ':TmuxNavigateDown<CR>', snore)
+    util.map('n', '<C-k>' , ':TmuxNavigateUp<CR>', snore)
     -- util.map('n', '<C-h>' , '<C-w>h', snore)
     -- util.map('n', '<C-l>' , '<C-w>l', snore)
     -- util.map('n', '<C-j>' , '<C-w>j', snore)
@@ -197,7 +205,6 @@ util.map('n', 'mk' , '<Plug>Markdown_Checkbox', nore)
 
 util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
 -- ================================================================|COLORIZER|
-util.map('n', '<leader>CC' , ':HexokinaseToggle<CR>', nore)
 util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
 -- ================================================================|NEOTREE|
 -- util.map('n', '<leader>e' , ':NeoTreeShowToggle<CR>', nore)
@@ -213,3 +220,6 @@ util.map( 'n', 'zR', ':lua require("ufo").openAllFolds()<CR>', {noremap = true, 
 util.map( 'n', 'zM', ':lua require("ufo").closeAllFolds()<CR>', {noremap = true, silent = true})
 
 
+util.map( 'n', '<leader><leader>tt', ':lua vim.diagnostic.disable()<CR>', {noremap = true, silent = true})
+util.map( 'n', '<leader><leader>to', ':lua vim.diagnostic.enable()<CR>', {noremap = true, silent = true})
+util.map( 'n', '<localleader>o', ':Oil<CR>', {noremap = true, silent = true})
