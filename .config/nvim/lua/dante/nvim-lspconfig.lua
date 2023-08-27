@@ -107,7 +107,7 @@ end
 local MASON_LSP_DEFAULT_SETTINGS = {
   -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
   -- This setting has no relation with the `automatic_installation` setting.
-  ensure_installed = { "clangd", "rust_analyzer@nightly", "gopls", "tsserver", "clangd" },
+  ensure_installed = {"emmet_language_server", "clangd", "rust_analyzer@nightly", "gopls", "tsserver", "clangd" },
 
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -143,6 +143,29 @@ require("mason-lspconfig").setup_handlers {
     --     capabilities = capabilities,
     --     root_dir = vim.fs.dirname(vim.fs.find({'.gradlew', '.git', 'mnvw'}, {upward = true})[0]),
     -- })
+  end,
+  ["emmet_language_server"] = function()
+    require("lspconfig").emmet_language_server.setup ({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { "css", "html","javascript", "javascripreact", "less","sass","scss", "svelte","typescriptreact"},
+        init_options = {
+          --- @type table<string, any> https://docs.emmet.io/customization/preferences/
+          preferences = {},
+          --- @type "always" | "never" defaults to `"always"`
+          showexpandedabbreviation = "always",
+          --- @type boolean defaults to `true`
+          showabbreviationsuggestions = true,
+          --- @type boolean defaults to `false`
+          showsuggestionsassnippets = true,
+          --- @type table<string, any> https://docs.emmet.io/customization/syntax-profiles/
+          syntaxprofiles = {},
+          --- @type table<string, string> https://docs.emmet.io/customization/snippets/#variables
+          variables = {},
+          --- @type string[]
+          excludelanguages = {},
+        },
+    })
   end,
   ["lua_ls"] = function()
     require("lspconfig").lua_ls.setup {

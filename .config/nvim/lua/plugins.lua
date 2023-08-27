@@ -12,7 +12,7 @@ return {
   { 'HiPhish/nvim-ts-rainbow2' },
 	{ 'windwp/nvim-ts-autotag' },
 	{ 'David-Kunz/markid' }, -- Tree-sitter plugin for correct colors of parameters
-	{ 'mattn/emmet-vim' },
+	-- { 'mattn/emmet-vim' },
 
 	-- ============ DEBUGGER PLUGINS ==============================
 
@@ -238,7 +238,14 @@ return {
     event = "VeryLazy",
   }, -- Browse and preview json files
 	-- GIT ========
-	{ 'lewis6991/gitsigns.nvim' }, -- Super fast git decorations implemented purely in Lua/Teal
+  {
+    'NeogitOrg/neogit',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = function()
+      require('neogit').setup()
+    end
+  },
+	-- { 'lewis6991/gitsigns.nvim' }, -- Super fast git decorations implemented purely in Lua/Teal
 	{ 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim', }, -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
 	-- Java ========
   {'mfussenegger/nvim-jdtls'}, -- Java JDTLS helpers

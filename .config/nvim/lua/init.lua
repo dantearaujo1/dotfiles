@@ -1,5 +1,5 @@
 if vim.g.vscode then
-
+ require("keymappings")
 else
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	if not vim.loop.fs_stat(lazypath) then
@@ -43,7 +43,7 @@ else
   require('dante/notify') -- Notify UI of plugins
   require('dante/emmet') -- Emmet for html and css
   require('dante/asynctasks')
-  require('dante/git')
+  -- require('dante/git')
   require('dante/dashboard')
   require('dante/smartcolumn')
   require("dante/lspsaga")
@@ -59,8 +59,8 @@ else
   require('keymappings')
   require('variables')
   require('autocmd')
-  require('colors')
   require('dante/hydra')
+  require('colors')
 
   -- Dante Plugins
   require('dante/processing')

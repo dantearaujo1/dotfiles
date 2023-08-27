@@ -69,7 +69,7 @@ util.map('x', 'H' , '^' , nore)
 util.map('x', 'L' , 'g_' , nore)
 -- Find and replace (like Sublime Text 3)
 util.map('x', '<M-s>', ':%s/', nore)
-util.map('n', '<C-r>', ':s/', nore)
+util.map('n', '<M-s>', ':s/', nore)
 util.map('n', '<C-S>', ':%s/', nore)
 
 -- CTRL-O and CTRL-I Movements
@@ -97,6 +97,8 @@ util.map('n','<F2>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp
 -- Tab Operation
 util.map('n', '<leader>1' , 'gT', nore)
 util.map('n', '<leader>2' , 'gt', nore)
+util.map('n', '<leader>n' , ':tabnew<CR>', nore)
+util.map('n', '<leader>c' , ':tabclose<CR>', nore)
 
 -- Change focus
 if(util.getOS() == "Linux") then
