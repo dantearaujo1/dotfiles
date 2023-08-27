@@ -83,12 +83,12 @@ HIST_STAMPS="dd/mm/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
-    plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize poetry)
+    plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize poetry poetry-env zsh-vi-mode)
 else
   if [ -z "$TMUX" ]; then
-      plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python vi-mode colorize)
+      plugins=(z git zsh-vi-mode zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python colorize)
   else
-    plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python colorize)
+    plugins=(z git zsh-vi-mode zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python colorize)
   fi
 fi
 
@@ -202,7 +202,7 @@ alias zz="nvim ~/.zshrc"
 alias zZ="source ~/.zshrc"
 alias zb="nvim ~/.bashrc"
 alias zB="source ~/.bashrc"
-alias zsh="nvim ~/.bashrc"
+alias bz="nvim ~/.bashrc"
 alias zt="nvim ~/.tmux.conf"
 alias zT="source ~/.tmux.conf"
 alias zn="nvim ~/.config/nvim/lua/init.lua"
@@ -214,6 +214,7 @@ alias lgd="lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cls="clear"
 alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 alias explorer="xdg-open"
+alias mindmap="h-m-m"
 if [[ $(whoami) = 'devdante-wsl' ]]; then
   alias emulator="/mnt/d/Code/Android/Sdk/emulator/emulator.exe"
   alias adb="/mnt/d/Code/Android/Sdk/platform-tools/adb.exe"
