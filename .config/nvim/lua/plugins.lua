@@ -178,7 +178,15 @@ return {
         })
     end
   }, -- Change surroundings Not tpope anymore
-	{ 'windwp/nvim-autopairs' }, -- Auto close () [] {} <Tags>
+	-- { 'windwp/nvim-autopairs' }, -- Auto close () [] {} <Tags>
+  {
+    "altermo/ultimate-autopair.nvim",
+    event={"InsertEnter","CmdlineEnter"},
+    opts={
+      --Config goes here
+    },
+  },
+	-- { 'windwp/nvim-autopairs' }, -- Auto close () [] {} <Tags>
 	{ 'bkad/camelcasemotion' }, -- Plugin for movin in camelcase with localleader
 	{ 'propet/toggle-fullscreen.nvim' }, -- Toggle fullScreen with <leader>z
 	{

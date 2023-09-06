@@ -22,7 +22,7 @@ else
     }})
 
   -- Custom Plugins Configurations
-  require('dante/nvim-autopairs') -- For completing pairs
+  --require('dante/nvim-autopairs') -- For completing pairs
 
 
   require('dante/cmp') -- This is a completion system to use with lsp and sources

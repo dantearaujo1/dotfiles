@@ -2,10 +2,10 @@ local cmp = require('cmp')
 local utils = require('utils')
 local luasnip = require'luasnip'
 local lspkind = require('lspkind')
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+--local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 -- If you want insert '(' after select function or method item
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({map_char = { tex = '' }}))
+--cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({map_char = { tex = '' }}))
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
