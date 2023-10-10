@@ -47,6 +47,7 @@ else
   require('dante/dashboard')
   require('dante/smartcolumn')
   require("dante/lspsaga")
+  require("dante/neorg")
 
   -- require('dante/firenvim') -- Browser Configurations for Firenvim
 

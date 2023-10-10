@@ -51,6 +51,7 @@ util.map('n', 'k' , '(v:count == 0 ? "gk" : "k")' , sxnore)
 util.map('n', '^' , 'g^' , snore)
 util.map('n', '0' , 'g0' , snore)
 
+util.map('n', 'U' , '<C-r>' , nore)
 -- Yank to the end of line
 util.map('n', 'Y' , 'y$' , nore)
 util.map('n', '<leader>Y' , '"+y$' , nore) -- Yank line to system clipboard

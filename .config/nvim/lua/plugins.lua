@@ -9,10 +9,21 @@ return {
 	{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
 	{ "nvim-treesitter/nvim-treesitter-textobjects" }, { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Know comment based on context
 	{ 'yioneko/nvim-yati' }, -- Better indent tree-sitter plugin
-  { 'HiPhish/nvim-ts-rainbow2' },
-	{ 'windwp/nvim-ts-autotag' },
+  -- { 'HiPhish/nvim-ts-rainbow2' },
+	{
+    'windwp/nvim-ts-autotag',
+      config = function()
+        require('nvim-ts-autotag').setup()
+      end,
+  },
 	{ 'David-Kunz/markid' }, -- Tree-sitter plugin for correct colors of parameters
 	-- { 'mattn/emmet-vim' },
+  {
+    "olrtg/nvim-emmet",
+    config = function()
+      vim.keymap.set({ "n", "v" }, '<localleader>a', require('nvim-emmet').wrap_with_abbreviation)
+    end,
+  },
 
 	-- ============ DEBUGGER PLUGINS ==============================
 
@@ -475,8 +486,8 @@ return {
           ["core.dirman"] = {
             config = {
               workspaces = {
-                work = "~/notes/work",
-                home = "~/notes",
+                work = "~/Notes/work",
+                prog = "~/Notes/prog",
               },
 		    default_workspace = "home",
             }

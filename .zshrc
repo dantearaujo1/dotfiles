@@ -83,6 +83,16 @@ HIST_STAMPS="dd/mm/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
+    bindkey -r "^G"
+    bindkey -r "^[g"
+    bindkey -r "^[G"
+    source ~/dev/scripts/fzf-git.sh
+    source ~/dev/scripts/zsh/zsh-fzf-widgets.zsh
+    bindkey "^L" clear-screen
+    bindkey "^zc" fzf-git-checkout
+    bindkey "^zs" fzf-git-status
+    bindkey "^zk" fzf-kill-proc-by-list
+    bindkey "^ze" fzf-gitmoji
     plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize poetry poetry-env zsh-vi-mode)
 else
   if [ -z "$TMUX" ]; then
@@ -100,6 +110,23 @@ export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="fd . ."
 export FZF_CTRL_T_OPTS=""
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export FZF_TMUX=1
+export FZF_TMUX_OPTS="-p 40%"
+export FZF_COMPLETION_TRIGGER="**"
+export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree"
+
+_fzf_compgen_path(){
+  rg --files --glob "!.git" . "$1"
+}
+_fzf_compgen_dir(){
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+_fzf_complete_git(){
+  _fzf_complete -- "$@" < <(
+    git --help -a | grep -E '^\s+' | awk '{print $1}'
+  )
+}
+
 # MAN - CONFIGURATIONS
 # export MANPAGER='nvim +Man!'
 # export MANWIDTH=999
@@ -118,6 +145,7 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
   export PAGER=nvimpager
   alias addtheme=kitty +kitten themes
   alias icat='kitty +kitten icat'
+  source /usr/share/nvm/init-nvm.sh
 fi
 
 export GOPATH="$HOME/.go"
@@ -212,6 +240,7 @@ alias smd="~/dev/projects/processing/smd"
 alias lg="lazygit"
 alias lgd="lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cls="clear"
+alias fzf="fzf-tmux -p"
 alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 alias explorer="xdg-open"
 alias mindmap="h-m-m"

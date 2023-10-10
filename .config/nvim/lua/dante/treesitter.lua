@@ -4,6 +4,8 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = {"cpp", "c", "javascript", "java", "html", "cmake", "python", 'lua','rust', 'markdown', 'markdown_inline',"typescript"},-- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {}, -- List of parsers to ignore installing
   enable = true,              -- false will disable the whole extension
+  sync_install = false,
+  auto_install = true,
   autotag = {
     enable = true,
     filetypes = { "html", "js", "javascript", "javascriptreact", "svelte", "vue", "rescript", "typescript","typescriptreact"},
@@ -33,7 +35,7 @@ require'nvim-treesitter.configs'.setup {
     extended_mode = true,
     max_file_lines = nil,
     query = 'rainbow-parens',
-    strategy = require('ts-rainbow').strategy.global,
+    --strategy = require('ts-rainbow').strategy.global,
     -- colors = {},
     -- termcolors = {}
   },
