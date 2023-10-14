@@ -88,11 +88,14 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
     bindkey -r "^[G"
     source ~/dev/scripts/fzf-git.sh
     source ~/dev/scripts/zsh/zsh-fzf-widgets.zsh
+    source ~/dev/scripts/zsh/dante.zsh
     bindkey "^L" clear-screen
     bindkey "^zc" fzf-git-checkout
     bindkey "^zs" fzf-git-status
     bindkey "^zk" fzf-kill-proc-by-list
     bindkey "^ze" fzf-gitmoji
+    bindkey "^[n" fzf-notes
+
     plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize poetry poetry-env zsh-vi-mode)
 else
   if [ -z "$TMUX" ]; then
@@ -216,9 +219,8 @@ if [ -d "$HOME/.config/hypr/" ];then
   alias rules='nvim ~/.config/hypr/ruleswindow.conf'
   alias hypr='nvim ~/.config/hypr/hyprland.conf'
   alias o='xdg-open'
-
 fi
-alias f='nvim "$(fzf)"'
+
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
 alias ts='tmux new-session -s'
@@ -240,7 +242,11 @@ alias smd="~/dev/projects/processing/smd"
 alias lg="lazygit"
 alias lgd="lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cls="clear"
+alias f='nvim "$(fzf)"'
+alias fn='nvim "$(fd . ~/Notes/ --type f | fzf --ansi --preview  "bat {}")"'
 alias fzf="fzf-tmux -p"
+alias fzfpacman="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+alias fzfpacall="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
 alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 alias explorer="xdg-open"
 alias mindmap="h-m-m"
