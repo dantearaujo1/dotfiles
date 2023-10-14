@@ -143,7 +143,7 @@ return {
 	},
 	{ 'wesq3/vim-windowswap' }, -- Exchange Windows
 	{ 'folke/todo-comments.nvim' },
-	{ 'lukas-reineke/indent-blankline.nvim' },
+	{ 'lukas-reineke/indent-blankline.nvim', main='ibl' },
 	{ 'arnamak/stay-centered.nvim' }, -- autocmds for always stay centered
 	-- Bundle of mini modules [Using for mini-align]
 	{
@@ -486,10 +486,11 @@ return {
           ["core.dirman"] = {
             config = {
               workspaces = {
+                study = "~/Notes/study",
                 work = "~/Notes/work",
                 prog = "~/Notes/prog",
               },
-		    default_workspace = "home",
+		    default_workspace = "prog",
             }
           },
           ["core.completion"] = {
