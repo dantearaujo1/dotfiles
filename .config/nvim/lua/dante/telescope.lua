@@ -192,8 +192,8 @@ M.search_notes = function()
   if system_name == "Windows" then
   elseif system_name == "Linux" then
     require("telescope.builtin").find_files({
-      prompt_title = "< DANTE - Linux >",
-      cwd = "~/dev/notes",
+      prompt_title = "< DANTE - Notes >",
+      cwd = "~/Notes/",
     })
   end
 end
