@@ -3,12 +3,24 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 
 return {
+	-- ============ ETC PLUGINS ==============================
+  {
+      "andweeb/presence.nvim",
+      cond = vim.env.TERMUX_VERSION == nil, -- do not load on Termux as it is useless
+      event = "VeryLazy",
+      opts = {
+        main_image = "file",
+        neovim_image_text = "Break my pinky? No thanks, I'm more of breaking my editor config",
+        enable_line_number = true,
+      },
+      config = function(_, opts) require("presence"):setup(opts) end,
+    },
 	-- ============ SPEED UP PLUGINS ==============================
 	-- { 'nathom/filetype.nvim' }, -- New method of filetype that is faster NOT WORKING
 	-- ============ SYNTAX PLUGINS ==============================
 	{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-	{ "nvim-treesitter/nvim-treesitter-textobjects" }, { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Know comment based on context
-	{ 'yioneko/nvim-yati' }, -- Better indent tree-sitter plugin
+	{ "nvim-treesitter/nvim-treesitter-textobjects" },
+  { 'JoosepAlviste/nvim-ts-context-commentstring' }, -- Know comment based on context
   -- { 'HiPhish/nvim-ts-rainbow2' },
 	{
     'windwp/nvim-ts-autotag',
@@ -19,7 +31,7 @@ return {
 	{ 'David-Kunz/markid' }, -- Tree-sitter plugin for correct colors of parameters
 	-- { 'mattn/emmet-vim' },
   {
-    "olrtg/nvim-emmet",
+    'olrtg/nvim-emmet',
     config = function()
       vim.keymap.set({ "n", "v" }, '<localleader>a', require('nvim-emmet').wrap_with_abbreviation)
     end,
@@ -31,6 +43,20 @@ return {
 	-- ============ REPL PLUGINS ==============================
   { 'milanglacier/yarepl.nvim', config = true },
 	-- ============ LSP PLUGINS ==============================
+  {
+    "zeioth/garbage-day.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+    opts = {
+      -- your options here
+    }
+  },
+  --- Separate cut from delete registers
+  {
+    "gbprod/cutlass.nvim",
+    event = "VeryLazy",
+    opts = { cut_key = "x" },
+  },
   { 'theHamsta/nvim-dap-virtual-text' }, -- Virtual text showing variables info
   { 'rcarriga/nvim-dap-ui' }, -- UI out of the box
   { 'nvim-telescope/telescope-dap.nvim' }, -- Telescope to find variables
@@ -39,7 +65,6 @@ return {
   { 'neovim/nvim-lspconfig' },
   { 'mfussenegger/nvim-dap' },
   { 'jay-babu/mason-nvim-dap.nvim' },
-  { 'jose-elias-alvarez/null-ls.nvim' },
   {
     "jayp0521/mason-null-ls.nvim",
     dependencies = {
@@ -48,8 +73,16 @@ return {
       'rcarriga/nvim-dap-ui' --
     },
   },
-  { "folke/neodev.nvim", opts = {} },
 
+  {
+    'folke/neodev.nvim',
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
+    'stevearc/conform.nvim',
+    opts = {},
+  },
 	-- ============ SERVER PLUGINS ==============================
   {
     'barrett-ruth/live-server.nvim',
@@ -58,7 +91,10 @@ return {
   },
 	-- ============ COMPLETION PLUGINS ============================
   { 'hrsh7th/nvim-cmp' },
-  { 'L3MON4D3/LuaSnip' },
+  {
+    'L3MON4D3/LuaSnip',
+    event = 'VeryLazy' ,
+  },
   { 'rafamadriz/friendly-snippets' },
 	-- -- -- === Completion Sources for CMP
    { 'saadparwaiz1/cmp_luasnip' }, -- Completion Source for luasnip
@@ -79,20 +115,57 @@ return {
 	},
 
 	-- Plugins
-	{ 'cljoly/telescope-repo.nvim' },
-	{ 'xiyaowong/telescope-emoji.nvim' },
-	{ 'dhruvmanila/telescope-bookmarks.nvim' },
-	{ 'nvim-telescope/telescope-symbols.nvim' },
-	{ 'nvim-telescope/telescope-project.nvim' },
+	{
+    'cljoly/telescope-repo.nvim',
+    event = "VeryLazy",
+  },
+	{
+    'xiyaowong/telescope-emoji.nvim',
+    event = "VeryLazy",
+  },
+	{
+    'dhruvmanila/telescope-bookmarks.nvim',
+    event = "VeryLazy",
+  },
+	{
+    'nvim-telescope/telescope-symbols.nvim',
+    event = "VeryLazy",
+  },
+	{
+    'nvim-telescope/telescope-project.nvim',
+    event = "VeryLazy",
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {
+      }
+    end
+  },
 	{ 'nvim-telescope/telescope-file-browser.nvim' },
   { 'tsakirist/telescope-lazy.nvim' },
-	{ 'LinArcX/telescope-env.nvim' },
-	{ 'GustavoKatel/telescope-asynctasks.nvim' },
+
+	{
+    'LinArcX/telescope-env.nvim',
+    event = "VeryLazy",
+  },
+  {
+    'nvim-telescope/telescope-media-files.nvim',
+    event = "VeryLazy",
+    enabled = function() return util.getOS() == "Linux" end
+  },
+	{
+    'GustavoKatel/telescope-asynctasks.nvim',
+    event = "VeryLazy",
+  },
 	{
     'nvim-telescope/telescope-fzf-native.nvim',
 		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
 	},
-	{ "nvim-telescope/telescope-live-grep-args.nvim" },
+	{
+    'nvim-telescope/telescope-live-grep-args.nvim',
+    event = "VeryLazy",
+  },
 
 	-- Terminal ==================================================================
 	{ 'akinsho/toggleterm.nvim', branch = 'main', config = function() require("toggleterm").setup() end},
@@ -153,12 +226,11 @@ return {
 			  require("mini.cursorword").setup()
 			  require("mini.ai").setup()
 			  require("mini.hipatterns").setup()
-			  require("mini.indentscope").setup()
+			  -- require("mini.indentscope").setup()
 			  -- require("mini.animate").setup()
 		end,
 	},
   { 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace
-	{ 'foosoft/vim-argwrap' }, -- Strenght argument wrapping and unwrapping
 	{ 'tommcdo/vim-exchange' }, -- Easy text exchange operator for Vim
   {
     'booperlv/nvim-gomove',
@@ -166,7 +238,7 @@ return {
       require('gomove').setup{}
     end
   }, -- Move lines up and down
-	{ 'ggandor/leap.nvim' },
+  {'ggandor/leap.nvim'},
 	{
     'ggandor/flit.nvim',
     config = function()
@@ -174,11 +246,11 @@ return {
     end
   },
 	{ 'vim-scripts/ReplaceWithRegister' }, -- Replace with gr
+	{ 'foosoft/vim-argwrap' }, -- Strenght argument wrapping and unwrapping
+	{ 'AckslD/nvim-trevJ.lua', }, -- Opposite of J
 	{
-    'AckslD/nvim-trevJ.lua',
-    -- Do the oposite of J in neovim config = 'require("trevj").setup()',
-  },
-	{ 'numToStr/Comment.nvim' }, -- Better comment than tpope
+    'numToStr/Comment.nvim',
+  }, -- Better comment than tpope
 	{
     'kylechui/nvim-surround',
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -260,9 +332,18 @@ return {
   {
     'NeogitOrg/neogit',
     dependencies = 'nvim-lua/plenary.nvim',
+    event="VeryLazy",
     config = function()
       require('neogit').setup()
     end
+  },
+  {
+    "rbong/vim-flog",
+    lazy = true,
+    cmd = { "Flog", "Flogsplit", "Floggit" },
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
   },
 	-- { 'lewis6991/gitsigns.nvim' }, -- Super fast git decorations implemented purely in Lua/Teal
 	{ 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim', }, -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
@@ -286,7 +367,23 @@ return {
   },
 	-- DATABASE Specifics =========================================================
   {'tpope/vim-dadbod'},-- Vim plugin to interact with databases {Mongo,JQ,Postgre}
-  {'kristijanhusak/vim-dadbod-ui'},-- User Interface for dadbod
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+      { 'tpope/vim-dadbod', lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
+  },
   {'kristijanhusak/vim-dadbod-completion'},-- Completion for dadbod
 	-- CLI Pluggins ===============================================================
 	{
@@ -353,7 +450,12 @@ return {
 			require('fidget').setup()
 		end
   }, -- Lsp progress handler
-  { 'karb94/neoscroll.nvim' },
+  {
+    'karb94/neoscroll.nvim',
+    config = function ()
+      require('neoscroll').setup()
+    end
+  },
 	{
     'rcarriga/nvim-notify',
     lazy = false,
@@ -367,22 +469,6 @@ return {
 	},
 	{"shortcuts/no-neck-pain.nvim"},
 
-	-- -- Using nvim inside browser WHAT????
-	-- {
-	--   'glacambre/firenvim',
-	--   build = function() vim.fn['firenvim#install'](0) end
-	-- }
-
-	--  {
-  -- 'folke/noice.nvim',
-	-- config = function ()
-  --require("noice").setup()
-	--end,
-	--dependencies = {
-	  --"MunifTanjim/nui.nvim",
-	  --"rcarriga/nvim-notify",
-	--}
-	--   }
 
 	-- THEMES =====================================================================
 	-- Dashboard ===========================
@@ -436,7 +522,10 @@ return {
     enabled = function() return util.getOS() == "Linux" end
   },
 	-- STATUS LINE PLUGINS ========================================================
-	{ 'nvim-lualine/lualine.nvim' },
+	-- { 'nvim-lualine/lualine.nvim' },
+	{
+    'MunifTanjim/nougat.nvim',
+  },
 	{'SmiteshP/nvim-navic', dependencies = "neovim/nvim-lspconfig"},
   {
     'christoomey/vim-tmux-navigator',
@@ -472,10 +561,6 @@ return {
   --     }
   --   end
   -- },
-  {
-    'nvim-telescope/telescope-media-files.nvim',
-    enabled = function() return util.getOS() == "Linux" end
-  },
   {
     'nvim-neorg/neorg',
       run = ":Neorg sync-parsers",

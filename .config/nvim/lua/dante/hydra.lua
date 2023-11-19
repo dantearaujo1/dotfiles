@@ -60,10 +60,10 @@ _l_:  Lazy Plugs
 _n_:  Notes
 _m_:  Bookmarks
 _o_:  Old files        _O_:  Show Options
-_p_:  Projects         _P_:  Packer Opts
+_p_:  Projects
 _q_:  Show Quick Fix
 _r_:  RepoList         _R_:  Resume
-_t_:  Find Todos       _T_: AsyncTasks List
+_t_:  Find Todos       _T_:  AsyncTasks List
 _/_:  In File          _?_:  Search History
 _;_:  Commands History _,_:  Search dotfiles
  _<_:  Grep dotfiles
@@ -103,8 +103,7 @@ Hydra({
       { 'm', cmd 'Telescope bookmarks', { desc = 'Show url bookmarks' } },
       { 'o', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },
       { 'O', cmd 'Telescope vim_options' },
-      { 'p', cmd 'Telescope project', { desc = 'projects' } },
-      { 'P', ':lua require("telescope").extensions.packer.packer(opts)<CR>', { desc = 'Packer Opts' } },
+      { 'p', cmd ':lua require"telescope".extensions.projects.projects{}<CR>', { desc = 'projects' } },
       { 'q', cmd 'Telescope quickfixhistory', { desc = 'Show quickfix menu' } },
       { 'r', cmd 'Telescope repo list' },
       { 'R', cmd 'Telescope resume' },
@@ -119,48 +118,5 @@ Hydra({
       { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },
       { '<Esc>', nil, { exit = true, nowait = true } },
    }
-
-})
-local load_operations = Hydra({
-  name = "Packer Load Operation",
-  hint = [[Load Plugins]],
-  config = {
-    color = 'teal',
-    invoke_on_body = true,
-    hint = {
-        position = 'middle',
-        border = 'rounded',
-    },
-  },
-  heads = {
-    {'n', ':PackerLoad neorg<CR>', {desc = 'Load Neorg'}},
-
-    { '<Esc>', nil, { exit = true, nowait = true, desc= 'Exit' } },
-  }
-
-})
-Hydra({
-  name = "Packer Operation",
-  hint = [[Packer]],
-  config = {
-    color = 'teal',
-    invoke_on_body = true,
-    hint = {
-        position = 'middle',
-        border = 'rounded',
-    },
-  },
-  mode = 'n',
-  body = '<leader>P',
-  heads = {
-    {'c', ':PackerClean<CR>', {desc = 'Remove folders from removed plugins'}},
-    {'i', ':PackerInstall<CR>', {desc = 'Install plugins'}},
-    {'s', ':PackerSync<CR>', {desc = 'Sync all plugins'}},
-    {'S', ':PackerStatus<CR>', {desc = 'Show plugins status'}},
-    {'q', function() load_operations:activate() end, {desc = 'Load specific plugins menu'}},
-    {'Q', ':PackerLoad ', {desc = 'Load a given plugin'}},
-
-    { '<Esc>', nil, { exit = true, nowait = true, desc= 'Exit' } },
-  }
 
 })

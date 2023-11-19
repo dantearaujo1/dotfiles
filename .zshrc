@@ -99,7 +99,7 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
     plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize poetry poetry-env zsh-vi-mode)
 else
   if [ -z "$TMUX" ]; then
-      plugins=(z git zsh-vi-mode zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python colorize)
+      plugins=(z git zsh-vi-mode zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases tmux python colorize)
   else
     plugins=(z git zsh-vi-mode zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python colorize)
   fi
@@ -221,6 +221,8 @@ if [ -d "$HOME/.config/hypr/" ];then
   alias o='xdg-open'
 fi
 
+alias emp='rm --recursive --verbose --force ~/.local/share/Trash/files/*'
+alias ls='lsd'
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
 alias ts='tmux new-session -s'
@@ -256,6 +258,7 @@ if [[ $(whoami) = 'devdante-wsl' ]]; then
 fi
 alias rdp="sudo /etc/init.d/xrdp start"
 alias ustart="~/dev/scripts/vncstart.sh"
+alias vpy="source ./.venv/bin/activate"
 
 pdf() {zathura $1 & disown}
 mgdir() {mkdir $@ && cd ${@:$#}}

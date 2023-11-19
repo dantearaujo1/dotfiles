@@ -31,7 +31,7 @@ util.map('n', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mo
 -- Commands Shortcuts =========================================================
 util.map('n', '<leader>ll' , ':luafile %<CR> <bar> :lua print("This file was sourced!")<CR>' , nore)
 -- " Change current working directory locally and print cwd after that
-util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR> :Neotree .<CR>', nore)
+util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR>', nore)
 util.map('n', '<leader>v' , '`[V`]' , snore) -- Reselect last pasted text
 -- " Use sane regex expression (see `:h magic` for more info)
 util.map('n', '/' , "/\\v" , nore)
@@ -39,6 +39,10 @@ util.map('n', '/' , "/\\v" , nore)
 -- Put ; in the end of line
 util.map('n', '<leader>;' , 'A;' , nore)
 util.map('n', '<localleader>q' , ':<C-u>call asyncrun#quickfix_toggle(10)<CR>' , nore)
+
+-- Stay in visual mode after indenting with < or >
+util.map("v", ">", ">gv")
+util.map("v", "<", "<gv")
 
 -- Turn off navigation with arrows
 util.map('n', '<Up>' , '<nop>' , nore)

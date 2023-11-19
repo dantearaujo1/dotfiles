@@ -38,7 +38,7 @@ o.splitbelow = true             -- When split put window below the current one
 o.splitright = true             -- When split vertical put window to right
 
 o.completeopt = 'menuone,noselect,noinsert' -- Completion Options
-o.shortmess = 'c'               -- Don't show completion messages
+o.shortmess = 'caoOtI'               -- Don't show completion messages
 o.matchpairs = '<:>,?:?,(:),{:},[:]'        -- Match these pairs with highlight
 o.ignorecase = true
 o.smartcase = true
