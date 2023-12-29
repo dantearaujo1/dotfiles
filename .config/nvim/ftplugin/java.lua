@@ -17,7 +17,7 @@ else
 end
 
 local plugins_dir = jdtls_dir .. '/plugins/'
-local path_to_jar = plugins_dir .. 'org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+local path_to_jar = plugins_dir .. 'org.eclipse.equinox.launcher_1.6.600.v20231106-1826.jar'
 local lombok_path = jdtls_dir .. "/lombok.jar"
 
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle", }
@@ -42,7 +42,7 @@ local config = {
     '-Dlog.protocol=true',
     '-Dlog.level=ALL',
     '-javaagent:' .. lombok_path,
-    '-Xms1G',
+    '-Xms1g',
     '--add-modules=ALL-SYSTEM',
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
@@ -114,7 +114,6 @@ local config = {
         "org"
       },
     },
-    extendedClientCapabilities = extendedClientCapabilities,
     sources = {
       organizeImports = {
         starThreshold = 9999,
@@ -136,6 +135,9 @@ local config = {
     allow_incremental_sync = true,
   },
   init_options = {
+    extendedClientCapabilities = {
+      progressReportProvider = false,
+    },
     bundles = {},
   },
 }
@@ -176,7 +178,7 @@ config['on_attach'] = function(client, bufnr)
   vim.keymap.set('n', '<leader>ec', ':lua require("jdtls").extract_constant()<CR>', bufopts)
   vim.keymap.set('v', '<leader>em', ':lua require("jdtls").extract_method(true)<CR>', bufopts)
   vim.keymap.set('v', '<leader>ca', ':lua vim.lsp.buf.range_code_action()<CR>', bufopts)
-  require("jdtls.setup").add_commands()
+  -- require("jdtls.setup").add_commands()
 end
 --
 -- This starts a new client & server,
