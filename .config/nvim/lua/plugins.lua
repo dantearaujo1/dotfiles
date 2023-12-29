@@ -44,6 +44,17 @@ return {
   { 'milanglacier/yarepl.nvim', config = true },
 	-- ============ LSP PLUGINS ==============================
   {
+    'akinsho/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = function()
+      require("flutter-tools").setup({})
+    end
+  },
+  {
     "zeioth/garbage-day.nvim",
     dependencies = "neovim/nvim-lspconfig",
     event = "VeryLazy",
@@ -447,7 +458,13 @@ return {
     'j-hui/fidget.nvim',
     tag = "legacy",
 		config = function ()
-			require('fidget').setup()
+			require('fidget').setup({
+        sources = {
+          ["jdtls"] = {
+            ignore = true,
+          },
+        },
+      })
 		end
   }, -- Lsp progress handler
   {

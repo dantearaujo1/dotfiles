@@ -38,7 +38,6 @@ util.map('n', '/' , "/\\v" , nore)
 
 -- Put ; in the end of line
 util.map('n', '<leader>;' , 'A;' , nore)
-util.map('n', '<localleader>q' , ':<C-u>call asyncrun#quickfix_toggle(10)<CR>' , nore)
 
 -- Stay in visual mode after indenting with < or >
 util.map("v", ">", ">gv")
@@ -82,12 +81,13 @@ util.map('n', '<leader>j', '<C-o>', nore)
 util.map('n', '<leader>k', '<C-i>', nore)
 
 --  Navigation in the location and quickfix list
+util.map('n', '<localleader>q' , ':<C-u>call asyncrun#quickfix_toggle(10)<CR>' , nore)
 util.map('n', ']L' , ':llast<CR>zv', nore)
 util.map('n', '[L' , ':lfirst<CR>zv', nore)
 util.map('n', '[Q' , ':cfirst<CR>zv', nore)
 util.map('n', ']Q' , ':clast<CR>zv', nore)
--- " Close location list or quickfix list if they are present,
-util.map('n', '<localleader>x' , ':windo close <bar> cclose<CR>', nore)
+util.map('n', ']c' , ':cnext<CR>zv', nore)
+util.map('n', '[c' , ':cprevious<CR>zv', nore)
 -- " Close a buffer and switching to another buffer, do not close the window
 util.map('n', '<localleader>d' , ':bprevious <bar> bdelete #<CR>', nore)
 util.map('n', '<localleader>[' , ':bprevious <CR>', nore)
@@ -227,6 +227,6 @@ util.map( 'n', 'zR', ':lua require("ufo").openAllFolds()<CR>', {noremap = true, 
 util.map( 'n', 'zM', ':lua require("ufo").closeAllFolds()<CR>', {noremap = true, silent = true})
 
 
-util.map( 'n', '<leader><leader>tt', ':lua vim.diagnostic.disable()<CR>', {noremap = true, silent = true})
-util.map( 'n', '<leader><leader>to', ':lua vim.diagnostic.enable()<CR>', {noremap = true, silent = true})
+util.map( 'n', '<leader>11', ':lua vim.diagnostic.disable()<CR>', {noremap = true, silent = true})
+util.map( 'n', '<leader>12', ':lua vim.diagnostic.enable()<CR>', {noremap = true, silent = true})
 util.map( 'n', '<localleader>o', ':Oil<CR>', {noremap = true, silent = true})

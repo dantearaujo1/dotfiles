@@ -119,5 +119,6 @@ if OS == "Windows" then
   require("luasnip.loaders.from_vscode").load({ "D:/Code/Configurations/nvim/nvim-data/site/pack/packer/start/friendly-snippets/snippets"})
 elseif OS == "Linux" then
   require("luasnip.loaders.from_vscode").load({ "~/.local/share/nvim/lazy/friendly-snippets/snippets"})
+  require("luasnip.loaders.from_vscode").load({ "~/.local/share/nvim/lazy/dart_snippets/snippets"})
 end
 

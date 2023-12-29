@@ -42,7 +42,7 @@ else
   require('dante/notify') -- Notify UI of plugins
   require('dante/emmet') -- Emmet for html and css
   require('dante/asynctasks')
-  -- require('dante/git')
+  --require('dante/git')
   require('dante/dashboard')
   require('dante/smartcolumn')
   require("dante/lspsaga")
