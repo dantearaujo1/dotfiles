@@ -38,25 +38,6 @@ telescope.setup {
           }
         },
       },
-      bookmarks = {
-        url_open_plugin = 'open_browser',
-        full_path = true,
-        firefox_profile_name = nil,
-      },
-      project = {
-        base_dirs = {
-          { '~/dev/projects/processing/', max_depth = 2 },
-          { '~/dev/projects/python/', max_depth = 2 },
-          { '~/dev/projects/javascript/', max_depth = 2 },
-          { '~/dev/projects/gamedev/', max_depth = 2 },
-          { '~/dev/projects/lua/', max_depth = 2 },
-          { '~/dev/projects/typescript/', max_depth = 2 },
-          { '~/dev/projects/cpp/', max_depth = 2 },
-          { '~/dev/projects/java/', max_depth = 2 },
-        },
-        hidden_files = true,
-        theme = "dropdown"
-      },
       lazy = {
           -- Optional theme (the extension doesn't set a default theme)
           theme = "ivy",
@@ -164,11 +145,9 @@ telescope.setup {
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('file_browser')
 require('telescope').load_extension('live_grep_args')
-require('telescope').load_extension('project')
 require('telescope').load_extension('env')
 require('telescope').load_extension('repo')
 require('telescope').load_extension('dap')
-require('telescope').load_extension('emoji')
 require('telescope').load_extension('notify')
 require('telescope').load_extension('lazy')
 
