@@ -78,7 +78,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   require "lsp_signature".on_attach(signature_setup, bufnr)
   if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
+    --navic.attach(client, bufnr)
   end
   client.server_capabilities.sementicTokensProvider = nil
   -- Mappings.

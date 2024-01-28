@@ -67,7 +67,7 @@ cmp.setup {
       -- { name = 'tags' },
       -- { name = 'calc' },
     },{
-    -- {name = 'buffer'},
+     {name = 'buffer'},
     }),
   formatting = {
     format = lspkind.cmp_format({
@@ -79,11 +79,10 @@ cmp.setup {
         nvim_lua = "[Lua]",
         latex_symbols = "[Latex]",
         buffer = "[Buffer]",
-      })
-      -- before = function (entry, vim_item)
-      --   ...
-      --   return vim_item
-      -- end
+      }),
+       before = function (entry, vim_item)
+         return vim_item
+       end
     })
   },
   sorting = {

@@ -88,7 +88,6 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
     bindkey -r "^[G"
     source ~/dev/scripts/fzf-git.sh
     source ~/dev/scripts/zsh/zsh-fzf-widgets.zsh
-    source ~/dev/scripts/zsh/dante.zsh
     bindkey "^L" clear-screen
     bindkey "^zc" fzf-git-checkout
     bindkey "^zs" fzf-git-status

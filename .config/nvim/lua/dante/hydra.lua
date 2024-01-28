@@ -8,8 +8,11 @@ Hydra({
     color = 'red',
     invoke_on_body = true,
     hint = {
-        position = 'bottom',
+      type = 'window',
+      position = 'bottom',
+      float_opts = {
         border = 'rounded',
+      },
     },
   },
   mode = 'n',
@@ -30,8 +33,11 @@ Hydra({
     color = 'teal',
     invoke_on_body = true,
     hint = {
-        position = 'middle',
+      type = 'window',
+      position = 'middle',
+      float_opts = {
         border = 'rounded',
+      },
     },
   },
   mode = 'n',
@@ -76,14 +82,17 @@ Hydra({
    hint = hint,
    config = {
       color = 'teal',
-      invoke_on_body = true,
+      invoke_on_body = false,
       hint = {
-         position = 'middle',
-         border = 'rounded',
+        type = 'window',
+        position = 'middle',
+        float_opts = {
+          border = 'rounded',
+        },
       },
    },
    mode = 'n',
-   body = '<Leader>f',
+   body = '<leader>f',
    heads = {
       { 'b', cmd 'Telescope buffers', { desc = 'Show open buffers' } },
       { 'B', cmd 'Telescope builtin', { desc = 'Show builtins' } },
@@ -119,4 +128,16 @@ Hydra({
       { '<Esc>', nil, { exit = true, nowait = true } },
    }
 
+})
+
+Hydra({
+   name = 'Side scroll',
+   mode = 'n',
+   body = 'z',
+   heads = {
+      { 'h', '5zh' },
+      { 'l', '5zl', { desc = '←/→' } },
+      { 'H', 'zH' },
+      { 'L', 'zL', { desc = 'half screen ←/→' } },
+   }
 })

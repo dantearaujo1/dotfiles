@@ -115,5 +115,7 @@ require("ufo").setup(
 
 o.winbar= "%f"
 o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+o.laststatus = 3
+o.cmdheight = 1
 
 vim.notify = require("notify")
