@@ -1,0 +1,26 @@
+[pyprland]
+plugins = [
+"scratchpads",
+"magnify",
+]
+
+[scratchpads.term]
+animation = "fromTop"
+command = "kitty --class kitty-dropterm tmux new -s dropdown"
+class = "kitty-dropterm"
+size = "80% 80%"
+
+[scratchpads.volume]
+command = "pavucontrol"
+animation = "fromRight"
+class = "pavucontrol"
+class_match=true
+process_tracking=false
+lazy = true
+size = "40% 90%"
+
+[scratchpads.fm]
+animation = "fromTop"
+command = "kitty --class kitty-dropterm ~/dev/scripts/scratchpads.sh"
+class = "kitty-dropterm"
+size = "75% 80%"
