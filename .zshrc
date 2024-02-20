@@ -252,6 +252,7 @@ alias fzfpacall="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
 alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 alias explorer="xdg-open"
 alias mindmap="h-m-m"
+alias hman="compgen -c | fzf | xargs man"
 if [[ $(whoami) = 'devdante-wsl' ]]; then
   alias emulator="/mnt/d/Code/Android/Sdk/emulator/emulator.exe"
   alias adb="/mnt/d/Code/Android/Sdk/platform-tools/adb.exe"

@@ -48,6 +48,7 @@ util.map('n', '<Up>' , '<nop>' , nore)
 util.map('n', '<Down>' , '<nop>' , nore)
 util.map('n', '<Left>' , '<nop>' , nore)
 util.map('n', '<Right>' , '<nop>' , nore)
+util.map('n', 'Q' , '<nop>' , nore)
 -- " Move the cursor based on physical lines, not the actual lines.
 util.map('n', 'j' , '(v:count == 0 ? "gj" : "j")' , sxnore)
 util.map('n', 'k' , '(v:count == 0 ? "gk" : "k")' , sxnore)
@@ -59,6 +60,7 @@ util.map('n', 'U' , '<C-r>' , nore)
 util.map('n', 'Y' , 'y$' , nore)
 util.map('n', '<leader>Y' , '"+y$' , nore) -- Yank line to system clipboard
 util.map('n', '<leader>y' , '"+y' , nore) -- Yank to system clipboard
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 if(util.getOS() == "Linux") then
   util.map('v', '<leader>cp' , ':\'<,\'>w !clip.exe<CR>' , nore) -- Yank to system clipboard inside visual mode and wsl
 end
@@ -231,32 +233,3 @@ util.map( 'n', '<leader>11', ':lua vim.diagnostic.disable()<CR>', {noremap = tru
 util.map( 'n', '<leader>12', ':lua vim.diagnostic.enable()<CR>', {noremap = true, silent = true})
 util.map( 'n', '<localleader>o', ':Oil<CR>', {noremap = true, silent = true})
 
--- util.map( 'n', '<leader>fb', ':Telescope buffers<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fcc', ':Telescope colorscheme<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fcm', ':Telescope commands<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fe', ':Telescope env<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fF', ':Telescope live_grep_args<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fg', ':Telescope live_grep<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fG', ':Telescope git_files<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fH', ':lua require("dante.telescope").search_from_home()<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fh', ':Telescope help_tags<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fk', ':Telescope keymaps<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fl', ':Telescope lazy<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fn', ':lua require("dante.telescope").search_notes()<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fm', ':Telescope bookmarks<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fo', ':Telescope oldfiles<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fO', ':Telescope vim_options<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fq', ':Telescope quickfixhistory<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fr', ':Telescope repo list<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fR', ':Telescope resume<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>ft', ':TodoTelescope<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fT', ':Telescope asynctask all<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>ff', ':Telescope find_files<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>fe', ':Telescope file_browser<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>f,', ':lua require("dante.telescope").search_dotfiles()<CR>', {noremap = true, silent = true})
--- util.map( 'n', '<leader>f<', ':lua require("dante.telescope").grep_dotfiles()<CR>', {noremap = true, silent = true})
---
--- util.map('n', '<leader>T', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {noremap = true, silent = true})
--- util.map('n', '<leader>t', '<cmd>lua _lazygit_toggle()<CR>', {noremap = true, silent = true})
--- util.map('n', '<leader>do', ':DiffviewOpen<CR>', {noremap = true, silent = true})
--- util.map('n', '<leader>dc', ':DiffviewClose<CR>', {noremap = true, silent = true})

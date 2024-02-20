@@ -59,11 +59,11 @@ return {
     }
   },
   -- Separate cut from delete registers
-  {
-    "gbprod/cutlass.nvim",
-    event = "VeryLazy",
-    opts = { cut_key = "x" },
-  },
+  -- {
+  --   "gbprod/cutlass.nvim",
+  --   event = "VeryLazy",
+  --   opts = { cut_key = "x" },
+  -- },
   {
     'theHamsta/nvim-dap-virtual-text',
   },  -- Virtual text showing variables info
@@ -246,12 +246,12 @@ return {
       require("mini.ai").setup()
       require("mini.hipatterns").setup()
       require("mini.comment").setup()
-      require("mini.clue").setup()
+      -- require("mini.clue").setup() -- Using Hydra
       -- require("mini.indentscope").setup()
       -- require("mini.animate").setup()
     end,
   },
-  { 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace
+  -- { 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace (TOO SLOW)
   { 'tommcdo/vim-exchange' },           -- Easy text exchange operator for Vim
   {
     'booperlv/nvim-gomove',
