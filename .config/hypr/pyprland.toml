@@ -2,6 +2,8 @@
 plugins = [
 "scratchpads",
 "magnify",
+"fetch_client_menu",
+"toggle_special",
 ]
 
 [scratchpads.term]
@@ -21,6 +23,6 @@ size = "40% 90%"
 
 [scratchpads.fm]
 animation = "fromTop"
-command = "kitty --class kitty-dropterm ~/dev/scripts/scratchpads.sh"
+command = "kitty --class kitty-dropterm ~/dev/scripts/scratchpads.sh fm"
 class = "kitty-dropterm"
 size = "75% 80%"

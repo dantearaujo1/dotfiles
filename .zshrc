@@ -260,6 +260,7 @@ fi
 alias rdp="sudo /etc/init.d/xrdp start"
 alias ustart="~/dev/scripts/vncstart.sh"
 alias vpy="source ./.venv/bin/activate"
+alias pacls="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 
 pdf() {zathura $1 & disown}
 mgdir() {mkdir $@ && cd ${@:$#}}
