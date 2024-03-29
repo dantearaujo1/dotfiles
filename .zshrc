@@ -87,13 +87,16 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
     bindkey -r "^[g"
     bindkey -r "^[G"
     source ~/dev/scripts/fzf-git.sh
+    source ~/dev/scripts/zsh/docker-comp-fzf.zsh
     source ~/dev/scripts/zsh/zsh-fzf-widgets.zsh
-    bindkey "^L" clear-screen
+    bindkey "^q" clear-screen
     bindkey "^zc" fzf-git-checkout
     bindkey "^zs" fzf-git-status
     bindkey "^zk" fzf-kill-proc-by-list
     bindkey "^ze" fzf-gitmoji
     bindkey "^[n" fzf-notes
+    bindkey "^|" complete-word
+    bindkey '^r' atuin-search
 
     plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize poetry poetry-env zsh-vi-mode)
 else
@@ -113,7 +116,7 @@ export FZF_CTRL_T_COMMAND="fd . ."
 export FZF_CTRL_T_OPTS=""
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 export FZF_TMUX=1
-export FZF_TMUX_OPTS="-p 40%"
+export FZF_TMUX_OPTS="-p 80%,80%"
 export FZF_COMPLETION_TRIGGER="**"
 export FZF_COMPLETION_DIR_COMMANDS="cd pushd rmdir tree"
 
@@ -139,6 +142,8 @@ if [[ $(whoami) = 'devdante-wsl-ubuntu' ]]; then
   export GOBIN="$GOPATH/bin"
   export PROCESSING_DIR="$HOME/dev/setup/processing/processing-4.2"
   export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$MYSCRIPTS
+  alias rdp="sudo /etc/init.d/xrdp start"
+  alias ustart="~/dev/scripts/vncstart.sh"
 fi
 if [[ $(whoami) = 'devdante-wsl-kali' ]]; then
 
@@ -218,6 +223,7 @@ if [ -d "$HOME/.config/hypr/" ];then
   alias initapps='nvim ~/.config/hypr/apps.conf'
   alias rules='nvim ~/.config/hypr/ruleswindow.conf'
   alias hypr='nvim ~/.config/hypr/hyprland.conf'
+  alias npypr='nvim ~/.config/hypr/hyprland.conf'
   alias o='xdg-open'
 fi
 
@@ -234,7 +240,6 @@ alias zz="nvim ~/.zshrc"
 alias zZ="source ~/.zshrc"
 alias zb="nvim ~/.bashrc"
 alias zB="source ~/.bashrc"
-alias bz="nvim ~/.bashrc"
 alias zt="nvim ~/.tmux.conf"
 alias zT="source ~/.tmux.conf"
 alias zn="nvim ~/.config/nvim/lua/init.lua"
@@ -246,10 +251,11 @@ alias lgd="lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cls="clear"
 alias f='nvim "$(fzf)"'
 alias fn='nvim "$(fd . ~/Notes/ --type f | fzf --ansi --preview  "bat {}")"'
-alias fzf="fzf-tmux -p"
-alias fzfpacman="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
-alias fzfpacall="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
+alias fzf="fzf-tmux -p 80%,80%"
 alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
+alias pacall="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
+alias pacls="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+alias pacd="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rcns {})'"
 alias explorer="xdg-open"
 alias mindmap="h-m-m"
 alias hman="compgen -c | fzf | xargs man"
@@ -257,10 +263,9 @@ if [[ $(whoami) = 'devdante-wsl' ]]; then
   alias emulator="/mnt/d/Code/Android/Sdk/emulator/emulator.exe"
   alias adb="/mnt/d/Code/Android/Sdk/platform-tools/adb.exe"
 fi
-alias rdp="sudo /etc/init.d/xrdp start"
-alias ustart="~/dev/scripts/vncstart.sh"
 alias vpy="source ./.venv/bin/activate"
-alias pacls="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+alias cvi="~/dev/scripts/nvim-config.sh "
+alias lsltp="tlmgr info --list | fzf "
 
 pdf() {zathura $1 & disown}
 mgdir() {mkdir $@ && cd ${@:$#}}
