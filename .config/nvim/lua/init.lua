@@ -15,6 +15,7 @@ else
 	vim.opt.rtp:prepend(lazypath)
 
   vim.g.mapleader = ' ' -- Lazy is asking to define leader before loading lazy
+  vim.g.maplocalleader = '\\' -- Lazy is asking to define localleader before loading lazy
 	require('lazy').setup("plugins",
     {
       dev = {
@@ -29,7 +30,6 @@ else
   require('dante/telescope') -- Like a file explorer or FZF
   -- require('dante/treesitter') -- ColorHighlight for a lot of languages
 
-  require('dante/formatter') -- Formatter configurations plugins
   require('dante/todo-comments') -- Highligh todo comments and show in a specific place
   require('dante/statusline') -- A fast but not fastest status line for neovim
 

@@ -17,7 +17,7 @@ else
 end
 
 local plugins_dir = jdtls_dir .. '/plugins/'
-local path_to_jar = plugins_dir .. 'org.eclipse.equinox.launcher_1.6.600.v20231106-1826.jar'
+local path_to_jar = plugins_dir .. 'org.eclipse.equinox.launcher_1.6.700.v20231214-2017.jar'
 local lombok_path = jdtls_dir .. "/lombok.jar"
 
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle", }

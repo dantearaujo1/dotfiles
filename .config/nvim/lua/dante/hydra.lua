@@ -69,12 +69,14 @@ _o_:  Old files        _O_:  Show Options
 _p_:  Projects
 _q_:  Show Quick Fix
 _r_:  RepoList         _R_:  Resume
+_s_:  Snippets
 _t_:  Find Todos       _T_:  AsyncTasks List
 _/_:  In File          _?_:  Search History
-_;_:  Commands History _,_:  Search dotfiles
- _<_:  Grep dotfiles
-^
-_<Enter>_: Telescope  _<Esc>_
+_;_:  Commands History
+_._:  Search config
+_<_:  Grep dotfiles    _,_:  Search dotfiles
+
+          _<Enter>_: Telescope  _<Esc>_
 ]]
 
 Hydra({
@@ -109,20 +111,22 @@ Hydra({
       { 'k', cmd 'Telescope keymaps', {desc = "Show keymapping"}},
       { 'l', cmd 'Telescope lazy', {desc = "Show Plugins installed with Lazy"}},
       { 'n', cmd ':lua require("dante.telescope").search_notes()<CR>', { desc = 'Search Notes' } },
-      { 'm', cmd 'Telescope bookmarks', { desc = 'Show url bookmarks' } },
+      { 'm', cmd 'Telescope openbrowser list', { desc = 'Show url bookmarks' } },
       { 'o', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },
       { 'O', cmd 'Telescope vim_options' },
-      { 'p', cmd ':lua require"telescope".extensions.projects.projects{}<CR>', { desc = 'projects' } },
+      { 'p', cmd ':lua require"telescope".extensions.project.project{}<CR>', { desc = 'projects' } },
       { 'q', cmd 'Telescope quickfixhistory', { desc = 'Show quickfix menu' } },
-      { 'r', cmd 'Telescope repo list' },
+      { 'r', cmd 'Telescope repo cached_list' },
       { 'R', cmd 'Telescope resume' },
+      { 's', cmd 'Telescope luasnip' },
       { 't', cmd 'TodoTelescope' },
       { 'T', cmd 'Telescope asynctasks all', { desc = 'List of AsyncTasks' } },
-      { 'u', cmd 'silent! %foldopen! | UndotreeToggle', { desc = 'undotree' }},
+      -- { 'u', cmd 'silent! %foldopen! | UndotreeToggle', { desc = 'undotree' }},
       { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'search in file' } },
       { '?', cmd 'Telescope search_history',  { desc = 'search history' } },
       { ';', cmd 'Telescope command_history', { desc = 'command-line history' } },
       { ',', ':lua require("dante.telescope").search_dotfiles()<CR>', { desc = 'Show nvim dotfiles' } },
+      { '.', ':lua require("dante.telescope").search_configs()<CR>', { desc = 'Show Configs' } },
       { '<', ':lua require("dante.telescope").grep_dotfiles()<CR>', { desc = 'Grep inside nvim dotfiles' } },
       { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },
       { '<Esc>', nil, { exit = true, nowait = true } },

@@ -5,14 +5,6 @@ local function t(str)
     return vim.api_nvim_replace_termcodes(str, true, true, true)
 end
 
-g.mapleader = ' '
-if util.getOS() == 'Windows' then
-  -- g.maplocalleader = 'ç'
-  g.maplocalleader = ','
-else
-  -- g.maplocalleader = '\\'
-  g.maplocalleader = ','
-end
 
 local snore = { noremap = true , silent = true}
 local sxnore = { noremap = true , silent = true, expr = true}
@@ -21,15 +13,20 @@ local plug = { expr = true, noremap = false }
 
 -- MODIFIED KEYS ==============================================================
 
+util.map('n', 'x' , '_x', nore)
 util.map('n', ';' , ':' , nore)
 util.map('x', ';' , ':' , nore)
 util.map('n', ':' , ';' , nore)
 util.map('x', ':' , ';' , nore)
 util.map('n', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mode
+util.map('v', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mode
 
 
 -- Commands Shortcuts =========================================================
 util.map('n', '<leader>ll' , ':luafile %<CR> <bar> :lua print("This file was sourced!")<CR>' , nore)
+util.map('n', '<leader>L' , ':Lazy<CR>' , nore)
+util.map('n', '<leader>M' , ':Mason<CR>' , nore)
+util.map('n', '<localleader>mkd' , ':!mkdir -p "%:h"<CR>:w<CR>' , nore)
 -- " Change current working directory locally and print cwd after that
 util.map('n', '<leader>cd' , ':lcd %:p:h<CR>:pwd<CR>', nore)
 util.map('n', '<leader>v' , '`[V`]' , snore) -- Reselect last pasted text
@@ -87,25 +84,25 @@ util.map('n', '<localleader>q' , ':<C-u>call asyncrun#quickfix_toggle(10)<CR>' ,
 util.map('n', ']L' , ':llast<CR>zv', nore)
 util.map('n', '[L' , ':lfirst<CR>zv', nore)
 util.map('n', '[Q' , ':cfirst<CR>zv', nore)
+util.map('n', '[q' , ':cp<CR>zv', nore)
+util.map('n', ']q' , ':cn<CR>zv', nore)
 util.map('n', ']Q' , ':clast<CR>zv', nore)
-util.map('n', ']c' , ':cnext<CR>zv', nore)
-util.map('n', '[c' , ':cprevious<CR>zv', nore)
+util.map('n', '[b' , ':bprevious <CR>', nore)
+util.map('n', ']b' , ':bnext <CR>', nore)
 -- " Close a buffer and switching to another buffer, do not close the window
-util.map('n', '<localleader>d' , ':bprevious <bar> bdelete #<CR>', nore)
-util.map('n', '<localleader>( ' , ':bprevious <CR>', nore)
-util.map('n', '<localleader> )' , ':bnext <CR>', nore)
+util.map('n', ']B' , ':bprevious <bar> bdelete #<CR>', nore)
+util.map('n', '[t' , 'gT', nore)
+util.map('n', ']t' , 'gt', nore)
+util.map('n', '[T' , ':tabnew<CR>', nore)
+util.map('n', ']T' , ':tabclose<CR>', nore)
 -- " Toggle search highlight
 util.map('n', '<Leader>hl' , '(&hls && v:hlsearch ? ":nohls" : ":set hls")."\n"', {expr = true, silent = true, noremap = true})
 -- Open Command Window
-util.map('n', 'q;' , 'q:', nore)
+util.map('n', 'q;' , ':q<CR>', nore)
 util.map('n','<F2>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp
 
 -- Window Operations ==========================================================
 -- Tab Operation
-util.map('n', '<leader>1' , 'gT', nore)
-util.map('n', '<leader>2' , 'gt', nore)
-util.map('n', '<leader>n' , ':tabnew<CR>', nore)
-util.map('n', '<leader>c' , ':tabclose<CR>', nore)
 
 -- Change focus
 if(util.getOS() == "Linux") then
@@ -129,6 +126,7 @@ else
   util.map('n', '<C-j>' , '<C-w>j', snore)
   util.map('n', '<C-k>' , '<C-w>k', snore)
 end
+util.map('n', '<leader>gf' , '<C-W>v gf', nore)
 
 -- Terminal Operations ========================================================
 util.map('n','<c-t>','<Cmd> exe v:count1 . "ToggleTerm"<CR>', nore)
@@ -146,8 +144,8 @@ end
 -- Plugins Keymaps ============================================================
 -- =================================================================|AsyncRun|
 util.map('n', '<F3>' , ':AsyncTask file-build<CR>', nore)
-util.map('n', '<F4>' , ':AsyncTask file-run<CR>', nore)
-util.map('n', '<F5>' , ':AsyncTask file-b&r<CR>', nore)
+util.map('n', '<F4>' , ':AsyncTask file-b&r<CR>', nore)
+util.map('n', '<F5>' , ':AsyncTask file-run<CR>', nore)
 util.map('n', '<F6>' , ':AsyncTask project-b&r<CR>', nore)
 util.map('n', '<F7>' , ':AsyncTask project-run<CR>', nore)
 util.map('n', '<F8>' , ':AsyncTask project-init<CR>', nore)
@@ -156,6 +154,7 @@ util.map('n', '<F8>' , ':AsyncTask project-init<CR>', nore)
 -- ===============================================================|OpenBrowser|
 util.map('n', '<leader>ob' , ':<C-u>call openbrowser#_keymap_smart_search("n")<CR>', nore)
 util.map('n', '<leader>og' , 'yi\' :OpenGithubProject <C-R>"<CR>', nore)
+util.map('n', '<leader>oG' , 'yi\" :OpenGithubProject <C-R>"<CR>', nore)
 util.map('v', '<leader>ob' , ':<C-u>call openbrowser#_keymap_smart_search("v")<CR>', nore)
 
 -- ===========================================================|CamelCaseMotion|
@@ -212,11 +211,11 @@ util.map('n', 'mk' , '<Plug>Markdown_Checkbox', nore)
 -- util.map('n', 'F' , '<Plug>Sneak_F', nore)
 --util.map('n', ':' , '<Plug>Sneak_;' , nore)
 
+-- ================================================================|ARGWRAP|
 util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
 -- ================================================================|COLORIZER|
-util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
+-- util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
 -- ================================================================|NEOTREE|
--- util.map('n', '<leader>e' , ':NeoTreeShowToggle<CR>', nore)
 util.map('n', '<leader>E' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
 
 -- ================================================================

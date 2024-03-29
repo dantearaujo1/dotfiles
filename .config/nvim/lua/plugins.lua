@@ -16,12 +16,19 @@ return {
   },
   {
     'windwp/nvim-ts-autotag',
+    ft = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    },
     config = function()
       require('nvim-ts-autotag').setup()
     end,
   },
   {
     'David-Kunz/markid',
+    event = "VeryLazy"
   }, -- Tree-sitter plugin for correct colors of parameters
   {
     'olrtg/nvim-emmet',
@@ -41,6 +48,8 @@ return {
   {
     'akinsho/flutter-tools.nvim',
     lazy = false,
+    ft = "dart",
+    event = "VeryLazy",
     dependencies = {
       'nvim-lua/plenary.nvim',
       'stevearc/dressing.nvim', -- optional for vim.ui.select
@@ -66,15 +75,22 @@ return {
   -- },
   {
     'theHamsta/nvim-dap-virtual-text',
-  },  -- Virtual text showing variables info
+  }, -- Virtual text showing variables info
   {
     'rcarriga/nvim-dap-ui',
-  },  -- UI out of the box
-  {
-    'nvim-telescope/telescope-dap.nvim',
-  },  -- Telescope to find variables
+    dependencies = {
+	    "mfussenegger/nvim-dap","nvim-neotest/nvim-nio"
+    }
+  }, -- UI out of the box
   {
     'williamboman/mason.nvim',
+  },
+  {
+    'nvimtools/none-ls.nvim',
+    event = "VeryLazy",
+    opts = function()
+      return require('dante/formatter') -- Formatter configurations plugins
+    end,
   },
   {
     'williamboman/mason-lspconfig.nvim',
@@ -111,44 +127,59 @@ return {
   --   -- ============ SERVER PLUGINS ==============================
   {
     'barrett-ruth/live-server.nvim',
+    event = "VeryLazy",
     enabled = function() return util.getOS() == "Linux" end,
     config = true,
   },
   --   -- ============ COMPLETION PLUGINS ============================
   {
     'hrsh7th/nvim-cmp',
+    event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = {
+      {
+        'hrsh7th/cmp-nvim-lsp',
+      },
+      {
+        'hrsh7th/cmp-buffer',
+      },
+      {
+        'hrsh7th/cmp-path',
+      },
+      {
+        'hrsh7th/cmp-nvim-lua',
+      },
+      {
+        'hrsh7th/cmp-calc',
+      },
+      {
+        'hrsh7th/cmp-emoji',
+      },
+      {
+        'kdheepak/cmp-latex-symbols',
+      },
+    },
   },
   {
     'L3MON4D3/LuaSnip',
-    event = 'VeryLazy',
-  },
-  {
-    'rafamadriz/friendly-snippets',
-  },
-  -- ====== Completion Sources for CMP
-  {
-    'saadparwaiz1/cmp_luasnip',
-  },
-  {
-    'hrsh7th/cmp-nvim-lsp',
-  },
-  {
-    'hrsh7th/cmp-buffer',
-  },
-  {
-    'hrsh7th/cmp-path',
-  },
-  {
-    'hrsh7th/cmp-nvim-lua',
-  },
-  {
-    'hrsh7th/cmp-calc',
-  },
-  {
-    'hrsh7th/cmp-emoji',
-  },
-  {
-    'kdheepak/cmp-latex-symbols',
+    version = "v2.*",
+    build = "make install_jsregexp",
+    dependencies = {
+      {
+        'rafamadriz/friendly-snippets',
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+      },
+      {
+        "evesdropper/luasnip-latex-snippets.nvim",
+      },
+      {
+        "nvim-cmp",
+        dependencies = {
+          "saadparwaiz1/cmp_luasnip",
+        },
+      },
+    }
   },
   -- -- ============  TELESCOPE PLUGINS & EXTENSIONS  ==============================
   {
@@ -156,31 +187,24 @@ return {
     dependencies = {
       { 'nvim-lua/popup.nvim' },
       { 'nvim-lua/plenary.nvim' },
+      { 'cljoly/telescope-repo.nvim' },
+      { 'nvim-telescope/telescope-dap.nvim' },
+      { 'nvim-telescope/telescope-symbols.nvim' },
+      { 'nvim-telescope/telescope-file-browser.nvim' },
+      { 'nvim-telescope/telescope-project.nvim' },
+      { 'tsakirist/telescope-lazy.nvim' },
+      { 'tamago324/telescope-openbrowser.nvim' },
+      { 'benfowler/telescope-luasnip.nvim' },
+      {'LinArcX/telescope-env.nvim'},
+      {'GustavoKatel/telescope-asynctasks.nvim'},
+      {'nvim-telescope/telescope-live-grep-args.nvim'},
     }
   },
-  {
-    'cljoly/telescope-repo.nvim',
-    event = "VeryLazy",
-  },
-  { 'nvim-telescope/telescope-file-browser.nvim' },
-  { 'tsakirist/telescope-lazy.nvim' },
 
-  {
-    'LinArcX/telescope-env.nvim',
-    event = "VeryLazy",
-  },
-  {
-    'GustavoKatel/telescope-asynctasks.nvim',
-    event = "VeryLazy",
-  },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     build =
     'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-  },
-  {
-    'nvim-telescope/telescope-live-grep-args.nvim',
-    event = "VeryLazy",
   },
 
   -- Terminal ==================================================================
@@ -196,9 +220,11 @@ return {
   },
   {
     'tyru/open-browser.vim',
+    event = "VeryLazy",
   },
   {
     'tyru/open-browser-github.vim',
+    event = "VeryLazy",
     dependencies = {
       'tyru/open-browser.vim'
     }
@@ -206,16 +232,33 @@ return {
   -- Custom Pluggins =============================================================
   {
     "nvim-neo-tree/neo-tree.nvim",
-
     keys = {
-      { "<leader>e", "<cmd>NeoTreeShowToggle<CR>" }
+      {
+        "<leader>e",
+        function()
+          require("neo-tree.command").execute({
+            toggle = true,
+            position = "left",
+          })
+        end,
+        desc = "Buffers (root dir)",
+      }
     },
-    branch = "v2.x",
+    branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-    }
+    },
+    config = function()
+      require("neo-tree").setup({
+        filesystem = {
+          follow_current_file = {
+            enabled = true,
+          }
+        }
+      })
+    end
   },
   {
     'stevearc/oil.nvim',
@@ -228,6 +271,7 @@ return {
   },
   {
     's1n7ax/nvim-window-picker',
+    event = "VeryLazy",
     config = function()
       require 'window-picker'.setup()
     end,
@@ -236,7 +280,7 @@ return {
 
   { 'folke/todo-comments.nvim' },
   { 'lukas-reineke/indent-blankline.nvim', main = 'ibl' },
-  { 'arnamak/stay-centered.nvim' },  -- autocmds for always stay centered
+  { 'arnamak/stay-centered.nvim' }, -- autocmds for always stay centered
   -- Bundle of mini modules [Using for mini-align]
   {
     'echasnovski/mini.nvim',
@@ -252,7 +296,7 @@ return {
     end,
   },
   -- { 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace (TOO SLOW)
-  { 'tommcdo/vim-exchange' },           -- Easy text exchange operator for Vim
+  { 'tommcdo/vim-exchange' }, -- Easy text exchange operator for Vim
   {
     'booperlv/nvim-gomove',
     config = function()
@@ -279,22 +323,16 @@ return {
       })
     end
   }, -- Change surroundings Not tpope anymore
-  -- { 'windwp/nvim-autopairs' }, -- Auto close () [] {} <Tags>
-  -- {
-  --   "altermo/ultimate-autopair.nvim",
-  --   event = { "InsertEnter", "CmdlineEnter" },
-  --   opts = {
-  --     --Config goes here
-  --   },
-  -- },
+  {
+    "altermo/ultimate-autopair.nvim",
+    event = { "InsertEnter", "CmdlineEnter" },
+    opts = {
+      --Config goes here
+    },
+  },
   -- { 'windwp/nvim-autopairs' }, -- Auto close () [] {} <Tags>
   { 'bkad/camelcasemotion' },          -- Plugin for movin in camelcase with localleader
   { 'propet/toggle-fullscreen.nvim' }, -- Toggle fullScreen with <leader>z
-  {
-    'iamcco/markdown-preview.nvim',
-    build = function() vim.fn["mkdp#util#install"]() end,
-    event = "VeryLazy",
-  },
   {
     'folke/zen-mode.nvim',
     event = "VeryLazy",
@@ -303,15 +341,19 @@ return {
     'folke/twilight.nvim',
     event = "VeryLazy",
   }, -- Dim buffers
-  {
-    'ellisonleao/glow.nvim',
-    enabled = function() return util.getOS() == "Linux" end,
-    config = true,
-    event = "VeryLazy",
-    cmd = "Glow",
-  },                        -- Preview Markdown files with :Glow
 
-  { 'uga-rosa/ccc.nvim' },  -- Color Picker
+  {
+    'uga-rosa/ccc.nvim',
+    keys={
+      {"<leader>cc", "<cmd>CccPick<CR>",desc="Color picker"},
+    },
+    config = function()
+      -- create hydras in here
+      require('ccc').setup({
+        ccc_option_highlighter_auto_enable = true,
+      })
+    end
+  }, -- Color Picker
   {
     "nvimtools/hydra.nvim",
     config = function()
@@ -326,18 +368,21 @@ return {
     ft = 'pde',
   }, -- Processing plugin helper
   -- LATEX ========
+  -- The recomandations to use this plugin tells that
+  -- it should be not lazy loaded
   {
     'lervag/vimtex',
-    event = "VeryLazy",
+    ft = "tex",
     enabled = function() return util.getOS() == "Linux" end
   },
   {
     'matze/vim-tex-fold',
-    event = "VeryLazy",
+    ft = "tex",
     enabled = function() return util.getOS() == "Linux" end
   },
   {
     'aspeddro/pandoc.nvim',
+    event = "VeryLazy",
     config = function()
       require 'pandoc'.setup()
     end
@@ -345,7 +390,12 @@ return {
   -- HTTP ========
   {
     'BlackLight/nvim-http',
-    event = "VeryLazy",
+    keys = {
+      {"<localleader>r",
+    ":Http<CR>",
+  desc = "Executes http request from http file"}
+    },
+    ft = "http",
   }, -- Run HTTP request directly in your editor
   -- JSON ========
   {
@@ -358,7 +408,7 @@ return {
     dependencies = 'nvim-lua/plenary.nvim',
     event = "VeryLazy",
     config = function()
-      require('neogit').setup()
+      require('neogit').setup({})
     end
   },
   {
@@ -370,22 +420,37 @@ return {
     },
   },
   -- { 'lewis6991/gitsigns.nvim' }, -- Super fast git decorations implemented purely in Lua/Teal
-  { 'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim', },   -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+  {
+    'sindrets/diffview.nvim',
+    event = "VeryLazy",
+    dependencies = 'nvim-lua/plenary.nvim',
+  },                             -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
   -- Java ========
-  { 'mfussenegger/nvim-jdtls' },                                           -- Java JDTLS helpers
+  { 'mfussenegger/nvim-jdtls' }, -- Java JDTLS helpers
   -- Typescript ========
   {
     "pmizio/typescript-tools.nvim",
+    ft = {
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+    },
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
     config = function()
-      require("typescript-tools").setup({})
+      require("typescript-tools").setup {}
     end
   },
   -- C++ ========
-  { 'p00f/clangd_extensions.nvim' },   -- C++ clangd lsp defaults
+  { 'p00f/clangd_extensions.nvim' }, -- C++ clangd lsp defaults
   {
-    'madskjeldgaard/cppman.nvim',      -- Interface for the cppman cli tool
+    'madskjeldgaard/cppman.nvim',    -- Interface for the cppman cli tool
+    event = "VeryLazy",
     dependencies = {
       { 'MunifTanjim/nui.nvim' }
     },
@@ -425,15 +490,33 @@ return {
   --   lazy = true,
   -- },
   -- UI Pluggins ===========================================================
+  -- PREVIEWERS
+  -- MARKDOWN
+  {
+    'ellisonleao/glow.nvim',
+    enabled = function() return util.getOS() == "Linux" end,
+    config = true,
+    event = "VeryLazy",
+    cmd = "Glow",
+  }, -- Preview Markdown files with :Glow
+  {
+    'iamcco/markdown-preview.nvim',
+    build = function() vim.fn["mkdp#util#install"]() end,
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+  },
+  -- LATEX
   {
     'folke/trouble.nvim',
     config = function()
       require('trouble').setup()
-    end
+    end,
+    lazy = true
+
   },
   { 'onsails/lspkind-nvim' },
-  { 'ray-x/lsp_signature.nvim' },   -- for symbols in completion
-  { 'ElPiloto/significant.nvim' },  -- Animate columnSigns
+  { 'ray-x/lsp_signature.nvim' },  -- for symbols in completion
+  { 'ElPiloto/significant.nvim' }, -- Animate columnSigns
   -- {
   --   "glepnir/lspsaga.nvim",
   --   event = "BufRead",
@@ -454,6 +537,7 @@ return {
   {
     'kevinhwang91/nvim-ufo',
     dependencies = 'kevinhwang91/promise-async',
+    event = "BufRead",
     config = function()
       require('ufo').setup()
     end
@@ -488,7 +572,7 @@ return {
         },
       })
     end
-  },  -- Lsp progress handler
+  }, -- Lsp progress handler
   {
     'karb94/neoscroll.nvim',
     config = function()
@@ -507,6 +591,7 @@ return {
     end
   },
   { "shortcuts/no-neck-pain.nvim" },
+  { "LunarVim/bigfile.nvim" },
   -- THEMES =====================================================================
   -- Dashboard ===========================
   {
@@ -526,23 +611,25 @@ return {
   { 'yamatsum/nvim-web-nonicons' },
   { 'nvim-tree/nvim-web-devicons' },
   -- TREESITTER SUPORTED THEMES==================================================
-  { 'luisiacc/gruvbox-baby',                       branch = 'main', lazy = true },
-  { 'Abstract-IDE/Abstract-cs',                    lazy = true },
-  { 'Mofiqul/vscode.nvim',                         lazy = true },
-  { 'ray-x/aurora',                                lazy = true },
-  { 'ofirgall/ofirkai.nvim',                       lazy = true },
-  { 'bluz71/vim-nightfly-guicolors',               lazy = true },
-  { 'bluz71/vim-moonfly-colors',                   lazy = true },
-  { 'christianchiarulli/nvcode-color-schemes.vim', lazy = true },
-  { 'sainnhe/sonokai',                             lazy = true },
-  { 'sainnhe/gruvbox-material',                    lazy = true },
-  { 'sainnhe/edge',                                lazy = true },
-  { 'kyazdani42/blue-moon',                        lazy = true },
-  { 'mhartington/oceanic-next',                    lazy = true },
-  { 'Iron-E/nvim-highlite',                        lazy = true },
-  { 'nxvu699134/vn-night.nvim',                    lazy = true },
-  { 'rockerBOO/boo-colorscheme-nvim',              lazy = true },
-  { 'projekt0n/github-nvim-theme',                 lazy = true },
+  { 'luisiacc/gruvbox-baby',                       branch = 'main' },
+  { 'Abstract-IDE/Abstract-cs', },
+  { 'Mofiqul/vscode.nvim', },
+  { 'ray-x/aurora', },
+  { 'ofirgall/ofirkai.nvim', },
+  { 'bluz71/vim-nightfly-guicolors', },
+  { 'bluz71/vim-moonfly-colors', },
+  { 'christianchiarulli/nvcode-color-schemes.vim', },
+  { 'sainnhe/sonokai', },
+  { 'sainnhe/gruvbox-material', },
+  { 'sainnhe/edge', },
+  { 'kyazdani42/blue-moon', },
+  { 'mhartington/oceanic-next', },
+  { 'Iron-E/nvim-highlite', },
+  { 'nxvu699134/vn-night.nvim', },
+  {
+    'projekt0n/github-nvim-theme',
+    event = "VeryLazy",
+  },
   -- My Pluggins ===========================================================
   {
     '~/dev/projects/lua/neovim/project-creator',
@@ -596,29 +683,42 @@ return {
 
   {
     'nvim-neorg/neorg',
-    run = ":Neorg sync-parsers",
+    tag = "v7.0.0",
+    build = ":Neorg sync-parsers",
+    keys = {"<localleader>ln"},
     ft = "norg",
-    opts = {
-      load = {
-        ["core.defaults"] = {},
-        ["core.dirman"] = {
-          config = {
-            workspaces = {
-              study = "~/Notes/study",
-              work = "~/Notes/work",
-              prog = "~/Notes/prog",
+    config = function()
+      require('neorg').setup {
+        load = {
+          ["core.defaults"] = {},
+          ["core.concealer"] = {},
+          ["core.dirman"] = {
+            config = {
+              workspaces = {
+                study = "~/Notes/study",
+                work = "~/Notes/work",
+                prog = "~/Notes/prog",
+              },
+              default_workspace = "prog",
+            }
+          },
+          ["core.completion"] = {
+            config = {
+              engine = "nvim-cmp",
+              name = "[Neorg]",
             },
-            default_workspace = "prog",
+          },
+          ["core.keybinds"]={
+            config = {
+              hook = function(keybinds)
+                keybinds.map("norg","n","<localleader>c", '<cmd>Neorg keybind all core.looking-glass.magnify-code-block<CR>')
+              end
+            }
           }
         },
-        ["core.completion"] = {
-          config = {
-            engine = "nvim-cmp",
-            name = "[Neorg]",
-          },
-        },
-        ["core.concealer"] = {},
-      },
-    },
-  }
+      }
+      vim.wo.foldlevel = 99
+      vim.wo.conceallevel = 2
+    end
+  },
 }
