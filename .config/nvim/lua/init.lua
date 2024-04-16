@@ -15,7 +15,7 @@ else
 	vim.opt.rtp:prepend(lazypath)
 
   vim.g.mapleader = ' ' -- Lazy is asking to define leader before loading lazy
-  vim.g.maplocalleader = '\\' -- Lazy is asking to define localleader before loading lazy
+  vim.g.maplocalleader = ',' -- Lazy is asking to define localleader before loading lazy
 	require('lazy').setup("plugins",
     {
       dev = {
@@ -33,7 +33,7 @@ else
   require('dante/todo-comments') -- Highligh todo comments and show in a specific place
   require('dante/statusline') -- A fast but not fastest status line for neovim
 
-  require('dante/indent-blankline') -- Show Indentation plugins
+  -- require('dante/indent-blankline') -- Show Indentation plugins
   require('stay-centered') -- Always make text centered
   require('dante/toggleterm') -- Terminal inside nvim
 

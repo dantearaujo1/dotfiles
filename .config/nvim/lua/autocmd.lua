@@ -29,3 +29,19 @@ api.nvim_create_autocmd("BufEnter", {
   group = asyncGrp,
   pattern = "*.js"
 })
+
+-- local ftGrp = api.nvim_create_augroup("FiletypeMaps", {clear = true})
+--
+-- api.nvim_create_autocmd({ "BufEnter","BufWinEnter" },{
+--   callback = function(ev)
+--     require('utils').map('n','<leader>io',':TSToolsOrganizeImports<CR>', {noremap = true})
+--     require('utils').map('n','<leader>gd',':TSToolsGoToSourceDefinition<CR>', {noremap = true})
+--     require('utils').map('n','<leader>is',':TSToolsSortImports<CR>', {noremap = true})
+--     require('utils').map('n','<leader>ir',':TSToolsRemoveUnusedImports<CR>', {noremap = true})
+--     require('utils').map('n','<leader>if',':TSToolsFixAll<CR>', {noremap = true})
+--     require('utils').map('n','<localleader>rf',':TSToolsRenameFile<CR>', {noremap = true})
+--   end,
+--   group = ftGrp,
+--   pattern = {"*.js","*.ts","*.jsx","*.tsx"},
+--   desc = "Autocommand for enabling keys of typescript-tools plugin"
+-- })

@@ -13,7 +13,7 @@ local plug = { expr = true, noremap = false }
 
 -- MODIFIED KEYS ==============================================================
 
-util.map('n', 'x' , '_x', nore)
+util.map('n', 'ç' , ':' , nore)
 util.map('n', ';' , ':' , nore)
 util.map('x', ';' , ':' , nore)
 util.map('n', ':' , ';' , nore)
@@ -71,9 +71,9 @@ util.map('n', 'L' , 'g_' , nore)
 util.map('x', 'H' , '^' , nore)
 util.map('x', 'L' , 'g_' , nore)
 -- Find and replace (like Sublime Text 3)
-util.map('x', '<M-s>', ':%s/', nore)
 util.map('n', '<M-s>', ':s/', nore)
-util.map('n', '<C-S>', ':%s/', nore)
+util.map('x', '<M-s>', ':%s/', nore)
+util.map('n', '<C-s>', ':%s/', nore)
 
 -- CTRL-O and CTRL-I Movements
 util.map('n', '<leader>j', '<C-o>', nore)

@@ -11,6 +11,8 @@ animation = "fromTop"
 command = "kitty --class kitty-dropterm tmux new -s dropdown"
 class = "kitty-dropterm"
 size = "80% 80%"
+lazy = true
+excludes = ["wpp","volume","fm"]
 
 [scratchpads.volume]
 command = "pavucontrol"
@@ -26,3 +28,29 @@ animation = "fromTop"
 command = "kitty --class kitty-dropterm ~/dev/scripts/scratchpads.sh fm"
 class = "kitty-dropterm"
 size = "75% 80%"
+lazy = true
+excludes = ["term","volume","wpp"]
+
+[scratchpads.wpp]
+animation = "fromTop"
+command = "whatsapp-nativefier"
+unfocus = "hide"
+class = "wpp"
+size = "75% 80%"
+lazy = true
+
+[scratchpads.spotify]
+command = "spotify-launcher"
+animation = "fromTop"
+class = "Spotify"
+unfocus = "hide"
+size = "75% 80%"
+lazy = true
+
+[scratchpads.mail]
+command = "thunderbird"
+animation = "fromTop"
+class = "thunderbird"
+unfocus = "hide"
+size = "75% 80%"
+lazy = true

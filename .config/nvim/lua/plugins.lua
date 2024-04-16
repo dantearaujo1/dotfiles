@@ -107,6 +107,7 @@ return {
   {
     'folke/neodev.nvim',
     event = "VeryLazy",
+    ft = {"lua"},
     opts = {},
   },
   {
@@ -156,6 +157,7 @@ return {
       },
       {
         'kdheepak/cmp-latex-symbols',
+        ft = {"latex","tex"}
       },
     },
   },
@@ -163,6 +165,7 @@ return {
     'L3MON4D3/LuaSnip',
     version = "v2.*",
     build = "make install_jsregexp",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       {
         'rafamadriz/friendly-snippets',
@@ -279,17 +282,36 @@ return {
   { 'wesq3/vim-windowswap' }, -- Exchange Windows
 
   { 'folke/todo-comments.nvim' },
-  { 'lukas-reineke/indent-blankline.nvim', main = 'ibl' },
+  -- The both plugin are for highligting indentation
+  -- { 'lukas-reineke/indent-blankline.nvim', main = 'ibl' },
+  {
+    "shellRaining/hlchunk.nvim",
+    event = { "UIEnter" },
+    config = function()
+      require("hlchunk").setup({})
+    end
+  },
   { 'arnamak/stay-centered.nvim' }, -- autocmds for always stay centered
   -- Bundle of mini modules [Using for mini-align]
   {
     'echasnovski/mini.nvim',
+    dependencies = {
+      {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+      },
+    },
     config = function()
       require("mini.align").setup()
       require("mini.cursorword").setup()
       require("mini.ai").setup()
       require("mini.hipatterns").setup()
-      require("mini.comment").setup()
+      require("mini.comment").setup({
+        options = {
+          custom_commentstring = function()
+            return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+          end,
+        },
+      })
       -- require("mini.clue").setup() -- Using Hydra
       -- require("mini.indentscope").setup()
       -- require("mini.animate").setup()
@@ -428,24 +450,33 @@ return {
   -- Java ========
   { 'mfussenegger/nvim-jdtls' }, -- Java JDTLS helpers
   -- Typescript ========
-  {
-    "pmizio/typescript-tools.nvim",
-    ft = {
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact"
-    },
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
-    config = function()
-      require("typescript-tools").setup {}
-    end
-  },
+  {"neoclide/vim-jsx-improve"}, -- Synteax Highlight for jsx and Better indent to
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   ft = {
+  --     "ts",
+  --     "tsx",
+  --     "js",
+  --     "jsx",
+  --     "javascript",
+  --     "javascriptreact",
+  --     "typescript",
+  --     "typescriptreact"
+  --   },
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  --   opts = {},
+  --   config = function()
+  --     require("typescript-tools").setup {
+  --       settings = {
+  --         tsserver_file_preferences = {
+  --           includeInlayParameterNameHints = "all",
+  --           includeCompletionsForModuleExports = true,
+  --           quotePreference = "auto",
+  --         },
+  --       }
+  --     }
+  --   end
+  -- },
   -- C++ ========
   { 'p00f/clangd_extensions.nvim' }, -- C++ clangd lsp defaults
   {
@@ -583,6 +614,11 @@ return {
     'rcarriga/nvim-notify',
     lazy = false,
     priority = 1000,
+    config = function()
+      require('notify').setup({
+        background_colour = "#000000"
+      })
+    end
   },
   {
     "nvim-zh/colorful-winsep.nvim",

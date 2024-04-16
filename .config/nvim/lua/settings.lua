@@ -73,7 +73,6 @@ o.shiftround = true
 o.virtualedit = 'block'
 o.tildeop = true
 o.joinspaces = false            -- Don't autoinsert two spaces after '.', '?'..
-o.filetype = 'enable'		    -- Enable filetype detection
 b.formatoptions = 'mM' 		    -- Format options for buffer
 o.confirm = true
 

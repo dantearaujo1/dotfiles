@@ -45,8 +45,21 @@ settings:
     - '{file}'
     - -c
     - normal {line}G{column0}l
+  fonts.statusbar:
+    global: default_size default_family
+  fonts.tabs.selected:
+    global: 12pt default_family
+  qt.args:
+    global:
+    - disable-accelerated-2d-canvas
+  statusbar.show:
+    global: in-mode
   tabs.last_close:
     global: close
+  tabs.show:
+    global: multiple
+  tabs.width:
+    global: 15%
   url.default_page:
     global: qute://start
   url.start_pages:

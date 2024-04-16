@@ -97,6 +97,7 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
     bindkey "^[n" fzf-notes
     bindkey "^|" complete-word
     bindkey '^r' atuin-search
+    alias cat='bat'
 
     plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize poetry poetry-env zsh-vi-mode)
 else
@@ -111,7 +112,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # FZF - CONFIGURATIONS
-export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_DEFAULT_COMMAND="fd . '$HOME' --type f "
 export FZF_CTRL_T_COMMAND="fd . ."
 export FZF_CTRL_T_OPTS=""
 export FZF_ALT_C_COMMAND="fd -t d . $HOME"
@@ -136,12 +137,20 @@ _fzf_complete_git(){
 # export MANPAGER='nvim +Man!'
 # export MANWIDTH=999
 # export MANPATH="/usr/local/man:$MANPATH"
+
+export GOBIN="$GOPATH/bin"
+export GOPATH="$HOME/.go"
+export MYSCRIPTS="$HOME/dev/scripts/"
+export FLUTTER_BIN="$HOME/.pub-cache/bin"
+export LOCALBINARIES="$HOME/.local/bin/"
+export PATH=$LOCALBINARIES:$PATH:$MYSCRIPTS:$FLUTTER_BIN
+
 if [[ $(whoami) = 'devdante-wsl-ubuntu' ]]; then
   export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
   export GOPATH="$HOME/dev/setup/golang/go"
   export GOBIN="$GOPATH/bin"
   export PROCESSING_DIR="$HOME/dev/setup/processing/processing-4.2"
-  export PATH=$LOCALBINARIES:$PATH:$PROCESSING_DIR:$GOLANG_DIR:$MYSCRIPTS
+  export PATH=$PATH:$PROCESSING_DIR:$GOLANG_DIR:
   alias rdp="sudo /etc/init.d/xrdp start"
   alias ustart="~/dev/scripts/vncstart.sh"
 fi
@@ -155,13 +164,7 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
   source /usr/share/nvm/init-nvm.sh
 fi
 
-export GOPATH="$HOME/.go"
-# export GOBIN="$GOPATH/bin"
 
-export MYSCRIPTS="$HOME/dev/scripts/"
-export FLUTTER_BIN="$HOME/.pub-cache/bin"
-export LOCALBINARIES="$HOME/.local/bin/"
-export PATH=$LOCALBINARIES:$PATH:$MYSCRIPTS:$FLUTTER_BIN
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
@@ -259,13 +262,14 @@ alias pacd="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 
 alias explorer="xdg-open"
 alias mindmap="h-m-m"
 alias hman="compgen -c | fzf | xargs man"
+alias vpy="source ./.venv/bin/activate"
+alias cvi="~/dev/scripts/nvim-config.sh "
+alias lsltp="tlmgr info --list | fzf "
+
 if [[ $(whoami) = 'devdante-wsl' ]]; then
   alias emulator="/mnt/d/Code/Android/Sdk/emulator/emulator.exe"
   alias adb="/mnt/d/Code/Android/Sdk/platform-tools/adb.exe"
 fi
-alias vpy="source ./.venv/bin/activate"
-alias cvi="~/dev/scripts/nvim-config.sh "
-alias lsltp="tlmgr info --list | fzf "
 
 pdf() {zathura $1 & disown}
 mgdir() {mkdir $@ && cd ${@:$#}}

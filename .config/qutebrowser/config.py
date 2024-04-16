@@ -1,5 +1,19 @@
 config.load_autoconfig()
 
+config.bind(",cc", 'hint code userscript code_select.py')
+## ,ya is my shortcut to “yank asciidoc-formatted link”
+config.bind(',ya', 'yank inline {url:pretty}[{title}]')
+## ,ym is my shortcut to “yank markdown-formatted link”
+## ym (without a leading comma) also works because it is built-in
+config.bind(',ym', 'yank inline [{title}]({url:pretty})')
+config.bind(';', 'cmd-set-text :')
+config.bind(';t', 'hint userscript link translate')
+config.bind(';T', 'hint userscript all translate --text')
+config.bind(",l", 'spawn --userscript qute-bitwarden')
+config.bind('<Ctrl+T>', 'spawn --userscript translate')
+config.bind('<Ctrl+Shift+T>', 'spawn --userscript translate --text')
+config.source('themes/qute-city-lights/city-lights-theme.py')
+config.bind("<Ctrl+w>", 'cmd-set-text :open -w ')
 config.bind("<Ctrl+Alt+1>", 'tab-focus 1')
 config.bind("<Ctrl+Alt+2>", 'tab-focus 2')
 config.bind("<Ctrl+Alt+3>", 'tab-focus 3')
@@ -10,7 +24,6 @@ config.bind("<Ctrl+Alt+7>", 'tab-focus 7')
 config.bind("<Ctrl+Alt+8>", 'tab-focus 8')
 config.bind("<Ctrl+Alt+9>", 'tab-focus 9')
 config.bind("<Ctrl+Alt+0>", 'tab-focus 10')
-config.bind(",u", 'spawn --userscript qute-1pass')
 config.bind(',b','hint links spawn mpv {hint-url}')
 config.bind(',B','spawn mpv {url}')
 config.bind(',g','tab-give')
@@ -70,17 +83,3 @@ with config.pattern('*://medium.com/') as p:
 with config.pattern('*://dev.to/') as p:
     p.content.javascript.clipboard = "access"
 
-
-config.bind(",cc", 'hint code userscript code_select.py')
-## ,ya is my shortcut to “yank asciidoc-formatted link”
-config.bind(',ya', 'yank inline {url:pretty}[{title}]')
-## ,ym is my shortcut to “yank markdown-formatted link”
-## ym (without a leading comma) also works because it is built-in
-config.bind(',ym', 'yank inline [{title}]({url:pretty})')
-config.bind(';t', 'hint userscript link translate')
-config.bind(';T', 'hint userscript all translate --text')
-config.bind(';', 'cmd-set-text :')
-config.bind('<Ctrl+T>', 'spawn --userscript translate')
-config.bind('<Ctrl+Shift+T>', 'spawn --userscript translate --text')
-config.source('themes/qute-city-lights/city-lights-theme.py')
-config.bind("<Ctrl+w>", 'cmd-set-text :open -w ')

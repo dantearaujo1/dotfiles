@@ -38,7 +38,7 @@ local signature_setup = {
   close_timeout = 4000, -- close floating window after ms when laster parameter is entered
   fix_pos = false, -- set to true, the floating window will not auto-close until finish all parameters
   hint_enable = true, -- virtual hint enable
-  hint_prefix = "🐼 ", -- Panda for parameter, NOTE: for the terminal not support emoji, might crash
+  hint_prefix = "👉", -- Panda for parameter, NOTE: for the terminal not support emoji, might crash
   hint_scheme = "String",
   hi_parameter = "LspSignatureActiveParameter", -- how your parameter will be highlight
   handler_opts = {
@@ -51,7 +51,7 @@ local signature_setup = {
   extra_trigger_chars = {}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
   zindex = 200, -- by default it will be on top of all floating windows, set to <= 50 send it to bottom
 
-  padding = '', -- character to pad on left and right of signature can be ' ', or '|'  etc
+  padding = ' ', -- character to pad on left and right of signature can be ' ', or '|'  etc
 
   transparency = nil, -- disabled by default, allow floating win transparent value 1~100
   shadow_blend = 36, -- if you using shadow as border use this set the opacity
@@ -59,23 +59,18 @@ local signature_setup = {
   timer_interval = 200, -- default timer check interval set to lower value if you want to reduce latency
   toggle_key = '<M-x>', -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
 
-  select_signature_key = nil, -- cycle to next signature, e.g. '<M-n>' function overloading
+  select_signature_key = '<M-n>', -- cycle to next signature, e.g. '<M-n>' function overloading
   move_cursor_key = nil, -- imap, use nvim_set_current_win to move cursor between current win and floating
 }
 
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   require "lsp_signature".on_attach(signature_setup, bufnr)
   if client.server_capabilities.documentSymbolProvider then
-    --navic.attach(client, bufnr)
+    navic.attach(client, bufnr)
   end
-  client.server_capabilities.sementicTokensProvider = nil
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<localleader>gr', vim.lsp.buf.references, bufopts)
@@ -96,34 +91,20 @@ local on_attach = function(client, bufnr)
 end
 
 local MASON_LSP_DEFAULT_SETTINGS = {
-  -- A list of servers to automatically install if they're not already installed. Example: { "rust_analyzer@nightly", "sumneko_lua" }
-  -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
     "emmet_language_server",
     "clangd",
     "rust_analyzer@nightly",
     "gopls",
     "clangd",
-    "tsserver",
     "tailwindcss",
     "eslint",
   },
-
-  -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
-  -- This setting has no relation with the `ensure_installed` setting.
-  -- Can either be:
-  --   - false: Servers are not automatically installed.
-  --   - true: All servers set up via lspconfig are automatically installed.
-  --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
-  --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
   automatic_installation = false,
 }
 require("mason").setup()
 require("mason-lspconfig").setup(MASON_LSP_DEFAULT_SETTINGS)
 require("mason-lspconfig").setup_handlers {
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
   function(server_name) -- default handler (optional)
     require("lspconfig")[server_name].setup {
       on_attach = on_attach,
@@ -137,13 +118,13 @@ require("mason-lspconfig").setup_handlers {
       require("clangd_extensions").setup()
     }
   end,
-  -- ["jdtls"] = function()
-    --   require("lspconfig").jdtls.setup ({
-    --     on_attach = on_attach,
-    --     capabilities = capabilities,
-    --     root_dir = vim.fs.dirname(vim.fs.find({'.gradlew', '.git', 'mnvw'}, {upward = true})[0]),
-    -- })
-  -- end,
+  ["html"] = function()
+    require("lspconfig").html.setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      filetypes = { "html" },
+    }
+  end,
   ["emmet_language_server"] = function()
     require("lspconfig").emmet_language_server.setup ({
         on_attach = on_attach,
@@ -168,38 +149,41 @@ require("mason-lspconfig").setup_handlers {
     })
   end,
   ["lua_ls"] = function()
-    require("lspconfig").lua_ls.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = {
-        Lua = {
-          runtime = {
-            version = 'LuaJIT',
-            path = runtime_path,
-          },
-          diagnostics = {
-            globals = { 'vim', 'use', 'require' },
-          },
-          workspace = {
-            maxPreload = 100000,
-            preloadFileSize = 100000,
-            library = {
-              vim.api.nvim_get_runtime_file('', true),
-              [vim.fn.expand "~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/love2d"] = true,
-              -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Jass"] = false,
-              -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/OpenResty"] = false,
-              -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/example"] = false,
-              -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Cocos4.0"] = false,
-            },
-            checkThirdParty = false,
-          },
-          telemetry = {
-            enable = false,
-          },
-        }
-      }
-    }
+    require("lspconfig").lua_ls.setup { }
   end
+  -- ["lua_ls"] = function()
+  --   require("lspconfig").lua_ls.setup {
+  --     on_attach = on_attach,
+  --     capabilities = capabilities,
+  --     settings = {
+  --       Lua = {
+  --         runtime = {
+  --           version = 'LuaJIT',
+  --           path = runtime_path,
+  --         },
+  --         diagnostics = {
+  --           globals = { 'vim', 'use', 'require' },
+  --         },
+  --         workspace = {
+  --           maxPreload = 100000,
+  --           preloadFileSize = 100000,
+  --           library = {
+  --             vim.api.nvim_get_runtime_file('', true),
+  --             [vim.fn.expand "~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/love2d"] = true,
+  --             -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Jass"] = false,
+  --             -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/OpenResty"] = false,
+  --             -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/example"] = false,
+  --             -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Cocos4.0"] = false,
+  --           },
+  --           checkThirdParty = false,
+  --         },
+  --         telemetry = {
+  --           enable = false,
+  --         },
+  --       }
+  --     }
+  --   }
+  -- end
 }
 
 
