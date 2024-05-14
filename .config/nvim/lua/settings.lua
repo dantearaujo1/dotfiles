@@ -8,7 +8,7 @@ local b = vim.bo -- For the Buffer local options
 
 local utils = require('utils')
 
-if utils.getUser() ~= "devdante-archlinux-hd" then
+if utils.getUser() == "wsl" then
   vim.g.clipboard = {
     name = "win32yank-wsl",
     copy = {
@@ -112,7 +112,7 @@ require("ufo").setup(
   }
 )
 
-o.winbar= "%f"
+o.winbar= '%=%m %f'
 o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 o.laststatus = 3
 o.cmdheight = 1

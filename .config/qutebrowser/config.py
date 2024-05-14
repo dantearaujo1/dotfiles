@@ -1,4 +1,5 @@
 config.load_autoconfig()
+config.source('themes/qute-city-lights/city-lights-theme.py')
 
 config.bind(",cc", 'hint code userscript code_select.py')
 ## ,ya is my shortcut to “yank asciidoc-formatted link”
@@ -12,7 +13,6 @@ config.bind(';T', 'hint userscript all translate --text')
 config.bind(",l", 'spawn --userscript qute-bitwarden')
 config.bind('<Ctrl+T>', 'spawn --userscript translate')
 config.bind('<Ctrl+Shift+T>', 'spawn --userscript translate --text')
-config.source('themes/qute-city-lights/city-lights-theme.py')
 config.bind("<Ctrl+w>", 'cmd-set-text :open -w ')
 config.bind("<Ctrl+Alt+1>", 'tab-focus 1')
 config.bind("<Ctrl+Alt+2>", 'tab-focus 2')
@@ -61,7 +61,7 @@ c.aliases['gu'] = 'open -t https://github.com/dantearaujo1'
 c.colors.tabs.selected.even.bg = "#AA00aa"
 c.colors.tabs.selected.even.fg = "white"
 c.tabs.background = True
-c.content.pdfjs = True
+c.content.pdfjs = False
 c.content.fullscreen.window = True
 
 c.hints.selectors["code"] = [
@@ -83,3 +83,12 @@ with config.pattern('*://medium.com/') as p:
 with config.pattern('*://dev.to/') as p:
     p.content.javascript.clipboard = "access"
 
+# Set VIFM as file picker.
+# config.set("fileselect.handler", "external")
+# config.set("fileselect.single_file.command", ['alacritty', '--class', 'vifm,vifm', '-e', 'vifm', '--choose-files', '{}'])
+# config.set("fileselect.multiple_files.command", ['alacritty', '--class', 'vifm,vifm', '-e', 'vifm', '--choose-files', '{}'])
+# config.set("fileselect.folder.command", ['alacritty', '--class', 'vifm,vifm', '-e', 'vifm', '--choose-dir', '{}'])
+
+# Use ctrl-f to select save location using external file picker.
+# config.unbind("<Ctrl-f>", mode="prompt")
+# config.bind('<Ctrl-f>', 'prompt-fileselect-external', mode='prompt')

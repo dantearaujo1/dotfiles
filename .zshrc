@@ -138,8 +138,8 @@ _fzf_complete_git(){
 # export MANWIDTH=999
 # export MANPATH="/usr/local/man:$MANPATH"
 
-export GOBIN="$GOPATH/bin"
 export GOPATH="$HOME/.go"
+export GOBIN="$GOPATH/bin"
 export MYSCRIPTS="$HOME/dev/scripts/"
 export FLUTTER_BIN="$HOME/.pub-cache/bin"
 export LOCALBINARIES="$HOME/.local/bin/"
@@ -157,11 +157,26 @@ fi
 if [[ $(whoami) = 'devdante-wsl-kali' ]]; then
 
 fi
-if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
+if [[ $(whoami) = 'dante' ]]; then
   export PAGER=nvimpager
   alias addtheme=kitty +kitten themes
   alias icat='kitty +kitten icat'
   source /usr/share/nvm/init-nvm.sh
+    bindkey -r "^G"
+    bindkey -r "^[g"
+    bindkey -r "^[G"
+    source ~/dev/scripts/fzf-git.sh
+    # source ~/dev/scripts/zsh/docker-comp-fzf.zsh
+    source ~/dev/scripts/zsh/zsh-fzf-widgets.zsh
+    bindkey "^q" clear-screen
+    bindkey "^zc" fzf-git-checkout
+    bindkey "^zs" fzf-git-status
+    bindkey "^zk" fzf-kill-proc-by-list
+    bindkey "^ze" fzf-gitmoji
+    bindkey "^[n" fzf-notes
+    bindkey "^|" complete-word
+    bindkey '^r' atuin-search
+    alias cat='bat'
 fi
 
 
@@ -253,9 +268,9 @@ alias lg="lazygit"
 alias lgd="lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cls="clear"
 alias f='nvim "$(fzf)"'
-alias fn='nvim "$(fd . ~/Notes/ --type f | fzf --ansi --preview  "bat {}")"'
+alias fn='files=$(fd . ~/Notes/ --type f | fzf -m --ansi --preview  "bat {}") && [ -n "$files" ] && nvim "$files"  && unset files'
 alias fzf="fzf-tmux -p 80%,80%"
-alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'batcat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
+alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 alias pacall="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
 alias pacls="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 alias pacd="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rcns {})'"

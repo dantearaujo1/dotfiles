@@ -7,6 +7,9 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    dependencies = {
+      'RRethy/nvim-treesitter-endwise'
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
@@ -317,15 +320,30 @@ return {
       -- require("mini.animate").setup()
     end,
   },
-  -- { 'ntpeters/vim-better-whitespace' }, -- Shows and trailling whitespace (TOO SLOW)
   { 'tommcdo/vim-exchange' }, -- Easy text exchange operator for Vim
-  {
-    'booperlv/nvim-gomove',
-    config = function()
-      require('gomove').setup {}
-    end
-  }, -- Move lines up and down
   { 'ggandor/leap.nvim' },
+  {
+    "fedepujol/move.nvim",
+    config = function()
+      require('move').setup({
+        line = {
+            enable = true, -- Enables line movement
+            indent = true  -- Toggles indentation
+          },
+          block = {
+            enable = true, -- Enables block movement
+            indent = true  -- Toggles indentation
+          },
+          word = {
+            enable = true, -- Enables word movement
+          },
+          char = {
+            enable = true -- Enables char movement
+          }
+      })
+      local opts = { noremap = true, silent = true }
+    end,
+  },
   {
     'ggandor/flit.nvim',
     config = function()
@@ -346,7 +364,7 @@ return {
     end
   }, -- Change surroundings Not tpope anymore
   {
-    "altermo/ultimate-autopair.nvim",
+    'altermo/ultimate-autopair.nvim',
     event = { "InsertEnter", "CmdlineEnter" },
     opts = {
       --Config goes here
@@ -428,6 +446,7 @@ return {
   {
     'NeogitOrg/neogit',
     dependencies = 'nvim-lua/plenary.nvim',
+    branch = 'nightly',
     event = "VeryLazy",
     config = function()
       require('neogit').setup({})
@@ -441,42 +460,66 @@ return {
       "tpope/vim-fugitive",
     },
   },
-  -- { 'lewis6991/gitsigns.nvim' }, -- Super fast git decorations implemented purely in Lua/Teal
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup{
+
+      on_attach = function(bufnr)
+        local gitsigns = require('gitsigns')
+
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- Navigation
+        map('n', ']c', function()
+          if vim.wo.diff then
+            vim.cmd.normal({']c', bang = true})
+          else
+            gitsigns.nav_hunk('next')
+          end
+        end)
+
+        map('n', '[c', function()
+          if vim.wo.diff then
+            vim.cmd.normal({'[c', bang = true})
+          else
+            gitsigns.nav_hunk('prev')
+          end
+        end)
+
+        -- Actions
+        map('n', '<leader>hs', gitsigns.stage_hunk)
+        map('n', '<leader>hr', gitsigns.reset_hunk)
+        map('v', '<leader>hs', function() gitsigns.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+        map('v', '<leader>hr', function() gitsigns.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+        map('n', '<leader>hS', gitsigns.stage_buffer)
+        map('n', '<leader>hu', gitsigns.undo_stage_hunk)
+        map('n', '<leader>hR', gitsigns.reset_buffer)
+        map('n', '<leader>hp', gitsigns.preview_hunk)
+        map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end)
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+        map('n', '<leader>hd', gitsigns.diffthis)
+        map('n', '<leader>hD', function() gitsigns.diffthis('~') end)
+        map('n', '<leader>td', gitsigns.toggle_deleted)
+
+        -- Text object
+        map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+      end
+      }
+    end
+  }, -- Super fast git decorations implemented purely in Lua/Teal
   {
     'sindrets/diffview.nvim',
-    event = "VeryLazy",
     dependencies = 'nvim-lua/plenary.nvim',
   },                             -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
   -- Java ========
   { 'mfussenegger/nvim-jdtls' }, -- Java JDTLS helpers
   -- Typescript ========
-  {"neoclide/vim-jsx-improve"}, -- Synteax Highlight for jsx and Better indent to
-  -- {
-  --   "pmizio/typescript-tools.nvim",
-  --   ft = {
-  --     "ts",
-  --     "tsx",
-  --     "js",
-  --     "jsx",
-  --     "javascript",
-  --     "javascriptreact",
-  --     "typescript",
-  --     "typescriptreact"
-  --   },
-  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  --   opts = {},
-  --   config = function()
-  --     require("typescript-tools").setup {
-  --       settings = {
-  --         tsserver_file_preferences = {
-  --           includeInlayParameterNameHints = "all",
-  --           includeCompletionsForModuleExports = true,
-  --           quotePreference = "auto",
-  --         },
-  --       }
-  --     }
-  --   end
-  -- },
+  { 'neoclide/vim-jsx-improve' }, -- Synteax Highlight for jsx and Better indent to
   -- C++ ========
   { 'p00f/clangd_extensions.nvim' }, -- C++ clangd lsp defaults
   {
@@ -524,46 +567,36 @@ return {
   -- PREVIEWERS
   -- MARKDOWN
   {
-    'ellisonleao/glow.nvim',
-    enabled = function() return util.getOS() == "Linux" end,
-    config = true,
-    event = "VeryLazy",
-    cmd = "Glow",
-  }, -- Preview Markdown files with :Glow
-  {
     'iamcco/markdown-preview.nvim',
     build = function() vim.fn["mkdp#util#install"]() end,
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
   },
   -- LATEX
-  {
-    'folke/trouble.nvim',
-    config = function()
-      require('trouble').setup()
-    end,
-    lazy = true
 
+  -- BUFFERS
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    -- lazy = true
   },
   { 'onsails/lspkind-nvim' },
   { 'ray-x/lsp_signature.nvim' },  -- for symbols in completion
-  { 'ElPiloto/significant.nvim' }, -- Animate columnSigns
-  -- {
-  --   "glepnir/lspsaga.nvim",
-  --   event = "BufRead",
-  --   -- config = function()
-  --   --     require("dante/lspsaga")
-  --   -- end,
-  --   dependencies = {
-  --     { "nvim-tree/nvim-web-devicons" },
-  --     { "nvim-treesitter/nvim-treesitter" }
-  --   }
-  -- },
   {
-    "nacro90/numb.nvim",
+    'nvimdev/lspsaga.nvim',
     config = function()
-      require('numb').setup()
-    end
+        require('lspsaga').setup({})
+    end,
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter', -- optional
+        'nvim-tree/nvim-web-devicons'     -- optional
+    },
+    event = "LspAttach",
   },
   {
     'kevinhwang91/nvim-ufo',
@@ -573,6 +606,7 @@ return {
       require('ufo').setup()
     end
   },
+  -- { 'ElPiloto/significant.nvim' }, -- Animate columnSigns Nothing good with this
   {
     'luukvbaal/statuscol.nvim',
     config = function()
@@ -616,18 +650,19 @@ return {
     priority = 1000,
     config = function()
       require('notify').setup({
-        background_colour = "#000000"
+        background_colour = "#FFFFFF88"
       })
     end
   },
   {
-    "nvim-zh/colorful-winsep.nvim",
+    'nvim-zh/colorful-winsep.nvim',
+    event = { "InsertEnter", "CmdlineEnter" },
     config = function()
       require('colorful-winsep').setup()
     end
   },
-  { "shortcuts/no-neck-pain.nvim" },
-  { "LunarVim/bigfile.nvim" },
+  { 'shortcuts/no-neck-pain.nvim' },
+  { 'LunarVim/bigfile.nvim' },
   -- THEMES =====================================================================
   -- Dashboard ===========================
   {
@@ -642,6 +677,22 @@ return {
   -- ColorColumn ===========================
   { 'xiyaowong/virtcolumn.nvim' },
   { 'm4xshen/smartcolumn.nvim' },
+  -- {
+  --   'mawkler/modicator.nvim',
+  --   init = function()
+  --     -- These are required for Modicator to work
+  --     vim.o.cursorline = true
+  --     vim.o.number = true
+  --     vim.o.termguicolors = true
+  --   end,
+  --   opts = {
+  --     -- Warn if any required option above is missing. May emit false positives
+  --     -- if some other plugin modifies them, which in that case you can just
+  --     -- ignore. Feel free to remove this line after you've gotten Modicator to
+  --     -- work properly.
+  --     show_warnings = true,
+  --   }
+  -- },
   -- ICONS THEMES==================================================
   { 'ryanoasis/vim-devicons' },
   { 'yamatsum/nvim-web-nonicons' },
@@ -681,6 +732,7 @@ return {
     dev = true,
     enabled = function() return util.getOS() == "Linux" end
   },
+  {'pysan3/pathlib.nvim'},
   -- STATUS LINE PLUGINS ========================================================
   { 'nvim-lualine/lualine.nvim' },
   {
@@ -696,32 +748,68 @@ return {
     'preservim/vimux',
     enabled = function() return vim.fn.executable('tmux') end
   },
-
   --{ 'vimpostor/vim-tpipeline' }, Tmux status line with vim
-  -- {
-  --   'hermitmaster/nvim-kitty-navigator',
-  --   build = './install',
-  --   enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end,
-  --   lazy = false,
-  --   config = function()
-  --     require('nvim-kitty-navigator').setup {}
-  --   end
-  -- },
-  -- {
-  --   'edluffy/hologram.nvim',
-  --   enabled = function() return not string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')end,
-  --   config = function()
-  --     require('hologram').setup {
-  --       auto_display = true
-  --     }
-  --   end
-  -- },
-
+  -- AI PLUGINS ================================================================
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    },
+    opts = {
+      debug = true, -- Enable debugging
+      -- See Configuration section for rest
+    },
+    config = function ()
+      local chat = require("CopilotChat")
+      chat.setup{
+        prompts = {
+          Explain = {
+              mapping = '<leader>ae',
+              description = 'AI Explain',
+          },
+          Review = {
+              mapping = '<leader>ar',
+              description = 'AI Review',
+          },
+          Tests = {
+              mapping = '<leader>at',
+              description = 'AI Tests',
+          },
+          Fix = {
+              mapping = '<leader>af',
+              description = 'AI Fix',
+          },
+          Optimize = {
+              mapping = '<leader>ao',
+              description = 'AI Optimize',
+          },
+          Docs = {
+              mapping = '<leader>ad',
+              description = 'AI Documentation',
+          },
+          CommitStaged = {
+              mapping = '<leader>ac',
+              description = 'AI Generate Commit',
+          },
+        }
+      }
+      require("copilot").setup{{}}
+      vim.keymap.set({ 'n', 'v' }, '<leader>ai', chat.toggle, { desc = 'AI Toggle' })
+      vim.keymap.set({ 'n', 'v' }, '<leader>ax', chat.reset, { desc = 'AI Reset' })
+    end
+    -- See Commands section for default commands if you want to lazy load on them
+  },
+  -- NOTE TAKING PLUGINS =======================================================
   {
     'nvim-neorg/neorg',
     tag = "v7.0.0",
     build = ":Neorg sync-parsers",
     keys = {"<localleader>ln"},
+    dependencies = {
+      {"nvim-neorg/neorg-telescope"}
+    },
     ft = "norg",
     config = function()
       require('neorg').setup {
@@ -750,11 +838,30 @@ return {
                 keybinds.map("norg","n","<localleader>c", '<cmd>Neorg keybind all core.looking-glass.magnify-code-block<CR>')
               end
             }
-          }
+          },
+          ["core.integrations.telescope"] = {},
         },
       }
       vim.wo.foldlevel = 99
       vim.wo.conceallevel = 2
+      local neorg_callbacks = require("neorg.core.callbacks")
+
+      neorg_callbacks.on_event("core.keybinds.events.enable_keybinds", function(_, keybinds)
+          -- Map all the below keybinds only when the "norg" mode is active
+          keybinds.map_event_to_mode("norg", {
+              n = { -- Bind keys in normal mode
+                  { "<C-s>", "core.integrations.telescope.find_linkable" },
+              },
+
+              i = { -- Bind in insert mode
+                  { "<C-l>", "core.integrations.telescope.insert_link" },
+              },
+          }, {
+              silent = true,
+              noremap = true,
+          })
+      end)
     end
   },
 }
+

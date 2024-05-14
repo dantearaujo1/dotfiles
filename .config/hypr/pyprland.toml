@@ -33,9 +33,9 @@ excludes = ["term","volume","wpp"]
 
 [scratchpads.wpp]
 animation = "fromTop"
-command = "whatsapp-nativefier"
-unfocus = "hide"
-class = "wpp"
+command = "whatsie"
+# unfocus = "hide"
+class = "com.ktechpit.whatsie"
 size = "75% 80%"
 lazy = true
 

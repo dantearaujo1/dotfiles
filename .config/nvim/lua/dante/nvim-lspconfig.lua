@@ -151,39 +151,6 @@ require("mason-lspconfig").setup_handlers {
   ["lua_ls"] = function()
     require("lspconfig").lua_ls.setup { }
   end
-  -- ["lua_ls"] = function()
-  --   require("lspconfig").lua_ls.setup {
-  --     on_attach = on_attach,
-  --     capabilities = capabilities,
-  --     settings = {
-  --       Lua = {
-  --         runtime = {
-  --           version = 'LuaJIT',
-  --           path = runtime_path,
-  --         },
-  --         diagnostics = {
-  --           globals = { 'vim', 'use', 'require' },
-  --         },
-  --         workspace = {
-  --           maxPreload = 100000,
-  --           preloadFileSize = 100000,
-  --           library = {
-  --             vim.api.nvim_get_runtime_file('', true),
-  --             [vim.fn.expand "~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/love2d"] = true,
-  --             -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Jass"] = false,
-  --             -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/OpenResty"] = false,
-  --             -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/example"] = false,
-  --             -- [vim.fn.expand"~/nvim/nvim-data/lsp_servers/sumneko_lua/extension/server/meta/3rd/Cocos4.0"] = false,
-  --           },
-  --           checkThirdParty = false,
-  --         },
-  --         telemetry = {
-  --           enable = false,
-  --         },
-  --       }
-  --     }
-  --   }
-  -- end
 }
 
 

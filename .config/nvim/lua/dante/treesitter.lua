@@ -1,5 +1,4 @@
 require 'nvim-treesitter.install'.compilers = { "gcc", "clang" }
-
 require 'nvim-treesitter.configs'.setup {
   ensure_installed = {
     "c",
@@ -46,6 +45,9 @@ require 'nvim-treesitter.configs'.setup {
   indent = {
     enable = false,
   },
+  endwise = {
+    enable = true,
+  },
   yati = {
     enable = true,
   },
@@ -59,13 +61,10 @@ require 'nvim-treesitter.configs'.setup {
     },
   },
   rainbow = {
-    enable = true,
+    enable = false,
     extended_mode = true,
     max_file_lines = nil,
     query = 'rainbow-parens',
-    --strategy = require('ts-rainbow').strategy.global,
-    -- colors = {},
-    -- termcolors = {}
   },
   textobjects = {
     select = {

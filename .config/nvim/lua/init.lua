@@ -28,7 +28,7 @@ else
   require('dante/nvim-dap') -- Another debugger Debug Adapter Protocol -- Universal
   require('dante/snippets') -- Custom Snippets created by me
   require('dante/telescope') -- Like a file explorer or FZF
-  -- require('dante/treesitter') -- ColorHighlight for a lot of languages
+  require('dante/treesitter') -- ColorHighlight for a lot of languages
 
   require('dante/todo-comments') -- Highligh todo comments and show in a specific place
   require('dante/statusline') -- A fast but not fastest status line for neovim
@@ -47,7 +47,7 @@ else
 
   require('dante/dashboard')
   require('dante/smartcolumn')
-  -- require("dante/lspsaga")
+  require("dante/lspsaga")
   require("dante/neorg")
 
   require('dante/others') -- Some custom plugins configurations

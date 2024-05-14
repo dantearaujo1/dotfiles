@@ -31,7 +31,7 @@ Hydra({
   hint = [[Git Mode]],
   config = {
     color = 'teal',
-    invoke_on_body = true,
+    invoke_on_body = false,
     hint = {
       type = 'window',
       position = 'middle',
@@ -39,13 +39,13 @@ Hydra({
         border = 'rounded',
       },
     },
+    timeout = true
   },
   mode = 'n',
-  body = '<leader>g',
+  body = 'gt',
   heads = {
     {'t', '<cmd>lua _lazygit_toggle()<CR>', {desc = 'Lazygit'}},
     {'T', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc = 'Dotfiles Git'}},
-
     {'do', ':DiffviewOpen<CR>', {desc = 'Open Diff View'}},
     {'dc', ':DiffviewClose<CR>', {desc = 'Close Diff View'}},
     { '<Esc>', nil, { exit = true, nowait = true, desc= 'Exit' } },
@@ -87,8 +87,11 @@ Hydra({
       invoke_on_body = false,
       hint = {
         type = 'window',
+        show_name = true,
         position = 'middle',
         float_opts = {
+          style = 'minimal',
+          focusable = false,
           border = 'rounded',
         },
       },

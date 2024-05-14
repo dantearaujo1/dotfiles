@@ -16,8 +16,10 @@ local plug = { expr = true, noremap = false }
 util.map('n', 'ç' , ':' , nore)
 util.map('n', ';' , ':' , nore)
 util.map('x', ';' , ':' , nore)
+
 util.map('n', ':' , ';' , nore)
 util.map('x', ':' , ';' , nore)
+
 util.map('n', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mode
 util.map('v', '<Tab>' , '%' , nore) --Jump to matching pairs easily in normal mode
 
@@ -81,6 +83,8 @@ util.map('n', '<leader>k', '<C-i>', nore)
 
 --  Navigation in the location and quickfix list
 util.map('n', '<localleader>q' , ':<C-u>call asyncrun#quickfix_toggle(10)<CR>' , nore)
+util.map('n', ']l' , ':lnext<CR>zv', nore)
+util.map('n', ']l' , ':lprevious<CR>zv', nore)
 util.map('n', ']L' , ':llast<CR>zv', nore)
 util.map('n', '[L' , ':lfirst<CR>zv', nore)
 util.map('n', '[Q' , ':cfirst<CR>zv', nore)
@@ -107,18 +111,10 @@ util.map('n','<F2>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp
 -- Change focus
 if(util.getOS() == "Linux") then
   if (util.getUser() == "devdante-archlinux-hd") then
-    -- util.map('n', '<C-h>' , ':KittyNavigateLeft<CR>', snore)
-    -- util.map('n', '<C-l>' , ':KittyNavigateRight<CR>', snore)
-    -- util.map('n', '<C-j>' , ':KittyNavigateDown<CR>', snore)
-    -- util.map('n', '<C-k>' , ':KittyNavigateUp<CR>', snore)
     util.map('n', '<C-h>' , ':TmuxNavigateLeft<CR>', snore)
     util.map('n', '<C-l>' , ':TmuxNavigateRight<CR>', snore)
     util.map('n', '<C-j>' , ':TmuxNavigateDown<CR>', snore)
     util.map('n', '<C-k>' , ':TmuxNavigateUp<CR>', snore)
-    -- util.map('n', '<C-h>' , '<C-w>h', snore)
-    -- util.map('n', '<C-l>' , '<C-w>l', snore)
-    -- util.map('n', '<C-j>' , '<C-w>j', snore)
-    -- util.map('n', '<C-k>' , '<C-w>k', snore)
   end
 else
   util.map('n', '<C-h>' , '<C-w>h', snore)
@@ -206,18 +202,10 @@ util.map('n', '<leader>p' , ':Glow<CR>', nore)
 util.map('n', 'ml' , '<Plug>Markdown_CreateLink', nore)
 util.map('n', 'mk' , '<Plug>Markdown_Checkbox', nore)
 
--- ================================================================|SNEAK|
--- util.map('n', 'f' , '<Plug>Sneak_f', nore)
--- util.map('n', 'F' , '<Plug>Sneak_F', nore)
---util.map('n', ':' , '<Plug>Sneak_;' , nore)
-
 -- ================================================================|ARGWRAP|
 util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
--- ================================================================|COLORIZER|
--- util.map('n', '<leader>cc' , ':CccPick<CR>', nore)
 -- ================================================================|NEOTREE|
 util.map('n', '<leader>E' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
-
 -- ================================================================
 util.map('i', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
 util.map('s', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
@@ -232,3 +220,27 @@ util.map( 'n', '<leader>11', ':lua vim.diagnostic.disable()<CR>', {noremap = tru
 util.map( 'n', '<leader>12', ':lua vim.diagnostic.enable()<CR>', {noremap = true, silent = true})
 util.map( 'n', '<localleader>o', ':Oil<CR>', {noremap = true, silent = true})
 
+-- ================================================================|NoNeckPain|
+util.map( 'n', '<leader>0', ':NoNeckPain<CR>', {noremap = true, silent = true})
+
+-- ================================================================|TROUBLE|
+vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end)
+vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+vim.keymap.set("n", "<leader>xr", function() require("trouble").toggle("lsp_references") end)
+
+-- ================================================================|MOVE|
+vim.keymap.set('n', '<A-j>', ':MoveLine(1)<CR>', opts)
+vim.keymap.set('n', '<A-k>', ':MoveLine(-1)<CR>', opts)
+vim.keymap.set('n', '<A-h>', ':MoveHChar(-1)<CR>', opts)
+vim.keymap.set('n', '<A-l>', ':MoveHChar(1)<CR>', opts)
+vim.keymap.set('n', '<leader>wf', ':MoveWord(1)<CR>', opts)
+vim.keymap.set('n', '<leader>wb', ':MoveWord(-1)<CR>', opts)
+
+-- Visual-mode commands
+vim.keymap.set('v', '<A-j>', ':MoveBlock(1)<CR>', opts)
+vim.keymap.set('v', '<A-k>', ':MoveBlock(-1)<CR>', opts)
+vim.keymap.set('v', '<A-h>', ':MoveHBlock(-1)<CR>', opts)
+vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
