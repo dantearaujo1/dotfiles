@@ -190,6 +190,7 @@ require('telescope').load_extension('lazy')
 require('telescope').load_extension('project')
 require('telescope').load_extension('openbrowser')
 require('telescope').load_extension('luasnip')
+require("telescope").load_extension("git_worktree")
 
 local M = {
 

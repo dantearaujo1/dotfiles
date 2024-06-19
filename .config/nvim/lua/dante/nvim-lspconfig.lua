@@ -2,9 +2,6 @@ local navic = require("nvim-navic")
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-require("neodev").setup({
-  -- add any options here, or leave empty to use the default settings
-})
 
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,

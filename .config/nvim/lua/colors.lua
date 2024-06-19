@@ -10,7 +10,7 @@ o.termguicolors = true
 w.cursorline = true
 w.signcolumn = 'yes'				-- Set a Column before numbers
 
-cmd('colorscheme vscode')                    -- Setting the theme
+-- cmd('colorscheme vscode')                    -- Setting the theme
 -- Applying transparency
 vim.cmd('hi TabLine                  ctermbg=NONE guibg=NONE')
 vim.cmd('hi TabLineSell              ctermbg=NONE guibg=NONE')

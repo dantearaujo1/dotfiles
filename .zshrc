@@ -99,12 +99,67 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
     bindkey '^r' atuin-search
     alias cat='bat'
 
-    plugins=(z git zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant tmux copyfile copypath common-aliases python colorize poetry poetry-env zsh-vi-mode)
+    plugins=(
+        z
+        git
+        zsh-autosuggestions
+        command-not-found
+        extract
+        fzf
+        web-search
+        yum
+        git-extras
+        docker
+        vagrant
+        tmux
+        copyfile
+        copypath
+        common-aliases
+        python
+        colorize
+        poetry
+        poetry-env
+      )
 else
   if [ -z "$TMUX" ]; then
-      plugins=(z git zsh-vi-mode zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases tmux python colorize)
+    plugins=(
+        z
+        git
+        zsh-autosuggestions
+        command-not-found
+        extract
+        fzf
+        web-search
+        git-extras
+        docker
+        tmux
+        copyfile
+        copypath
+        common-aliases
+        python
+        colorize
+        poetry
+        poetry-env
+      )
   else
-    plugins=(z git zsh-vi-mode zsh-autosuggestions command-not-found extract fzf web-search yum git-extras docker vagrant copyfile copypath common-aliases python colorize)
+    plugins=(
+        z
+        git
+        zsh-autosuggestions
+        command-not-found
+        extract
+        fzf
+        git-extras
+        docker
+        tmux
+        copyfile
+        copypath
+        common-aliases
+        python
+        colorize
+        poetry
+        poetry-env
+      )
   fi
 fi
 

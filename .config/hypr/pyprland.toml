@@ -23,13 +23,20 @@ process_tracking=false
 lazy = true
 size = "40% 90%"
 
+# [scratchpads.fm]
+# animation = "fromTop"
+# command = "kitty --class kitty-dropterm ~/dev/scripts/scratchpads.sh fm"
+# class = "kitty-dropterm"
+# size = "75% 80%"
+# lazy = true
+# excludes = ["term","volume","wpp"]
+
 [scratchpads.fm]
 animation = "fromTop"
-command = "kitty --class kitty-dropterm ~/dev/scripts/scratchpads.sh fm"
-class = "kitty-dropterm"
+command = "kitty --class kitty-dropterm-fm yazi"
+class = "kitty-dropterm-fm"
 size = "75% 80%"
 lazy = true
-excludes = ["term","volume","wpp"]
 
 [scratchpads.wpp]
 animation = "fromTop"
@@ -47,10 +54,18 @@ unfocus = "hide"
 size = "75% 80%"
 lazy = true
 
+# [scratchpads.mail]
+# command = "thunderbird"
+# animation = "fromTop"
+# class = "thunderbird"
+# unfocus = "hide"
+# size = "75% 80%"
+# lazy = true
+
 [scratchpads.mail]
-command = "thunderbird"
+command = "kitty --class kitty-dropterm-mail neomutt"
 animation = "fromTop"
-class = "thunderbird"
+class = "kitty-dropterm-mail"
 unfocus = "hide"
 size = "75% 80%"
 lazy = true

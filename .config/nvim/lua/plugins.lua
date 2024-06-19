@@ -25,9 +25,6 @@ return {
       "typescript",
       "typescriptreact"
     },
-    config = function()
-      require('nvim-ts-autotag').setup()
-    end,
   },
   {
     'David-Kunz/markid',
@@ -88,6 +85,22 @@ return {
   {
     'williamboman/mason.nvim',
   },
+  --   -- ============ CODE STYLING ====================================
+  -- {
+  --   'stevearc/conform.nvim',
+  --   opts = {},
+  --   config = function()
+  --     require("conform").setup({
+  --       formatters_by_ft = {
+  --         lua = { "stylua" },
+  --         -- Conform will run multiple formatters sequentially
+  --         python = { "isort", "black" },
+  --         -- Use a sub-list to run only the first available formatter
+  --         javascript = { { "prettierd", "prettier" } },
+  --       },
+  --     })
+  --   end
+  -- },
   {
     'nvimtools/none-ls.nvim',
     event = "VeryLazy",
@@ -95,6 +108,7 @@ return {
       return require('dante/formatter') -- Formatter configurations plugins
     end,
   },
+  -- ========================================================================
   {
     'williamboman/mason-lspconfig.nvim',
   },
@@ -108,26 +122,18 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
   },
   {
-    'folke/neodev.nvim',
-    event = "VeryLazy",
-    ft = {"lua"},
-    opts = {},
-  },
-  {
-    'stevearc/conform.nvim',
-    opts = {},
-    config = function()
-      require("conform").setup({
-        formatters_by_ft = {
-          lua = { "stylua" },
-          -- Conform will run multiple formatters sequentially
-          python = { "isort", "black" },
-          -- Use a sub-list to run only the first available formatter
-          javascript = { { "prettierd", "prettier" } },
+      "folke/lazydev.nvim",
+      ft = "lua", -- only load on lua files
+      opts = {
+        library = {
+          -- See the configuration section for more details
+          -- Load luvit types when the `vim.uv` word is found
+          { path = "luvit-meta/library", words = { "vim%.uv" } },
         },
-      })
-    end
-  },
+      },
+    },
+  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+  { "mistricky/codesnap.nvim", build = "make" },
   --   -- ============ SERVER PLUGINS ==============================
   {
     'barrett-ruth/live-server.nvim',
@@ -139,6 +145,13 @@ return {
   {
     'hrsh7th/nvim-cmp',
     event = { "InsertEnter", "CmdlineEnter" },
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
+    end,
     dependencies = {
       {
         'hrsh7th/cmp-nvim-lsp',
@@ -236,36 +249,6 @@ return {
     }
   },
   -- Custom Pluggins =============================================================
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    keys = {
-      {
-        "<leader>e",
-        function()
-          require("neo-tree.command").execute({
-            toggle = true,
-            position = "left",
-          })
-        end,
-        desc = "Buffers (root dir)",
-      }
-    },
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    },
-    config = function()
-      require("neo-tree").setup({
-        filesystem = {
-          follow_current_file = {
-            enabled = true,
-          }
-        }
-      })
-    end
-  },
   {
     'stevearc/oil.nvim',
     opts = {},
@@ -443,22 +426,24 @@ return {
     event = "VeryLazy",
   }, -- Browse and preview json files
   -- GIT ========
+  {'ThePrimeagen/git-worktree.nvim'},
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require('harpoon').setup({})
+      vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+      vim.keymap.set("n", "<leader>ha", function() harpoon.list():add() end)
+    end
+  },
   {
     'NeogitOrg/neogit',
     dependencies = 'nvim-lua/plenary.nvim',
-    branch = 'nightly',
     event = "VeryLazy",
     config = function()
       require('neogit').setup({})
     end
-  },
-  {
-    "rbong/vim-flog",
-    lazy = true,
-    cmd = { "Flog", "Flogsplit", "Floggit" },
-    dependencies = {
-      "tpope/vim-fugitive",
-    },
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -698,24 +683,15 @@ return {
   { 'yamatsum/nvim-web-nonicons' },
   { 'nvim-tree/nvim-web-devicons' },
   -- TREESITTER SUPORTED THEMES==================================================
-  { 'luisiacc/gruvbox-baby',                       branch = 'main' },
-  { 'Abstract-IDE/Abstract-cs', },
-  { 'Mofiqul/vscode.nvim', },
-  { 'ray-x/aurora', },
-  { 'ofirgall/ofirkai.nvim', },
-  { 'bluz71/vim-nightfly-guicolors', },
-  { 'bluz71/vim-moonfly-colors', },
-  { 'christianchiarulli/nvcode-color-schemes.vim', },
-  { 'sainnhe/sonokai', },
-  { 'sainnhe/gruvbox-material', },
-  { 'sainnhe/edge', },
-  { 'kyazdani42/blue-moon', },
-  { 'mhartington/oceanic-next', },
-  { 'Iron-E/nvim-highlite', },
-  { 'nxvu699134/vn-night.nvim', },
   {
-    'projekt0n/github-nvim-theme',
-    event = "VeryLazy",
+      "vague2k/huez.nvim",
+      -- if you want registry related features, uncomment this
+      branch = "stable",
+      event = "UIEnter",
+      import = "huez-manager.import",
+      config = function()
+          require("huez").setup({})
+      end,
   },
   -- My Pluggins ===========================================================
   {
@@ -723,17 +699,17 @@ return {
     dev = true,
     enabled = function() return util.getOS() == "Linux" end
   },
-  {
-    '~/dev/projects/lua/neovim/nepsAcademyIntegration',
-    dev = true,
-  },
-  {
-    '~/dev/projects/lua/neovim/nomodor',
-    dev = true,
-    enabled = function() return util.getOS() == "Linux" end
-  },
-  {'pysan3/pathlib.nvim'},
+  -- {
+  --   '~/dev/projects/lua/neovim/nepsAcademyIntegration',
+  --   dev = true,
+  -- },
+  -- {
+  --   '~/dev/projects/lua/neovim/nomodor',
+  --   dev = true,
+  --   enabled = function() return util.getOS() == "Linux" end
+  -- },
   -- STATUS LINE PLUGINS ========================================================
+  {'pysan3/pathlib.nvim'},
   { 'nvim-lualine/lualine.nvim' },
   {
     'SmiteshP/nvim-navic',
@@ -743,6 +719,18 @@ return {
     'christoomey/vim-tmux-navigator',
     -- enabled = function() return util.getOS() == 'Linux' end
     enabled = function() return not (vim.fn.executable('tmux') and string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')) end
+  },
+  {
+    'mikesmithgh/kitty-scrollback.nvim',
+    enabled = true,
+    lazy = true,
+    cmd = { 'KittyScrollbackGenerateKittens', 'KittyScrollbackCheckHealth' },
+    event = { 'User KittyScrollbackLaunch' },
+    -- version = '*', -- latest stable version, may have breaking changes if major version changed
+    -- version = '^5.0.0', -- pin major version, include fixes and features that do not have breaking changes
+    config = function()
+      require('kitty-scrollback').setup()
+    end,
   },
   {
     'preservim/vimux',

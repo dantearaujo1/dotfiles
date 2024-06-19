@@ -100,7 +100,7 @@ util.map('n', ']t' , 'gt', nore)
 util.map('n', '[T' , ':tabnew<CR>', nore)
 util.map('n', ']T' , ':tabclose<CR>', nore)
 -- " Toggle search highlight
-util.map('n', '<Leader>hl' , '(&hls && v:hlsearch ? ":nohls" : ":set hls")."\n"', {expr = true, silent = true, noremap = true})
+util.map('n', '<Leader>no' , '(&hls && v:hlsearch ? ":nohls" : ":set hls")."\n"', {expr = true, silent = true, noremap = true})
 -- Open Command Window
 util.map('n', 'q;' , ':q<CR>', nore)
 util.map('n','<F2>',':pu=strftime(\'%c\')<CR>', nore) -- Put time stamp

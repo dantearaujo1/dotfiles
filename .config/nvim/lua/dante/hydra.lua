@@ -44,8 +44,10 @@ Hydra({
   mode = 'n',
   body = 'gt',
   heads = {
-    {'t', '<cmd>lua _lazygit_toggle()<CR>', {desc = 'Lazygit'}},
-    {'T', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc = 'Dotfiles Git'}},
+    {'l', '<cmd>lua _lazygit_toggle()<CR>', {desc = 'Lazygit'}},
+    {'d', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc = 'Dotfiles Git'}},
+    {'w', '<cmd>lua require("telescope").extensions.git_worktree.git_worktrees()<CR>', {desc = 'Switch and Delete WorkTrees'}},
+    {'cw', '<cmd>lua require("telescope").extensions.git_worktree.create_git_worktree()<CR>', {desc = 'Create WorkTrees'}},
     {'do', ':DiffviewOpen<CR>', {desc = 'Open Diff View'}},
     {'dc', ':DiffviewClose<CR>', {desc = 'Close Diff View'}},
     { '<Esc>', nil, { exit = true, nowait = true, desc= 'Exit' } },
