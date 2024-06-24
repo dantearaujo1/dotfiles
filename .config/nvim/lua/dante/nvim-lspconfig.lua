@@ -122,6 +122,13 @@ require("mason-lspconfig").setup_handlers {
       filetypes = { "html" },
     }
   end,
+  ["ltex"] = function()
+    require("lspconfig").html.setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "mail", "text" }
+    }
+  end,
   ["emmet_language_server"] = function()
     require("lspconfig").emmet_language_server.setup ({
         on_attach = on_attach,

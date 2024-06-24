@@ -247,7 +247,18 @@ M.search_configs = function()
     require("telescope.builtin").find_files({
       prompt_title = "< CONFIGS - DANTE - Linux >",
       cwd = "~/.config",
-      search_dirs = {"nvim","kitty","qutebrowser","hypr","waybar","wofi"},
+      search_dirs = {
+        "nvim",
+        "kitty",
+        "qutebrowser",
+        "rofi",
+        "yazi",
+        "nwg-dock",
+        "hypr",
+        "waybar",
+        "wofi",
+        "swaync",
+      },
     })
   end
 end

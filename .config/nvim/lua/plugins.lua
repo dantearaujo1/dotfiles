@@ -19,12 +19,15 @@ return {
   },
   {
     'windwp/nvim-ts-autotag',
-    ft = {
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact"
-    },
+    config = function()
+        require('nvim-ts-autotag').setup({
+            opts = {
+                enable_close = true,
+                enable_rename = true,
+                enable_close_on_slash = true
+            }
+        })
+    end
   },
   {
     'David-Kunz/markid',
@@ -635,7 +638,7 @@ return {
     priority = 1000,
     config = function()
       require('notify').setup({
-        background_colour = "#FFFFFF88"
+        background_colour = "#555555"
       })
     end
   },
@@ -646,8 +649,39 @@ return {
       require('colorful-winsep').setup()
     end
   },
+  { 'xiyaowong/transparent.nvim' },
   { 'shortcuts/no-neck-pain.nvim' },
   { 'LunarVim/bigfile.nvim' },
+  ---@type LazySpec
+  {
+    "mikavilpas/yazi.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    event = "VeryLazy",
+    keys = {
+      -- 👇 in this section, choose your own keymappings!
+      {
+        "<leader>-",
+        function()
+          require("yazi").yazi()
+        end,
+        desc = "Open the file manager",
+      },
+      {
+        -- Open in the current working directory
+        "<leader>cw",
+        function()
+          require("yazi").yazi(nil, vim.fn.getcwd())
+        end,
+        desc = "Open the file manager in nvim's working directory" ,
+      },
+    },
+    ---@type YaziConfig
+    opts = {
+      open_for_directories = false,
+    },
+  },
   -- THEMES =====================================================================
   -- Dashboard ===========================
   {
@@ -662,22 +696,22 @@ return {
   -- ColorColumn ===========================
   { 'xiyaowong/virtcolumn.nvim' },
   { 'm4xshen/smartcolumn.nvim' },
-  -- {
-  --   'mawkler/modicator.nvim',
-  --   init = function()
-  --     -- These are required for Modicator to work
-  --     vim.o.cursorline = true
-  --     vim.o.number = true
-  --     vim.o.termguicolors = true
-  --   end,
-  --   opts = {
-  --     -- Warn if any required option above is missing. May emit false positives
-  --     -- if some other plugin modifies them, which in that case you can just
-  --     -- ignore. Feel free to remove this line after you've gotten Modicator to
-  --     -- work properly.
-  --     show_warnings = true,
-  --   }
-  -- },
+  {
+    'mawkler/modicator.nvim',
+    init = function()
+      -- These are required for Modicator to work
+      vim.o.cursorline = true
+      vim.o.number = true
+      vim.o.termguicolors = true
+    end,
+    opts = {
+      -- Warn if any required option above is missing. May emit false positives
+      -- if some other plugin modifies them, which in that case you can just
+      -- ignore. Feel free to remove this line after you've gotten Modicator to
+      -- work properly.
+      show_warnings = true,
+    }
+  },
   -- ICONS THEMES==================================================
   { 'ryanoasis/vim-devicons' },
   { 'yamatsum/nvim-web-nonicons' },
@@ -786,6 +820,15 @@ return {
       require("copilot").setup{{}}
       vim.keymap.set({ 'n', 'v' }, '<leader>ai', chat.toggle, { desc = 'AI Toggle' })
       vim.keymap.set({ 'n', 'v' }, '<leader>ax', chat.reset, { desc = 'AI Reset' })
+      vim.keymap.set({ 'n'  }, "<leader>aaq",
+          function()
+            local input = vim.fn.input("Quick Chat: ")
+            if input ~= "" then
+              require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+            end
+          end,
+          {desc = "CopilotChat - Quick chat"}
+      )
     end
     -- See Commands section for default commands if you want to lazy load on them
   },

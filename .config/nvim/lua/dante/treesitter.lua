@@ -19,18 +19,6 @@ require 'nvim-treesitter.configs'.setup {
   enable = true,       -- false will disable the whole extension
   sync_install = false,
   auto_install = true,
-  autotag = {
-    enable = true,
-    filetypes = {
-      "html",
-      "javascript",
-      "javascriptreact",
-      "svelte",
-      "vue",
-      "typescript",
-      "typescriptreact",
-    },
-  },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = true,

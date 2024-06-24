@@ -66,6 +66,7 @@ end
 
 -- Help files vertical split
 util.map('n', '<F1>' , ':vert help ' , nore)
+util.map('n', '<F11>' , '<cmd>TransparentToggle<CR>' , nore)
 
 -- Go to start or end of line easier
 util.map('n', 'H' , '^' , nore)

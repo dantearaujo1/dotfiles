@@ -74,6 +74,7 @@ o.virtualedit = 'block'
 o.tildeop = true
 o.joinspaces = false            -- Don't autoinsert two spaces after '.', '?'..
 b.formatoptions = 'mM' 		    -- Format options for buffer
+-- b.formatoptions = 'tcqlmM' 		    -- Format options for buffer
 o.confirm = true
 
 o.wildmode = 'full'
