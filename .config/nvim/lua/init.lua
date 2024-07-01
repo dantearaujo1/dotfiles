@@ -45,9 +45,6 @@ else
 
   -- require('dante/git')
 
-  require('dante/dashboard')
-  require('dante/smartcolumn')
-  require("dante/lspsaga")
   require("dante/neorg")
 
   require('dante/others') -- Some custom plugins configurations

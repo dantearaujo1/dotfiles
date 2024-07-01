@@ -126,9 +126,9 @@ end
 util.map('n', '<leader>gf' , '<C-W>v gf', nore)
 
 -- Terminal Operations ========================================================
-util.map('n','<c-t>','<Cmd> exe v:count1 . "ToggleTerm"<CR>', nore)
-util.map('i','<c-t>','<Esc><Cmd> exe v:count1 . "ToggleTerm"<CR>', nore)
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+-- util.map('n','<c-t>','<Cmd> exe v:count1 . "ToggleTerm"<CR>', nore)
+-- util.map('i','<c-t>','<Esc><Cmd> exe v:count1 . "ToggleTerm"<CR>', nore)
+-- vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 if(util.getOS() == "Linux") then
   if(util.getUser() == "devdante-wsl-ubuntu") then

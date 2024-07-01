@@ -429,7 +429,12 @@ return {
     event = "VeryLazy",
   }, -- Browse and preview json files
   -- GIT ========
-  {'ThePrimeagen/git-worktree.nvim'},
+  {
+    "Juksuu/worktrees.nvim",
+    config = function()
+        require("worktrees").setup()
+    end,
+  },
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
@@ -500,12 +505,49 @@ return {
       }
     end
   }, -- Super fast git decorations implemented purely in Lua/Teal
-  {
-    'sindrets/diffview.nvim',
-    dependencies = 'nvim-lua/plenary.nvim',
-  },                             -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+  { 'sindrets/diffview.nvim' },-- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
   -- Java ========
-  { 'mfussenegger/nvim-jdtls' }, -- Java JDTLS helpers
+  -- {
+  --   'mfussenegger/nvim-jdtls',
+  --   ft = 'java',
+  -- }, -- Java JDTLS helpers
+
+    -- [1] Up and Running Java
+  {
+    "nvim-java/nvim-java",
+    dependencies = {
+      "nvim-java/lua-async-await",
+      "nvim-java/nvim-java-refactor",
+      "nvim-java/nvim-java-core",
+      "nvim-java/nvim-java-test",
+      "nvim-java/nvim-java-dap",
+      "MunifTanjim/nui.nvim",
+      "neovim/nvim-lspconfig",
+      "mfussenegger/nvim-dap",
+      {
+        "williamboman/mason.nvim",
+        opts = {
+          registries = {
+            "github:nvim-java/mason-registry",
+            "github:mason-org/mason-registry",
+          },
+        },
+      },
+    },
+    opts = {
+      notifications = {
+        dap = false,
+      }
+    },
+  },
+  -- {
+  --   "JavaHello/spring-boot.nvim",
+  --   ft = "java",
+  --   dependencies = {
+  --     "nvim-java/nvim-java", -- or nvim-java, nvim-lspconfig
+  --   },
+  -- },
+
   -- Typescript ========
   { 'neoclide/vim-jsx-improve' }, -- Synteax Highlight for jsx and Better indent to
   -- C++ ========
@@ -554,12 +596,16 @@ return {
   -- UI Pluggins ===========================================================
   -- PREVIEWERS
   -- MARKDOWN
-  {
-    'iamcco/markdown-preview.nvim',
-    build = function() vim.fn["mkdp#util#install"]() end,
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-  },
+{
+    "OXY2DEV/markview.nvim",
+    dependencies = {
+        "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
+    },
+
+    config = function ()
+        require("markview").setup();
+    end
+},
   -- LATEX
 
   -- BUFFERS
@@ -578,7 +624,7 @@ return {
   {
     'nvimdev/lspsaga.nvim',
     config = function()
-        require('lspsaga').setup({})
+      require("dante/lspsaga")
     end,
     dependencies = {
         'nvim-treesitter/nvim-treesitter', -- optional
@@ -638,7 +684,7 @@ return {
     priority = 1000,
     config = function()
       require('notify').setup({
-        background_colour = "#555555"
+        background_colour = "#55555500"
       })
     end
   },
@@ -649,7 +695,16 @@ return {
       require('colorful-winsep').setup()
     end
   },
-  { 'xiyaowong/transparent.nvim' },
+  {
+    'xiyaowong/transparent.nvim',
+    config = function()
+      require('transparent').setup({
+        extra_groups = {
+          "StatusLine"
+        }
+      })
+    end
+  },
   { 'shortcuts/no-neck-pain.nvim' },
   { 'LunarVim/bigfile.nvim' },
   ---@type LazySpec
@@ -685,17 +740,23 @@ return {
   -- THEMES =====================================================================
   -- Dashboard ===========================
   {
-    'glepnir/dashboard-nvim',
+    'nvimdev/dashboard-nvim',
     event = 'VimEnter',
-    config = function()
-      require('dashboard').setup {}
-    end,
     dependencies = {
-    }
+      { 'juansalvatore/git-dashboard-nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
+    },
+    config = function()
+      require('dante/dashboard')
+    end
   },
   -- ColorColumn ===========================
   { 'xiyaowong/virtcolumn.nvim' },
-  { 'm4xshen/smartcolumn.nvim' },
+  {
+    'm4xshen/smartcolumn.nvim',
+    config = function()
+      require('dante/smartcolumn')
+    end
+  },
   {
     'mawkler/modicator.nvim',
     init = function()
@@ -728,11 +789,11 @@ return {
       end,
   },
   -- My Pluggins ===========================================================
-  {
-    '~/dev/projects/lua/neovim/project-creator',
-    dev = true,
-    enabled = function() return util.getOS() == "Linux" end
-  },
+  -- {
+  --   '~/dev/projects/lua/neovim/project-creator',
+  --   dev = true,
+  --   enabled = function() return util.getOS() == "Linux" end
+  -- },
   -- {
   --   '~/dev/projects/lua/neovim/nepsAcademyIntegration',
   --   dev = true,
@@ -779,13 +840,15 @@ return {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
-    opts = {
-      debug = true, -- Enable debugging
-      -- See Configuration section for rest
-    },
     config = function ()
       local chat = require("CopilotChat")
       chat.setup{
+        debug = false, -- Enable debugging
+        show_help = "yes",
+        disable_extra_info = 'no',
+        window = {
+          layout = 'float',
+        },
         prompts = {
           Explain = {
               mapping = '<leader>ae',
@@ -815,6 +878,12 @@ return {
               mapping = '<leader>ac',
               description = 'AI Generate Commit',
           },
+        },
+        mappings = {
+          submit_prompt = {
+            normal = '<CR>',
+            insert = '<C-m>'
+          }
         }
       }
       require("copilot").setup{{}}

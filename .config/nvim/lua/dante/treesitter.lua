@@ -1,5 +1,5 @@
 require 'nvim-treesitter.install'.compilers = { "gcc", "clang" }
-require 'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup ({
   ensure_installed = {
     "c",
     "cmake",
@@ -105,4 +105,4 @@ require 'nvim-treesitter.configs'.setup {
       enable_autocmd = false,
     }
   },
-}
+})

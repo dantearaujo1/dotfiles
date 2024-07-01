@@ -9,7 +9,7 @@ end
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'onedark',
+    theme = 'powerline_dark',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {
@@ -27,12 +27,12 @@ require'lualine'.setup {
   },
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch'},
+    lualine_b = {{'b:gitsigns_head', icon = ''}},
     lualine_c = {'filename',{navic.get_location, cond = navic.is_available} },
-    lualine_x = {'filetype','fileformat', 'encoding'},
+    lualine_x = {'filetype','fileformat'},
     -- lualine_y = {'progress'},
-    lualine_y = {{keymap}},
-    lualine_z = {'progress','location'}
+    lualine_y = {},
+    lualine_z = {'location'}
   },
   inactive_sections = {
     lualine_a = {},

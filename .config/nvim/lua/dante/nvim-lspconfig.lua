@@ -1,17 +1,13 @@
 local navic = require("nvim-navic")
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-
 capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true
 }
 
 local options = { noremap = true, silent = true }
-vim.keymap.set('n', '[d', vim.diagnostic.goto_next, options)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_prev, options)
-vim.keymap.set('n', '<localleader>o', vim.diagnostic.open_float, options)
+vim.keymap.set('n', '<leader>o', vim.diagnostic.open_float, options)
 vim.keymap.set('n', '<localleader>q', vim.diagnostic.setloclist, options)
 
 local signature_setup = {
@@ -50,7 +46,7 @@ local signature_setup = {
 
   padding = ' ', -- character to pad on left and right of signature can be ' ', or '|'  etc
 
-  transparency = nil, -- disabled by default, allow floating win transparent value 1~100
+  transparency = 100, -- disabled by default, allow floating win transparent value 1~100
   shadow_blend = 36, -- if you using shadow as border use this set the opacity
   shadow_guibg = 'Black', -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
   timer_interval = 200, -- default timer check interval set to lower value if you want to reduce latency
@@ -67,13 +63,9 @@ local on_attach = function(client, bufnr)
   end
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<localleader>gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<localleader>k', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<localleader>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', '<localleader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>td', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<leader>DS', require('telescope.builtin').lsp_document_symbols, bufopts)
   vim.keymap.set('n', '<leader>WS', require('telescope.builtin').lsp_dynamic_workspace_symbols, bufopts)
@@ -154,8 +146,10 @@ require("mason-lspconfig").setup_handlers {
   end,
   ["lua_ls"] = function()
     require("lspconfig").lua_ls.setup { }
-  end
+  end,
+  ["jdtls"] = function()
+    require("java").setup()
+    require("lspconfig").jdtls.setup { }
+  end,
 }
-
-
 
