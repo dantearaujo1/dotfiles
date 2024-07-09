@@ -41,6 +41,7 @@ lazy = true
 [scratchpads.wpp]
 animation = "fromTop"
 command = "whatsie"
+position = "12% 10%"
 # unfocus = "hide"
 class = "com.ktechpit.whatsie"
 size = "75% 80%"
@@ -66,6 +67,12 @@ lazy = true
 command = "kitty --class kitty-dropterm-mail neomutt"
 animation = "fromTop"
 class = "kitty-dropterm-mail"
-unfocus = "hide"
+size = "75% 80%"
+lazy = true
+
+[scratchpads.calendar]
+command = "kitty --class kitty-dropterm-calendar calcurse"
+animation = "fromTop"
+class = "kitty-dropterm-calendar"
 size = "75% 80%"
 lazy = true

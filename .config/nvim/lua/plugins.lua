@@ -251,7 +251,25 @@ return {
       'tyru/open-browser.vim'
     }
   },
-  -- Custom Pluggins =============================================================
+  -- Utils Pluggins =============================================================
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require('harpoon').setup()
+      vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+      vim.keymap.set("n", "<leader>ha", function() harpoon.list():add() end)
+    end
+  },
+  {
+    "jiaoshijie/undotree",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+    keys = { -- load the plugin only when using it's keybinding:
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+    },
+  },
   {
     'stevearc/oil.nvim',
     opts = {},
@@ -268,9 +286,13 @@ return {
       require 'window-picker'.setup()
     end,
   },
-  { 'wesq3/vim-windowswap' }, -- Exchange Windows
-
-  { 'folke/todo-comments.nvim' },
+  {
+    'wesq3/vim-windowswap',
+    event = "VeryLazy",
+  }, -- Exchange Windows
+  {
+    'folke/todo-comments.nvim',
+  },
   -- The both plugin are for highligting indentation
   -- { 'lukas-reineke/indent-blankline.nvim', main = 'ibl' },
   {
@@ -280,8 +302,12 @@ return {
       require("hlchunk").setup({})
     end
   },
-  { 'arnamak/stay-centered.nvim' }, -- autocmds for always stay centered
-  -- Bundle of mini modules [Using for mini-align]
+  {
+    'arnamak/stay-centered.nvim',
+    config = function()
+      require('stay-centered') -- Always make text centered
+    end
+  }, -- autocmds for always stay centered
   {
     'echasnovski/mini.nvim',
     dependencies = {
@@ -301,13 +327,76 @@ return {
           end,
         },
       })
-      -- require("mini.clue").setup() -- Using Hydra
+      local miniclue = require("mini.clue")
+      miniclue.setup({
+
+        triggers = {
+          -- Leader triggers
+          { mode = 'n', keys = '<Leader>' },
+          { mode = 'x', keys = '<Leader>' },
+
+          -- Built-in completion
+          { mode = 'i', keys = '<C-x>' },
+
+          -- `g` key
+          { mode = 'n', keys = 'g' },
+          { mode = 'x', keys = 'g' },
+
+          -- Marks
+          { mode = 'n', keys = "'" },
+          { mode = 'n', keys = '`' },
+          { mode = 'x', keys = "'" },
+          { mode = 'x', keys = '`' },
+
+          -- Registers
+          { mode = 'n', keys = '"' },
+          { mode = 'x', keys = '"' },
+          { mode = 'i', keys = '<C-r>' },
+          { mode = 'c', keys = '<C-r>' },
+
+          -- Window commands
+          { mode = 'n', keys = '<C-w>' },
+
+          -- `z` key
+          { mode = 'n', keys = 'z' },
+          { mode = 'x', keys = 'z' },
+        },
+
+        clues = {
+          -- Enhance this by adding descriptions for <Leader> mapping groups
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.marks(),
+          miniclue.gen_clues.registers(),
+          miniclue.gen_clues.windows(),
+          miniclue.gen_clues.z(),
+          { mode = 'n', keys = '<Leader>w', desc = ' Window Operations' },
+          { mode = 'n', keys = '<Leader>g', desc = ' Git Operations' },
+          { mode = 'n', keys = '<Leader>f', desc = ' Telescope' },
+          { mode = 'n', keys = '<Leader>wh', postkeys = '<Leader>w' },
+          { mode = 'n', keys = '<Leader>wj', postkeys = '<Leader>w' },
+          { mode = 'n', keys = '<Leader>wk', postkeys = '<Leader>w' },
+          { mode = 'n', keys = '<Leader>wl', postkeys = '<Leader>w' },
+        },
+        window = {
+          delay = 500,
+          config = {
+            width = 'auto',
+            border = 'double',
+          }
+
+        }
+      })
       -- require("mini.indentscope").setup()
       -- require("mini.animate").setup()
     end,
   },
-  { 'tommcdo/vim-exchange' }, -- Easy text exchange operator for Vim
-  { 'ggandor/leap.nvim' },
+  {
+    'tommcdo/vim-exchange',
+  }, -- Easy text exchange operator for Vim
+  {
+    'ggandor/leap.nvim',
+  },
   {
     "fedepujol/move.nvim",
     config = function()
@@ -336,9 +425,15 @@ return {
       require('flit').setup({ labeled_modes = "nv" })
     end
   },
-  { 'vim-scripts/ReplaceWithRegister' }, -- Replace with gr
-  { 'foosoft/vim-argwrap' },             -- Strenght argument wrapping and unwrapping
-  { 'AckslD/nvim-trevJ.lua', },          -- Opposite of J
+  {
+    'vim-scripts/ReplaceWithRegister',
+  }, -- Replace with gr
+  {
+    'foosoft/vim-argwrap',
+  },             -- Strenght argument wrapping and unwrapping
+  {
+    'AckslD/nvim-trevJ.lua',
+  },          -- Opposite of J
   {
     'kylechui/nvim-surround',
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -357,8 +452,34 @@ return {
     },
   },
   -- { 'windwp/nvim-autopairs' }, -- Auto close () [] {} <Tags>
-  { 'bkad/camelcasemotion' },          -- Plugin for movin in camelcase with localleader
-  { 'propet/toggle-fullscreen.nvim' }, -- Toggle fullScreen with <leader>z
+  -- {
+  --   'bkad/camelcasemotion',
+  -- },          -- Plugin for movin in camelcase with localleader
+  -- {
+  --   "chrisgrieser/nvim-spider",
+  --   keys = {
+  --     {
+  --       "e",
+  --       "<cmd>lua require('spider').motion('e')<CR>",
+  --       mode = { "n", "o", "x" },
+  --     },
+  --     {
+  --       "w",
+  --       "<cmd>lua require('spider').motion('w')<CR>",
+  --       mode = { "n", "o", "x" },
+  --     },
+  --     {
+  --       "b",
+  --       "<cmd>lua require('spider').motion('b')<CR>",
+  --       mode = { "n", "o", "x" },
+  --     },
+  --     -- ...
+  --   },
+  -- },
+  {
+    'propet/toggle-fullscreen.nvim',
+    event = "VeryLazy",
+  }, -- Toggle fullScreen with <leader>z
   {
     'folke/zen-mode.nvim',
     event = "VeryLazy",
@@ -380,12 +501,9 @@ return {
       })
     end
   }, -- Color Picker
-  {
-    "nvimtools/hydra.nvim",
-    config = function()
-      -- create hydras in here
-    end
-  },
+  -- {
+  --   "nvimtools/hydra.nvim",
+  -- },
 
   -- Language Specifics ==========================================================
   -- Processing ========
@@ -430,29 +548,26 @@ return {
   }, -- Browse and preview json files
   -- GIT ========
   {
+    "dlvhdr/gh-blame.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
+    keys = {
+      { "<leader>gh", "<cmd>GhBlameCurrentLine<cr>", desc = "GitHub Blame Current Line" },
+    },
+  },
+  {
     "Juksuu/worktrees.nvim",
     config = function()
         require("worktrees").setup()
     end,
   },
-  {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require('harpoon').setup({})
-      vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-      vim.keymap.set("n", "<leader>ha", function() harpoon.list():add() end)
-    end
-  },
-  {
-    'NeogitOrg/neogit',
-    dependencies = 'nvim-lua/plenary.nvim',
-    event = "VeryLazy",
-    config = function()
-      require('neogit').setup({})
-    end
-  },
+  -- {
+  --   'NeogitOrg/neogit',
+  --   dependencies = 'nvim-lua/plenary.nvim',
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require('neogit').setup({})
+  --   end
+  -- },
   {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -757,22 +872,22 @@ return {
       require('dante/smartcolumn')
     end
   },
-  {
-    'mawkler/modicator.nvim',
-    init = function()
-      -- These are required for Modicator to work
-      vim.o.cursorline = true
-      vim.o.number = true
-      vim.o.termguicolors = true
-    end,
-    opts = {
-      -- Warn if any required option above is missing. May emit false positives
-      -- if some other plugin modifies them, which in that case you can just
-      -- ignore. Feel free to remove this line after you've gotten Modicator to
-      -- work properly.
-      show_warnings = true,
-    }
-  },
+  -- {
+  --   'mawkler/modicator.nvim',
+  --   init = function()
+  --     -- These are required for Modicator to work
+  --     vim.o.cursorline = true
+  --     vim.o.number = true
+  --     vim.o.termguicolors = true
+  --   end,
+  --   opts = {
+  --     -- Warn if any required option above is missing. May emit false positives
+  --     -- if some other plugin modifies them, which in that case you can just
+  --     -- ignore. Feel free to remove this line after you've gotten Modicator to
+  --     -- work properly.
+  --     show_warnings = true,
+  --   }
+  -- },
   -- ICONS THEMES==================================================
   { 'ryanoasis/vim-devicons' },
   { 'yamatsum/nvim-web-nonicons' },

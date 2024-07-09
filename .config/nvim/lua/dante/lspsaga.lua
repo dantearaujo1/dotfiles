@@ -58,8 +58,8 @@ vim.fn.sign_define(
 
 local keymap = vim.keymap.set
 
-vim.keymap.set('n', '[d', "<cmd>Lspsaga diagnostic_jump_next<CR>", options)
-vim.keymap.set('n', ']d', "<cmd>Lspsaga diagnostic_jump_previous<CR>", options)
+vim.keymap.set('n', '[d', "<cmd>Lspsaga diagnostic_jump_next<CR>", { noremap = true })
+vim.keymap.set('n', ']d', "<cmd>Lspsaga diagnostic_jump_prev<CR>", { noremap = true })
 -- LSP finder - Find the symbol's definition
 -- you can use <C-t> to jump back
 keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")

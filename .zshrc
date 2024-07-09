@@ -102,13 +102,13 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
     plugins=(
         z
         git
+        git-extras
         zsh-autosuggestions
         command-not-found
         extract
         fzf
         web-search
         yum
-        git-extras
         docker
         vagrant
         tmux
@@ -125,12 +125,12 @@ else
     plugins=(
         z
         git
+        git-extras
         zsh-autosuggestions
         command-not-found
         extract
         fzf
         web-search
-        git-extras
         docker
         tmux
         copyfile
@@ -145,11 +145,11 @@ else
     plugins=(
         z
         git
+        git-extras
         zsh-autosuggestions
         command-not-found
         extract
         fzf
-        git-extras
         docker
         tmux
         copyfile
@@ -189,9 +189,9 @@ _fzf_complete_git(){
 }
 
 # MAN - CONFIGURATIONS
-# export MANPAGER='nvim +Man!'
-# export MANWIDTH=999
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
+export MANPATH="/usr/local/man:$MANPATH"
 
 export GOPATH="$HOME/.go"
 export GOBIN="$GOPATH/bin"
@@ -327,6 +327,7 @@ alias cls="clear"
 alias f='nvim "$(fzf)"'
 alias fn='files=$(fd . ~/Notes/ --type f | fzf -m --ansi --preview  "bat {}") && [ -n "$files" ] && nvim "$files"  && unset files'
 alias fzc='files=$(fd . ~/.config/ --type f | fzf -m --ansi --preview  "bat {}") && [ -n "$files" ] && nvim "$files"  && unset files'
+alias fzg="git status --short | grep '^[ M??]' | awk '{print $2}' | fzf --multi"
 alias fzf="fzf-tmux -p 80%,80%"
 alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'bat --style=numbers --color=always --line-range :500 {}' | xargs nvim"
 alias pacall="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"

@@ -245,3 +245,56 @@ vim.keymap.set('v', '<A-j>', ':MoveBlock(1)<CR>', opts)
 vim.keymap.set('v', '<A-k>', ':MoveBlock(-1)<CR>', opts)
 vim.keymap.set('v', '<A-h>', ':MoveHBlock(-1)<CR>', opts)
 vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
+
+-- GIT
+vim.keymap.set('n', '<Leader>gg', '<cmd>lua _lazygit_toggle()<CR>', {desc="Toggle Lazygit"})
+vim.keymap.set('n', '<Leader>gd', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc="Toggle Lazygit in Dotfiles"})
+vim.keymap.set('n', '<Leader>go', ':DiffviewOpen<CR>', {desc = 'Open Diff View'} )
+vim.keymap.set('n', '<Leader>gq', ':DiffviewClose<CR>', {desc = 'Close Diff View'} )
+vim.keymap.set( 'n','<Leader>gw', '<cmd>lua require("telescope").extensions.worktrees.list_worktrees()<CR>', {desc = 'Switch Worktrees'} )
+vim.keymap.set( 'n','<Leader>gc', '<cmd>GitWorktreeCreateExisting<CR>', {desc = 'Create WorkTrees'} )
+
+-- Telescope
+vim.keymap.set('n', '<Leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Show open Buffers' })
+vim.keymap.set('n', '<Leader>fB', '<cmd>Telescope builtin<CR>', { desc = 'Show Builtins' })
+vim.keymap.set('n', '<Leader>fcc', '<cmd>Telescope colorscheme<CR>', { desc = 'Show Available ColorSchemes' })
+vim.keymap.set('n', '<Leader>fcm', '<cmd>Telescope commands<CR>', { desc = 'Execute command' })
+vim.keymap.set('n', '<Leader>fe', '<cmd>Telescope file_browser<CR>', { desc = 'Enter directory mode' })
+vim.keymap.set('n', '<Leader>fE', '<cmd>Telescope env<CR>', { desc = 'See Environment Variables' })
+vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files<CR>', { desc = 'Look for a file in the cwd' })
+vim.keymap.set('n', '<Leader>fF', '<cmd>Telescope live_grep_args<CR>', { desc = 'Look for a string inside a file in a folder' })
+vim.keymap.set('n', '<Leader>fg', '<cmd>Telescope live_grep<CR>', { desc = 'Search string in files' })
+vim.keymap.set('n', '<Leader>fG', '<cmd>Telescope git_files<CR>', { desc = 'Show git files' })
+vim.keymap.set('n', '<Leader>fh', '<cmd>Telescope help_tags<CR>', { desc = 'Vim help' })
+vim.keymap.set('n', '<Leader>fH', ':lua require("dante.telescope").search_from_home()<CR>', { desc = 'Find files from home' })
+vim.keymap.set('n', '<Leader>fj', '<cmd>Telescope symbols<CR>', { desc = 'Show emojis' })
+vim.keymap.set('n', '<Leader>fk', '<cmd>Telescope keymaps<CR>', { desc = 'Show keymaps' })
+vim.keymap.set('n', '<Leader>fl', '<cmd>Telescope lazy<CR>', { desc = 'Show plugins' })
+vim.keymap.set('n', '<Leader>fl', ':lua require("dante.telescope").search_notes()<CR>', { desc = 'Search Notes' })
+
+vim.keymap.set('n', '<Leader>f,', ':lua require("dante.telescope").search_dotfiles()<CR>', { desc = 'Search Dotfiles' })
+vim.keymap.set('n', '<Leader>f.', ':lua require("dante.telescope").search_configs()<CR>', { desc = 'Search Configuration Files' })
+vim.keymap.set('n', '<Leader>f<', ':lua require("dante.telescope").grep_dotfiles()<CR>', { desc = 'Grep Nvim Files' })
+
+      -- { 'm', cmd 'Telescope openbrowser list', { desc = 'Show url bookmarks' } },
+      -- { 'o', cmd 'Telescope oldfiles', { desc = 'recently opened files' } },
+      -- { 'O', cmd 'Telescope vim_options' },
+      -- { 'p', cmd ':lua require"telescope".extensions.project.project{}<CR>', { desc = 'projects' } },
+      -- { 'q', cmd 'Telescope quickfixhistory', { desc = 'Show quickfix menu' } },
+      -- { 'r', cmd 'Telescope repo cached_list' },
+      -- { 'R', cmd 'Telescope resume' },
+      -- { 's', cmd 'Telescope luasnip' },
+      -- { 't', cmd 'TodoTelescope' },
+      -- { 'T', cmd 'Telescope asynctasks all', { desc = 'List of AsyncTasks' } },
+      -- -- { 'u', cmd 'silent! %foldopen! | UndotreeToggle', { desc = 'undotree' }},
+      -- { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'search in file' } },
+      -- { '?', cmd 'Telescope search_history',  { desc = 'search history' } },
+      -- { ';', cmd 'Telescope command_history', { desc = 'command-line history' } },
+      -- { '<Enter>', cmd 'Telescope', { exit = true, desc = 'list all pickers' } },
+
+-- Window
+    vim.keymap.set('n', '<Leader>wh', '<C-w><', {desc = 'Expand Buffer Left'} )
+    vim.keymap.set('n', '<Leader>wj', '<C-w>-', {desc = 'Expand Buffer Up'} )
+    vim.keymap.set('n', '<Leader>wk', '<c-w>+', {desc = 'Expand Buffer Bottom'} )
+    vim.keymap.set('n', '<Leader>wl', '<c-w>>', {desc = 'Expand Buffer Right'} )
+    vim.keymap.set('n', '<Leader>wz', ':lua require("toggle-fullscreen"):toggle_fullscreen()<CR>', {desc = 'Make Buffer FullScreen'} )

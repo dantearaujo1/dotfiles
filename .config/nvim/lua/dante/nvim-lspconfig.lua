@@ -148,7 +148,7 @@ require("mason-lspconfig").setup_handlers {
     require("lspconfig").lua_ls.setup { }
   end,
   ["jdtls"] = function()
-    require("java").setup()
+    -- require("java").setup()
     require("lspconfig").jdtls.setup { }
   end,
 }
