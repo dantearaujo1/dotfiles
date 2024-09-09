@@ -43,7 +43,6 @@ else
  require('keymappings')
  require('variables')
  require('autocmd')
- -- require('dante/hydra') -- Don't Working anymore
  require('colors')
 
   -- Dante Plugins

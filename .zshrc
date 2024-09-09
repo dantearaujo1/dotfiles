@@ -115,10 +115,7 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
         copyfile
         copypath
         common-aliases
-        python
         colorize
-        poetry
-        poetry-env
       )
 else
   if [ -z "$TMUX" ]; then
@@ -136,10 +133,7 @@ else
         copyfile
         copypath
         common-aliases
-        python
         colorize
-        poetry
-        poetry-env
       )
   else
     plugins=(
@@ -155,10 +149,8 @@ else
         copyfile
         copypath
         common-aliases
-        python
         colorize
-        poetry
-        poetry-env
+        autoswitch_virtualenv
       )
   fi
 fi

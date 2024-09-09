@@ -28,11 +28,24 @@ require'lualine'.setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {{'b:gitsigns_head', icon = ''}},
-    lualine_c = {'filename',{navic.get_location, cond = navic.is_available} },
+    lualine_c = {
+      -- {
+      --   require('tmux-status').tmux_windows,
+      --   cond = require('tmux-status').show,
+      -- },
+      'filename',
+      {navic.get_location, cond = navic.is_available},
+    },
     lualine_x = {'filetype','fileformat'},
     -- lualine_y = {'progress'},
     lualine_y = {},
-    lualine_z = {'location'}
+    lualine_z = {
+      -- {
+      --   require('tmux-status').tmux_session,
+      --   cond = require('tmux-status').show,
+      -- },
+      'location',
+    }
   },
   inactive_sections = {
     lualine_a = {},

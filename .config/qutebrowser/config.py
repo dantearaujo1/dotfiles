@@ -1,6 +1,11 @@
 config.load_autoconfig()
 config.source('themes/qute-city-lights/city-lights-theme.py')
 
+# Utils
+def bind_chained(key, *commands):
+    config.bind(key, ' ;; '.join(commands))
+
+
 ## ,ym is my shortcut to “yank markdown-formatted link”
 ## ym (without a leading comma) also works because it is built-in
 config.bind('<Ctrl+T>', 'spawn --userscript translate')
@@ -19,7 +24,6 @@ config.bind("<Ctrl+Alt+0>", 'tab-focus 10')
 config.bind("<Ctrl-=>", 'zoom-in')
 config.bind("<Ctrl-->", 'zoom-out')
 config.bind("<Ctrl+r>", 'config-source')
-config.bind(';', 'cmd-set-text :')
 config.bind(',t', 'hint userscript link translate')
 config.bind(',T', 'hint userscript all translate --text')
 config.bind(",l", 'spawn --userscript qute-bitwarden')
@@ -27,6 +31,8 @@ config.bind(',v','hint links spawn mpv {hint-url}')
 config.bind(',b','hint links spawn mpv --wayland-app-id=pip {hint-url}')
 config.bind(',B','spawn mpv {url}')
 config.bind(',g','tab-give')
+config.bind(',r','open -t https://freedium.cfd/{url}')
+config.bind(',R','open -t https://12ft.io/{url}')
 config.bind(",p", 'cmd-set-text :open -p ')
 config.bind(",w", 'cmd-set-text :open -w ')
 config.bind(",cc", 'hint code userscript code_select.py')
@@ -52,6 +58,10 @@ c.url.searchengines['gh'] = 'https://github.com/search?q={}&type=Code'
 c.url.searchengines['ap'] = 'https://www.archlinux.org/packages/?sort=&q={}'
 c.url.searchengines['ab'] = 'https://bugs.archlinux.org/?project=5&string={}'
 c.url.searchengines['gp'] = 'http://127.0.0.1:{}'
+c.url.searchengines['rd'] = 'https://www.reddit.com/search/?q={}&type=link&cId=50c89248-b25c-4b48-abdf-543304d94b16&iId=dc230979-a2a8-49a0-914c-87634f929a79'
+c.url.searchengines['rdn'] = 'https://www.reddit.com/r/neovim/search/?q={}&type=link&cId=50c89248-b25c-4b48-abdf-543304d94b16&iId=dc230979-a2a8-49a0-914c-87634f929a79'
+c.url.searchengines['rdq'] = 'https://www.reddit.com/r/qutebrowser/search/?q={}&type=link&cId=50c89248-b25c-4b48-abdf-543304d94b16&iId=dc230979-a2a8-49a0-914c-87634f929a79'
+c.url.searchengines['rda'] = 'https://www.reddit.com/r/arch-linux/search/?q={}&type=link&cId=50c89248-b25c-4b48-abdf-543304d94b16&iId=dc230979-a2a8-49a0-914c-87634f929a79'
 
 c.aliases['ge'] = 'open -t https://wiki.archlinux.org/index.php/Forum_Etiquette'
 c.aliases['gu'] = 'open -t https://github.com/dantearaujo1'
@@ -75,9 +85,13 @@ c.hints.selectors["code"] = [
     "pre"
 ]
 
+# Clipboard access
 # c.content.javascript.clipboard = "access"
+bind_chained("ya", 'set -t -p content.javascript.clipboard access','cmd-later 10s set -p content.javascript.clipboard none') # Enable clipboard access
 c.content.local_content_can_access_remote_urls = True
 with config.pattern('*://github.com/') as p:
+    p.content.javascript.clipboard = "access-paste"
+with config.pattern('*://gitlab.com/') as p:
     p.content.javascript.clipboard = "access-paste"
 with config.pattern('*://chatgpt.com/') as p:
     p.content.javascript.clipboard = "access-paste"
@@ -91,6 +105,15 @@ with config.pattern('*://dev.to/') as p:
     p.content.javascript.clipboard = "access"
 with config.pattern('*://dashboard.ngrok.com/') as p:
     p.content.javascript.clipboard = "access"
+
+# Passthrough Mode
+# config.bind('<Ctrl-V>', 'mode-leave', mode='passthrough')
+# config.bind('<Ctrl-J>', 'back', mode='passthrough')
+# config.bind('<Ctrl-K>', 'forward', mode='passthrough')
+with config.pattern('*.figma.com') as p:
+    p.input.mode_override = 'passthrough'
+with config.pattern('*.chatgpt.com') as p:
+    p.input.mode_override = 'passthrough'
 
 # Set VIFM as file picker.
 # config.set("fileselect.handler", "external")

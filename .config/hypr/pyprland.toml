@@ -10,41 +10,37 @@ plugins = [
 animation = "fromTop"
 command = "kitty --class kitty-dropterm tmux new -s dropdown"
 class = "kitty-dropterm"
-size = "80% 80%"
+size = "90% 90%"
 lazy = true
 excludes = ["wpp","volume","fm"]
 
+[scratchpads.web]
+animation = "fromTop"
+command = "qutebrowser"
+class = "org.qutebrowser.qutebrowser"
+size = "85% 90%"
+lazy = true
+
 [scratchpads.volume]
 command = "pavucontrol"
-animation = "fromRight"
-class = "pavucontrol"
-class_match=true
-process_tracking=false
-lazy = true
+animation = "fromTop"
+class = "org.pulseaudio.pavucontrol"
 size = "40% 90%"
-
-# [scratchpads.fm]
-# animation = "fromTop"
-# command = "kitty --class kitty-dropterm ~/dev/scripts/scratchpads.sh fm"
-# class = "kitty-dropterm"
-# size = "75% 80%"
-# lazy = true
-# excludes = ["term","volume","wpp"]
+lazy = true
 
 [scratchpads.fm]
 animation = "fromTop"
 command = "kitty --class kitty-dropterm-fm yazi"
 class = "kitty-dropterm-fm"
-size = "75% 80%"
+size = "75% 85%"
 lazy = true
 
 [scratchpads.wpp]
 animation = "fromTop"
 command = "whatsie"
-position = "12% 10%"
-# unfocus = "hide"
+match_by = "class"
 class = "com.ktechpit.whatsie"
-size = "75% 80%"
+size = "80% 80%"
 lazy = true
 
 [scratchpads.spotify]
@@ -54,14 +50,6 @@ class = "Spotify"
 unfocus = "hide"
 size = "75% 80%"
 lazy = true
-
-# [scratchpads.mail]
-# command = "thunderbird"
-# animation = "fromTop"
-# class = "thunderbird"
-# unfocus = "hide"
-# size = "75% 80%"
-# lazy = true
 
 [scratchpads.mail]
 command = "kitty --class kitty-dropterm-mail neomutt"
@@ -75,4 +63,11 @@ command = "kitty --class kitty-dropterm-calendar calcurse"
 animation = "fromTop"
 class = "kitty-dropterm-calendar"
 size = "75% 80%"
+lazy = true
+
+[scratchpads.gpt]
+command = "noi-desktop"
+animation = "fromTop"
+class = "Noi"
+size = "75% 90%"
 lazy = true

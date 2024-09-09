@@ -152,4 +152,19 @@ require("mason-lspconfig").setup_handlers {
     require("lspconfig").jdtls.setup { }
   end,
 }
+require("mason-null-ls").setup({
+  ensure_installed = {
 
+  },
+  handlers = {
+
+  },
+  automatic_installation = true
+})
+
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    -- Anything not supported by mason
+  },
+})

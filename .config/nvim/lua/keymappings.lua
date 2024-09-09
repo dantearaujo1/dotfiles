@@ -131,10 +131,15 @@ util.map('n', '<leader>gf' , '<C-W>v gf', nore)
 -- vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 if(util.getOS() == "Linux") then
-  if(util.getUser() == "devdante-wsl-ubuntu") then
     util.map('n', '<leader>tc' , ':VimuxCloseRunner<CR>', nore)
     util.map('n', '<leader>to' , ':VimuxOpenRunner<CR>', nore)
-  end
+    util.map('n', '<leader>tp' , ':VimuxPromptRunner<CR>', nore)
+    util.map('n', '<leader>tt' , ':VimuxTogglePane<CR>', nore)
+    util.map('n', '<leader>tl' , ':VimuxLastCommand<CR>', nore)
+    util.map('n', '<leader>tL' , ':VimuxClearTerminalScreen<CR>', nore)
+    util.map('n', '<leader>ti' , ':VimuxRunCommand<CR>', nore)
+    util.map('n', '<leader>tI' , ':VimuxInterruptCommand<CR>', nore)
+    util.map('n', '<leader>tr' , ':VimuxRunCommand<CR>', nore)
 end
 
 
@@ -206,7 +211,7 @@ util.map('n', 'mk' , '<Plug>Markdown_Checkbox', nore)
 -- ================================================================|ARGWRAP|
 util.map('n', '<leader><leader>a', ':ArgWrap<CR>', nore)
 -- ================================================================|NEOTREE|
-util.map('n', '<leader>E' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
+-- util.map('n', '<leader>E' , ':Neotree dir=~/.config/nvim/lua/ toggle<CR>', nore)
 -- ================================================================
 util.map('i', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
 util.map('s', '<C-E>', 'luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"', {expr =true, noremap = true, silent = true})
@@ -233,6 +238,10 @@ vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist"
 vim.keymap.set("n", "<leader>xr", function() require("trouble").toggle("lsp_references") end)
 
 -- ================================================================|MOVE|
+vim.keymap.set({ "n" }, "<S-A-k>"   ,"<CMD>LineDuplicate -1<CR>")
+vim.keymap.set({ "n" }, "<S-A-j>" ,"<CMD>LineDuplicate +1<CR>")
+vim.keymap.set({ "v" }, "<S-A-k>"   ,"<CMD>VisualDuplicate -1<CR>")
+vim.keymap.set({ "v" }, "<S-A-j>" ,"<CMD>VisualDuplicate +1<CR>")
 vim.keymap.set('n', '<A-j>', ':MoveLine(1)<CR>', opts)
 vim.keymap.set('n', '<A-k>', ':MoveLine(-1)<CR>', opts)
 vim.keymap.set('n', '<A-h>', ':MoveHChar(-1)<CR>', opts)
@@ -248,11 +257,15 @@ vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
 
 -- GIT
 vim.keymap.set('n', '<Leader>gg', '<cmd>lua _lazygit_toggle()<CR>', {desc="Toggle Lazygit"})
-vim.keymap.set('n', '<Leader>gd', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc="Toggle Lazygit in Dotfiles"})
-vim.keymap.set('n', '<Leader>go', ':DiffviewOpen<CR>', {desc = 'Open Diff View'} )
-vim.keymap.set('n', '<Leader>gq', ':DiffviewClose<CR>', {desc = 'Close Diff View'} )
+vim.keymap.set('n', '<Leader>gld', '<cmd>lua _lazygit_dotfiles_toggle()<CR>', {desc="Toggle Lazygit in Dotfiles"})
+vim.keymap.set('n', '<Leader>gd', ':DiffviewOpen<CR>', {desc = 'Open Diff View'} )
+vim.keymap.set('n', '<Leader>gD', ':DiffviewClose<CR>', {desc = 'Close Diff View'} )
 vim.keymap.set( 'n','<Leader>gw', '<cmd>lua require("telescope").extensions.worktrees.list_worktrees()<CR>', {desc = 'Switch Worktrees'} )
 vim.keymap.set( 'n','<Leader>gc', '<cmd>GitWorktreeCreateExisting<CR>', {desc = 'Create WorkTrees'} )
+
+-- GIT DEV
+vim.keymap.set('n', '<Leader>gO', ':GitDevOpen ', {desc="Open a remote git repository"})
+vim.keymap.set('n', '<Leader>got', ':GitDevToggleUI ', {desc="Open the UI for GIT Dev"})
 
 -- Telescope
 vim.keymap.set('n', '<Leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Show open Buffers' })
@@ -261,7 +274,7 @@ vim.keymap.set('n', '<Leader>fcc', '<cmd>Telescope colorscheme<CR>', { desc = 'S
 vim.keymap.set('n', '<Leader>fcm', '<cmd>Telescope commands<CR>', { desc = 'Execute command' })
 vim.keymap.set('n', '<Leader>fe', '<cmd>Telescope file_browser<CR>', { desc = 'Enter directory mode' })
 vim.keymap.set('n', '<Leader>fE', '<cmd>Telescope env<CR>', { desc = 'See Environment Variables' })
-vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files<CR>', { desc = 'Look for a file in the cwd' })
+vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files hidden=true<CR>', { desc = 'Look for a file in the cwd' })
 vim.keymap.set('n', '<Leader>fF', '<cmd>Telescope live_grep_args<CR>', { desc = 'Look for a string inside a file in a folder' })
 vim.keymap.set('n', '<Leader>fg', '<cmd>Telescope live_grep<CR>', { desc = 'Search string in files' })
 vim.keymap.set('n', '<Leader>fG', '<cmd>Telescope git_files<CR>', { desc = 'Show git files' })
@@ -270,7 +283,7 @@ vim.keymap.set('n', '<Leader>fH', ':lua require("dante.telescope").search_from_h
 vim.keymap.set('n', '<Leader>fj', '<cmd>Telescope symbols<CR>', { desc = 'Show emojis' })
 vim.keymap.set('n', '<Leader>fk', '<cmd>Telescope keymaps<CR>', { desc = 'Show keymaps' })
 vim.keymap.set('n', '<Leader>fl', '<cmd>Telescope lazy<CR>', { desc = 'Show plugins' })
-vim.keymap.set('n', '<Leader>fl', ':lua require("dante.telescope").search_notes()<CR>', { desc = 'Search Notes' })
+vim.keymap.set('n', '<Leader>fn', ':lua require("dante.telescope").search_notes()<CR>', { desc = 'Search Notes' })
 
 vim.keymap.set('n', '<Leader>f,', ':lua require("dante.telescope").search_dotfiles()<CR>', { desc = 'Search Dotfiles' })
 vim.keymap.set('n', '<Leader>f.', ':lua require("dante.telescope").search_configs()<CR>', { desc = 'Search Configuration Files' })
@@ -298,3 +311,25 @@ vim.keymap.set('n', '<Leader>f<', ':lua require("dante.telescope").grep_dotfiles
     vim.keymap.set('n', '<Leader>wk', '<c-w>+', {desc = 'Expand Buffer Bottom'} )
     vim.keymap.set('n', '<Leader>wl', '<c-w>>', {desc = 'Expand Buffer Right'} )
     vim.keymap.set('n', '<Leader>wz', ':lua require("toggle-fullscreen"):toggle_fullscreen()<CR>', {desc = 'Make Buffer FullScreen'} )
+
+local wk = require("which-key")
+wk.add({
+  { "<leader>f", group = "Telescope", icon = "" }, -- group
+  { "<leader>g", group = "Git", icon = "" }, -- group
+  { "<leader>w", group = "Window", icon = "" }, -- group
+  { "<leader>t", group = "Terminal", icon = "" }, -- group
+  -- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
+  -- { "<leader>fb", function() print("hello") end, desc = "Foobar" },
+  -- { "<leader>fn", desc = "New File" },
+  -- { "<leader>f1", hidden = true }, -- hide this keymap
+  -- {
+    -- Nested mappings are allowed and can be added in any order
+    -- Most attributes can be inherited or overridden on any level
+    -- There's no limit to the depth of nesting
+    -- mode = { "n", "v" }, -- NORMAL and VISUAL mode
+    -- { "<leader>q", "<cmd>q<cr>", desc = "Quit" }, -- no need to specify mode since it's inherited
+    -- { "<leader>w", "<cmd>w<cr>", desc = "Write" },
+  -- }
+})
+
+util.map('n', '<leader>pw' , '<nop>' , nore)

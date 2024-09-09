@@ -67,6 +67,14 @@ function M.getUser()
   return vim.fn.expand("$USER")
 end
 
+function M.mod_hl(hl_name,opts)
+  local is_ok, hl_def = pcall(vim.api.nvim_get_hl, hl_name, true)
+  if is_ok then
+    for k,v in pairs(opts) do hl_def[k] = v end
+    vim.api.nvim_set_hl(0, hl_name, hl_def)
+  end
+end
+
 -- We want to be able to access utils in all our configuration files
 -- so we add the module to the _G global variable.
 _G.utils = M

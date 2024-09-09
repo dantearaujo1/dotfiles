@@ -15,6 +15,11 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
   {
+    "chrisgrieser/nvim-various-textobjs",
+    lazy = false,
+    opts = { useDefaultKeymaps = true },
+  },
+  {
     'HiPhish/nvim-ts-rainbow2',
   },
   {
@@ -88,6 +93,11 @@ return {
   {
     'williamboman/mason.nvim',
   },
+  -- {
+  --   "christopher-francisco/tmux-status.nvim",
+  --   lazy = true,
+  --   opts = {},
+  -- },
   --   -- ============ CODE STYLING ====================================
   -- {
   --   'stevearc/conform.nvim',
@@ -105,11 +115,16 @@ return {
   --   end
   -- },
   {
-    'nvimtools/none-ls.nvim',
+    'nvitools/none-ls.nvim',
     event = "VeryLazy",
-    opts = function()
-      return require('dante/formatter') -- Formatter configurations plugins
-    end,
+  },
+  {
+      "jay-babu/mason-null-ls.nvim",
+      event = { "BufReadPre", "BufNewFile" },
+      dependencies = {
+        "williamboman/mason.nvim",
+        "nvimtools/none-ls.nvim",
+      },
   },
   -- ========================================================================
   {
@@ -253,6 +268,10 @@ return {
   },
   -- Utils Pluggins =============================================================
   {
+    "mizlan/iswap.nvim",
+    event = "VeryLazy"
+  },
+  {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -318,8 +337,10 @@ return {
     config = function()
       require("mini.align").setup()
       require("mini.cursorword").setup()
+      -- require("mini.animate").setup()
       require("mini.ai").setup()
       require("mini.hipatterns").setup()
+      require("mini.indentscope").setup()
       require("mini.comment").setup({
         options = {
           custom_commentstring = function()
@@ -327,75 +348,105 @@ return {
           end,
         },
       })
-      local miniclue = require("mini.clue")
-      miniclue.setup({
-
-        triggers = {
-          -- Leader triggers
-          { mode = 'n', keys = '<Leader>' },
-          { mode = 'x', keys = '<Leader>' },
-
-          -- Built-in completion
-          { mode = 'i', keys = '<C-x>' },
-
-          -- `g` key
-          { mode = 'n', keys = 'g' },
-          { mode = 'x', keys = 'g' },
-
-          -- Marks
-          { mode = 'n', keys = "'" },
-          { mode = 'n', keys = '`' },
-          { mode = 'x', keys = "'" },
-          { mode = 'x', keys = '`' },
-
-          -- Registers
-          { mode = 'n', keys = '"' },
-          { mode = 'x', keys = '"' },
-          { mode = 'i', keys = '<C-r>' },
-          { mode = 'c', keys = '<C-r>' },
-
-          -- Window commands
-          { mode = 'n', keys = '<C-w>' },
-
-          -- `z` key
-          { mode = 'n', keys = 'z' },
-          { mode = 'x', keys = 'z' },
-        },
-
-        clues = {
-          -- Enhance this by adding descriptions for <Leader> mapping groups
-          miniclue.gen_clues.builtin_completion(),
-          miniclue.gen_clues.g(),
-          miniclue.gen_clues.marks(),
-          miniclue.gen_clues.registers(),
-          miniclue.gen_clues.windows(),
-          miniclue.gen_clues.z(),
-          { mode = 'n', keys = '<Leader>w', desc = ' Window Operations' },
-          { mode = 'n', keys = '<Leader>g', desc = ' Git Operations' },
-          { mode = 'n', keys = '<Leader>f', desc = ' Telescope' },
-          { mode = 'n', keys = '<Leader>wh', postkeys = '<Leader>w' },
-          { mode = 'n', keys = '<Leader>wj', postkeys = '<Leader>w' },
-          { mode = 'n', keys = '<Leader>wk', postkeys = '<Leader>w' },
-          { mode = 'n', keys = '<Leader>wl', postkeys = '<Leader>w' },
-        },
-        window = {
-          delay = 500,
-          config = {
-            width = 'auto',
-            border = 'double',
-          }
-
-        }
-      })
-      -- require("mini.indentscope").setup()
-      -- require("mini.animate").setup()
+    --   local miniclue = require("mini.clue")
+    --   miniclue.setup({
+    --
+    --     triggers = {
+    --       -- Leader triggers
+    --       { mode = 'n', keys = '<Leader>' },
+    --       { mode = 'x', keys = '<Leader>' },
+    --
+    --       -- Built-in completion
+    --       { mode = 'i', keys = '<C-x>' },
+    --
+    --       -- `g` key
+    --       { mode = 'n', keys = 'g' },
+    --       { mode = 'x', keys = 'g' },
+    --
+    --       -- Marks
+    --       { mode = 'n', keys = "'" },
+    --       { mode = 'n', keys = '`' },
+    --       { mode = 'x', keys = "'" },
+    --       { mode = 'x', keys = '`' },
+    --
+    --       -- Registers
+    --       { mode = 'n', keys = '"' },
+    --       { mode = 'x', keys = '"' },
+    --       { mode = 'i', keys = '<C-r>' },
+    --       { mode = 'c', keys = '<C-r>' },
+    --
+    --       -- Window commands
+    --       { mode = 'n', keys = '<C-w>' },
+    --
+    --       -- `z` key
+    --       { mode = 'n', keys = 'z' },
+    --       { mode = 'x', keys = 'z' },
+    --     },
+    --
+    --     clues = {
+    --       -- Enhance this by adding descriptions for <Leader> mapping groups
+    --       miniclue.gen_clues.builtin_completion(),
+    --       miniclue.gen_clues.g(),
+    --       miniclue.gen_clues.marks(),
+    --       miniclue.gen_clues.registers(),
+    --       miniclue.gen_clues.windows(),
+    --       miniclue.gen_clues.z(),
+    --       { mode = 'n', keys = '<Leader>w', desc = ' Window Operations' },
+    --       { mode = 'n', keys = '<Leader>g', desc = ' Git Operations' },
+    --       { mode = 'n', keys = '<Leader>f', desc = ' Telescope' },
+    --       { mode = 'n', keys = '<Leader>wh', postkeys = '<Leader>w' },
+    --       { mode = 'n', keys = '<Leader>wj', postkeys = '<Leader>w' },
+    --       { mode = 'n', keys = '<Leader>wk', postkeys = '<Leader>w' },
+    --       { mode = 'n', keys = '<Leader>wl', postkeys = '<Leader>w' },
+    --     },
+    --     window = {
+    --       delay = 500,
+    --       config = {
+    --         width = 'auto',
+    --         border = 'double',
+    --       }
+    --
+    --     }
+    --   })
     end,
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      preset = "helix",
+      icons = {
+          breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+          separator = "➜", -- symbol used between a key and it's label
+          group = " ", -- symbol prepended to a group
+          ellipsis = "…",
+      },
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
   },
   {
     'tommcdo/vim-exchange',
   }, -- Easy text exchange operator for Vim
   {
     'ggandor/leap.nvim',
+    -- Flit requires this
+    -- config = function()
+    --   require('leap').create_default_mappings()
+    -- end
+  },
+  {
+    "hinell/duplicate.nvim",
   },
   {
     "fedepujol/move.nvim",
@@ -451,31 +502,9 @@ return {
       --Config goes here
     },
   },
-  -- { 'windwp/nvim-autopairs' }, -- Auto close () [] {} <Tags>
-  -- {
-  --   'bkad/camelcasemotion',
-  -- },          -- Plugin for movin in camelcase with localleader
-  -- {
-  --   "chrisgrieser/nvim-spider",
-  --   keys = {
-  --     {
-  --       "e",
-  --       "<cmd>lua require('spider').motion('e')<CR>",
-  --       mode = { "n", "o", "x" },
-  --     },
-  --     {
-  --       "w",
-  --       "<cmd>lua require('spider').motion('w')<CR>",
-  --       mode = { "n", "o", "x" },
-  --     },
-  --     {
-  --       "b",
-  --       "<cmd>lua require('spider').motion('b')<CR>",
-  --       mode = { "n", "o", "x" },
-  --     },
-  --     -- ...
-  --   },
-  -- },
+  {
+    'bkad/camelcasemotion',
+  },          -- Plugin for movin in camelcase with localleader
   {
     'propet/toggle-fullscreen.nvim',
     event = "VeryLazy",
@@ -506,7 +535,18 @@ return {
   -- },
 
   -- Language Specifics ==========================================================
-  -- Processing ========
+  -- Documentation ---------------------------------------------------------------
+  {
+    "kkoomen/vim-doge",
+    config = function ()
+      vim.g.doge_enable_mappings = 0
+      vim.g.doge_mappings = '<Leader>dg'
+      vim.g.doge_filetype_aliases = {
+        javascript = { 'javascript.jsx','javascriptreact','javascript.tsx' }
+      }
+    end
+  }, -- Create documentation with leader dg
+  -- Processing ------------------------------------------------------------------
   {
     'sophacles/vim-processing',
     ft = 'pde',
@@ -532,21 +572,46 @@ return {
     end
   },
   -- HTTP ========
-  {
-    'BlackLight/nvim-http',
-    keys = {
-      {"<localleader>r",
-    ":Http<CR>",
-  desc = "Executes http request from http file"}
-    },
-    ft = "http",
-  }, -- Run HTTP request directly in your editor
+  -- {
+  --   "vhyrro/luarocks.nvim",
+  --   priority = 1000,
+  --   config = true,
+  --   opts = {
+  --     rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
+  --   }
+  -- },
+  -- {
+  --   "rest-nvim/rest.nvim",
+  --   ft = "http",
+  --   dependencies = { "luarocks.nvim" },
+  --   config = function()
+  --     require("rest-nvim").setup()
+  --   end,
+  -- },
   -- JSON ========
   {
     'gennaro-tedesco/nvim-jqx',
     event = "VeryLazy",
   }, -- Browse and preview json files
   -- GIT ========
+  {
+    "moyiz/git-dev.nvim",
+    event = "VeryLazy",
+    keys = {
+        {
+          "<leader>go",
+          function()
+            local repo = vim.fn.input "Repository name / URI: "
+            if repo ~= "" then
+              require("git-dev").open(repo)
+            end
+          end,
+          desc = "[O]pen a remote git repository",
+        }
+    },
+    opts = {},
+  },
+
   {
     "dlvhdr/gh-blame.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
@@ -713,13 +778,17 @@ return {
   -- MARKDOWN
 {
     "OXY2DEV/markview.nvim",
-    dependencies = {
-        "nvim-tree/nvim-web-devicons", -- Used by the code bloxks
-    },
+    lazy = false,      -- Recommended
+    -- ft = "markdown" -- If you decide to lazy-load anyway
 
-    config = function ()
-        require("markview").setup();
-    end
+    dependencies = {
+        -- You will not need this if you installed the
+        -- parsers manually
+        -- Or if the parsers are in your $RUNTIMEPATH
+        "nvim-treesitter/nvim-treesitter",
+
+        "nvim-tree/nvim-web-devicons"
+    }
 },
   -- LATEX
 
@@ -815,7 +884,32 @@ return {
     config = function()
       require('transparent').setup({
         extra_groups = {
-          "StatusLine"
+          "FoldColumn",
+          "lualine_b_normal",
+          "lualine_x_filetype_DevIconLua_normal",
+          "lualine_x_filetype_DevIconJs_normal",
+          "lualine_x_filetype_DevIconDefault_normal",
+          "lualine_c_normal",
+          "StatusLine",
+          "CmpItemAbbr",
+          "CmpDocumentationBorder",
+          "CmpDocumentation",
+          "NotifyBackground",
+          "LspFloatWinNormal",
+          "SagaBorder",
+          "SagaNormal",
+          "TelescopeNormal",
+          "TelescopeResultsTitle",
+          "TelescopePromptNormal",
+          "TelescopePromptPrefix",
+          "TelescopeBorder",
+          "TelescopePromptBorder",
+          -- "Normal",
+          -- "FloatBorder",
+          -- "NormalFloat",
+        },
+        exclude_groups = {
+          'WhichKeyTitle'
         }
       })
     end
@@ -891,7 +985,12 @@ return {
   -- ICONS THEMES==================================================
   { 'ryanoasis/vim-devicons' },
   { 'yamatsum/nvim-web-nonicons' },
-  { 'nvim-tree/nvim-web-devicons' },
+  {
+    'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('nvim-web-devicons').setup()
+    end
+  },
   -- TREESITTER SUPORTED THEMES==================================================
   {
       "vague2k/huez.nvim",
@@ -944,7 +1043,14 @@ return {
   },
   {
     'preservim/vimux',
-    enabled = function() return vim.fn.executable('tmux') end
+    enabled = function() return vim.fn.executable('tmux') end,
+    config = function ()
+      vim.g.VimuxOrientation = "v"
+    end
+  },
+  {
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf',
   },
   --{ 'vimpostor/vim-tpipeline' }, Tmux status line with vim
   -- AI PLUGINS ================================================================
@@ -1001,7 +1107,27 @@ return {
           }
         }
       }
-      require("copilot").setup{{}}
+      require("copilot").setup{{
+        suggestions = {
+          auto_trigger = true,
+        },
+        cmp = {
+          enabled = false,
+        },
+        panel = {
+          enabled = false,
+        },
+        filetypes = {
+          markdown = false,
+        },
+        server_opts_overrides = {
+          settings = {
+            advanced = {
+              inlineSuggestionCount = 3,
+            },
+          },
+        },
+      }}
       vim.keymap.set({ 'n', 'v' }, '<leader>ai', chat.toggle, { desc = 'AI Toggle' })
       vim.keymap.set({ 'n', 'v' }, '<leader>ax', chat.reset, { desc = 'AI Reset' })
       vim.keymap.set({ 'n'  }, "<leader>aaq",
@@ -1015,6 +1141,12 @@ return {
       )
     end
     -- See Commands section for default commands if you want to lazy load on them
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function ()
+      require("copilot_cmp").setup()
+    end
   },
   -- NOTE TAKING PLUGINS =======================================================
   {

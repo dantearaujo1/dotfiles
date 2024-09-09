@@ -11,6 +11,8 @@ telescope.setup {
 	defaults = {
     file_ignore_patterns = {
       "node_modules/.*",
+      ".next/.*",
+      "__pycache__/.*",
       ".vscode/.*",
       ".git/.*",
       ".venv/.*",
@@ -227,11 +229,13 @@ M.search_dotfiles = function()
       prompt_title = "< NVIM RC - DANTE  - Windows>",
       cwd = "~\\.config\\nvim",
       search_dirs = {"lua"},
+      hidden_files = true, -- default: false
     })
   elseif system_name == "Linux" then
     require("telescope.builtin").find_files({
       prompt_title = "< NVIM RC - DANTE - Linux >",
       cwd = "~/.config/nvim",
+      hidden_files = true, -- default: false
     })
   end
 end
@@ -247,6 +251,7 @@ M.search_configs = function()
     require("telescope.builtin").find_files({
       prompt_title = "< CONFIGS - DANTE - Linux >",
       cwd = "~/.config",
+      hidden_files = true, -- default: false
       search_dirs = {
         "nvim",
         "kitty",
