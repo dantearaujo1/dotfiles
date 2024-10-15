@@ -21,12 +21,23 @@ config.bind("<Ctrl+Alt+7>", 'tab-focus 7')
 config.bind("<Ctrl+Alt+8>", 'tab-focus 8')
 config.bind("<Ctrl+Alt+9>", 'tab-focus 9')
 config.bind("<Ctrl+Alt+0>", 'tab-focus 10')
+config.bind("1", 'tab-focus 1')
+config.bind("2", 'tab-focus 2')
+config.bind("3", 'tab-focus 3')
+config.bind("4", 'tab-focus 4')
+config.bind("5", 'tab-focus 5')
+config.bind("6", 'tab-focus 6')
+config.bind("7", 'tab-focus 7')
+config.bind("8", 'tab-focus 8')
+config.bind("9", 'tab-focus 9')
+config.bind("0", 'tab-focus 10')
 config.bind("<Ctrl-=>", 'zoom-in')
 config.bind("<Ctrl-->", 'zoom-out')
 config.bind("<Ctrl+r>", 'config-source')
 config.bind(',t', 'hint userscript link translate')
 config.bind(',T', 'hint userscript all translate --text')
 config.bind(",l", 'spawn --userscript qute-bitwarden')
+config.bind(",L", 'spawn --userscript qute-pass --password-only')
 config.bind(',v','hint links spawn mpv {hint-url}')
 config.bind(',b','hint links spawn mpv --wayland-app-id=pip {hint-url}')
 config.bind(',B','spawn mpv {url}')
@@ -94,6 +105,8 @@ with config.pattern('*://github.com/') as p:
 with config.pattern('*://gitlab.com/') as p:
     p.content.javascript.clipboard = "access-paste"
 with config.pattern('*://chatgpt.com/') as p:
+    p.content.javascript.clipboard = "access-paste"
+with config.pattern('*://chat.openai.com/') as p:
     p.content.javascript.clipboard = "access-paste"
 with config.pattern('*://youtube.com/') as p:
     p.content.javascript.clipboard = "access"

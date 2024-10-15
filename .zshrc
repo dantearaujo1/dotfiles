@@ -288,7 +288,7 @@ if [ -d "$HOME/.config/hypr/" ];then
   alias initapps='nvim ~/.config/hypr/apps.conf'
   alias rules='nvim ~/.config/hypr/ruleswindow.conf'
   alias hypr='nvim ~/.config/hypr/hyprland.conf'
-  alias npypr='nvim ~/.config/hypr/hyprland.conf'
+  alias npypr='nvim ~/.config/hypr/pyprland.conf'
   alias o='xdg-open'
 fi
 
@@ -317,6 +317,7 @@ alias lsql="lazysql"
 alias lgd="lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cls="clear"
 alias f='nvim "$(fzf)"'
+alias ndiff='nvim -c DiffviewOpen'
 alias fn='files=$(fd . ~/Notes/ --type f | fzf -m --ansi --preview  "bat {}") && [ -n "$files" ] && nvim "$files"  && unset files'
 alias fzc='files=$(fd . ~/.config/ --type f | fzf -m --ansi --preview  "bat {}") && [ -n "$files" ] && nvim "$files"  && unset files'
 alias fzg="git status --short | grep '^[ M??]' | awk '{print $2}' | fzf --multi"

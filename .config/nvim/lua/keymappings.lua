@@ -79,8 +79,8 @@ util.map('x', '<M-s>', ':%s/', nore)
 util.map('n', '<C-s>', ':%s/', nore)
 
 -- CTRL-O and CTRL-I Movements
-util.map('n', '<leader>j', '<C-o>', nore)
-util.map('n', '<leader>k', '<C-i>', nore)
+-- util.map('n', '<leader>j', '<C-o>', nore)
+util.map('n', '<C-S-O>', '<C-i>', nore)
 
 --  Navigation in the location and quickfix list
 util.map('n', '<localleader>q' , ':<C-u>call asyncrun#quickfix_toggle(10)<CR>' , nore)
@@ -262,6 +262,7 @@ vim.keymap.set('n', '<Leader>gd', ':DiffviewOpen<CR>', {desc = 'Open Diff View'}
 vim.keymap.set('n', '<Leader>gD', ':DiffviewClose<CR>', {desc = 'Close Diff View'} )
 vim.keymap.set( 'n','<Leader>gw', '<cmd>lua require("telescope").extensions.worktrees.list_worktrees()<CR>', {desc = 'Switch Worktrees'} )
 vim.keymap.set( 'n','<Leader>gc', '<cmd>GitWorktreeCreateExisting<CR>', {desc = 'Create WorkTrees'} )
+vim.keymap.set('n', '<Leader>gb' , ':Gitsigns blame_line<CR>' , {desc = "Blame the current line"})
 
 -- GIT DEV
 vim.keymap.set('n', '<Leader>gO', ':GitDevOpen ', {desc="Open a remote git repository"})
@@ -316,6 +317,7 @@ local wk = require("which-key")
 wk.add({
   { "<leader>f", group = "Telescope", icon = "" }, -- group
   { "<leader>g", group = "Git", icon = "" }, -- group
+  { "<leader>h", group = "Harpoon & GitSigns", icon = "" }, -- group
   { "<leader>w", group = "Window", icon = "" }, -- group
   { "<leader>t", group = "Terminal", icon = "" }, -- group
   -- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },

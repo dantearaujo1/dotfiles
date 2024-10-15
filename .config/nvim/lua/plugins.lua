@@ -276,9 +276,16 @@ return {
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require('harpoon').setup()
-      vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-      vim.keymap.set("n", "<leader>ha", function() harpoon.list():add() end)
+      local harpoon = require('harpoon')
+      harpoon:setup()
+      vim.keymap.set("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Show Harpoon Menu" })
+      vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Add File to Harpoon" })
+      vim.keymap.set("n", "<leader>hj", function() harpoon:list():next() end, { desc = "Go to the next File on Harpoon" })
+      vim.keymap.set("n", "<leader>hk", function() harpoon:list():prev() end, { desc = "Go to the previous File on Harpoon" })
+      vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end, { desc = "Select entry (1)" })
+      vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end, { desc = "Select entry (2)" })
+      vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end, { desc = "Select entry (3)" })
+      vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end, { desc = "Select entry (4)" })
     end
   },
   {
@@ -348,66 +355,6 @@ return {
           end,
         },
       })
-    --   local miniclue = require("mini.clue")
-    --   miniclue.setup({
-    --
-    --     triggers = {
-    --       -- Leader triggers
-    --       { mode = 'n', keys = '<Leader>' },
-    --       { mode = 'x', keys = '<Leader>' },
-    --
-    --       -- Built-in completion
-    --       { mode = 'i', keys = '<C-x>' },
-    --
-    --       -- `g` key
-    --       { mode = 'n', keys = 'g' },
-    --       { mode = 'x', keys = 'g' },
-    --
-    --       -- Marks
-    --       { mode = 'n', keys = "'" },
-    --       { mode = 'n', keys = '`' },
-    --       { mode = 'x', keys = "'" },
-    --       { mode = 'x', keys = '`' },
-    --
-    --       -- Registers
-    --       { mode = 'n', keys = '"' },
-    --       { mode = 'x', keys = '"' },
-    --       { mode = 'i', keys = '<C-r>' },
-    --       { mode = 'c', keys = '<C-r>' },
-    --
-    --       -- Window commands
-    --       { mode = 'n', keys = '<C-w>' },
-    --
-    --       -- `z` key
-    --       { mode = 'n', keys = 'z' },
-    --       { mode = 'x', keys = 'z' },
-    --     },
-    --
-    --     clues = {
-    --       -- Enhance this by adding descriptions for <Leader> mapping groups
-    --       miniclue.gen_clues.builtin_completion(),
-    --       miniclue.gen_clues.g(),
-    --       miniclue.gen_clues.marks(),
-    --       miniclue.gen_clues.registers(),
-    --       miniclue.gen_clues.windows(),
-    --       miniclue.gen_clues.z(),
-    --       { mode = 'n', keys = '<Leader>w', desc = ' Window Operations' },
-    --       { mode = 'n', keys = '<Leader>g', desc = ' Git Operations' },
-    --       { mode = 'n', keys = '<Leader>f', desc = ' Telescope' },
-    --       { mode = 'n', keys = '<Leader>wh', postkeys = '<Leader>w' },
-    --       { mode = 'n', keys = '<Leader>wj', postkeys = '<Leader>w' },
-    --       { mode = 'n', keys = '<Leader>wk', postkeys = '<Leader>w' },
-    --       { mode = 'n', keys = '<Leader>wl', postkeys = '<Leader>w' },
-    --     },
-    --     window = {
-    --       delay = 500,
-    --       config = {
-    --         width = 'auto',
-    --         border = 'double',
-    --       }
-    --
-    --     }
-    --   })
     end,
   },
   {
@@ -625,14 +572,6 @@ return {
         require("worktrees").setup()
     end,
   },
-  -- {
-  --   'NeogitOrg/neogit',
-  --   dependencies = 'nvim-lua/plenary.nvim',
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require('neogit').setup({})
-  --   end
-  -- },
   {
     'lewis6991/gitsigns.nvim',
     config = function()
@@ -773,6 +712,15 @@ return {
   --   event = "VeryLazy",
   --   lazy = true,
   -- },
+  {
+    "ramilito/kubectl.nvim",
+    event = "VeryLazy",
+    lazy = true,
+    config = function()
+      require("kubectl").setup()
+      vim.keymap.set("n", "<leader>kk", '<cmd>lua require("kubectl").toggle()<cr>', { noremap = true, silent = true , desc = "Toggler Kubectl"})
+    end,
+  },
   -- UI Pluggins ===========================================================
   -- PREVIEWERS
   -- MARKDOWN

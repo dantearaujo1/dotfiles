@@ -14,13 +14,6 @@ size = "90% 90%"
 lazy = true
 excludes = ["wpp","volume","fm"]
 
-[scratchpads.web]
-animation = "fromTop"
-command = "qutebrowser"
-class = "org.qutebrowser.qutebrowser"
-size = "85% 90%"
-lazy = true
-
 [scratchpads.volume]
 command = "pavucontrol"
 animation = "fromTop"
@@ -69,5 +62,19 @@ lazy = true
 command = "noi-desktop"
 animation = "fromTop"
 class = "Noi"
+size = "75% 90%"
+lazy = true
+
+[scratchpads.chatall]
+command = "chatall"
+animation = "fromTop"
+class = "chatall"
+size = "75% 90%"
+lazy = true
+
+[scratchpads.tasks]
+command = "morgen"
+animation = "fromTop"
+class = "Morgen"
 size = "75% 90%"
 lazy = true
