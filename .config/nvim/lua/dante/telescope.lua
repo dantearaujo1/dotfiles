@@ -19,7 +19,8 @@ telescope.setup {
       "undodir/.*"
     },
     preview = {
-      check_mime_type = true
+      check_mime_type = true,
+      treesitter = false
     },
 		mappings = {
 			i = {

@@ -6,7 +6,21 @@
 
 config_version: 2
 settings:
+  bindings.key_mappings:
+    global:
+      <Ctrl-6>: <Ctrl-^>
+      <Ctrl-Enter>: <Ctrl-Return>
+      <Ctrl-I>: <Tab>
+      <Ctrl-J>: <Return>
+      <Ctrl-M>: <Return>
+      <Ctrl-[>: <Escape>
+      <Enter>: <Return>
+      <Shift-Enter>: <Return>
+      <Shift-Return>: <Return>
+  colors.webpage.darkmode.enabled:
+    global: false
   content.desktop_capture:
+    https://app.gather.town: true
     https://meet.google.com: true
     https://vdo.ninja: true
   content.geolocation:
@@ -15,16 +29,23 @@ settings:
     https://www.speedtest.net: true
   content.javascript.clipboard:
     github.com: access
+    global: none
   content.media.audio_capture:
+    https://app.gather.town: true
+    https://b54.virtual.ufc.br: true
     https://discord.com: true
     https://meet.google.com: true
+    https://teams.microsoft.com: true
     https://vdo.ninja: true
   content.media.audio_video_capture:
     https://meet.google.com: true
+    https://teams.live.com: true
+    https://teams.microsoft.com: true
     https://vdo.ninja: true
     https://www.omegle.com: false
   content.media.video_capture:
     https://meet.google.com: true
+    https://teams.microsoft.com: true
     https://vdo.ninja: true
     https://webcamtests.com: true
   content.notifications.enabled:
@@ -36,6 +57,7 @@ settings:
     https://www.tiktok.com: true
     https://www.vunesp.com.br: false
   content.register_protocol_handler:
+    https://calendar.google.com?cid=%25s: true
     https://mail.google.com?extsrc=mailto&url=%25s: true
     https://outlook.live.com?mailtouri=%25s: true
   editor.command:

@@ -237,6 +237,13 @@ return {
       {'nvim-telescope/telescope-live-grep-args.nvim'},
     }
   },
+  {
+    "olacin/telescope-gitmoji.nvim",
+    config = function()
+        require("telescope").load_extension("gitmoji")
+    end,
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
 
   {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -267,6 +274,17 @@ return {
     }
   },
   -- Utils Pluggins =============================================================
+  -- {
+  --   "smilhey/ed-cmd.nvim",
+  --   config = function()
+  --     require("ed-cmd").setup({
+  --       -- Those are the default options, you can just call setup({}) if you don't want to change the defaults
+  --       cmdline = { keymaps = { edit = "<ESC>", execute = "<CR>" } },
+  --       -- You enter normal mode in the cmdline with edit and execute a command from normal mode with execute
+  --       pumenu = { max_items = 100 },
+  --     })
+  --   end,
+  -- },
   {
     "mizlan/iswap.nvim",
     event = "VeryLazy"
@@ -863,7 +881,12 @@ return {
     end
   },
   { 'shortcuts/no-neck-pain.nvim' },
-  { 'LunarVim/bigfile.nvim' },
+  {
+    'LunarVim/bigfile.nvim',
+    config = function()
+      require('bigfile').setup()
+    end
+  },
   ---@type LazySpec
   {
     "mikavilpas/yazi.nvim",

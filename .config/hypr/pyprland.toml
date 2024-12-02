@@ -58,6 +58,14 @@ class = "kitty-dropterm-calendar"
 size = "75% 80%"
 lazy = true
 
+[scratchpads.calc]
+command = "speedcrunch"
+animation = "fromTop"
+class = "org.speedcrunch.speedcrunch"
+# title: SpeedCrunch
+size = "75% 80%"
+lazy = true
+
 [scratchpads.gpt]
 command = "noi-desktop"
 animation = "fromTop"

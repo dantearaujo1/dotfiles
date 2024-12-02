@@ -317,6 +317,7 @@ alias lsql="lazysql"
 alias lgd="lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias cls="clear"
 alias f='nvim "$(fzf)"'
+alias gvim='nvim --listen ~/.cache/nvim/godot.pipe $*'
 alias ndiff='nvim -c DiffviewOpen'
 alias fn='files=$(fd . ~/Notes/ --type f | fzf -m --ansi --preview  "bat {}") && [ -n "$files" ] && nvim "$files"  && unset files'
 alias fzc='files=$(fd . ~/.config/ --type f | fzf -m --ansi --preview  "bat {}") && [ -n "$files" ] && nvim "$files"  && unset files'
@@ -344,4 +345,10 @@ mgdir() {mkdir $@ && cd ${@:$#}}
 # eval "$(starship init zsh)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/dante/.dart-cli-completion/zsh-config.zsh ]] && . /home/dante/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
 

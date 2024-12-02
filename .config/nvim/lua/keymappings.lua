@@ -284,6 +284,7 @@ vim.keymap.set('n', '<Leader>fH', ':lua require("dante.telescope").search_from_h
 vim.keymap.set('n', '<Leader>fj', '<cmd>Telescope symbols<CR>', { desc = 'Show emojis' })
 vim.keymap.set('n', '<Leader>fk', '<cmd>Telescope keymaps<CR>', { desc = 'Show keymaps' })
 vim.keymap.set('n', '<Leader>fl', '<cmd>Telescope lazy<CR>', { desc = 'Show plugins' })
+vim.keymap.set('n', '<Leader>f<Space>', '<cmd>Telescope gitmoji<CR>', { desc = 'Show gitmoji emojis' })
 vim.keymap.set('n', '<Leader>fn', ':lua require("dante.telescope").search_notes()<CR>', { desc = 'Search Notes' })
 
 vim.keymap.set('n', '<Leader>f,', ':lua require("dante.telescope").search_dotfiles()<CR>', { desc = 'Search Dotfiles' })
