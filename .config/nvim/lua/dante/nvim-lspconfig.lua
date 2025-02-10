@@ -57,7 +57,7 @@ local signature_setup = {
 }
 
 local on_attach = function(client, bufnr)
-  require "lsp_signature".on_attach(signature_setup, bufnr)
+  -- require "lsp_signature".on_attach(signature_setup, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
@@ -146,6 +146,9 @@ require("mason-lspconfig").setup_handlers {
   end,
   ["lua_ls"] = function()
     require("lspconfig").lua_ls.setup { }
+  end,
+  ["gdscript"] = function()
+    require("lspconfig").gdscript.setup { }
   end,
   ["jdtls"] = function()
     -- require("java").setup()

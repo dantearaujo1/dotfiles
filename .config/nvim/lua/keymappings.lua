@@ -336,3 +336,6 @@ wk.add({
 })
 
 util.map('n', '<leader>pw' , '<nop>' , nore)
+
+-- TODOS WITH DOOING
+util.map('n', '<leader>dd' , ':Dooing<CR>' , nore)

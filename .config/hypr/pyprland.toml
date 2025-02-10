@@ -10,7 +10,7 @@ plugins = [
 animation = "fromTop"
 command = "kitty --class kitty-dropterm tmux new -s dropdown"
 class = "kitty-dropterm"
-size = "90% 90%"
+size = "95% 93%"
 lazy = true
 excludes = ["wpp","volume","fm"]
 
@@ -44,10 +44,24 @@ unfocus = "hide"
 size = "75% 80%"
 lazy = true
 
-[scratchpads.mail]
-command = "kitty --class kitty-dropterm-mail neomutt"
+[scratchpads.tuispotify]
 animation = "fromTop"
-class = "kitty-dropterm-mail"
+command = "kitty --class spotify-tui ncspot"
+class = "spotify-tui"
+size = "75% 85%"
+lazy = true
+
+# [scratchpads.mail]
+# command = "kitty --class kitty-dropterm-mail neomutt"
+# animation = "fromTop"
+# class = "kitty-dropterm-mail"
+# size = "75% 80%"
+# lazy = true
+
+[scratchpads.mail]
+command = "thunderbird"
+animation = "fromTop"
+class = "thunderbird"
 size = "75% 80%"
 lazy = true
 
@@ -70,19 +84,4 @@ lazy = true
 command = "noi-desktop"
 animation = "fromTop"
 class = "Noi"
-size = "75% 90%"
-lazy = true
-
-[scratchpads.chatall]
-command = "chatall"
-animation = "fromTop"
-class = "chatall"
-size = "75% 90%"
-lazy = true
-
-[scratchpads.tasks]
-command = "morgen"
-animation = "fromTop"
-class = "Morgen"
-size = "75% 90%"
 lazy = true

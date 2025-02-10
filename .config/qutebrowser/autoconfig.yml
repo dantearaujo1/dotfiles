@@ -32,6 +32,7 @@ settings:
     global: none
   content.media.audio_capture:
     https://app.gather.town: true
+    https://b53.virtual.ufc.br: true
     https://b54.virtual.ufc.br: true
     https://discord.com: true
     https://meet.google.com: true
@@ -44,6 +45,7 @@ settings:
     https://vdo.ninja: true
     https://www.omegle.com: false
   content.media.video_capture:
+    https://app.gather.town: true
     https://meet.google.com: true
     https://teams.microsoft.com: true
     https://vdo.ninja: true

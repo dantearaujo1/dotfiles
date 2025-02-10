@@ -96,7 +96,6 @@ if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
     bindkey "^ze" fzf-gitmoji
     bindkey "^[n" fzf-notes
     bindkey "^|" complete-word
-    bindkey '^r' atuin-search
     alias cat='bat'
 
     plugins=(
@@ -134,6 +133,7 @@ else
         copypath
         common-aliases
         colorize
+        zsh-vi-mode
       )
   else
     plugins=(
@@ -151,6 +151,7 @@ else
         common-aliases
         colorize
         autoswitch_virtualenv
+        zsh-vi-mode
       )
   fi
 fi
@@ -222,7 +223,6 @@ if [[ $(whoami) = 'dante' ]]; then
     bindkey "^ze" fzf-gitmoji
     bindkey "^[n" fzf-notes
     bindkey "^|" complete-word
-    bindkey '^r' atuin-search
     alias cat='bat'
 fi
 
@@ -341,6 +341,15 @@ fi
 
 pdf() {zathura $1 & disown}
 mgdir() {mkdir $@ && cd ${@:$#}}
+
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		      cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 #export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0 #Exporting Display to XServer
 # eval "$(starship init zsh)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

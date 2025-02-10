@@ -9,12 +9,7 @@
 # monitor=eDP-1,1920x1080@60.051998,0x0,1.0
 
 # Casa monitor normal
-monitor=eDP-1,1920x1080@60.0,1920x0,1.333333
 monitor=HDMI-A-1,1920x1080@60.0,0x0,1.0
-
-# Jogando no quarto
-# monitor=eDP-1,disable
-# monitor=HDMI-A-1,1920x1080@60.0,1920x0,1.0
-
+monitor=eDP-1,1920x1080@60.051998,1921x0,1.0
 ## Tablet como monitor
 # monitor=HEADLESS-2,1280x720@60.0,0x1080,1.0

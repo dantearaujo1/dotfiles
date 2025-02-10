@@ -17,7 +17,7 @@ return {
   {
     "chrisgrieser/nvim-various-textobjs",
     lazy = false,
-    opts = { useDefaultKeymaps = true },
+    opts = { keymaps = {useDefault = true} },
   },
   {
     'HiPhish/nvim-ts-rainbow2',
@@ -75,12 +75,6 @@ return {
       -- your options here
     }
   },
-  -- Separate cut from delete registers
-  -- {
-  --   "gbprod/cutlass.nvim",
-  --   event = "VeryLazy",
-  --   opts = { cut_key = "x" },
-  -- },
   {
     'theHamsta/nvim-dap-virtual-text',
   }, -- Virtual text showing variables info
@@ -93,12 +87,7 @@ return {
   {
     'williamboman/mason.nvim',
   },
-  -- {
-  --   "christopher-francisco/tmux-status.nvim",
-  --   lazy = true,
-  --   opts = {},
-  -- },
-  --   -- ============ CODE STYLING ====================================
+    -- ============ CODE STYLING ====================================
   -- {
   --   'stevearc/conform.nvim',
   --   opts = {},
@@ -251,6 +240,7 @@ return {
     'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   },
 
+
   -- Terminal ==================================================================
   { 'akinsho/toggleterm.nvim',   branch = 'main', config = function() require("toggleterm").setup() end },
   { 'skywind3000/asyncrun.vim' },
@@ -274,17 +264,136 @@ return {
     }
   },
   -- Utils Pluggins =============================================================
+  {
+    "OXY2DEV/helpview.nvim",
+    lazy = false
+  },
   -- {
-  --   "smilhey/ed-cmd.nvim",
+  --   'cche/todo-txt.nvim',
+  --   dependencies = {
+  --       'hrsh7th/nvim-cmp'
+  --   },
   --   config = function()
-  --     require("ed-cmd").setup({
-  --       -- Those are the default options, you can just call setup({}) if you don't want to change the defaults
-  --       cmdline = { keymaps = { edit = "<ESC>", execute = "<CR>" } },
-  --       -- You enter normal mode in the cmdline with edit and execute a command from normal mode with execute
-  --       pumenu = { max_items = 100 },
-  --     })
-  --   end,
+  --       require('todo-txt').setup()
+  --   end
   -- },
+  -- {
+  --   'arnarg/todotxt.nvim',
+  --   dependencies = {'MunifTanjim/nui.nvim'},
+  -- },
+  {
+      "jake-stewart/multicursor.nvim",
+      branch = "1.0",
+      config = function()
+          local mc = require("multicursor-nvim")
+
+          mc.setup()
+
+          local set = vim.keymap.set
+
+          -- Add or skip cursor above/below the main cursor.
+          set({"n", "v"}, "<up>",
+              function() mc.lineAddCursor(-1) end)
+          set({"n", "v"}, "<down>",
+              function() mc.lineAddCursor(1) end)
+          set({"n", "v"}, "<localleader><up>",
+              function() mc.lineSkipCursor(-1) end)
+          set({"n", "v"}, "<localleader><down>",
+              function() mc.lineSkipCursor(1) end)
+
+          -- Add or skip adding a new cursor by matching word/selection
+          set({"n", "v"}, "<localleader>n",
+              function() mc.matchAddCursor(1) end)
+          set({"n", "v"}, "<localleader>s",
+              function() mc.matchSkipCursor(1) end)
+          set({"n", "v"}, "<localleader>N",
+              function() mc.matchAddCursor(-1) end)
+          set({"n", "v"}, "<localleader>S",
+              function() mc.matchSkipCursor(-1) end)
+
+          -- Add all matches in the document
+          set({"n", "v"}, "<localleader>A", mc.matchAllAddCursors)
+
+          -- You can also add cursors with any motion you prefer:
+          -- set("n", "<right>", function()
+          --     mc.addCursor("w")
+          -- end)
+          -- set("n", "<leader><right>", function()
+          --     mc.skipCursor("w")
+          -- end)
+
+          -- Rotate the main cursor.
+          set({"n", "v"}, "<left>", mc.nextCursor)
+          set({"n", "v"}, "<right>", mc.prevCursor)
+
+          -- Delete the main cursor.
+          set({"n", "v"}, "<localleader>x", mc.deleteCursor)
+
+          -- Add and remove cursors with control + left click.
+          set("n", "<c-leftmouse>", mc.handleMouse)
+
+          -- Easy way to add and remove cursors using the main cursor.
+          set({"n", "v"}, "<c-q>", mc.toggleCursor)
+
+          -- Clone every cursor and disable the originals.
+          set({"n", "v"}, "<localleader><c-q>", mc.duplicateCursors)
+
+          set("n", "<esc>", function()
+              if not mc.cursorsEnabled() then
+                  mc.enableCursors()
+              elseif mc.hasCursors() then
+                  mc.clearCursors()
+              else
+                  -- Default <esc> handler.
+              end
+          end)
+
+          -- bring back cursors if you accidentally clear them
+          set("n", "<localleader>gv", mc.restoreCursors)
+
+          -- Align cursor columns.
+          set("n", "<localleader>a", mc.alignCursors)
+
+          -- Split visual selections by regex.
+          set("v", "S", mc.splitCursors)
+
+          -- Append/insert for each line of visual selections.
+          set("v", "I", mc.insertVisual)
+          set("v", "A", mc.appendVisual)
+
+          -- match new cursors within visual selections by regex.
+          set("v", "M", mc.matchCursors)
+
+          -- Rotate visual selection contents.
+          set("v", "<localleader>t",
+              function() mc.transposeCursors(1) end)
+          set("v", "<localleader>T",
+              function() mc.transposeCursors(-1) end)
+
+          -- Jumplist support
+          set({"v", "n"}, "<c-i>", mc.jumpForward)
+          set({"v", "n"}, "<c-o>", mc.jumpBackward)
+
+          -- Customize how cursors look.
+          local hl = vim.api.nvim_set_hl
+          hl(0, "MultiCursorCursor", { link = "Cursor" })
+          hl(0, "MultiCursorVisual", { link = "Visual" })
+          hl(0, "MultiCursorSign", { link = "SignColumn"})
+          hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
+          hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
+          hl(0, "MultiCursorDisabledSign", { link = "SignColumn"})
+      end
+  },
+  {
+    "phrmendes/todotxt.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+        require("todotxt").setup({
+            todotxt = "/home/dante/todo.txt",
+            donetxt = "/home/dante/done.txt",
+        })
+    end
+  },
   {
     "mizlan/iswap.nvim",
     event = "VeryLazy"
@@ -336,6 +445,14 @@ return {
   }, -- Exchange Windows
   {
     'folke/todo-comments.nvim',
+  },
+  {
+      "atiladefreitas/dooing",
+      config = function()
+          require("dooing").setup({
+              -- your custom config here (optional)
+          })
+      end,
   },
   -- The both plugin are for highligting indentation
   -- { 'lukas-reineke/indent-blankline.nvim', main = 'ibl' },
@@ -559,6 +676,12 @@ return {
     event = "VeryLazy",
   }, -- Browse and preview json files
   -- GIT ========
+  -- lazy.nvim
+  {
+    'akinsho/git-conflict.nvim',
+    version = "*",
+    config = true,
+  },
   {
     "moyiz/git-dev.nvim",
     event = "VeryLazy",
@@ -642,8 +765,12 @@ return {
       }
     end
   }, -- Super fast git decorations implemented purely in Lua/Teal
-  { 'sindrets/diffview.nvim' },-- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+  {
+    'sindrets/diffview.nvim',
+  },-- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+
   -- Java ========
+
   -- {
   --   'mfussenegger/nvim-jdtls',
   --   ft = 'java',
@@ -740,9 +867,13 @@ return {
     end,
   },
   -- UI Pluggins ===========================================================
+  -- {
+  --   "sphamba/smear-cursor.nvim",
+  --   opts = {},
+  -- }, -- This will make the cursor more animated
   -- PREVIEWERS
   -- MARKDOWN
-{
+  {
     "OXY2DEV/markview.nvim",
     lazy = false,      -- Recommended
     -- ft = "markdown" -- If you decide to lazy-load anyway
@@ -755,7 +886,7 @@ return {
 
         "nvim-tree/nvim-web-devicons"
     }
-},
+  },
   -- LATEX
 
   -- BUFFERS
@@ -770,7 +901,12 @@ return {
     -- lazy = true
   },
   { 'onsails/lspkind-nvim' },
-  { 'ray-x/lsp_signature.nvim' },  -- for symbols in completion
+  -- {
+  --   'ray-x/lsp_signature.nvim',
+  --   event = "VeryLazy",
+  --   opts = {},
+  --   config = function(_, opts) require("lsp_signature").setup(opts) end
+  -- },  -- for symbols in completion
   {
     'nvimdev/lspsaga.nvim',
     config = function()
@@ -887,36 +1023,6 @@ return {
       require('bigfile').setup()
     end
   },
-  ---@type LazySpec
-  {
-    "mikavilpas/yazi.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    event = "VeryLazy",
-    keys = {
-      -- 👇 in this section, choose your own keymappings!
-      {
-        "<leader>-",
-        function()
-          require("yazi").yazi()
-        end,
-        desc = "Open the file manager",
-      },
-      {
-        -- Open in the current working directory
-        "<leader>cw",
-        function()
-          require("yazi").yazi(nil, vim.fn.getcwd())
-        end,
-        desc = "Open the file manager in nvim's working directory" ,
-      },
-    },
-    ---@type YaziConfig
-    opts = {
-      open_for_directories = false,
-    },
-  },
   -- THEMES =====================================================================
   -- Dashboard ===========================
   {
@@ -1027,7 +1133,7 @@ return {
   -- AI PLUGINS ================================================================
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    branch = "main",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper

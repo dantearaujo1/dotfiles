@@ -13,28 +13,32 @@ bind = $mainMod , R, exec, wf-recorder -g "$(slurp)"
 # Utils
 bind = $mainMod SHIFT , C, exec, $colorpicker -a # Show zoom to colorpick
 bind = $mainMod SHIFT , S, exec, grim -g "$(slurp -d -b ffffff50 -c 00000000)" - | satty -f - # take a screenshot
+bind = $mainMod, C, exec, swaync-client -t -sw
 
 # Window QuicklyOperations
-bind = CTRL ALT, Return, fullscreen
-bind = CTRL ALT, SPACE, exec, hyprctl dispatch swapactiveworkspaces 0 1
+bind = $mainMod, Return, fullscreen # Turn window to fullscreen
+bind = $mainMod SHIFT, Return, exec, hyprctl dispatch fullscreenstate 3 3 # Turn window to fullscreen
+bind = CTRL ALT, RETURN, exec, hyprctl dispatch swapactiveworkspaces 0 1
+# bind = $mainMod, T, togglegroup
+bind = CTRL ALT, F, togglefloating, # Allow a window to float
+# Movement Focus Keybinds
 bind = CTRL ALT , H, movefocus, l
 bind = CTRL ALT , L, movefocus, r
 bind = CTRL ALT , K, movefocus, u
 bind = CTRL ALT , J, movefocus, d
-bind = CTRL ALT, F, togglefloating, # Allow a window to float
-bind = CTRL ALT , M, layoutmsg, swapwithmaster master
 bind = CTRL, Tab, workspace, previous
-binde = CTRL ALT SHIFT, L, resizeactive, 10 0
-binde = CTRL ALT SHIFT, H, resizeactive, -10 0
-binde = CTRL ALT SHIFT, K, resizeactive, 0 -10
-binde = CTRL ALT SHIFT, J, resizeactive, 0 10
+bind = ALT, TAB, cyclenext,
+bind = CTRL ALT , SPACE, layoutmsg, swapwithmaster master
+bind = $mainMod ALT, L, resizeactive, 10 0;
+bind = $mainMod ALT, H, resizeactive, -10 0;
+bind = $mainMod ALT, K, resizeactive, 0 -10;
+bind = $mainMod ALT, J, resizeactive, 0 10
 
 # Launcher
 bind = $mainMod, SPACE, exec, pkill wofi || wofi --show drun # Show the graphical app launcher
-bind = $mainMod, V, exec, pkill wofi || cliphist list | wofi --conf ~/.config/wofi/dmenu-config  | cliphist decode | wl-copy
+bind = $mainMod, V, exec, pkill wofi || cliphist list | wofi --show dmenu | cliphist decode | wl-copy
 # System keybinds
 bind = $mainMod SHIFT, L, exec, hyprlock # Lock the screen
-bind = $mainMod SHIFT, Q, exec, wlogout # Lock the screen
 bind = $mainMod SHIFT, M, exit, # Exit Hyprland all together no (force quit Hyprland)
 bind = $mainMod, F10, exec, killall -SIGUSR1 waybar
 # Switch workspaces with mainMod + [0-9]
@@ -74,29 +78,33 @@ bind = Ctrl+Super, mouse_down, exec, hyprctl keyword cursor:zoom_factor $(awk "B
 bind = Ctrl+Super, mouse_up, exec, hyprctl keyword cursor:zoom_factor $(awk "BEGIN {print $(hyprctl getoption cursor:zoom_factor | grep 'float:' | awk '{print $2}') - 0.5}") # Zoom in
 # WINDOW KEYBINDS ==================================================
 bind = $mainMod, F4, killactive, # close the active window
-bind = $mainMod, X, killactive
+bind = $mainMod, Q, killactive, # close the active window
+bind = $mainMod SHIFT, Q, exec, wlogout --protocol layer-shell
+bind = $mainMod, W, exec, [workspace 1] $term
+bind = $mainMod, E, exec, [workspace 2 silent] $browser # Show the qutebrowser
 # PYPR KEYBINDS ====================================================
-bind = $mainMod, Return,  exec, pypr toggle term
+# bind = $mainMod,       Y,       exec, pypr toggle tasks
+bind = $mainMod,       T,       exec, pypr toggle term
 bind = $mainMod, Y,       exec, pypr  attach
 bind = $mainMod, code:34, exec, pypr  toggle spotify # [
-bind = $mainMod, c,       exec, pypr  toggle calc
-bind = $mainMod SHIFT, A,       exec, pypr  toggle volume
-bind = $mainMod, A,       exec, pypr  toggle tuispotify
-bind = $mainMod, Q,       exec, pypr  toggle gpt
-bind = $mainMod, O,       exec, pypr toggle fm
+bind = $mainMod, c,       exec, pypr  toggle calc    # [
+bind = $mainMod, U,       exec, pypr  toggle volume
+bind = $mainMod, I,       exec, pypr  toggle gpt
+bind = $mainMod  SHIFT,   I,    exec, pypr   toggle  chatall
+bind = $mainMod,       O,       exec, pypr toggle fm
 bind = $mainMod SHIFT, O,       exec, $file_explorer # Show the graphical file browser
 bind = $mainMod,       TAB,     exec, pypr toggle wpp
 bind = $mainMod,       M,       exec, pypr toggle mail
 bind = $mainMod,       Z,       exec, pypr zoom
-bind = $mainMod,       E,       exec, pypr toggle_special
-bind = $mainMod SHIFT, E, togglespecialworkspace, minimized
+bind = $mainMod,       N,       exec, pypr toggle_special
+bind = $mainMod SHIFT, N, togglespecialworkspace, minimized
 
 # APPLICATIONS KEYBINDS ============================================
 bind = ALT, A, submap, Apps
 submap = Apps
-bind = , W, exec, [workspace 2] $term
-bind = , E, exec, [workspace 1 silent] $browser # Show the qutebrowser
+bind = , C, exec, morgan
 bind = , U, exec, [workspace 9 silent] $voicechat
+bind = , E, exec, [workspace 2 silent] $browser # Show the qutebrowser
 bind = , V, exec, [workspace 3 silent] $stream
 bind = , escape, submap, reset
 submap = reset
@@ -141,7 +149,7 @@ submap = reset
 # RELOAD KEYBINDS ==================================================
 bind = ALT SHIFT, R, submap, Reload
 submap = Reload
-bind = , W, exec, killall -SIGUSR2 waybar
+binde = , W, exec, killall -SIGUSR2 waybar
 bind = , escape, submap, reset
 submap = reset
 
@@ -175,39 +183,3 @@ submap = reset
 # This should only be sourced if a game is running
 # source = ~/.config/hypr/gamemode.conf
 
-# Cursor submap (similar to the Mouse mode in Sway)
-submap=cursor
-
-# Jump cursor to a position
-bind=,a,exec,hyprctl dispatch submap reset && wl-kbptr && hyprctl dispatch submap cursor
-
-# Cursor movement
-binde=,j,exec,wlrctl pointer move 0 10
-binde=,k,exec,wlrctl pointer move 0 -10
-binde=,l,exec,wlrctl pointer move 10 0
-binde=,h,exec,wlrctl pointer move -10 0
-
-# Left button
-bind=,s,exec,wlrctl pointer click left
-# Middle button
-bind=,d,exec,wlrctl pointer click middle
-# Right button
-bind=,f,exec,wlrctl pointer click right
-
-# Scroll up and down
-binde=,e,exec,wlrctl pointer scroll 10 0
-binde=,r,exec,wlrctl pointer scroll -10 0
-
-# Scroll left and right
-binde=,t,exec,wlrctl pointer scroll 0 -10
-binde=,g,exec,wlrctl pointer scroll 0 10
-
-# Exit cursor submap
-# If you do not use cursor timeout or cursor:hide_on_key_press, you can delete its respective cals
-bind=,escape,exec,hyprctl keyword cursor:inactive_timeout 3; hyprctl keyword cursor:hide_on_key_press true; hyprctl dispatch submap reset
-
-submap = reset
-
-# Entrypoint
-# If you do not use cursor timeout or cursor:hide_on_key_press, you can delete its respective cals
-bind=$mainMod,g,exec,hyprctl keyword cursor:inactive_timeout 0; hyprctl keyword cursor:hide_on_key_press false; hyprctl dispatch submap cursor
