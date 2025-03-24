@@ -1,10 +1,11 @@
 local navic = require("nvim-navic")
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-capabilities.textDocument.foldingRange = {
-  dynamicRegistration = false,
-  lineFoldingOnly = true
-}
+
+-- capabilities.textDocument.foldingRange = {
+--   dynamicRegistration = false,
+--   lineFoldingOnly = true
+-- }
 
 local options = { noremap = true, silent = true }
 vim.keymap.set('n', '<leader>o', vim.diagnostic.open_float, options)
@@ -67,8 +68,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<localleader>gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<localleader>k', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<leader>td', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<leader>DS', require('telescope.builtin').lsp_document_symbols, bufopts)
-  vim.keymap.set('n', '<leader>WS', require('telescope.builtin').lsp_dynamic_workspace_symbols, bufopts)
+  -- vim.keymap.set('n', '<leader>DS', require('telescope.builtin').lsp_document_symbols, bufopts)
+  -- vim.keymap.set('n', '<leader>WS', require('telescope.builtin').lsp_dynamic_workspace_symbols, bufopts)
   -- -- Workspace keymaps
   vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
@@ -81,13 +82,7 @@ end
 
 local MASON_LSP_DEFAULT_SETTINGS = {
   ensure_installed = {
-    "emmet_language_server",
-    "clangd",
-    "rust_analyzer@nightly",
-    "gopls",
-    "clangd",
-    "tailwindcss",
-    "eslint",
+    emmet_language_server
   },
   automatic_installation = false,
 }
@@ -104,7 +99,7 @@ require("mason-lspconfig").setup_handlers {
     require("lspconfig").clangd.setup {
       on_attach = on_attach,
       capabilities = capabilities,
-      require("clangd_extensions").setup()
+      -- require("clangd_extensions").setup()
     }
   end,
   ["html"] = function()
@@ -127,28 +122,18 @@ require("mason-lspconfig").setup_handlers {
         capabilities = capabilities,
         filetypes = { "css", "html","javascript", "javascripreact", "less","sass","scss", "svelte","typescriptreact"},
         init_options = {
-          --- @type table<string, any> https://docs.emmet.io/customization/preferences/
           preferences = {},
-          --- @type "always" | "never" defaults to `"always"`
           showexpandedabbreviation = "always",
-          --- @type boolean defaults to `true`
           showabbreviationsuggestions = true,
-          --- @type boolean defaults to `false`
           showsuggestionsassnippets = true,
-          --- @type table<string, any> https://docs.emmet.io/customization/syntax-profiles/
           syntaxprofiles = {},
-          --- @type table<string, string> https://docs.emmet.io/customization/snippets/#variables
           variables = {},
-          --- @type string[]
           excludelanguages = {},
         },
     })
   end,
   ["lua_ls"] = function()
     require("lspconfig").lua_ls.setup { }
-  end,
-  ["gdscript"] = function()
-    require("lspconfig").gdscript.setup { }
   end,
   ["jdtls"] = function()
     -- require("java").setup()
@@ -199,6 +184,7 @@ require("mason-lspconfig").setup_handlers {
   }
   end
 }
+
 require("mason-null-ls").setup({
   ensure_installed = {
 
@@ -207,11 +193,4 @@ require("mason-null-ls").setup({
 
   },
   automatic_installation = true
-})
-
-local null_ls = require("null-ls")
-null_ls.setup({
-  sources = {
-    -- Anything not supported by mason
-  },
 })

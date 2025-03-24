@@ -1,15 +1,8 @@
 local navic = require("nvim-navic")
 
-local function keymap()
-  if vim.opt.iminsert:get() > 0 and vim.b.keymap_name then
-    return '⌨ ' .. vim.b.keymap_name
-  end
-  return ''
-end
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'powerline_dark',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {
@@ -17,6 +10,7 @@ require'lualine'.setup {
       winbar = {},
     },
     ignore_focus = {},
+    always_show_tabline = false,
     always_divide_middle = true,
     globalstatus = true,
     refresh ={
@@ -26,24 +20,15 @@ require'lualine'.setup {
     }
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {{'b:gitsigns_head', icon = ''}},
+    lualine_a = {{'mode', format=function(mode) mode:sub(1,1) end}},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
     lualine_c = {
-      -- {
-      --   require('tmux-status').tmux_windows,
-      --   cond = require('tmux-status').show,
-      -- },
       'filename',
       {navic.get_location, cond = navic.is_available},
     },
     lualine_x = {'filetype','fileformat'},
-    -- lualine_y = {'progress'},
     lualine_y = {},
     lualine_z = {
-      -- {
-      --   require('tmux-status').tmux_session,
-      --   cond = require('tmux-status').show,
-      -- },
       'location',
     }
   },

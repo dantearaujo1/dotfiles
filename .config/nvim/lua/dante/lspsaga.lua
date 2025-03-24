@@ -83,12 +83,12 @@ keymap("n", "<leader>sw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
 keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
 
 -- Diagnostic jump with filters such as only jumping to an error
--- keymap("n", "[E", function()
---   require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
--- end)
--- keymap("n", "]E", function()
---   require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
--- end)
+keymap("n", "[e", function()
+  require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end)
+keymap("n", "]e", function()
+  require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+end)
 keymap("n","<leader>o", "<cmd>Lspsaga outline<CR>")
 
 -- Hover Doc

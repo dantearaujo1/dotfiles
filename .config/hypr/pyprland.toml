@@ -1,5 +1,7 @@
 [pyprland]
 plugins = [
+"expose",
+"menubar",
 "scratchpads",
 "magnify",
 "fetch_client_menu",
@@ -33,6 +35,14 @@ animation = "fromTop"
 command = "whatsie"
 match_by = "class"
 class = "com.ktechpit.whatsie"
+size = "80% 80%"
+lazy = true
+
+[scratchpads.wpp2]
+animation = "fromTop"
+command = "zapzap"
+match_by = "class"
+class = "com.rtosta.zapzap"
 size = "80% 80%"
 lazy = true
 
@@ -82,6 +92,10 @@ lazy = true
 
 [scratchpads.gpt]
 command = "noi-desktop"
-animation = "fromTop"
+animation = "fromBottom"
 class = "Noi"
+size = "80% 80%"
 lazy = true
+
+[menubar]
+command = "waybar"

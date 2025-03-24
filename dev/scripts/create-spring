@@ -1,3 +1,0 @@
-#!/bin/bash
-test=$(curl -s -X GET -H "Accept: application/json" https://start.spring.io | jq ".dependencies.values[].values[].name" | sed -n "s/\"/ /gp" | fzf --multi | awk -F ',' '{print $1}')
-echo $test

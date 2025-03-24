@@ -10,17 +10,13 @@ def bind_chained(key, *commands):
 ## ym (without a leading comma) also works because it is built-in
 config.bind('<Ctrl+T>', 'spawn --userscript translate')
 config.bind('<Ctrl+Shift+T>', 'spawn --userscript translate --text')
+config.bind(',t', 'hint userscript link translate')
+config.bind(',T', 'hint userscript all translate --text')
+
+# Dark mode toggler
+config.bind('td', 'config-cycle colors.webpage.darkmode.enabled true false')
+
 config.bind("<Ctrl+w>", 'cmd-set-text :open -w ')
-config.bind("<Ctrl+Alt+1>", 'tab-focus 1')
-config.bind("<Ctrl+Alt+2>", 'tab-focus 2')
-config.bind("<Ctrl+Alt+3>", 'tab-focus 3')
-config.bind("<Ctrl+Alt+4>", 'tab-focus 4')
-config.bind("<Ctrl+Alt+5>", 'tab-focus 5')
-config.bind("<Ctrl+Alt+6>", 'tab-focus 6')
-config.bind("<Ctrl+Alt+7>", 'tab-focus 7')
-config.bind("<Ctrl+Alt+8>", 'tab-focus 8')
-config.bind("<Ctrl+Alt+9>", 'tab-focus 9')
-config.bind("<Ctrl+Alt+0>", 'tab-focus 10')
 config.bind("1", 'tab-focus 1')
 config.bind("2", 'tab-focus 2')
 config.bind("3", 'tab-focus 3')
@@ -34,8 +30,6 @@ config.bind("0", 'tab-focus 10')
 config.bind("<Ctrl-=>", 'zoom-in')
 config.bind("<Ctrl-->", 'zoom-out')
 config.bind("<Ctrl+r>", 'config-source')
-config.bind(',t', 'hint userscript link translate')
-config.bind(',T', 'hint userscript all translate --text')
 config.bind(",l", 'spawn --userscript qute-bitwarden')
 config.bind(",L", 'spawn --userscript qute-pass --password-only')
 config.bind(',v','hint links spawn mpv {hint-url}')
@@ -44,6 +38,7 @@ config.bind(',B','spawn mpv {url}')
 config.bind(',g','tab-give')
 config.bind(',r','open -t https://freedium.cfd/{url}')
 config.bind(',R','open -t https://12ft.io/{url}')
+
 config.bind(",p", 'cmd-set-text :open -p ')
 config.bind(",w", 'cmd-set-text :open -w ')
 config.bind(",cc", 'hint code userscript code_select.py')
@@ -79,8 +74,8 @@ c.aliases['gu'] = 'open -t https://github.com/dantearaujo1'
 c.aliases['gyt'] = 'open -t https://www.youtube.com/'
 c.aliases['grd'] = 'open -t https://www.reddit.com/'
 
-# if c.colors.webpage.darkmode.enabled:
-    # c.colors.webpage.preferred_color_scheme = "dark"
+if c.colors.webpage.darkmode.enabled:
+    c.colors.webpage.preferred_color_scheme = "dark"
 
 c.colors.tabs.selected.even.bg = "#4f0078"
 c.colors.tabs.selected.odd.bg = "#4f0078"
@@ -128,11 +123,14 @@ with config.pattern('*.figma.com') as p:
 with config.pattern('*.chatgpt.com') as p:
     p.input.mode_override = 'passthrough'
 
-# Set VIFM as file picker.
-# config.set("fileselect.handler", "external")
-# config.set("fileselect.single_file.command", ['alacritty', '--class', 'vifm,vifm', '-e', 'vifm', '--choose-files', '{}'])
-# config.set("fileselect.multiple_files.command", ['alacritty', '--class', 'vifm,vifm', '-e', 'vifm', '--choose-files', '{}'])
-# config.set("fileselect.folder.command", ['alacritty', '--class', 'vifm,vifm', '-e', 'vifm', '--choose-dir', '{}'])
+# Set Yazi as the external file picker
+c.fileselect.handler = "external"
+# For selecting a single file
+c.fileselect.single_file.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
+# For selecting multiple files
+c.fileselect.multiple_files.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
+# For selecting a folder
+c.fileselect.folder.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
 
 # Use ctrl-f to select save location using external file picker.
 # config.unbind("<Ctrl-f>", mode="prompt")

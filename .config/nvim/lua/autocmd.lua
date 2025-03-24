@@ -45,3 +45,15 @@ api.nvim_create_autocmd("BufEnter", {
 --   pattern = {"*.js","*.ts","*.jsx","*.tsx"},
 --   desc = "Autocommand for enabling keys of typescript-tools plugin"
 -- })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "pde",
+  callback = function()
+      -- Define the keymap only for .pde files
+    if(util.getOS() == "Linux") then
+      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>r', ':AsyncRun -mode=term -pos=tmux -close processing-java --sketch=$(VIM_FILEDIR) --output=/tmp/vim-processing/$(VIM_FILENOEXT) --force --run<CR>', { noremap = true, silent = true })
+    else
+      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>r', ':AsyncRun -mode=term -pos=bottom -close processing-java --sketch=%:p:h --output=', { noremap = true, silent = true })
+    end
+  end
+})

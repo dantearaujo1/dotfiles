@@ -9,7 +9,7 @@ local MASON_DAP_DEFAULT_SETTINGS = {
 
   }
 }
-require("mason-nvim-dap").setup(MASON_DAP_DEFAULT_SETTINGS)
+-- require("mason-nvim-dap").setup(MASON_DAP_DEFAULT_SETTINGS)
 require'nvim-dap-virtual-text'.setup()
 dapui.setup({
   icons = { expanded = "▾", collapsed = "▸" },

@@ -23,19 +23,14 @@ else
     }})
 
   -- Custom Plugins Configurations
-  require('dante/cmp') -- This is a completion system to use with lsp and sources
   require('dante/nvim-lspconfig') -- Language System Protocol -- Universal
   require('dante/nvim-dap') -- Another debugger Debug Adapter Protocol -- Universal
   require('dante/snippets') -- Custom Snippets created by me
-  require('dante/telescope') -- Like a file explorer or FZF
   require('dante/treesitter') -- ColorHighlight for a lot of languages
   require('dante/todo-comments') -- Highligh todo comments and show in a specific place
   require('dante/statusline') -- A fast but not fastest status line for neovim
-  require('dante/toggleterm') -- Terminal inside nvim
-  require('dante/minis') --
   require('dante/latex')
   require('dante/asynctasks')
-  require('dante/others') -- Some custom plugins configurations
 
   -- User Lua Configs
  require('utils')
@@ -47,10 +42,6 @@ else
 
   -- Dante Plugins
   require('dante/processing')
-  if vim.env.TERM == 'xterm-kitty' or vim.env.TERM == 'screen-256color' then
-    vim.cmd([[autocmd UIEnter * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[>1u") | endif]])
-    vim.cmd([[autocmd UILeave * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[<1u") | endif]])
-  end
 
 end
 

@@ -8,20 +8,6 @@ local b = vim.bo -- For the Buffer local options
 
 local utils = require('utils')
 
-if utils.getUser() == "wsl" then
-  vim.g.clipboard = {
-    name = "win32yank-wsl",
-    copy = {
-      ["+"] = "win32yank.exe -i --crlf",
-      ["*"] = "win32yank.exe -i --crlf"
-    },
-    paste = {
-      ["+"] = "win32yank.exe -o --crlf",
-      ["*"] = "win32yank.exe -o --crlf"
-    },
-    cache_enable = 0,
-  }
-end
 -- --------------------------------------------------------------------------
 -- Tabs, Indents
 -- --------------------------------------------------------------------------
@@ -43,13 +29,13 @@ o.matchpairs = '<:>,?:?,(:),{:},[:]'        -- Match these pairs with highlight
 o.ignorecase = true
 o.smartcase = true
 o.compatible = false
-
--- --------------------------------------------------------------------------
--- Lateral Information
--- --------------------------------------------------------------------------
+--
+-- -- --------------------------------------------------------------------------
+-- -- Lateral Information
+-- -- --------------------------------------------------------------------------
 w.number = true
 w.relativenumber = true
-
+--
 o.showmode = false
 o.timeoutlen = 500
 o.updatetime = 2000
@@ -73,8 +59,8 @@ o.shiftround = true
 o.virtualedit = 'block'
 o.tildeop = true
 o.joinspaces = false            -- Don't autoinsert two spaces after '.', '?'..
-b.formatoptions = 'mM' 		    -- Format options for buffer
--- b.formatoptions = 'tcqlmM' 		    -- Format options for buffer
+-- b.formatoptions = 'mM' 		    -- Format options for buffer
+b.formatoptions = 'tcqlmM' 		    -- Format options for buffer
 o.confirm = true
 
 o.wildmode = 'full'
@@ -88,34 +74,35 @@ o.wildignorecase = true
 
 o.title = true
 o.inccommand='split'          -- Shows the effects of a command in a window
--- --------------------------------------------------------------------------
--- Memory, CPU
--- --------------------------------------------------------------------------
+
+-- -- --------------------------------------------------------------------------
+-- -- Memory, CPU
+-- -- --------------------------------------------------------------------------
 b.synmaxcol = 240
 o.lazyredraw = false
 o.syntax = 'enable'
-
-
--- --------------------------------------------------------------------------
--- Folding
--- --------------------------------------------------------------------------
-o.foldcolumn = '1'
+--
+--
+-- -- --------------------------------------------------------------------------
+-- -- Folding
+-- -- --------------------------------------------------------------------------
+o.foldcolumn = '2'
 o.foldlevel = 99
 o.foldlevelstart = 99
 o.foldenable = true
 o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
-require("ufo").setup(
-  {
-    provider_selector = function(bufnr, filetype, buftype)
-      return {"treesitter", "indent"}
-    end
-  }
-)
-
-o.winbar= '%=%m %f'
+--
 o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 o.laststatus = 3
 o.cmdheight = 1
 
-vim.notify = require("notify")
+vim.opt.diffopt = {
+"internal",
+"filler",
+"closeoff",
+"context:12",
+"algorithm:histogram",
+"linematch:200",
+"indent-heuristic",
+"iwhite" -- I toggle this one, it doesn't fit all cases.
+}

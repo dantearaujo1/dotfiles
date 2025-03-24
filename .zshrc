@@ -1,7 +1,3 @@
-# Created by newuser for 5.9
-# if [ -z "$TMUX" ]; then
-   # exec tmux new-session -A -s workspace
-# fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -72,7 +68,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="dd/mm/yyyy"
+HIST_STAMPS="yyyy/mm/dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -82,79 +78,22 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-if [[ $(whoami) = 'devdante-archlinux-hd' ]]; then
-    bindkey -r "^G"
-    bindkey -r "^[g"
-    bindkey -r "^[G"
-    source ~/dev/scripts/fzf-git.sh
-    source ~/dev/scripts/zsh/docker-comp-fzf.zsh
-    source ~/dev/scripts/zsh/zsh-fzf-widgets.zsh
-    bindkey "^q" clear-screen
-    bindkey "^zc" fzf-git-checkout
-    bindkey "^zs" fzf-git-status
-    bindkey "^zk" fzf-kill-proc-by-list
-    bindkey "^ze" fzf-gitmoji
-    bindkey "^[n" fzf-notes
-    bindkey "^|" complete-word
-    alias cat='bat'
-
-    plugins=(
-        z
-        git
-        git-extras
-        zsh-autosuggestions
-        command-not-found
-        extract
-        fzf
-        web-search
-        yum
-        docker
-        vagrant
-        tmux
-        copyfile
-        copypath
-        common-aliases
-        colorize
-      )
-else
-  if [ -z "$TMUX" ]; then
-    plugins=(
-        z
-        git
-        git-extras
-        zsh-autosuggestions
-        command-not-found
-        extract
-        fzf
-        web-search
-        docker
-        tmux
-        copyfile
-        copypath
-        common-aliases
-        colorize
-        zsh-vi-mode
-      )
-  else
-    plugins=(
-        z
-        git
-        git-extras
-        zsh-autosuggestions
-        command-not-found
-        extract
-        fzf
-        docker
-        tmux
-        copyfile
-        copypath
-        common-aliases
-        colorize
-        autoswitch_virtualenv
-        zsh-vi-mode
-      )
-  fi
-fi
+plugins=(
+  z
+  git
+  git-extras
+  zsh-autosuggestions
+  command-not-found
+  extract
+  fzf
+  docker
+  tmux
+  copyfile
+  copypath
+  common-aliases
+  colorize
+  autoswitch_virtualenv
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -193,95 +132,31 @@ export FLUTTER_BIN="$HOME/.pub-cache/bin"
 export LOCALBINARIES="$HOME/.local/bin/"
 export PATH=$LOCALBINARIES:$PATH:$MYSCRIPTS:$FLUTTER_BIN
 
-if [[ $(whoami) = 'devdante-wsl-ubuntu' ]]; then
-  export GOLANG_DIR="$HOME/dev/setup/golang/go/bin"
-  export GOPATH="$HOME/dev/setup/golang/go"
-  export GOBIN="$GOPATH/bin"
-  export PROCESSING_DIR="$HOME/dev/setup/processing/processing-4.2"
-  export PATH=$PATH:$PROCESSING_DIR:$GOLANG_DIR:
-  alias rdp="sudo /etc/init.d/xrdp start"
-  alias ustart="~/dev/scripts/vncstart.sh"
-fi
-if [[ $(whoami) = 'devdante-wsl-kali' ]]; then
-
-fi
 if [[ $(whoami) = 'dante' ]]; then
   export PAGER=nvimpager
-  alias addtheme=kitty +kitten themes
+  alias kitheme=kitty +kitten themes
   alias icat='kitty +kitten icat'
+  alias cat='bat'
+  bindkey -r "^G"
+  bindkey "^q" clear-screen
+  bindkey "^zc" fzf-git-checkout
+  bindkey "^zs" fzf-git-status
+  bindkey "^zk" fzf-kill-proc-by-list
+  bindkey "^ze" fzf-gitmoji
+  bindkey "^[n" fzf-notes
+  bindkey "^|" complete-word
+  source ~/dev/scripts/fzf-git.sh
+  # source ~/dev/scripts/zsh/docker-comp-fzf.zsh
+  source ~/dev/scripts/zsh/zsh-fzf-widgets.zsh
   source /usr/share/nvm/init-nvm.sh
-    bindkey -r "^G"
-    bindkey -r "^[g"
-    bindkey -r "^[G"
-    source ~/dev/scripts/fzf-git.sh
-    # source ~/dev/scripts/zsh/docker-comp-fzf.zsh
-    source ~/dev/scripts/zsh/zsh-fzf-widgets.zsh
-    bindkey "^q" clear-screen
-    bindkey "^zc" fzf-git-checkout
-    bindkey "^zs" fzf-git-status
-    bindkey "^zk" fzf-kill-proc-by-list
-    bindkey "^ze" fzf-gitmoji
-    bindkey "^[n" fzf-notes
-    bindkey "^|" complete-word
-    alias cat='bat'
 fi
 
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-if uname -r | grep -q 'Microsoft'; then
-
-  PATH=$(REMOVE_PART="/mnt/d/Code/NodeJS/" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/c/tools/neovim/Neovim/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/c/Program Files (x86)/Lua/5.1" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/c/Program Files (x86)/Lua/5.1/clibs" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/c/Program Files/dotnet/" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Package Managers/chocolatey/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Languages/Ruby/Ruby27-x64/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Languages/Cmake/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Android/appdata/platform-tools" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Android/appdata/build-tools" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Package Managers/chocolatey/lib/gsudo/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Text Editors/Neovim 64/bin/" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Text Editors/Emacs/x86_64/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Compilers/LLVM/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Compilers/TDM-GCC-64/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/c/Program Files/OpenJDK/openjdk-8u322-b06/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Git/cmd" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/c/Users/dante/AppData/Local/Pandoc/" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/c/Users/dante/.dotnet/tools" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Languages/Processing/" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/f/Programs Files/Texlive/2020/bin/win32" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/LS/lua-language-server/3rd/luamake" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Languages/Python/Python38/Scripts/" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Languages/Python/Python38/" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Package Managers/chocolatey/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Git/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Text Editors/Neovim 64/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Package Managers/chocolatey" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-  PATH=$(REMOVE_PART="/mnt/d/Code/Android/bin" sh -c 'echo ":$PATH:" | sed "s@:$REMOVE_PART:@:@g;s@^:\(.*\):\$@\1@"')
-
-fi
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 export EDITOR='nvim'
 
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
 if [ -d "$HOME/.config/hypr/" ];then
   alias binds='nvim ~/.config/hypr/binds.conf'
   alias monitors='nvim ~/.config/hypr/monitors.conf'
@@ -290,6 +165,9 @@ if [ -d "$HOME/.config/hypr/" ];then
   alias hypr='nvim ~/.config/hypr/hyprland.conf'
   alias npypr='nvim ~/.config/hypr/pyprland.conf'
   alias o='xdg-open'
+fi
+if [ -d "$HOME/.config/qutebrowser/" ];then
+  alias qte='nvim ~/.config/qutebrowser/config.py'
 fi
 
 alias emp='rm --recursive --verbose --force ~/.local/share/Trash/files/*'
@@ -332,16 +210,9 @@ alias mindmap="h-m-m"
 alias hman="compgen -c | fzf | xargs man"
 alias vpy="source ./.venv/bin/activate"
 alias cvi="~/dev/scripts/nvim-config.sh "
-alias lsltp="tlmgr info --list | fzf "
-
-if [[ $(whoami) = 'devdante-wsl' ]]; then
-  alias emulator="/mnt/d/Code/Android/Sdk/emulator/emulator.exe"
-  alias adb="/mnt/d/Code/Android/Sdk/platform-tools/adb.exe"
-fi
 
 pdf() {zathura $1 & disown}
 mgdir() {mkdir $@ && cd ${@:$#}}
-
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
@@ -350,14 +221,132 @@ function yy() {
 	fi
 	rm -f -- "$tmp"
 }
-#export DISPLAY=$(ip route | grep default | awk '{print $3; exit;}'):0.0 #Exporting Display to XServer
-# eval "$(starship init zsh)"
+
+## ATUIN CONFIG
+# shellcheck disable=SC2034,SC2153,SC2086,SC2155
+
+# Above line is because shellcheck doesn't support zsh, per
+# https://github.com/koalaman/shellcheck/wiki/SC1071, and the ignore: param in
+# ludeeus/action-shellcheck only supports _directories_, not _files_. So
+# instead, we manually add any error the shellcheck step finds in the file to
+# the above line ...
+
+# Source this in your ~/.zshrc
+autoload -U add-zsh-hook
+
+zmodload zsh/datetime 2>/dev/null
+
+# If zsh-autosuggestions is installed, configure it to use Atuin's search. If
+# you'd like to override this, then add your config after the $(atuin init zsh)
+# in your .zshrc
+_zsh_autosuggest_strategy_atuin() {
+    suggestion=$(ATUIN_QUERY="$1" atuin search --cmd-only --limit 1 --search-mode prefix)
+}
+
+if [ -n "${ZSH_AUTOSUGGEST_STRATEGY:-}" ]; then
+    ZSH_AUTOSUGGEST_STRATEGY=("atuin" "${ZSH_AUTOSUGGEST_STRATEGY[@]}")
+else
+    ZSH_AUTOSUGGEST_STRATEGY=("atuin")
+fi
+
+export ATUIN_SESSION=$(atuin uuid)
+ATUIN_HISTORY_ID=""
+
+_atuin_preexec() {
+    local id
+    id=$(atuin history start -- "$1")
+    export ATUIN_HISTORY_ID="$id"
+    __atuin_preexec_time=${EPOCHREALTIME-}
+}
+
+_atuin_precmd() {
+    local EXIT="$?" __atuin_precmd_time=${EPOCHREALTIME-}
+
+    [[ -z "${ATUIN_HISTORY_ID:-}" ]] && return
+
+    local duration=""
+    if [[ -n $__atuin_preexec_time && -n $__atuin_precmd_time ]]; then
+        printf -v duration %.0f $(((__atuin_precmd_time - __atuin_preexec_time) * 1000000000))
+    fi
+
+    (ATUIN_LOG=error atuin history end --exit $EXIT ${duration:+--duration=$duration} -- $ATUIN_HISTORY_ID &) >/dev/null 2>&1
+    export ATUIN_HISTORY_ID=""
+}
+
+_atuin_search() {
+    emulate -L zsh
+    zle -I
+
+    # swap stderr and stdout, so that the tui stuff works
+    # TODO: not this
+    local output
+    # shellcheck disable=SC2048
+    output=$(ATUIN_SHELL_ZSH=t ATUIN_LOG=error ATUIN_QUERY=$BUFFER atuin search $* -i 3>&1 1>&2 2>&3)
+
+    zle reset-prompt
+
+    if [[ -n $output ]]; then
+        RBUFFER=""
+        LBUFFER=$output
+
+        if [[ $LBUFFER == __atuin_accept__:* ]]
+        then
+            LBUFFER=${LBUFFER#__atuin_accept__:}
+            zle accept-line
+        fi
+    fi
+}
+_atuin_search_vicmd() {
+    _atuin_search --keymap-mode=vim-normal
+}
+_atuin_search_viins() {
+    _atuin_search --keymap-mode=vim-insert
+}
+
+_atuin_up_search() {
+    # Only trigger if the buffer is a single line
+    if [[ ! $BUFFER == *$'\n'* ]]; then
+        _atuin_search --shell-up-key-binding "$@"
+    else
+        zle up-line
+    fi
+}
+_atuin_up_search_vicmd() {
+    _atuin_up_search --keymap-mode=vim-normal
+}
+_atuin_up_search_viins() {
+    _atuin_up_search --keymap-mode=vim-insert
+}
+
+add-zsh-hook preexec _atuin_preexec
+add-zsh-hook precmd _atuin_precmd
+
+zle -N atuin-search _atuin_search
+zle -N atuin-search-vicmd _atuin_search_vicmd
+zle -N atuin-search-viins _atuin_search_viins
+zle -N atuin-up-search _atuin_up_search
+zle -N atuin-up-search-vicmd _atuin_up_search_vicmd
+zle -N atuin-up-search-viins _atuin_up_search_viins
+
+# These are compatibility widget names for "atuin <= 17.2.1" users.
+zle -N _atuin_search_widget _atuin_search
+zle -N _atuin_up_search_widget _atuin_up_search
+
+bindkey -M emacs '^r' atuin-search
+bindkey -M viins '^r' atuin-search-viins
+bindkey -M vicmd '/' atuin-search
+bindkey -M emacs '^[[A' atuin-up-search
+bindkey -M vicmd '^[[A' atuin-up-search-vicmd
+bindkey -M viins '^[[A' atuin-up-search-viins
+bindkey -M emacs '^[OA' atuin-up-search
+bindkey -M vicmd '^[OA' atuin-up-search-vicmd
+bindkey -M viins '^[OA' atuin-up-search-viins
+bindkey -M vicmd 'k' atuin-up-search-vicmd
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f /home/dante/.dart-cli-completion/zsh-config.zsh ]] && . /home/dante/.dart-cli-completion/zsh-config.zsh || true
-## [/Completion]
 
