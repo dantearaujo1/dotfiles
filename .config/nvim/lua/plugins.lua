@@ -518,11 +518,9 @@ return {
   {
     'stevearc/oil.nvim',
     opts = {},
-    keys = { -- load the plugin only when using it's keybinding:
-      { "<localleader>o", "<cmd>Oil<cr>" },
-    },
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
   },
   {
     'folke/todo-comments.nvim',

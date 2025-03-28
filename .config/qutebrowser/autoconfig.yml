@@ -29,7 +29,7 @@ settings:
     https://www.speedtest.net: true
   content.javascript.clipboard:
     github.com: access
-    global: none
+    global: access
   content.media.audio_capture:
     https://app.gather.town: true
     https://b53.virtual.ufc.br: true
