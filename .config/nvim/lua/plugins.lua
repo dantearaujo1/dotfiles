@@ -151,7 +151,6 @@ return {
         ['<C-j>'] = { 'select_next', 'fallback' },
         ['<S-Tab>'] = { 'select_prev', 'fallback' },
         ['<Tab>'] = { 'select_next', 'fallback' },
-        ['<C-y>'] = { 'accept_and_enter', 'fallback' },
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
       },
@@ -181,7 +180,6 @@ return {
 
         }
       },
-      signature = { enabled = true },
 
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -296,10 +294,16 @@ return {
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
         default = {
+          'lazydev',
           'lsp',
           'copilot',
           'path',
           'snippets',
+          'buffer',
+        },
+        per_filetype = {
+          sql = { 'snippets', 'dadbod', 'buffer' },
+          mysql = { 'snippets', 'dadbod', 'buffer' }
         },
         providers = {
           lsp = {
@@ -315,6 +319,10 @@ return {
             opts = {
               max_completions = 3,
             }
+          },
+          dadbod = {
+            name = "Dadbod",
+            module = "vim_dadbod_completion.blink",
           },
           nerdfont = {
             module = 'blink-nerdfont',
@@ -335,6 +343,11 @@ return {
                 vim.o.filetype
               )
             end,
+          },
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100,
           },
         },
       },
@@ -525,11 +538,6 @@ return {
   {
     'folke/todo-comments.nvim',
     event = "BufEnter",
-  },
-  {
-      'atiladefreitas/dooing',
-      cmd = {"Dooing"},
-      opts = {},
   },
   {
     'arnamak/stay-centered.nvim',
@@ -904,30 +912,6 @@ return {
   -- Java ========
   {
     "nvim-java/nvim-java",
-    dependencies = {
-      "nvim-java/lua-async-await",
-      "nvim-java/nvim-java-refactor",
-      "nvim-java/nvim-java-core",
-      "nvim-java/nvim-java-test",
-      "nvim-java/nvim-java-dap",
-      "MunifTanjim/nui.nvim",
-      "neovim/nvim-lspconfig",
-      "mfussenegger/nvim-dap",
-      {
-        "williamboman/mason.nvim",
-        opts = {
-          registries = {
-            "github:nvim-java/mason-registry",
-            "github:mason-org/mason-registry",
-          },
-        },
-      },
-    },
-    opts = {
-      notifications = {
-        dap = false,
-      }
-    },
   },
   -- {
   --   "JavaHello/spring-boot.nvim",
@@ -1079,20 +1063,20 @@ return {
     },
     event = "LspAttach",
   },
-  {
-    'kevinhwang91/nvim-ufo',
-    dependencies = 'kevinhwang91/promise-async',
-    event = "BufRead",
-    config = function()
-      require("ufo").setup(
-        {
-          provider_selector = function(bufnr, filetype, buftype)
-            return {"treesitter", "indent"}
-          end
-        }
-      )
-    end
-  },
+  -- {
+  --   'kevinhwang91/nvim-ufo',
+  --   dependencies = 'kevinhwang91/promise-async',
+  --   event = "BufRead",
+  --   config = function()
+  --     require("ufo").setup(
+  --       {
+  --         provider_selector = function(bufnr, filetype, buftype)
+  --           return {"treesitter", "indent"}
+  --         end
+  --       }
+  --     )
+  --   end
+  -- },
   {
     'nvim-zh/colorful-winsep.nvim',
     event = { "InsertEnter", "CmdlineEnter" },
@@ -1179,7 +1163,6 @@ return {
           "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
       },
       -- cmd = "MCPHub", -- lazily start the hub when `MCPHub` is called
-      branch = "nightly",
       build = "bundled_build.lua", -- Installs required mcp-hub npm module
       opts = {
         use_bundled_binary = true,
@@ -1265,95 +1248,6 @@ return {
       },
     },
   },
-  -- {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
-  --   dependencies = {
-  --     { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-  --     { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-  --   },
-  --   build = "make tiktoken",
-  --   config = function ()
-  --     local chat = require("CopilotChat")
-  --     chat.setup{
-  --       debug = false, -- Enable debugging
-  --       show_help = true,
-  --       disable_extra_info = 'no',
-  --       -- window = {
-  --       --   layout = 'float',
-  --       -- },
-  --       prompts = {
-  --         Explain = {
-  --             mapping = '<leader>aie',
-  --             description = 'AI Explain',
-  --         },
-  --         Review = {
-  --             mapping = '<leader>air',
-  --             description = 'AI Review',
-  --         },
-  --         Tests = {
-  --             mapping = '<leader>ait',
-  --             description = 'AI Tests',
-  --         },
-  --         Fix = {
-  --             mapping = '<leader>aif',
-  --             description = 'AI Fix',
-  --         },
-  --         Optimize = {
-  --             mapping = '<leader>aio',
-  --             description = 'AI Optimize',
-  --         },
-  --         Docs = {
-  --             mapping = '<leader>aid',
-  --             description = 'AI Documentation',
-  --         },
-  --         CommitStaged = {
-  --             mapping = '<leader>aic',
-  --             description = 'AI Generate Commit',
-  --         },
-  --       },
-  --       mappings = {
-  --         submit_prompt = {
-  --           normal = '<CR>',
-  --           insert = '<C-s>'
-  --         }
-  --       }
-  --     }
-  --     require("copilot").setup{{
-  --       suggestions = {
-  --         auto_trigger = true,
-  --         enabled = true,
-  --       },
-  --       cmp = {
-  --         enabled = false,
-  --       },
-  --       panel = {
-  --         enabled = false,
-  --       },
-  --       filetypes = {
-  --         markdown = false,
-  --       },
-  --       server_opts_overrides = {
-  --         settings = {
-  --           advanced = {
-  --             inlineSuggestionCount = 3,
-  --           },
-  --         },
-  --       },
-  --     }}
-  --     vim.keymap.set({ 'n', 'v' }, '<leader>aii', chat.toggle, { desc = 'AI Toggle' })
-  --     vim.keymap.set({ 'n', 'v' }, '<leader>aix', chat.reset, { desc = 'AI Reset' })
-  --     vim.keymap.set({ 'n'  }, "<leader>aiq",
-  --         function()
-  --           local input = vim.fn.input("Quick Chat: ")
-  --           if input ~= "" then
-  --             require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-  --           end
-  --         end,
-  --         {desc = "CopilotChat - Quick chat"}
-  --     )
-  --   end
-  --   -- See Commands section for default commands if you want to lazy load on them
-  -- },
   -- NOTE TAKING PLUGINS =======================================================
   {
     'nvim-neorg/neorg',

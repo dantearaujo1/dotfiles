@@ -31,7 +31,6 @@ config.bind("<Ctrl-=>", 'zoom-in')
 config.bind("<Ctrl-->", 'zoom-out')
 config.bind("<Ctrl+r>", 'config-source')
 config.bind(",l", 'spawn --userscript qute-bitwarden')
-config.bind(",P", 'spawn --userscript qute-pass --password-only')
 config.bind(',v','hint links spawn mpv {hint-url}')
 config.bind(',b','hint links spawn mpv --wayland-app-id=pip {hint-url}')
 config.bind(',B','spawn mpv {url}')
@@ -135,3 +134,5 @@ c.fileselect.folder.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
 # Use ctrl-f to select save location using external file picker.
 # config.unbind("<Ctrl-f>", mode="prompt")
 # config.bind('<Ctrl-f>', 'prompt-fileselect-external', mode='prompt')
+config.set('url.start_pages','~/.config/qutebrowser/startpage/custom-one/index.html')
+config.set('url.default_page','~/.config/qutebrowser/startpage/custom-one/index.html')

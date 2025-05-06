@@ -25,7 +25,6 @@ else
   -- Custom Plugins Configurations
   require('dante/nvim-lspconfig') -- Language System Protocol -- Universal
   require('dante/nvim-dap') -- Another debugger Debug Adapter Protocol -- Universal
-  require('dante/snippets') -- Custom Snippets created by me
   require('dante/treesitter') -- ColorHighlight for a lot of languages
   require('dante/todo-comments') -- Highligh todo comments and show in a specific place
   require('dante/statusline') -- A fast but not fastest status line for neovim

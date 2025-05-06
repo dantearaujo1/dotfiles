@@ -20,11 +20,10 @@ require'lualine'.setup {
     }
   },
   sections = {
-    lualine_a = {{'mode', format=function(mode) mode:sub(1,1) end}},
+    lualine_a = { {'mode', fmt = function(res) return res:sub(1,1) end} },
     lualine_b = {'branch', 'diff', 'diagnostics'},
     lualine_c = {
       'filename',
-      {navic.get_location, cond = navic.is_available},
     },
     lualine_x = {'filetype','fileformat'},
     lualine_y = {},

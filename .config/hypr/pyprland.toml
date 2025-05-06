@@ -16,6 +16,13 @@ size = "95% 93%"
 lazy = true
 excludes = ["wpp","volume","fm"]
 
+[scratchpads.todo]
+animation = "fromBottom"
+command = "kitty --class kitty-todo taskwarrior-tui"
+class = "kitty-todo"
+size = "95% 93%"
+lazy = true
+
 [scratchpads.volume]
 command = "pavucontrol"
 animation = "fromTop"

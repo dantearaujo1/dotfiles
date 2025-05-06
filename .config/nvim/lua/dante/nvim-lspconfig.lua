@@ -86,6 +86,7 @@ local MASON_LSP_DEFAULT_SETTINGS = {
   },
   automatic_installation = false,
 }
+require('java').setup()
 require("mason").setup()
 require("mason-lspconfig").setup(MASON_LSP_DEFAULT_SETTINGS)
 require("mason-lspconfig").setup_handlers {

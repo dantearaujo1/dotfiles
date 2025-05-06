@@ -86,11 +86,13 @@ o.syntax = 'enable'
 -- -- --------------------------------------------------------------------------
 -- -- Folding
 -- -- --------------------------------------------------------------------------
-o.foldcolumn = '2'
-o.foldlevel = 99
-o.foldlevelstart = 99
-o.foldenable = true
-o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldclose:'
+vim.o.foldcolumn = '1'
+vim.o.foldenable = true
+vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldmethod = 'expr'
 --
 o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 o.laststatus = 3

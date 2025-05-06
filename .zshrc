@@ -179,6 +179,7 @@ alias tl='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
 alias tmuxconf='$EDITOR $ZSH_TMUX_CONFIG'
+alias tt='taskwarrior-tui'
 alias zz="nvim ~/.zshrc"
 alias zZ="source ~/.zshrc"
 alias zb="nvim ~/.bashrc"
@@ -342,6 +343,11 @@ bindkey -M emacs '^[OA' atuin-up-search
 bindkey -M vicmd '^[OA' atuin-up-search-vicmd
 bindkey -M viins '^[OA' atuin-up-search-viins
 bindkey -M vicmd 'k' atuin-up-search-vicmd
+
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - -zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
