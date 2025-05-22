@@ -1,5 +1,6 @@
 if vim.g.vscode then
- require("keymappings")
+ require("vscode-keymappings")
+ require("dante/vscode")
 else
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	if not vim.loop.fs_stat(lazypath) then

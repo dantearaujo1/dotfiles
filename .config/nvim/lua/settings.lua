@@ -88,10 +88,10 @@ o.syntax = 'enable'
 -- -- --------------------------------------------------------------------------
 vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldclose:'
 vim.o.foldcolumn = '1'
-vim.o.foldenable = true
-vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()'
 vim.o.foldmethod = 'expr'
 --
 o.guicursor ="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
@@ -99,12 +99,12 @@ o.laststatus = 3
 o.cmdheight = 1
 
 vim.opt.diffopt = {
-"internal",
-"filler",
-"closeoff",
-"context:12",
-"algorithm:histogram",
-"linematch:200",
-"indent-heuristic",
-"iwhite" -- I toggle this one, it doesn't fit all cases.
+  "internal",
+  "filler",
+  "closeoff",
+  "context:12",
+  "algorithm:histogram",
+  "linematch:200",
+  "indent-heuristic",
+  "iwhite" -- I toggle this one, it doesn't fit all cases.
 }

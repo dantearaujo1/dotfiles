@@ -17,7 +17,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     dependencies = {
-      'RRethy/nvim-treesitter-endwise'
+      'RRethy/nvim-treesitter-endwise',
     },
   },
   {
@@ -70,22 +70,27 @@ return {
     }
   }, -- UI out of the box
   {
-    'williamboman/mason.nvim',
-  },
-  {
     'nvitools/none-ls.nvim',
     event = "VeryLazy",
+  },
+  {
+    'mason-org/mason.nvim',
+    version = "^1.0.0"
   },
   {
       "jay-babu/mason-null-ls.nvim",
       event = { "BufReadPre", "BufNewFile" },
       dependencies = {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         "nvimtools/none-ls.nvim",
       },
   },
   {
-    'williamboman/mason-lspconfig.nvim',
+    'mason-org/mason-lspconfig.nvim',
+    version = "^1.0.0"
+  },
+  {
+    'jay-babu/mason-nvim-dap.nvim',
   },
   {
     'neovim/nvim-lspconfig',
@@ -108,9 +113,6 @@ return {
   },
   {
     'preservim/vimux'
-  },
-  {
-    'jay-babu/mason-nvim-dap.nvim',
   },
   {
       "folke/lazydev.nvim",
@@ -156,7 +158,6 @@ return {
       },
       cmdline = {
         keymap = {
-          ['<CR>'] = { 'accept_and_enter', 'fallback' },
           ['<Tab>'] = {
             function(cmp)
               if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then return cmp.accept() end
@@ -165,16 +166,13 @@ return {
             'select_next',
           },
         },
-        -- enabled = function()
-        --   return vim.fn.getcmdtype() ~= ':' or not vim.fn.getcmdline():match("^[%%0-9,'<>%-]*!")
-        -- end,
         completion = {
           menu = {
-            -- auto_show = function(ctx)
-            --   return vim.fn.getcmdtype() == ':'
-            --   -- enable for inputs as well, with:
-            --   -- or vim.fn.getcmdtype() == '@'
-            -- end,
+            auto_show = function(ctx)
+              return vim.fn.getcmdtype() == ':'
+              -- enable for inputs as well, with:
+              -- or vim.fn.getcmdtype() == '@'
+            end,
           },
           ghost_text = { enabled = true },
 
@@ -182,12 +180,7 @@ return {
       },
 
       appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- Will be removed in a future release
         use_nvim_cmp_as_default = true,
-        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = 'mono',
         kind_icons = {
             Text = '󰉿',
@@ -261,9 +254,6 @@ return {
                   return icon .. ctx.icon_gap
                 end,
 
-                -- Optionally, use the highlight groups from nvim-web-devicons
-                -- You can also add the same function for `kind.highlight` if you want to
-                -- keep the highlight groups in sync with the icons.
                 highlight = function(ctx)
                   local hl = "BlinkCmpKind" .. ctx.kind
                     or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
@@ -277,7 +267,6 @@ return {
                 end,
               }
             },
-            -- columns = {  { 'label', 'label_description', gap = 1 }, { 'kind_icon', 'kind' } },
             columns = function(ctx)
               if ctx.mode == "cmdline" then
                   return { { "label" } }
@@ -913,13 +902,6 @@ return {
   {
     "nvim-java/nvim-java",
   },
-  -- {
-  --   "JavaHello/spring-boot.nvim",
-  --   ft = "java",
-  --   dependencies = {
-  --     "nvim-java/nvim-java", -- or nvim-java, nvim-lspconfig
-  --   },
-  -- },
 
   -- Typescript ========
   -- C++ ========
@@ -1000,22 +982,60 @@ return {
   --     vim.keymap.set("n", "<leader>kk", '<cmd>lua require("kubectl").toggle()<cr>', { noremap = true, silent = true , desc = "Toggler Kubectl"})
   --   end,
   -- },
+  -- Note Taking Plugins ===================================================
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",  -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    event = {
+      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+      -- refer to `:h file-pattern` for more examples
+      "BufReadPre ~/Notes/obsidian/*.md",
+      "BufNewFile ~/Notes/obsidian/*.md",
+    },
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- see below for full list of optional dependencies 👇
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "personal",
+          path = "~/Notes/obsidian/programming",
+        },
+        {
+          name = "work",
+          path = "~/Notes/obsidian/work",
+        },
+      },
+      ui = {
+        enable = false
+      },
+      -- Optional, customize how note file names are generated given the ID, target directory, and title.
+      ---@param spec { id: string, dir: obsidian.Path, title: string|? }
+      ---@return string|obsidian.Path The full path to the new note.
+      note_path_func = function(spec)
+        local path = spec.dir / tostring(spec.title)
+        return path:with_suffix(".md")
+      end,
+    },
+  },
   -- UI Pluggins ===========================================================
   -- PREVIEWERS
   -- MARKDOWN
   {
     "OXY2DEV/markview.nvim",
     lazy = false,      -- Recommended
-    -- ft = "markdown" -- If you decide to lazy-load anyway
 
     dependencies = {
-        -- You will not need this if you installed the
-        -- parsers manually
-        -- Or if the parsers are in your $RUNTIMEPATH
         "nvim-treesitter/nvim-treesitter",
-
         "nvim-tree/nvim-web-devicons"
-    }
+    },
   },
   -- LATEX
 
@@ -1063,20 +1083,6 @@ return {
     },
     event = "LspAttach",
   },
-  -- {
-  --   'kevinhwang91/nvim-ufo',
-  --   dependencies = 'kevinhwang91/promise-async',
-  --   event = "BufRead",
-  --   config = function()
-  --     require("ufo").setup(
-  --       {
-  --         provider_selector = function(bufnr, filetype, buftype)
-  --           return {"treesitter", "indent"}
-  --         end
-  --       }
-  --     )
-  --   end
-  -- },
   {
     'nvim-zh/colorful-winsep.nvim',
     event = { "InsertEnter", "CmdlineEnter" },
@@ -1087,23 +1093,10 @@ return {
   -- THEMES =====================================================================
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   { "ellisonleao/gruvbox.nvim", priority = 1000, lazy=true },
-  {
-    "baliestri/aura-theme",
-    lazy = true,
-    priority = 1000,
-    config = function(plugin)
-      vim.opt.rtp:append(plugin.dir .. "/packages/neovim")
-      vim.cmd([[colorscheme aura-dark]])
-    end
-  },
+  { "rebelot/kanagawa.nvim" },
+
   -- ColorColumn ===========================
   { 'xiyaowong/virtcolumn.nvim' },
-  {
-    'm4xshen/smartcolumn.nvim',
-    config = function()
-      require('dante/smartcolumn')
-    end
-  },
   -- ICONS THEMES==================================================
   { 'ryanoasis/vim-devicons' },
   { 'yamatsum/nvim-web-nonicons' },
@@ -1113,17 +1106,6 @@ return {
       require('nvim-web-devicons').setup()
     end
   },
-  -- TREESITTER SUPORTED THEMES==================================================
-  -- {
-  --     "vague2k/huez.nvim",
-  --     -- if you want registry related features, uncomment this
-  --     branch = "stable",
-  --     event = "UIEnter",
-  --     import = "huez-manager.import",
-  --     config = function()
-  --         require("huez").setup({})
-  --     end,
-  -- },
   -- My Pluggins ===========================================================
   -- {
   --   '~/dev/projects/lua/neovim/project-creator',
@@ -1238,61 +1220,7 @@ return {
           },
         },
       },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
     },
-  },
-  -- NOTE TAKING PLUGINS =======================================================
-  {
-    'nvim-neorg/neorg',
-    version = "*",
-    build = ":Neorg sync-parsers",
-    keys = {"<localleader>p"},
-    dependencies = {
-      {"nvim-neorg/neorg-telescope"}
-    },
-    ft = "norg",
-    config = function()
-      require('neorg').setup {
-        load = {
-          ["core.defaults"] = {},
-          ["core.concealer"] = {},
-          ["core.dirman"] = {
-            config = {
-              workspaces = {
-                study = "~/Notes/study",
-                work = "~/Notes/work",
-                prog = "~/Notes/prog",
-              },
-              default_workspace = "prog",
-            }
-          },
-          ["core.completion"] = {
-            config = {
-              engine = "nvim-cmp",
-              name = "[Neorg]",
-            },
-          },
-          ["core.keybinds"]={
-            config = {
-              hook = function(keybinds)
-                keybinds.map("norg","n","<localleader>c", '<cmd>Neorg keybind all core.looking-glass.magnify-code-block<CR>')
-              end
-            }
-          },
-          ["core.integrations.telescope"] = {},
-        },
-      }
-      vim.wo.foldlevel = 99
-      vim.wo.conceallevel = 2
-
-    end
   },
   {
     'xiyaowong/transparent.nvim',
