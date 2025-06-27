@@ -104,5 +104,13 @@ size = "85% 85%"
 position = "8% 5%"
 lazy = true
 
+[scratchpads.yt_dlp_download]
+animation = "fromTop"
+command = "kitty --class yt_dlp_download ~/dev/scripts/downloader.sh"
+class = "yt_dlp_download"
+lazy = true
+size = "65% 25%"
+
 [menubar]
 command = "waybar"
+

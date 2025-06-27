@@ -206,6 +206,8 @@ alias fzn="fzf --bind 'f1:execute(dirname {} | cd)' --preview 'bat --style=numbe
 alias pacall="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
 alias pacls="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
 alias pacd="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rcns {})'"
+alias paclse="pacman -Qe | awk '{print \$1;}' | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+alias pacde="pacman -Qe | awk '{print \$1;}' | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rcns {})'"
 alias explorer="xdg-open"
 alias mindmap="h-m-m"
 alias hman="compgen -c | fzf | xargs man"

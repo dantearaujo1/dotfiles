@@ -122,14 +122,15 @@ with config.pattern('*.figma.com') as p:
 with config.pattern('*.chatgpt.com') as p:
     p.input.mode_override = 'passthrough'
 
+c.fileselect.handler = "default"
 # Set Yazi as the external file picker
-c.fileselect.handler = "external"
+# c.fileselect.handler = "external"
 # For selecting a single file
-c.fileselect.single_file.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
+# c.fileselect.single_file.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
 # For selecting multiple files
-c.fileselect.multiple_files.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
+# c.fileselect.multiple_files.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
 # For selecting a folder
-c.fileselect.folder.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
+# c.fileselect.folder.command = ["kitty", "-e", "yazi", "--chooser-file", "{}"]
 
 # Use ctrl-f to select save location using external file picker.
 # config.unbind("<Ctrl-f>", mode="prompt")

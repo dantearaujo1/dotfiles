@@ -42,11 +42,13 @@ util.map("v", ">", ">gv")
 util.map("v", "<", "<gv")
 
 -- Turn off navigation with arrows
-util.map("n", "<Up>", "<nop>", nore)
-util.map("n", "<Down>", "<nop>", nore)
-util.map("n", "<Left>", "<nop>", nore)
-util.map("n", "<Right>", "<nop>", nore)
-util.map("n", "Q", "<nop>", nore)
+util.map('n', 'n' , '<nop>' , nore)
+util.map('n', 'n' , 'n' , nore)
+util.map('n', '<Up>' , '<nop>' , nore)
+util.map('n', '<Down>' , '<nop>' , nore)
+util.map('n', '<Left>' , '<nop>' , nore)
+util.map('n', '<Right>' , '<nop>' , nore)
+util.map('n', 'Q' , '<nop>' , nore)
 -- " Move the cursor based on physical lines, not the actual lines.
 util.map("n", "j", '(v:count == 0 ? "gj" : "j")', sxnore)
 util.map("n", "k", '(v:count == 0 ? "gk" : "k")', sxnore)
@@ -81,6 +83,11 @@ util.map("n", "<C-s>", ":%s/", nore)
 util.map("n", "<C-S-\\>", "<C-i>", nore)
 -- util.map('n', '<leader>o', '<C-o>', nore)
 -- util.map('n', '<C-o>' , '<nop>' , nore)
+util.map('n', '<M-s>', ':s/', nore)
+util.map('x', '<M-s>', ':%s/', nore)
+util.map('n', '<C-s>', ':%s/', nore)
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
 
 --  Navigation in the location and quickfix list
 util.map("n", "<localleader>q", ":<C-u>call asyncrun#quickfix_toggle(10)<CR>", nore)
@@ -174,7 +181,7 @@ util.map("n", "<leader>de", ":lua require'dap'.set_exception_breakpoints({'all'}
 -- end
 
 -- ================================================================|ARGWRAP|
-util.map("n", "<leader><leader>a", ":ArgWrap<CR>", nore)
+util.map('n', '<localleader>a', ':ArgWrap<CR>', nore)
 
 util.map("n", "zR", ':lua require("ufo").openAllFolds()<CR>', { noremap = true, silent = true })
 util.map("n", "zM", ':lua require("ufo").closeAllFolds()<CR>', { noremap = true, silent = true })
@@ -254,5 +261,4 @@ util.map("n", "<leader>pw", "<nop>", nore)
 vim.keymap.set("n", "<localleader>f", function()
 	require("conform").format()
 end, { desc = "Format the buffer" })
--- TODOS WITH DOOING
 util.map("n", "<Leader>tt", ":VimuxTogglePane<CR>", { desc = "Toggle vimux pane" })

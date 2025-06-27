@@ -29,7 +29,6 @@ else
   require('dante/treesitter') -- ColorHighlight for a lot of languages
   require('dante/todo-comments') -- Highligh todo comments and show in a specific place
   require('dante/statusline') -- A fast but not fastest status line for neovim
-  require('dante/latex')
   require('dante/asynctasks')
 
   -- User Lua Configs
