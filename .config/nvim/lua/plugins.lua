@@ -280,6 +280,7 @@ return {
 									return icon .. ctx.icon_gap
 								end,
 
+<<<<<<< HEAD
 								highlight = function(ctx)
 									local hl = "BlinkCmpKind" .. ctx.kind
 										or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
@@ -1379,6 +1380,702 @@ return {
 	-- {
 	--   "nvim-java/nvim-java",
 	-- },
+=======
+      -- Default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      sources = {
+        default = {
+          'lazydev',
+          'lsp',
+          'copilot',
+          'path',
+          'snippets',
+          'buffer',
+        },
+        per_filetype = {
+          sql = { 'snippets', 'dadbod', 'buffer' },
+          plsql = { 'snippets', 'dadbod', 'buffer' },
+          mysql = { 'snippets', 'dadbod', 'buffer' }
+        },
+        providers = {
+          lsp = {
+            name = "LSP",
+            module = "blink.cmp.sources.lsp",
+            async = true,
+          },
+          copilot = {
+            module = "blink-copilot",
+            name = "copilot",
+            async = true,
+            score_offset = 100,
+            opts = {
+              max_completions = 3,
+            }
+          },
+          dadbod = {
+            name = "Dadbod",
+            module = "vim_dadbod_completion.blink",
+          },
+          nerdfont = {
+            module = 'blink-nerdfont',
+            name = 'Nerd Fonts',
+            score_offset = 15,
+            opts = { insert = true }
+          },
+          emoji = {
+            module = "blink-emoji",
+            name = "Emoji",
+            score_offset = 25, -- Tune by preference
+            opts = { insert = true }, -- Insert emoji (default) or complete its name
+            should_show_items = function()
+              return vim.tbl_contains(
+                -- Enable emoji completion only for git commits and markdown.
+                -- By default, enabled for all file-types.
+                { "gitcommit", "markdown", "text", "html" },
+                vim.o.filetype
+              )
+            end,
+          },
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100,
+          },
+        },
+      },
+    },
+    opts_extend = { "sources.default" }
+  },
+  -- Terminal ==================================================================
+  {
+    'skywind3000/asyncrun.vim',
+    event = "VeryLazy",
+    cmd = "AsyncRun",
+    event = "VeryLazy"
+  },
+  {
+    'skywind3000/asynctasks.vim',
+    event = "VeryLazy",
+    cmd = { "AsyncTask", "AsyncTaskList", "AsyncTaskEdit" },
+  },
+  -- Browser Navigation Plugins ==================================================
+  {
+      "sontungexpt/url-open",
+      event = "VeryLazy",
+      cmd = "URLOpenUnderCursor",
+      keys = {
+        { "<leader>ob", "<cmd>URLOpenUnderCursor<cr>" }
+      },
+      config = function()
+          local status_ok, url_open = pcall(require, "url-open")
+          if not status_ok then
+              return
+          end
+          url_open.setup ({})
+      end,
+  },
+  -- Utils Pluggins =============================================================
+  {
+    "uhs-robert/sshfs.nvim",
+    opts = {
+      -- Refer to the configuration section below
+      -- or leave empty for defaults
+    },
+  },
+  {
+    "colomb8/rambo.nvim",
+    config = function()
+      require("rambo").setup({
+        -- operations_key = 'C', -- 'C' or 'M'
+        -- c_right_mode = 'bow', -- 'bow' or 'eow'
+      })
+    end,
+  }, -- A lot of insert mode mappings
+  {
+    "gennaro-tedesco/nvim-jqx",
+    event = {"BufReadPost"},
+    ft = { "json", "yaml" },
+  }, -- Better way to check json and yaml data JqxQuery and JqxList
+  {
+    "alex-popov-tech/store.nvim",
+    dependencies = { "OXY2DEV/markview.nvim" },
+    cmd = "Store"
+  }, -- A Store for plugins
+  {
+    'kevinhwang91/nvim-bqf',
+    event = "VeryLazy",
+    ft = 'qf',
+  },
+  {
+    "chrisgrieser/nvim-puppeteer",
+    lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
+  }, -- change  string to f-strings or template strings automatically
+  -- {
+  --     "jake-stewart/multicursor.nvim",
+  --     branch = "1.0",
+  --     config = function()
+  --         local mc = require("multicursor-nvim")
+  --
+  --         mc.setup()
+  --
+  --         local set = vim.keymap.set
+  --
+  --         -- Add or skip cursor above/below the main cursor.
+  --         set({"n", "v"}, "<up>",
+  --             function() mc.lineAddCursor(-1) end)
+  --         set({"n", "v"}, "<down>",
+  --             function() mc.lineAddCursor(1) end)
+  --         set({"n", "v"}, "<localleader><up>",
+  --             function() mc.lineSkipCursor(-1) end)
+  --         set({"n", "v"}, "<localleader><down>",
+  --             function() mc.lineSkipCursor(1) end)
+  --
+  --         -- Add or skip adding a new cursor by matching word/selection
+  --         set({"n", "v"}, "<localleader>n",
+  --             function() mc.matchAddCursor(1) end)
+  --         set({"n", "v"}, "<localleader>s",
+  --             function() mc.matchSkipCursor(1) end)
+  --         set({"n", "v"}, "<localleader>N",
+  --             function() mc.matchAddCursor(-1) end)
+  --         set({"n", "v"}, "<localleader>S",
+  --             function() mc.matchSkipCursor(-1) end)
+  --
+  --         -- Add all matches in the document
+  --         set({"n", "v"}, "<localleader>A", mc.matchAllAddCursors)
+  --
+  --         -- You can also add cursors with any motion you prefer:
+  --         -- set("n", "<right>", function()
+  --         --     mc.addCursor("w")
+  --         -- end)
+  --         -- set("n", "<leader><right>", function()
+  --         --     mc.skipCursor("w")
+  --         -- end)
+  --
+  --         -- Rotate the main cursor.
+  --         set({"n", "v"}, "<left>", mc.nextCursor)
+  --         set({"n", "v"}, "<right>", mc.prevCursor)
+  --
+  --         -- Delete the main cursor.
+  --         set({"n", "v"}, "<localleader>x", mc.deleteCursor)
+  --
+  --         -- Add and remove cursors with control + left click.
+  --         set("n", "<c-leftmouse>", mc.handleMouse)
+  --
+  --         -- Easy way to add and remove cursors using the main cursor.
+  --         set({"n", "v"}, "<c-q>", mc.toggleCursor)
+  --
+  --         -- Clone every cursor and disable the originals.
+  --         set({"n", "v"}, "<localleader><c-q>", mc.duplicateCursors)
+  --
+  --         set("n", "<esc>", function()
+  --             if not mc.cursorsEnabled() then
+  --                 mc.enableCursors()
+  --             elseif mc.hasCursors() then
+  --                 mc.clearCursors()
+  --             else
+  --                 -- Default <esc> handler.
+  --             end
+  --         end)
+  --
+  --         -- bring back cursors if you accidentally clear them
+  --         set("n", "<localleader>gv", mc.restoreCursors)
+  --
+  --         -- Align cursor columns.
+  --         set("n", "<localleader>a", mc.alignCursors)
+  --
+  --         -- Split visual selections by regex.
+  --         set("v", "S", mc.splitCursors)
+  --
+  --         -- Append/insert for each line of visual selections.
+  --         set("v", "I", mc.insertVisual)
+  --         set("v", "A", mc.appendVisual)
+  --
+  --         -- match new cursors within visual selections by regex.
+  --         set("v", "M", mc.matchCursors)
+  --
+  --         -- Rotate visual selection contents.
+  --         set("v", "<localleader>t",
+  --             function() mc.transposeCursors(1) end)
+  --         set("v", "<localleader>T",
+  --             function() mc.transposeCursors(-1) end)
+  --
+  --         -- Jumplist support
+  --         set({"v", "n"}, "<c-i>", mc.jumpForward)
+  --         set({"v", "n"}, "<c-o>", mc.jumpBackward)
+  --
+  --         -- Customize how cursors look.
+  --         local hl = vim.api.nvim_set_hl
+  --         hl(0, "MultiCursorCursor", { link = "Cursor" })
+  --         hl(0, "MultiCursorVisual", { link = "Visual" })
+  --         hl(0, "MultiCursorSign", { link = "SignColumn"})
+  --         hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
+  --         hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
+  --         hl(0, "MultiCursorDisabledSign", { link = "SignColumn"})
+  --     end
+  -- },
+  {
+    'jiaoshijie/undotree',
+    dependencies = 'nvim-lua/plenary.nvim',
+    opts = {},
+    config = true,
+    keys = { -- load the plugin only when using it's keybinding:
+      { "<leader>ut", "<cmd>lua require('undotree').toggle()<cr>" },
+    },
+  },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
+  },
+  {
+    'folke/todo-comments.nvim',
+    event = "BufEnter",
+  },
+  {
+    'arnamak/stay-centered.nvim',
+    opts = {}
+  }, -- autocmds for always stay centered
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      bigfile = { enabled = true },
+      dashboard = { enabled = false },
+      explorer = { enabled = false },
+      indent = { enabled = true },
+      input = { enabled = false },
+      notifier = {
+        enabled = true,
+        timeout = 3000,
+      },
+      picker = {
+        enabled = true,
+        sources = {
+          files = {
+            hidden = true,
+            ignored = true,
+          },
+          projects = {
+            dev = {
+              "~/dev/projects/java",
+              "~/dev/projects/javascript",
+              "~/dev/projects/cpp",
+              "~/dev/projects/c",
+              "~/dev/projects/arduino",
+              "~/dev/projects/go",
+              "~/dev/projects/lua",
+              "~/dev/projects/php",
+              "~/dev/projects/microcontrollers",
+            }
+          }
+        },
+      },
+      quickfile = { enabled = true },
+      scope = { enabled = false },
+      scroll = { enabled = false },
+      statuscolumn = { enabled = true },
+      words = { enabled = false },
+      styles = {
+        notification = {
+          wo = { wrap = true } -- Wrap notifications
+        }
+      }
+    },
+    keys = {
+      -- Top Pickers & Explorer
+      { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+      { "<leader>q", function() require('dante/custom').pick_asynctask() end, desc = "Run Tasks" },
+      { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>f:", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader>fn", function() Snacks.picker.notifications() end, desc = "Notification History" },
+      { "<leader>fe", function() Snacks.explorer() end, desc = "File Explorer" },
+      { "<leader>fz", function() Snacks.picker.zoxide() end, desc = "Project with Zoxide" },
+      -- find
+      { "<leader>f,", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config"), exclude = {'undodir'}, layout='telescope'}) end, desc = "Find Config File" },
+      { "<leader>f.", function() Snacks.picker.files({ cwd = "~/.config", exclude = {'undodir'}, layout='telescope'}) end, desc = "Find Config File" },
+      { "<leader>ff", function() Snacks.picker.files({exclude = { '*.class', 'target/' }}) end,  desc = "Find Files" },
+      { "<leader>fG", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+      -- GIT
+      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
+      { "<M-g>", function() Snacks.lazygit() end, desc = "Lazygit" },
+      { "<leader>gb", function() Snacks.picker.git_branches({layout="select"}) end, desc = "Git Branches" },
+      { "<leader>gl", function() Snacks.picker.git_log({
+            finder = "git_log",
+            format = "git_log",
+            preview = "git_show",
+            confirm = "git_checkout",
+            layout = "telescope",
+      }) end, desc = "Git Log" },
+      { "<localleader>gl", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+      { "<localleader>gs", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+      { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+      -- Grep
+      { "<leader>f<", function() Snacks.picker.grep({ cwd = vim.fn.stdpath("config") }) end, desc = "Grep Config File" },
+      { "<leader>f>", function() Snacks.picker.grep({ cwd = vim.fs.joinpath(vim.fn.stdpath("config"), "lazy")}) end, desc = "Grep Config File" },
+      { "<leader>fL", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+      { "<leader>fB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+      -- search
+      { '<leader>f"', function() Snacks.picker.registers() end, desc = "Registers" },
+      { '<leader>f/', function() Snacks.picker.search_history() end, desc = "Search History" },
+      { "<leader>fa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+      { "<leader>fc", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader>fC", function() Snacks.picker.commands() end, desc = "Commands" },
+      { "<leader>fd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+      { "<leader>fD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
+      { "<leader>fh", function() Snacks.picker.help() end, desc = "Help Pages" },
+      { "<leader>fH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+      { "<leader>fi", function() Snacks.picker.icons() end, desc = "Icons" },
+      { "<leader>fj", function() Snacks.picker.jumps() end, desc = "Jumps" },
+      { "<leader>fk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+      { "<leader>fl", function() Snacks.picker.loclist() end, desc = "Location List" },
+      { "<leader>ft", function() Snacks.picker.todo_comments() end, desc = "Todo" },
+      { "<leader>fT", function () Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME", "WARN", "INFO" } }) end, desc = "Todo/Fix/Fixme" },
+      { "<leader>fmk", function() Snacks.picker.marks() end, desc = "Marks" },
+      { "<leader>fmn", function() Snacks.picker.man() end, desc = "Man Pages" },
+      { "<leader>fy", function() Snacks.picker.cliphist() end, desc = "Clip history" },
+      { "<leader>fP", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
+      { "<leader>fq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+      { "<leader>fR", function() Snacks.picker.resume() end, desc = "Resume" },
+      { "<leader>gww", function() Snacks.picker.worktrees() end, desc = "Show worktrees" },
+      { "<leader>gwc", function() Snacks.picker.worktrees_new() end, desc = "Create worktrees" },
+      { "<leader>fu", function() Snacks.picker.undo() end, desc = "Undo History" },
+      { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+      -- LSP
+      { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+      { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
+      { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+      { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+      { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+      { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+      { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+      -- Other
+      { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+      { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
+      { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+      { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+      { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
+      { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+      { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+      { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+      { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
+      { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
+      { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
+      { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+      {
+        "<leader>N",
+        desc = "Neovim News",
+        function()
+          Snacks.win({
+            file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+            width = 0.6,
+            height = 0.6,
+            wo = {
+              spell = false,
+              wrap = false,
+              signcolumn = "yes",
+              statuscolumn = " ",
+              conceallevel = 3,
+            },
+          })
+        end,
+      }
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          -- Setup some globals for debugging (lazy-loaded)
+          _G.dd = function(...)
+            Snacks.debug.inspect(...)
+          end
+          _G.bt = function()
+            Snacks.debug.backtrace()
+          end
+          vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+          -- Create some toggle mappings
+          Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+          Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+          Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+          Snacks.toggle.diagnostics():map("<leader>ud")
+          Snacks.toggle.line_number():map("<leader>ul")
+          Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+          Snacks.toggle.treesitter():map("<leader>uT")
+          Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+          Snacks.toggle.inlay_hints():map("<leader>uh")
+          Snacks.toggle.indent():map("<leader>ui")
+          Snacks.toggle.dim():map("<leader>uD")
+        end,
+      })
+    end,
+  },
+  {
+    'echasnovski/mini.nvim',
+    dependencies = {
+      {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+      },
+    },
+    config = function()
+      require("mini.align").setup()
+      require("mini.cursorword").setup()
+      require("mini.ai").setup()
+      require("mini.misc").setup()
+      require("mini.operators").setup()
+      require("mini.surround").setup()
+      require("mini.splitjoin").setup()
+      require("mini.comment").setup({
+        options = {
+          custom_commentstring = function()
+            return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+          end,
+        },
+      })
+    end,
+  },
+  {
+    "booperlv/nvim-gomove",
+    config = function()
+      require("gomove").setup({})
+    end
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      preset = "helix",
+      icons = {
+          breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+          separator = "➜", -- symbol used between a key and it's label
+          group = " ", -- symbol prepended to a group
+          ellipsis = "…",
+      },
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = true })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+  },
+  {
+    'ggandor/leap.nvim',
+    keys = {
+      {'s', '<Plug>(leap)'},
+      {'S', '<Plug>(leap-from-window)'},
+    }
+  },
+  {
+    'hinell/duplicate.nvim',
+  }, -- Duplicate lines
+  {
+    'altermo/ultimate-autopair.nvim',
+    event = { "InsertEnter", "CmdlineEnter" },
+    opts = {
+      --Config goes here
+    },
+  },
+  {
+    'bkad/camelcasemotion',
+  },
+  {
+    'propet/toggle-fullscreen.nvim',
+    event = "VeryLazy",
+  }, -- Toggle fullScreen with <leader>z
+  {
+    'uga-rosa/ccc.nvim',
+    keys={
+      {"<leader>cc", "<cmd>CccPick<CR>",desc="Color picker"},
+    },
+    config = function()
+      -- create hydras in here
+      require('ccc').setup({
+        ccc_option_highlighter_auto_enable = true,
+      })
+    end
+  }, -- Color Picker
+
+  -- Language Specifics ==========================================================
+  -- Documentation ---------------------------------------------------------------
+  -- Processing ------------------------------------------------------------------
+  -- LATEX ========
+  -- The recomandations to use this plugin tells that
+  -- it should be not lazy loaded
+  {
+    'lervag/vimtex',
+    lazy = false,
+    ft = "tex",
+    keys = {
+      { "<localLeader>l", "", desc = "+vimtex" },
+    },
+    enabled = function() return util.getOS() == "Linux" end,
+    config = function ()
+      vim.g.vimtex_view_method = 'zathura'
+      vim.g.vimtex_compiler_latexmk = {
+        aux_dir = "./.latexmk/aux",
+        out_dir = "./.latexmk/out",
+      }
+    end
+  },
+  -- HTTP ========
+  {
+    "mistweaverco/kulala.nvim",
+    keys = {
+      { "<leader>Rs", desc = "Send request" },
+      { "<leader>Ra", desc = "Send all requests" },
+      { "<leader>Rb", desc = "Open scratchpad" },
+    },
+    ft = {"http", "rest"},
+    opts = {
+      global_keymaps = false,
+      global_keymaps_prefix = "<leader>R",
+      kulala_keymaps_prefix = "",
+    },
+  },
+  -- JSON ========
+  { 'yochem/jq-playground.nvim' },
+  -- GIT ========
+  -- lazy.nvim
+  {
+    "moyiz/git-dev.nvim",
+    event = "VeryLazy",
+    keys = {
+        {
+          "<leader>go",
+          function()
+            local repo = vim.fn.input "Repository name / URI: "
+            if repo ~= "" then
+              require("git-dev").open(repo)
+            end
+          end,
+          desc = "[O]pen a remote git repository",
+        }
+    },
+    opts = {},
+  },
+  {
+    "Juksuu/worktrees.nvim",
+    config = function()
+        require("worktrees").setup()
+    end,
+  },
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }, -- Super fast git decorations implemented purely in Lua/Teal
+  {
+    'sindrets/diffview.nvim',
+    command = "DiffviewOpen",
+    cond = is_git_root,
+    keys = {
+      {
+        "<leader>gg",
+        function()
+          toggle_diffview("DiffviewOpen")
+        end,
+        desc = "Diff Index",
+      },
+      {
+        "<leader>gM",
+        function()
+          toggle_diffview("DiffviewOpen master..HEAD")
+        end,
+        desc = "Diff master HEAD",
+      },
+      {
+        "<leader>gD",
+        function()
+          toggle_diffview("DiffviewOpen dev..HEAD")
+        end,
+        desc = "Diff dev HEAD",
+      },
+      {
+        "<leader>gh",
+        function()
+          toggle_diffview("DiffviewFileHistory %")
+        end,
+        desc = "Open diffs for current File",
+      },
+      },
+  },-- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+
+  -- Java ========
+  {
+    "nvim-java/nvim-java",
+  },
+  {
+    'jkeresman01/spring-initializr.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    config = function()
+      require('spring-initializr').setup()
+    end
+  },
+  {
+      'javiorfo/nvim-springtime',
+      lazy = true,
+      cmd = { "Springtime", "SpringtimeUpdate" },
+      dependencies = {
+          "javiorfo/nvim-popcorn",
+          "javiorfo/nvim-spinetta",
+          "hrsh7th/nvim-cmp"
+      },
+      build = function()
+          require'springtime.core'.update()
+      end,
+      opts = {
+          -- This section is optional
+          -- If you want to change default configurations
+          -- In packer.nvim use require'springtime'.setup { ... }
+
+          -- Springtime popup section
+          spring = {
+              -- Project: Gradle, Gradle Kotlin and Maven (Gradle default)
+              project = {
+                  selected = 1
+              },
+              -- Language: Java, Kotlin and Groovy (Java default)
+              language = {
+                  selected = 1
+              },
+              -- Packaging: Jar and War (Jar default)
+              packaging = {
+                  selected = 1
+              },
+              -- Project Metadata defaults:
+              -- Change the default values as you like
+              -- This can also be edited in the popup
+              project_metadata = {
+                  group = "br.com.dantedev",
+                  artifact = "demo",
+                  name = "demo",
+                  package_name = "br.com.dantedev.demo",
+                  version = "0.0.1-SNAPSHOT"
+              }
+          },
+>>>>>>> 927819fd2 (:rocket: update 13-11)
 
 	-- Typescript ========
 	-- C++ ========
@@ -1604,6 +2301,7 @@ return {
 		end,
 	},
 
+<<<<<<< HEAD
 	-- ColorColumn ===========================
 	{ "xiyaowong/virtcolumn.nvim" },
 	-- ICONS THEMES==================================================
@@ -1674,4 +2372,439 @@ return {
 			})
 		end,
 	},
+=======
+              -- Highlight links to Title and sections for changing colors
+              style = {
+                  title_link = "Boolean",
+                  section_link = "Type"
+              }
+          },
+
+          -- Workspace is where the generated Spring project will be saved
+          workspace = {
+              -- Default where Neovim is open
+              path = vim.fn.expand("%:p:h"),
+
+              -- Spring Initializr generates a zip file
+              -- Decompress the file by default
+              decompress = true,
+
+              -- If after generation you want to open the folder
+              -- Opens the generated project in Neovim by default
+              open_auto = true
+          },
+
+          -- This could be enabled for debugging purposes
+          -- Generates a springtime.log with debug and errors.
+          internal = {
+              log_debug = false
+          }
+      }
+  },
+
+  -- Typescript ========
+  -- C++ ========
+  -- {
+  --   'madskjeldgaard/cppman.nvim',    -- Interface for the cppman cli tool
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     { 'MunifTanjim/nui.nvim' }
+  --   },
+  --   enabled = function() return util.getOS() == "Linux" end,
+  --   config = function()
+  --     local cppman = require "cppman"
+  --     cppman.setup()
+  --     vim.keymap.set("n", "<leader>cm", function() cppman.open_cppman_for(vim.fn.expand("<cword>")) end)
+  --     vim.keymap.set("n", "<leader>cn", function() cppman.input() end)
+  --   end
+  --
+  -- },
+  -- DATABASE Specifics =========================================================
+  {
+    'tpope/vim-dadbod'
+
+  }, -- Vim plugin to interact with databases {Mongo,JQ,Postgre}
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+      { 'tpope/vim-dadbod',                     lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
+  },
+  { 'kristijanhusak/vim-dadbod-completion' }, -- Completion for dadbod
+
+  -- CLI Pluggins ===============================================================
+  {
+      "kawre/leetcode.nvim",
+      dependencies = {
+          "nvim-lua/plenary.nvim",
+          "nvim-telescope/telescope.nvim",
+          "MunifTanjim/nui.nvim",
+      },
+      opts = {
+          -- configuration goes here
+        cn = {
+          enabled = false,
+          translator = true,
+          translate_problems = true
+        },
+        injector = { ---@type table<lc.lang, lc.inject>
+            ["python3"] = {
+                before = true
+            },
+            ["cpp"] = {
+                before = { "#include <bits/stdc++.h>", "using namespace std;" },
+                after = "int main() {}",
+            },
+            ["java"] = {
+                before = "import java.util.*;",
+            },
+        },
+      },
+  },
+  -- {
+  --   "ramilito/kubectl.nvim",
+  --   event = "VeryLazy",
+  --   lazy = true,
+  --   config = function()
+  --     require("kubectl").setup()
+  --     vim.keymap.set("n", "<leader>kk", '<cmd>lua require("kubectl").toggle()<cr>', { noremap = true, silent = true , desc = "Toggler Kubectl"})
+  --   end,
+  -- },
+  -- Note Taking Plugins ===================================================
+  {
+    "echaya/neowiki.nvim",
+    opts = {
+      wiki_dirs = {
+        -- neowiki.nvim supports both absolute and relative paths
+        { name = "Work", path = "~/Notes/obsidian/work"},
+        { name = "Programming", path = "~/Notes/obsidian/programming" },
+      },
+    },
+    keys = {
+      { "<localleader>ww", "<cmd>lua require('neowiki').open_wiki()<cr>", desc = "Open Wiki" },
+      { "<localleader>wW", "<cmd>lua require('neowiki').open_wiki_floating()<cr>", desc = "Open Floating Wiki" },
+      { "<localleader>wT", "<cmd>lua require('neowiki').open_wiki_new_tab()<cr>", desc = "Open Wiki in Tab" },
+    },
+  },
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",  -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    event = {
+      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+      -- refer to `:h file-pattern` for more examples
+      "BufReadPre ~/Notes/obsidian/*.md",
+      "BufNewFile ~/Notes/obsidian/*.md",
+    },
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- see below for full list of optional dependencies 👇
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "personal",
+          path = "~/Notes/obsidian/programming",
+        },
+        {
+          name = "work",
+          path = "~/Notes/obsidian/work",
+        },
+      },
+      ui = {
+        enable = false
+      },
+      -- Optional, customize how note file names are generated given the ID, target directory, and title.
+      ---@param spec { id: string, dir: obsidian.Path, title: string|? }
+      ---@return string|obsidian.Path The full path to the new note.
+      note_path_func = function(spec)
+        local path = spec.dir / tostring(spec.title)
+        return path:with_suffix(".md")
+      end,
+    },
+  },
+  -- UI Pluggins ===========================================================
+  {
+    "chrisgrieser/nvim-origami",
+    event = "VeryLazy",
+    opts = {}, -- needed even when using default config
+
+  },
+  -- PREVIEWERS
+  -- MARKDOWN
+  {
+    "bngarren/checkmate.nvim",
+    ft = "markdown", -- Lazy loads for Markdown files matching patterns in 'files'
+    opts = {
+      -- files = { "*.md" }, -- any .md file (instead of defaults)
+    },
+  } -- todo with any todo markdown file
+  -- LATEX
+
+  -- BUFFERS
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    specs = {
+        "folke/snacks.nvim",
+        opts = function(_, opts)
+          return vim.tbl_deep_extend("force", opts or {}, {
+            picker = {
+              actions = require("trouble.sources.snacks").actions,
+              win = {
+                input = {
+                  keys = {
+                    ["<c-t>"] = {
+                      "trouble_open",
+                      mode = { "n", "i" },
+                    },
+                  },
+                },
+              },
+            },
+          })
+        end,
+      },
+      lazy = true
+  },
+  { 'onsails/lspkind-nvim' },
+  {
+    'ray-x/lsp_signature.nvim',
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts) require("lsp_signature").setup(opts) end
+  },  -- for symbols in completion
+  {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+      require("dante/lspsaga")
+    end,
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter', -- optional
+        'nvim-tree/nvim-web-devicons'     -- optional
+    },
+    event = "LspAttach",
+  },
+  {
+    'nvim-zh/colorful-winsep.nvim',
+    event = { "InsertEnter", "CmdlineEnter" },
+    config = function()
+      require('colorful-winsep').setup()
+    end
+  },
+  -- THEMES =====================================================================
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "ellisonleao/gruvbox.nvim", priority = 1000, lazy=true },
+  { "rebelot/kanagawa.nvim" },
+
+  -- ColorColumn ===========================
+  { 'xiyaowong/virtcolumn.nvim' },
+  -- ICONS THEMES==================================================
+  { 'ryanoasis/vim-devicons' },
+  { 'yamatsum/nvim-web-nonicons' },
+  {
+    'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('nvim-web-devicons').setup()
+    end
+  },
+  -- My Pluggins ===========================================================
+  -- {
+  --   '~/dev/projects/lua/neovim/project-creator',
+  --   dev = true,
+  --   enabled = function() return util.getOS() == "Linux" end
+  -- },
+  {
+    'jui',
+    dev = true,
+    enabled = function() return util.getOS() == "Linux" end
+  },
+  {
+    'cursor',
+    dev = true,
+    enabled = function() return util.getOS() == "Linux" end
+  },
+  -- STATUS LINE PLUGINS ========================================================
+  -- {'pysan3/pathlib.nvim'},
+  {
+    'nvim-lualine/lualine.nvim'
+  },
+  {
+    'SmiteshP/nvim-navic',
+    dependencies = "neovim/nvim-lspconfig",
+  },
+  {
+    'christoomey/vim-tmux-navigator',
+    -- enabled = function() return util.getOS() == 'Linux' end
+    enabled = function() return not (vim.fn.executable('tmux') and string.find(vim.fn.expandcmd('$TERM'), 'xterm-kitty')) end
+  },
+  -- AI PLUGINS ================================================================
+  {
+      "ravitemer/mcphub.nvim",
+      dependencies = {
+          "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
+      },
+      -- cmd = "MCPHub", -- lazily start the hub when `MCPHub` is called
+      build = "bundled_build.lua", -- Installs required mcp-hub npm module
+      opts = {
+        use_bundled_binary = true,
+      },
+  },
+  {
+    "0xrusowsky/nvim-ctx-ingest",
+    dependencies = {
+      "nvim-web-devicons", -- required for file icons
+    },
+    keys = {"<localleader>i"},
+    config = function()
+      require("nvim-ctx-ingest").setup({
+        -- your config options here
+      })
+    end,
+  },
+  -- {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   dependencies = {
+  --     { "nvim-lua/plenary.nvim", branch = "master" },
+  --   },
+  --   build = "make tiktoken",
+  --   opts = {
+  --     -- See Configuration section for options
+  --   },
+  -- },
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false,
+    opts = {
+      provider = "perplexity",
+      providers = {
+        perplexity = {
+          __inherited_from = "openai",
+          api_key_name = "PERPLEXITY_API_KEY",
+          endpoint = "https://api.perplexity.ai",
+          model = "llama-3.1-sonar-large-128k-online",
+          -- model = "claude",
+        },
+        gemini = {
+          model = "gemini-2.5-pro-preview-03-25",
+          extra_request_body = {
+            temperature = 0,
+            max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+            --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+          }
+        },
+        openai = {
+          endpoint = "https://api.openai.com/v1",
+          model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+          timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+          extra_request_body = {
+            temperature = 0,
+            max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+            --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+          }
+        },
+      },
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+    },
+  },
+  {
+    'xiyaowong/transparent.nvim',
+    config = function()
+      require('transparent').setup({
+        extra_groups = {
+          "FoldColumn",
+          "WinBar",
+          "WinBarNC",
+          -- Saga
+          "SagaWinbarFileName",
+          "SagaWinbarFolderName",
+          "SagaWinbarSep",
+          "SagaText",
+          "SagaDetail",
+          "SagaSep",
+          "SagaToggle",
+          "SagaBorder",
+          "SagaNormal",
+          -- Snacks
+          "SnacksPickerDir",
+          "SnacksPickerTree",
+          "SnacksPickerCol",
+          "SnacksPickerComment",
+          "SnacksWinKeySep",
+          "SnacksPickerDimmed",
+          -- StatusLine
+          "lualine_b_normal",
+          "lualine_x_filetype_DevIconLua_normal",
+          "lualine_x_filetype_DevIconJs_normal",
+          "lualine_x_filetype_DevIconDefault_normal",
+          "lualine_c_normal",
+          "StatusLineNC",
+          "StatusLine",
+          -- CMP
+          "CmpItemAbbr",
+          "CmpDocumentationBorder",
+          "CmpDocumentation",
+          "NotifyBackground",
+          -- Floating
+          "LspFloatWinNormal",
+          "Normal",
+          "FloatBorder",
+          "NormalFloat",
+        },
+        exclude_groups = {
+          'WhichKeyTitle'
+        }
+      })
+    end
+  },
+>>>>>>> 927819fd2 (:rocket: update 13-11)
 }

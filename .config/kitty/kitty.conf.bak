@@ -11,8 +11,7 @@
 # italic_font      auto
 # bold_italic_font auto
 
- window_padding_width 0
-#window_padding_height 0
+ window_padding_width 0 0 0 5
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. To get a full list of supported fonts use the `kitty
@@ -27,7 +26,7 @@
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
- font_size 17.0
+ font_size 18.0
 
 #: Font size (in pts).
 
@@ -822,7 +821,7 @@ enable_audio_bell no
 #: that setting a non-zero window_margin_width overrides this and
 #: causes all borders to be drawn.
 
- # window_margin_width 0
+# window_margin_width 0
 
 #: The window margin (in pts) (blank area outside the border). A
 #: single value sets all four sides. Two values set the vertical and
@@ -837,7 +836,7 @@ enable_audio_bell no
 #: set the vertical and horizontal sides. Three values set top,
 #: horizontal and bottom. Four values set top, right, bottom and left.
 
- # window_padding_width 0
+# window_padding_width 0
 
 #: The window padding (in pts) (blank area between the text and the
 #: window border). A single value sets all four sides. Two values set
@@ -880,7 +879,7 @@ enable_audio_bell no
 #: Fade the text in inactive windows by the specified amount (a number
 #: between zero and one, with zero being fully faded).
 
-hide_window_decorations yes
+# hide_window_decorations no
 
 #: Hide the window decorations (title-bar and window borders) with
 #: yes. On macOS, titlebar-only and titlebar-and-corners can be used
@@ -1153,13 +1152,8 @@ background_opacity 0.8
 #: (this is off by default as it has a performance cost). Changing
 #: this option when reloading the config will only work if
 #: dynamic_background_opacity was enabled in the original config.
-dynamic_background_opacity yes
 
 # background_blur 0
-
-enable_background_blur yes
-
-background_blur 1
 
 #: Set to a positive value to enable background blur (blurring of the
 #: visuals behind a transparent window) on platforms that support it.
@@ -2493,12 +2487,11 @@ action_alias kitty_scrollback_nvim kitten ~/.local/share/nvim/lazy/kitty-scrollb
 # Browse scrollback buffer in nvim
 map kitty_mod+h kitty_scrollback_nvim
 # Browse output of the last shell command in nvim
+map kitty_mod+g kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
 # Show clicked command output in nvim
 mouse_map ctrl+shift+right press ungrabbed combine : mouse_select_command_output : kitty_scrollback_nvim --config ksb_builtin_last_visited_cmd_output
 
-symbol_map U+F8F6 U+F8F8 U+F76B U+F769 PowerlineSymbols
-map ctrl+shift+\ send_text all \x1b[92;5u
 # BEGIN_KITTY_THEME
-# spaceduck
+# ENCOM
 include current-theme.conf
 # END_KITTY_THEME

@@ -8,75 +8,200 @@ plugins = [
 "toggle_special",
 ]
 
+# [scratchpads.term]
+# animation = "fromTop"
+# command = "kitty --class kitty-dropterm tmux attach-session -t dropdown || tmux new -s dropdown"
+# class = "kitty-dropterm"
+# size = "95% 93%"
+# lazy = true
+#
+# [scratchpads.todo]
+# animation = "fromBottom"
+# command = "kitty --class kitty-todo taskwarrior-tui"
+# class = "kitty-todo"
+# size = "95% 93%"
+# lazy = true
+#
+# [scratchpads.fm]
+# animation = "fromTop"
+# command = "kitty --class kitty-dropterm-fm yazi"
+# class = "kitty-dropterm-fm"
+# size = "75% 85%"
+# lazy = true
+#
+# [scratchpads.tuispotify]
+# animation = "fromTop"
+# command = "kitty --class spotify-tui ncspot"
+# class = "spotify-tui"
+# size = "75% 85%"
+# lazy = true
+#
+# [scratchpads.obsidian]
+# command = "kitty --class kitty-obsidian nvim ~/Notes/obsidian/programming"
+# animation = "fromTop"
+# class = "kitty-obsidian"
+# size = "75% 80%"
+# lazy = true
+#
+# [scratchpads.yt_dlp_download]
+# animation = "fromTop"
+# command = "kitty --class yt_dlp_download ~/dev/scripts/downloader.sh"
+# class = "yt_dlp_download"
+# lazy = true
+# size = "65% 25%"
+#
+# [scratchpads.volume]
+# command = "pavucontrol"
+# animation = "fromTop"
+# class = "org.pulseaudio.pavucontrol"
+# size = "40% 90%"
+# lazy = true
+#
+#
+# [scratchpads.wpp2]
+# animation = "fromTop"
+# command = "zapzap"
+# match_by = "class"
+# class = "com.rtosta.zapzap"
+# size = "80% 80%"
+# lazy = true
+#
+# [scratchpads.spotify]
+# command = "spotify-launcher"
+# animation = "fromTop"
+# class = "Spotify"
+# unfocus = "hide"
+# size = "75% 80%"
+# lazy = true
+#
+#
+# [scratchpads.mail]
+# command = "thunderbird"
+# animation = "fromTop"
+# class = "thunderbird"
+# size = "75% 80%"
+# lazy = true
+#
+# [scratchpads.calc]
+# command = "speedcrunch"
+# animation = "fromTop"
+# class = "org.speedcrunch.speedcrunch"
+# # title: SpeedCrunch
+# size = "75% 80%"
+# lazy = true
+#
+# [scratchpads.gpt]
+# command = "noi-desktop"
+# animation = "fromBottom"
+# class = "Noi"
+# size = "80% 80%"
+# lazy = true
+#
+# [scratchpads.testing]
+# command = "/opt/insomnia/insomnia"
+# animation = "fromTop"
+# class = "Insomnia"
+# size = "85% 85%"
+# position = "8% 5%"
+# lazy = true
+#
+# [scratchpads.auth]
+# animation = "fromTop"
+# command = "authenticator"
+# class = "com.belmoussaoui.Authenticator"
+# lazy = true
+# size = "45% 65%"
+
+[menubar]
+command = "waybar"
+
+
+
 [scratchpads.term]
-animation = "fromTop"
-command = "kitty --class kitty-dropterm tmux new -s dropdown"
+animation = ""
+command = "kitty --class kitty-dropterm tmux attach-session -t dropdown || tmux new -s dropdown"
 class = "kitty-dropterm"
 size = "95% 93%"
 lazy = true
-excludes = ["wpp","volume","fm"]
 
 [scratchpads.todo]
-animation = "fromBottom"
+animation = ""
 command = "kitty --class kitty-todo taskwarrior-tui"
 class = "kitty-todo"
 size = "95% 93%"
-lazy = true
-
-[scratchpads.volume]
-command = "pavucontrol"
-animation = "fromTop"
-class = "org.pulseaudio.pavucontrol"
-size = "40% 90%"
+pinned = false
 lazy = true
 
 [scratchpads.fm]
-animation = "fromTop"
+animation = ""
 command = "kitty --class kitty-dropterm-fm yazi"
 class = "kitty-dropterm-fm"
 size = "75% 85%"
+pinned = false
 lazy = true
 
+[scratchpads.tuispotify]
+animation = ""
+command = "kitty --class spotify-tui ncspot"
+class = "spotify-tui"
+size = "75% 85%"
+pinned = false
+lazy = true
+
+[scratchpads.obsidian]
+command = "kitty --class kitty-obsidian nvim ~/Notes/obsidian/programming"
+animation = ""
+class = "kitty-obsidian"
+size = "75% 80%"
+pinned = false
+lazy = true
+
+[scratchpads.yt_dlp_download]
+animation = ""
+command = "kitty --class yt_dlp_download ~/dev/scripts/downloader.sh"
+class = "yt_dlp_download"
+lazy = true
+size = "65% 25%"
+
+[scratchpads.volume]
+command = "pavucontrol"
+animation = ""
+class = "org.pulseaudio.pavucontrol"
+size = "40% 90%"
+pinned = false
+lazy = true
+
+
 [scratchpads.wpp2]
-animation = "fromTop"
+animation = ""
 command = "zapzap"
 match_by = "class"
 class = "com.rtosta.zapzap"
 size = "80% 80%"
 lazy = true
+pinned = false
 
 [scratchpads.spotify]
 command = "spotify-launcher"
-animation = "fromTop"
+animation = ""
 class = "Spotify"
 unfocus = "hide"
 size = "75% 80%"
+pinned = false
 lazy = true
 
-[scratchpads.tuispotify]
-animation = "fromTop"
-command = "kitty --class spotify-tui ncspot"
-class = "spotify-tui"
-size = "75% 85%"
-lazy = true
 
 [scratchpads.mail]
 command = "thunderbird"
-animation = "fromTop"
+animation = ""
 class = "thunderbird"
 size = "75% 80%"
-lazy = true
-
-[scratchpads.calendar]
-command = "kitty --class kitty-dropterm-calendar calcurse"
-animation = "fromTop"
-class = "kitty-dropterm-calendar"
-size = "75% 80%"
+pinned = false
 lazy = true
 
 [scratchpads.calc]
 command = "speedcrunch"
-animation = "fromTop"
+animation = ""
 class = "org.speedcrunch.speedcrunch"
 # title: SpeedCrunch
 size = "75% 80%"
@@ -84,33 +209,42 @@ lazy = true
 
 [scratchpads.gpt]
 command = "noi-desktop"
-animation = "fromBottom"
+animation = ""
 class = "Noi"
 size = "80% 80%"
 lazy = true
-
-[scratchpads.obsidian]
-command = "kitty --class kitty-obsidian nvim ~/Notes/obsidian/programming"
-animation = "fromTop"
-class = "kitty-obsidian"
-size = "75% 80%"
-lazy = true
+pinned = false
 
 [scratchpads.testing]
-command = "/opt/insomnia/insomnia"
-animation = "fromTop"
-class = "Insomnia"
+command = "/usr/bin/bruno"
+animation = ""
+class = "bruno"
 size = "85% 85%"
 position = "8% 5%"
 lazy = true
+pinned = false
 
-[scratchpads.yt_dlp_download]
-animation = "fromTop"
-command = "kitty --class yt_dlp_download ~/dev/scripts/downloader.sh"
-class = "yt_dlp_download"
+[scratchpads.auth]
+animation = ""
+command = "authenticator"
+class = "com.belmoussaoui.Authenticator"
 lazy = true
-size = "65% 25%"
+size = "45% 65%"
+pinned = false
 
-[menubar]
-command = "waybar"
+[scratchpads.secrets]
+animation = ""
+command = "bitwarden-desktop"
+class = "Bitwarden"
+lazy = true
+size = "55% 65%"
+pinned = false
 
+[scratchpads.pomodoro]
+animation = "fromRight"
+command = "pomodorolm"
+class = "pomodorolm"
+lazy = true
+size = "23% 60%"
+position = "1428px 45px"
+pinned = false

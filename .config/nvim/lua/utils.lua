@@ -82,6 +82,18 @@ function M.mod_hl(hl_name,opts)
   end
 end
 
+function M.pprint(t, level)
+    level = level or 1
+    for k, v in pairs(t) do
+        print(string.rep(" ", level) .. k .. ":")
+        if type(v) == "table" then
+            M.pprint(v, level + 2)
+        else
+            print(string.rep(" ", level + 2) .. tostring(v))
+        end
+    end
+end
+
 -- We want to be able to access utils in all our configuration files
 -- so we add the module to the _G global variable.
 _G.utils = M

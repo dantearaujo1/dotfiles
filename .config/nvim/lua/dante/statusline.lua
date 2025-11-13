@@ -21,7 +21,7 @@ require'lualine'.setup {
   },
   sections = {
     lualine_a = { {'mode', fmt = function(res) return res:sub(1,1) end} },
-    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_b = {'branch', 'diff', 'diagnostics',},
     lualine_c = {
       'filename',
     },
@@ -40,7 +40,7 @@ require'lualine'.setup {
     lualine_z = {}
   },
   tabline = {},
-  extensions = {}
+  extensions = {'oil','lazy','mason'}
 }
 
 

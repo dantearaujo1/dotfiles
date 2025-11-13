@@ -2,6 +2,13 @@ if vim.g.vscode then
  require("vscode-keymappings")
  require("dante/vscode")
 else
+  _G.dd = function(...)
+    Snacks.debug.inspect(...)
+  end
+  _G.bt = function()
+    Snacks.debug.backtrace()
+  end
+  vim.print = _G.dd
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	if not vim.loop.fs_stat(lazypath) then
 	  vim.fn.system({
@@ -28,8 +35,9 @@ else
   require('dante/nvim-dap') -- Another debugger Debug Adapter Protocol -- Universal
   require('dante/treesitter') -- ColorHighlight for a lot of languages
   require('dante/todo-comments') -- Highligh todo comments and show in a specific place
-  require('dante/statusline') -- A fast but not fastest status line for neovim
+  require('dante/statusline')
   require('dante/asynctasks')
+  require('dante/custom')
 
   -- User Lua Configs
  require('utils')
