@@ -20,7 +20,7 @@ else
 	require('lazy').setup("plugins",
     {
       dev = {
-        path = '~/dev/projects/lua/neovim/'
+        path = '~/dev/clones/'
     }})
 
   -- Custom Plugins Configurations

@@ -12,6 +12,13 @@ function M.getOS()
   end
   return system_name
 end
+function M.toggle_diffview(cmd)
+  if next(require("diffview.lib").views) == nil then
+    vim.cmd(cmd)
+  else
+    vim.cmd("DiffviewClose")
+  end
+end
 
 -- We will create a few autogroup, this function will help to avoid
 -- always writing cmd('augroup' .. group) etc..
