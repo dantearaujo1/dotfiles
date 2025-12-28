@@ -3,7 +3,7 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 
 return {
-	--   -- ============ SYNTAX PLUGINS ==============================
+	-- ============ SYNTAX PLUGINS ==============================
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -17,6 +17,27 @@ return {
 		opts = { keymaps = { useDefault = true } },
 	},
 	{
+		"windwp/nvim-ts-autotag",
+		config = function()
+      require('nvim-ts-autotag').setup({
+        opts = {
+          -- Defaults
+          enable_close = true, -- Auto close tags
+          enable_rename = true, -- Auto rename pairs of tags
+          enable_close_on_slash = false -- Auto close on trailing </
+        },
+        -- Also override individual filetype configs, these take priority.
+        -- Empty by default, useful if one of the "opts" global settings
+        -- doesn't work well in a specific filetype
+        per_filetype = {
+          ["html"] = {
+            enable_close = false
+          }
+        }
+      })
+		end
+	},
+	{
 		"olrtg/nvim-emmet",
 		keys = {
 			{ "n", "v" },
@@ -27,9 +48,9 @@ return {
 		end,
 	},
 
-	--   -- ============ DEBUGGER PLUGINS ==============================
-	--   -- ============ REPL PLUGINS ==============================
-	--   -- ============ LSP PLUGINS ==============================
+	-- ============ DEBUGGER PLUGINS ==============================
+	-- ============ REPL PLUGINS ==============================
+	-- ============ LSP PLUGINS ==============================
 	{
 		"akinsho/flutter-tools.nvim",
 		lazy = true,
@@ -62,7 +83,7 @@ return {
 		},
 	}, -- UI out of the box
 	{
-		"nvitools/none-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		event = "VeryLazy",
 	},
 	{
@@ -81,11 +102,9 @@ return {
 		dependencies = { "saghen/blink.cmp" },
 		opts = {
 			servers = {
-				lua_ls = {},
 			},
 		},
 		config = function(_, opts)
-			-- require("dante/nvim-lspconfig")
 			for server, cfg in pairs(opts.servers) do
 				cfg = cfg or {}
 				cfg.capabilities = require("blink.cmp").get_lsp_capabilities(cfg.capabilities)
@@ -402,6 +421,22 @@ return {
 		end,
 	},
 	-- Utils Pluggins =============================================================
+  {
+    "uhs-robert/sshfs.nvim",
+    opts = {
+      -- Refer to the configuration section below
+      -- or leave empty for defaults
+    },
+  },
+  {
+    "colomb8/rambo.nvim",
+    config = function()
+      require("rambo").setup({
+        -- operations_key = 'C', -- 'C' or 'M'
+        -- c_right_mode = 'bow', -- 'bow' or 'eow'
+      })
+    end,
+  }, -- A lot of insert mode mappings
 	{
 		"mistricky/codesnap.nvim",
 		lazy = true,
@@ -428,6 +463,16 @@ return {
 			bg_theme = "bamboo",
 		},
 	}, -- take snapshots of the code
+  {
+    "gennaro-tedesco/nvim-jqx",
+    event = {"BufReadPost"},
+    ft = { "json", "yaml" },
+  }, -- Better way to check json and yaml data JqxQuery and JqxList
+  {
+    "alex-popov-tech/store.nvim",
+    dependencies = { "OXY2DEV/markview.nvim" },
+    cmd = "Store"
+  }, -- A Store for plugins
 	{
 		"kevinhwang91/nvim-bqf",
 		event = "VeryLazy",
@@ -604,6 +649,7 @@ return {
 				end,
 				desc = "Smart Find Files",
 			},
+      { "<leader>q", function() require('dante/custom').pick_asynctask() end, desc = "Run Tasks" },
 			{
 				"<leader>fb",
 				function()
@@ -626,14 +672,14 @@ return {
 				desc = "Command History",
 			},
 			{
-				"<leader>fn",
+				"<leader>fN",
 				function()
 					Snacks.picker.notifications()
 				end,
 				desc = "Notification History",
 			},
 			{
-				"<leader>fN",
+				"<leader>fn",
 				function()
 					Snacks.picker.files({ cwd = "~/Notes/", layout = "telescope" })
 				end,
@@ -1191,6 +1237,12 @@ return {
 			})
 		end,
 	},
+  {
+    "booperlv/nvim-gomove",
+    config = function()
+      require("gomove").setup({})
+    end
+  },
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
@@ -1225,16 +1277,6 @@ return {
 	{
 		"foosoft/vim-argwrap",
 	}, -- Strenght argument wrapping and unwrapping
-	-- {
-	--   'kylechui/nvim-surround',
-	--   version = "*", -- Use for stability; omit to use `main` branch for the latest features
-	--   event = "VeryLazy",
-	--   config = function()
-	--     require("nvim-surround").setup({
-	--       -- Configuration here, or leave empty to use defaults
-	--     })
-	--   end
-	-- }, -- Change surroundings Not tpope anymore
 	{
 		"altermo/ultimate-autopair.nvim",
 		event = { "InsertEnter", "CmdlineEnter" },
@@ -1281,23 +1323,23 @@ return {
 	-- LATEX ========
 	-- The recomandations to use this plugin tells that
 	-- it should be not lazy loaded
-	-- {
-	--   'lervag/vimtex',
-	--   ft = "tex",
-	--   enabled = function() return util.getOS() == "Linux" end
-	-- },
-	-- {
-	--   'matze/vim-tex-fold',
-	--   ft = "tex",
-	--   enabled = function() return util.getOS() == "Linux" end
-	-- },
-	-- {
-	--   'aspeddro/pandoc.nvim',
-	--   event = "VeryLazy",
-	--   config = function()
-	--     require 'pandoc'.setup()
-	--   end
-	-- },
+	{
+	  'lervag/vimtex',
+	  ft = "tex",
+	  enabled = function() return util.getOS() == "Linux" end
+	},
+	{
+	  'matze/vim-tex-fold',
+	  ft = "tex",
+	  enabled = function() return util.getOS() == "Linux" end
+	},
+	{
+	  'aspeddro/pandoc.nvim',
+	  event = "VeryLazy",
+	  config = function()
+	    require 'pandoc'.setup()
+	  end
+	},
 	-- HTTP ========
 	-- {
 	--   "rest-nvim/rest.nvim",
@@ -1307,7 +1349,22 @@ return {
 	--     require("rest-nvim").setup()
 	--   end,
 	-- },
+  {
+    "mistweaverco/kulala.nvim",
+    keys = {
+      { "<leader>Rs", desc = "Send request" },
+      { "<leader>Ra", desc = "Send all requests" },
+      { "<leader>Rb", desc = "Open scratchpad" },
+    },
+    ft = {"http", "rest"},
+    opts = {
+      global_keymaps = false,
+      global_keymaps_prefix = "<leader>R",
+      kulala_keymaps_prefix = "",
+    },
+  },
 	-- JSON ========
+  { 'yochem/jq-playground.nvim' },
 	-- GIT ========
 	-- lazy.nvim
 	{
@@ -1376,9 +1433,89 @@ return {
 	}, -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
 
 	-- Java ========
-	-- {
-	--   "nvim-java/nvim-java",
-	-- },
+  {
+    "nvim-java/nvim-java",
+  },
+  {
+    'jkeresman01/spring-initializr.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    config = function()
+      require('spring-initializr').setup()
+    end
+  },
+  {
+      'javiorfo/nvim-springtime',
+      lazy = true,
+      cmd = { "Springtime", "SpringtimeUpdate" },
+      dependencies = {
+          "javiorfo/nvim-popcorn",
+          "javiorfo/nvim-spinetta",
+          "hrsh7th/nvim-cmp"
+      },
+      build = function()
+          require'springtime.core'.update()
+      end,
+      opts = {
+          -- This section is optional
+          -- If you want to change default configurations
+          -- In packer.nvim use require'springtime'.setup { ... }
+
+          -- Springtime popup section
+          spring = {
+              -- Project: Gradle, Gradle Kotlin and Maven (Gradle default)
+              project = {
+                  selected = 1
+              },
+              -- Language: Java, Kotlin and Groovy (Java default)
+              language = {
+                  selected = 1
+              },
+              -- Packaging: Jar and War (Jar default)
+              packaging = {
+                  selected = 1
+              },
+              -- Project Metadata defaults:
+              -- Change the default values as you like
+              -- This can also be edited in the popup
+              project_metadata = {
+                  group = "br.com.dantedev",
+                  artifact = "demo",
+                  name = "demo",
+                  package_name = "br.com.dantedev.demo",
+                  version = "0.0.1-SNAPSHOT"
+              }
+          },
+              -- Highlight links to Title and sections for changing colors
+              style = {
+                  title_link = "Boolean",
+                  section_link = "Type"
+              }
+          },
+
+          -- Workspace is where the generated Spring project will be saved
+	workspace = {
+	-- Default where Neovim is open
+	path = vim.fn.expand("%:p:h"),
+
+	-- Spring Initializr generates a zip file
+	-- Decompress the file by default
+	decompress = true,
+
+	-- If after generation you want to open the folder
+	-- Opens the generated project in Neovim by default
+	open_auto = true
+	},
+
+	-- This could be enabled for debugging purposes
+	-- Generates a springtime.log with debug and errors.
+	internal = {
+		log_debug = false
+	}
+      },
 
 	-- Typescript ========
 	-- C++ ========
@@ -1447,6 +1584,13 @@ return {
 	-- UI Pluggins ===========================================================
 	-- PREVIEWERS
 	-- MARKDOWN
+  {
+    "bngarren/checkmate.nvim",
+    ft = "markdown", -- Lazy loads for Markdown files matching patterns in 'files'
+    opts = {
+      -- files = { "*.md" }, -- any .md file (instead of defaults)
+    },
+  },
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },            -- if you use the mini.nvim suite
@@ -1550,6 +1694,12 @@ return {
 		end,
 	},
 	-- THEMES|UI ==============================================================
+  {
+    "chrisgrieser/nvim-origami",
+    event = "VeryLazy",
+    opts = {}, -- needed even when using default config
+
+  },
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, lazy = true },
 	{ "rebelot/kanagawa.nvim" },
@@ -1662,6 +1812,17 @@ return {
 		end,
 	},
 	-- AI PLUGINS ================================================================
+  {
+      "ravitemer/mcphub.nvim",
+      dependencies = {
+          "nvim-lua/plenary.nvim",  -- Required for Job and HTTP requests
+      },
+      -- cmd = "MCPHub", -- lazily start the hub when `MCPHub` is called
+      build = "bundled_build.lua", -- Installs required mcp-hub npm module
+      opts = {
+        use_bundled_binary = true,
+      },
+  },
 	{
 		"0xrusowsky/nvim-ctx-ingest",
 		dependencies = {
@@ -1674,4 +1835,72 @@ return {
 			})
 		end,
 	},
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false,
+    opts = {
+      provider = "perplexity",
+      providers = {
+        perplexity = {
+          __inherited_from = "openai",
+          api_key_name = "PERPLEXITY_API_KEY",
+          endpoint = "https://api.perplexity.ai",
+          model = "llama-3.1-sonar-large-128k-online",
+          -- model = "claude",
+        },
+        gemini = {
+          model = "gemini-2.5-pro-preview-03-25",
+          extra_request_body = {
+            temperature = 0,
+            max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+            --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+          }
+        },
+        openai = {
+          endpoint = "https://api.openai.com/v1",
+          model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+          timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+          extra_request_body = {
+            temperature = 0,
+            max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+            --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+          }
+        },
+      },
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+    },
+  },
 }

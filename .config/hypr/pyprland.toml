@@ -1,4 +1,5 @@
 [pyprland]
+hyprland_version = "0.50.0"
 plugins = [
 "expose",
 "menubar",
@@ -145,14 +146,6 @@ animation = ""
 command = "kitty --class spotify-tui ncspot"
 class = "spotify-tui"
 size = "75% 85%"
-pinned = false
-lazy = true
-
-[scratchpads.obsidian]
-command = "kitty --class kitty-obsidian nvim ~/Notes/obsidian/programming"
-animation = ""
-class = "kitty-obsidian"
-size = "75% 80%"
 pinned = false
 lazy = true
 

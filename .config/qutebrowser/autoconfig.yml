@@ -19,11 +19,15 @@ settings:
       <Shift-Return>: <Return>
   colors.webpage.darkmode.enabled:
     global: false
+  content.blocking.enabled:
+    global: true
   content.desktop_capture:
     https://app.gather.town: true
     https://meet.google.com: true
+    https://meetingtest.zoho.com: true
     https://vdo.ninja: true
   content.geolocation:
+    https://github.com: true
     https://sso.acesso.gov.br: true
     https://www.estrategiaconcursos.com.br: false
     https://www.speedtest.net: true
@@ -35,26 +39,35 @@ settings:
     https://b53.virtual.ufc.br: true
     https://b54.virtual.ufc.br: true
     https://discord.com: true
+    https://emilalvaro-e2-f5-tts.hf.space: true
     https://meet.google.com: true
+    https://meetingtest.zoho.com: true
     https://teams.microsoft.com: true
     https://vdo.ninja: true
   content.media.audio_video_capture:
+    global: ask
     https://meet.google.com: true
+    https://meetingtest.zoho.com: true
     https://teams.live.com: true
     https://teams.microsoft.com: true
     https://vdo.ninja: true
     https://www.omegle.com: false
   content.media.video_capture:
     https://app.gather.town: true
+    https://liveness.mercadolivre.com.br: true
     https://meet.google.com: true
+    https://meetingtest.zoho.com: true
     https://teams.microsoft.com: true
     https://vdo.ninja: true
     https://webcamtests.com: true
   content.notifications.enabled:
+    https://cursor.com: false
+    https://drive.dantedev.com.br: false
     https://meet.google.com: true
     https://www.estrategiaconcursos.com.br: false
     https://www.kabum.com.br: true
     https://www.macworld.com: true
+    https://www.netflix.com: true
     https://www.reddit.com: true
     https://www.tiktok.com: true
     https://www.vunesp.com.br: false
@@ -81,7 +94,7 @@ settings:
   tabs.last_close:
     global: close
   tabs.show:
-    global: multiple
+    global: always
   tabs.width:
     global: 15%
   url.default_page:
