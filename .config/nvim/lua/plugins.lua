@@ -620,10 +620,12 @@ return {
 		---@type snacks.Config
 		opts = {
 			bigfile = { enabled = true },
-			dashboard = { enabled = true },
-			explorer = { enabled = false },
-			indent = { enabled = true },
-			input = { enabled = false },
+			dashboard = { enabled = false },
+      debug = { enabled = true },
+			explorer = { enabled = true },
+      indent = { enabled = true },
+			input = { enabled = true },
+			image = { enabled = true },
 			notifier = {
 				enabled = true,
 				timeout = 3000,
@@ -688,7 +690,11 @@ return {
 			{
 				"<leader>fw",
 				function()
-					Snacks.picker.files({ cwd = "/mnt/c/users/dante.clementino/code", layout = "telescope" })
+          if util.getOS() == "Linux" then
+            Snacks.picker.files({ cwd = "~/dev/projects", layout = "telescope" })
+          else
+            Snacks.picker.files({ cwd = "/mnt/c/users/dante.clementino/code", layout = "telescope" })
+          end
 				end,
 				desc = "Find Windows Files",
 			},
@@ -1321,8 +1327,6 @@ return {
 	--   ft = 'pde',
 	-- }, -- Processing plugin helper
 	-- LATEX ========
-	-- The recomandations to use this plugin tells that
-	-- it should be not lazy loaded
 	{
 	  'lervag/vimtex',
 	  ft = "tex",
@@ -1341,14 +1345,6 @@ return {
 	  end
 	},
 	-- HTTP ========
-	-- {
-	--   "rest-nvim/rest.nvim",
-	--   ft = "http",
-	--   dependencies = { "luarocks.nvim" },
-	--   config = function()
-	--     require("rest-nvim").setup()
-	--   end,
-	-- },
   {
     "mistweaverco/kulala.nvim",
     keys = {
@@ -1366,7 +1362,6 @@ return {
 	-- JSON ========
   { 'yochem/jq-playground.nvim' },
 	-- GIT ========
-	-- lazy.nvim
 	{
 		"moyiz/git-dev.nvim",
 		event = "VeryLazy",
@@ -1383,12 +1378,6 @@ return {
 			},
 		},
 		opts = {},
-	},
-	{
-		"Juksuu/worktrees.nvim",
-		config = function()
-			require("worktrees").setup()
-		end,
 	},
 	{
 		"lewis6991/gitsigns.nvim",
@@ -1497,25 +1486,25 @@ return {
           },
 
           -- Workspace is where the generated Spring project will be saved
-	workspace = {
-	-- Default where Neovim is open
-	path = vim.fn.expand("%:p:h"),
+    workspace = {
+    -- Default where Neovim is open
+    path = vim.fn.expand("%:p:h"),
 
-	-- Spring Initializr generates a zip file
-	-- Decompress the file by default
-	decompress = true,
+    -- Spring Initializr generates a zip file
+    -- Decompress the file by default
+    decompress = true,
 
-	-- If after generation you want to open the folder
-	-- Opens the generated project in Neovim by default
-	open_auto = true
-	},
+    -- If after generation you want to open the folder
+    -- Opens the generated project in Neovim by default
+    open_auto = true
+    },
 
-	-- This could be enabled for debugging purposes
-	-- Generates a springtime.log with debug and errors.
-	internal = {
-		log_debug = false
-	}
-      },
+    -- This could be enabled for debugging purposes
+    -- Generates a springtime.log with debug and errors.
+    internal = {
+      log_debug = false
+    }
+  },
 
 	-- Typescript ========
 	-- C++ ========
@@ -1642,29 +1631,41 @@ return {
 
 	-- BUFFERS
 	{
-		"folke/trouble.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		specs = {
-			"folke/snacks.nvim",
-			opts = function(_, opts)
-				return vim.tbl_deep_extend("force", opts or {}, {
-					picker = {
-						actions = require("trouble.sources.snacks").actions,
-						win = {
-							input = {
-								keys = {
-									["<c-t>"] = {
-										"trouble_open",
-										mode = { "n", "i" },
-									},
-								},
-							},
-						},
-					},
-				})
-			end,
-		},
-		lazy = true,
+	  "folke/trouble.nvim",
+	  opts = {}, -- for default options, refer to the configuration section for custom setup.
+	  cmd = "Trouble",
+	  keys = {
+	    {
+	      "<leader>xx",
+	      "<cmd>Trouble diagnostics toggle<cr>",
+	      desc = "Diagnostics (Trouble)",
+	    },
+	    {
+	      "<leader>xX",
+	      "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+	      desc = "Buffer Diagnostics (Trouble)",
+	    },
+	    {
+	      "<leader>cs",
+	      "<cmd>Trouble symbols toggle focus=false<cr>",
+	      desc = "Symbols (Trouble)",
+	    },
+	    {
+	      "<leader>cl",
+	      "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+	      desc = "LSP Definitions / references / ... (Trouble)",
+	    },
+	    {
+	      "<leader>xL",
+	      "<cmd>Trouble loclist toggle<cr>",
+	      desc = "Location List (Trouble)",
+	    },
+	    {
+	      "<leader>xQ",
+	      "<cmd>Trouble qflist toggle<cr>",
+	      desc = "Quickfix List (Trouble)",
+	    },
+	  },
 	},
 	{ "onsails/lspkind-nvim" },
 	{
@@ -1694,15 +1695,31 @@ return {
 		end,
 	},
 	-- THEMES|UI ==============================================================
-  {
-    "chrisgrieser/nvim-origami",
-    event = "VeryLazy",
-    opts = {}, -- needed even when using default config
-
-  },
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, lazy = true },
 	{ "rebelot/kanagawa.nvim" },
+  { "serhez/teide.nvim", lazy = false, priority = 1000, opts = {}, },
+  {
+    'everviolet/nvim', name = 'evergarden',
+    priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
+    opts = {
+      theme = {
+        variant = 'fall', -- 'winter'|'fall'|'spring'|'summer'
+        accent = 'green',
+      },
+      editor = {
+        transparent_background = false,
+        sign = { color = 'none' },
+        float = {
+          color = 'mantle',
+          solid_border = false,
+        },
+        completion = {
+          color = 'surface0',
+        },
+      },
+    }
+  },
 	{
 		"xiyaowong/transparent.nvim",
 		config = function()
@@ -1753,18 +1770,19 @@ return {
 			})
 		end,
 	},
-
+  { "zaldih/themery.nvim", lazy = false, config = function() require("themery").setup({
+    themes = {
+      "teide","teide-darker", "teide-dark","teide-dimmed","teide-light","evergarden","kanagawa","gruvbox","catppuccin"
+    },
+  }) end }, -- theme switcher
 	-- ColorColumn ===========================
 	{ "xiyaowong/virtcolumn.nvim" },
 	-- ICONS THEMES==================================================
 	{ "ryanoasis/vim-devicons" },
 	{ "yamatsum/nvim-web-nonicons" },
-	{
-		"nvim-tree/nvim-web-devicons",
-		config = function()
-			require("nvim-web-devicons").setup()
-		end,
-	},
+	{ "nvim-tree/nvim-web-devicons", config = function() require("nvim-web-devicons").setup() end, },
+	-- Folding ==================================================
+  { "chrisgrieser/nvim-origami", event = "VeryLazy", opts = {},}, -- needed even when using default config
 	-- My Pluggins ===========================================================
 	-- {
 	--   '/tcc/',

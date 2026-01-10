@@ -1,8 +1,6 @@
-if [[ $(whoami) = 'dante' ]]; then
-  bindkey -r "^G"
-  bindkey "^q" clear-screen
-  bindkey "^|" complete-word
-fi
+bindkey "^q" clear-screen
+bindkey -r "^G"
+bindkey "^|" complete-word
 
 autoload -Uz edit-command-line
 zle -N edit-command-line

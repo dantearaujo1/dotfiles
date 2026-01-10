@@ -27,11 +27,10 @@ else
 	require('lazy').setup("plugins",
     {
       dev = {
-        path = '~/dev/clones/'
+        path = '~/dev/projects/lua/neovim/'
     }})
 
   -- Custom Plugins Configurations
-  require('dante/nvim-lspconfig') -- Language System Protocol -- Universal
   require('dante/nvim-dap') -- Another debugger Debug Adapter Protocol -- Universal
   require('dante/treesitter') -- ColorHighlight for a lot of languages
   require('dante/todo-comments') -- Highligh todo comments and show in a specific place

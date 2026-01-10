@@ -8,19 +8,20 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 HIST_STAMPS="yyyy/mm/dd"
 plugins=(
+  autoswitch_virtualenv
+  colorize
+  command-not-found
+  common-aliases
+  copyfile
+  copypath
+  docker
+  extract
+  man
+  sudo
+  tmux
   z
   zsh-autosuggestions
   zsh-interactive-cd
-  command-not-found
-  extract
-  docker
-  copyfile
-  copypath
-  common-aliases
-  colorize
-  autoswitch_virtualenv
-  man
-  sudo
 )
 source $ZSH/oh-my-zsh.sh
 

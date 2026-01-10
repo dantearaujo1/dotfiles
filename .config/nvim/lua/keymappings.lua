@@ -22,6 +22,8 @@ local plug = { expr = true, noremap = false }
 util.map("n", "-", "<C-^>", nore)
 util.map("n", "<Tab>", "%", nore) --Jump to matching pairs easily in normal mode
 util.map("v", "<Tab>", "%", nore) --Jump to matching pairs easily in normal mode
+util.map("n", "ç", ":", nore)
+util.map("i", "jj", ":", nore)
 
 -- Commands Shortcuts =========================================================
 util.map("n", "<leader>ll", ':luafile %<CR> <bar> :lua print("This file was sourced!")<CR>', nore)
@@ -189,26 +191,6 @@ util.map("n", "zM", ':lua require("ufo").closeAllFolds()<CR>', { noremap = true,
 util.map("n", "<leader>11", ":lua vim.diagnostic.disable()<CR>", { noremap = true, silent = true })
 util.map("n", "<leader>12", ":lua vim.diagnostic.enable()<CR>", { noremap = true, silent = true })
 util.map("n", "<localleader>o", ":Oil<CR>", { noremap = true, silent = true })
--- ================================================================|TROUBLE|
-vim.keymap.set("n", "<leader>xx", function()
-	require("trouble").toggle()
-end)
-vim.keymap.set("n", "<leader>xw", function()
-	require("trouble").toggle("workspace_diagnostics")
-end)
-vim.keymap.set("n", "<leader>xd", function()
-	require("trouble").toggle("document_diagnostics")
-end)
-vim.keymap.set("n", "<leader>xq", function()
-	require("trouble").toggle("quickfix")
-end)
-vim.keymap.set("n", "<leader>xl", function()
-	require("trouble").toggle("loclist")
-end)
-vim.keymap.set("n", "<leader>xr", function()
-	require("trouble").toggle("lsp_references")
-end)
-
 -- ================================================================|DUPLICATE|
 vim.keymap.set({ "n" }, "<S-A-k>", "<CMD>LineDuplicate -1<CR>")
 vim.keymap.set({ "n" }, "<S-A-j>", "<CMD>LineDuplicate +1<CR>")
