@@ -19,6 +19,7 @@ animation = ""
 command = "kitty --class kitty-dropterm tmux attach-session -t dropdown || tmux new -s dropdown"
 class = "kitty-dropterm"
 size = "95% 93%"
+position = "2.5% 5%"
 lazy = true
 
 [scratchpads.todo]
@@ -26,6 +27,7 @@ animation = ""
 command = "kitty --class kitty-todo taskwarrior-tui"
 class = "kitty-todo"
 size = "95% 93%"
+position = "2.5% 5%"
 pinned = false
 lazy = true
 
@@ -34,6 +36,7 @@ animation = ""
 command = "kitty --class kitty-dropterm-fm yazi"
 class = "kitty-dropterm-fm"
 size = "75% 85%"
+position = "15% 10%"
 pinned = false
 lazy = true
 
@@ -42,6 +45,7 @@ animation = ""
 command = "kitty --class spotify-tui ncspot"
 class = "spotify-tui"
 size = "75% 85%"
+position = "10% 10%"
 pinned = false
 lazy = true
 
@@ -51,12 +55,14 @@ command = "kitty --class yt_dlp_download ~/dev/scripts/downloader.sh"
 class = "yt_dlp_download"
 lazy = true
 size = "65% 25%"
+position = "25% 5%"
 
 [scratchpads.volume]
 command = "pavucontrol"
 animation = ""
 class = "org.pulseaudio.pavucontrol"
-size = "40% 90%"
+size = "50% 70%"
+position = "25% 15%"
 pinned = false
 lazy = true
 
@@ -97,6 +103,7 @@ animation = ""
 class = "org.speedcrunch.speedcrunch"
 # title: SpeedCrunch
 size = "75% 80%"
+position = "10% 10%"
 lazy = true
 
 [scratchpads.gpt]

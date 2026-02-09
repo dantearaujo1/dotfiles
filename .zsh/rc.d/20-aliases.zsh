@@ -77,3 +77,8 @@ function yy() {
 	fi
 	rm -f -- "$tmp"
 }
+function thist() {
+    rm -rf /tmp/thist
+    tmux capture-pane -epS - > /tmp/tmuxhist
+    nvim -c 'term cat /tmp/tmuxhist'
+}
