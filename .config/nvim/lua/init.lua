@@ -32,22 +32,20 @@ else
 
   -- Custom Plugins Configurations
   require('dante/nvim-dap') -- Another debugger Debug Adapter Protocol -- Universal
-  require('dante/treesitter') -- ColorHighlight for a lot of languages
   require('dante/todo-comments') -- Highligh todo comments and show in a specific place
   require('dante/statusline')
   require('dante/asynctasks')
   require('dante/custom')
+    -- User Lua Configs
+  require('utils')
+  require('settings')
+  require('keymappings')
+  require('variables')
+  require('autocmd')
+  require('colors')
 
-  -- User Lua Configs
- require('utils')
- require('settings')
- require('keymappings')
- require('variables')
- require('autocmd')
- require('colors')
-
-  -- Dante Plugins
-  require('dante/processing')
+    -- Dante Plugins
+    require('dante/processing')
 
 end
 

@@ -1,0 +1,48 @@
+# [Created by task 3.4.1 4/9/2025 10:13:02]
+data.location=/home/dante/.task
+news.version=3.4.1
+
+# To use the default location of the XDG directories,
+# move this configuration file from ~/.taskrc to ~/.config/task/taskrc and update location config as follows:
+
+#data.location=~/.local/share/task
+#hooks.location=~/.config/task/hooks
+
+# Color theme (uncomment one to use)
+#include light-16.theme
+#include light-256.theme
+#include bubblegum-256.theme
+#include dark-16.theme
+#include dark-256.theme
+#include dark-red-256.theme
+#include dark-green-256.theme
+#include dark-blue-256.theme
+#include dark-violets-256.theme
+#include dark-yellow-green.theme
+#include dark-gray-256.theme
+#include dark-gray-blue-256.theme
+# include solarized-dark-256.theme
+#include solarized-light-256.theme
+#include no-color.theme
+# include ./themes/garret.theme
+include ~/.task/themes/ireland.theme
+
+editor=nvim
+default.priority=B
+
+uda.priority.values=A,M,B,
+uda.priority.label=Priority
+uda.priority.type=string
+
+color.uda.priority.A=color255
+color.uda.priority.B=color245
+color.uda.priority.M=color250
+
+urgency.uda.priority.A.coefficient=6.0
+urgency.uda.priority.M.coefficient=3.9
+urgency.uda.priority.B.coefficient=1.8
+
+context.work.read=project:work
+context.work.write=project:work
+context.personal.read=project.not:work
+context.personal.write=project.not:work

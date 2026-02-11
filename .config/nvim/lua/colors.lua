@@ -8,7 +8,7 @@ o.guifont = 'Hack Nerd Font Mono:h12'       -- Set GUI Font
 g.termguicolors = true
 o.termguicolors = true
 w.cursorline = true
-o.signcolumn = 'no'				-- Set a Column before numbers
+o.signcolumn = 'yes'				-- Set a Column before numbers
 
 -- vim.api.nvim_set_hl(0, 'Comment', { bg = 'none' })
 

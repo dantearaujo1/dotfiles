@@ -1349,7 +1349,7 @@ return {
 		},
 	},
 	{
-		"ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim",
 	},
 	{
 		"hinell/duplicate.nvim",
@@ -1371,15 +1371,6 @@ return {
 		"propet/toggle-fullscreen.nvim",
 		event = "VeryLazy",
 	}, -- Toggle fullScreen with <leader>z
-	{
-		"folke/zen-mode.nvim",
-		event = "VeryLazy",
-	}, -- Distraction Free
-	{
-		"folke/twilight.nvim",
-		event = "VeryLazy",
-	}, -- Dim buffers
-
 	{
 		"uga-rosa/ccc.nvim",
 		keys = {
@@ -1460,40 +1451,43 @@ return {
 		end,
 	}, -- Super fast git decorations implemented purely in Lua/Teal
 	{
-		"sindrets/diffview.nvim",
-		command = "DiffviewOpen",
-		cond = is_git_root,
-		keys = {
-			{
-				"<leader>gg",
-				function()
-					util.toggle_diffview("DiffviewOpen")
-				end,
-				desc = "Diff Index",
-			},
-			{
-				"<leader>gM",
-				function()
-					util.toggle_diffview("DiffviewOpen master..HEAD")
-				end,
-				desc = "Diff master",
-			},
-			{
-				"<leader>gD",
-				function()
-					util.toggle_diffview("DiffviewOpen dev..HEAD")
-				end,
-				desc = "Diff master",
-			},
-			{
-				"<leader>gh",
-				function()
-					util.toggle_diffview("DiffviewFileHistory %")
-				end,
-				desc = "Open diffs for current File",
-			},
-		},
-	}, -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
+		"barrettruth/diffs.nvim",
+	}, -- new diff
+	-- {
+	-- 	"sindrets/diffview.nvim",
+	-- 	command = "DiffviewOpen",
+	-- 	cond = is_git_root,
+	-- 	keys = {
+	-- 		{
+	-- 			"<leader>gg",
+	-- 			function()
+	-- 				util.toggle_diffview("DiffviewOpen")
+	-- 			end,
+	-- 			desc = "Diff Index",
+	-- 		},
+	-- 		{
+	-- 			"<leader>gM",
+	-- 			function()
+	-- 				util.toggle_diffview("DiffviewOpen master..HEAD")
+	-- 			end,
+	-- 			desc = "Diff master",
+	-- 		},
+	-- 		{
+	-- 			"<leader>gD",
+	-- 			function()
+	-- 				util.toggle_diffview("DiffviewOpen dev..HEAD")
+	-- 			end,
+	-- 			desc = "Diff master",
+	-- 		},
+	-- 		{
+	-- 			"<leader>gh",
+	-- 			function()
+	-- 				util.toggle_diffview("DiffviewFileHistory %")
+	-- 			end,
+	-- 			desc = "Open diffs for current File",
+	-- 		},
+	-- 	},
+	-- }, -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev.
 
 	-- Java ========
   {
@@ -1645,6 +1639,14 @@ return {
 	-- },
 	-- Note Taking Plugins ===================================================
 	-- UI Pluggins ===========================================================
+  {
+    'zeybek/camouflage.nvim',
+    event = 'VeryLazy',
+    opts = {},
+    keys = {
+      { '<leader>ct', '<cmd>CamouflageToggle<cr>', desc = 'Toggle Camouflage' },
+    },
+  },
 	-- PREVIEWERS
 	-- MARKDOWN
   {
@@ -1750,17 +1752,6 @@ return {
 			require("lsp_signature").setup(opts)
 		end,
 	}, -- for symbols in completion
-	{
-		"nvimdev/lspsaga.nvim",
-		config = function()
-			require("dante/lspsaga")
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter", -- optional
-			"nvim-tree/nvim-web-devicons", -- optional
-		},
-		event = "LspAttach",
-	},
 	{
 		"nvim-zh/colorful-winsep.nvim",
 		event = { "InsertEnter", "CmdlineEnter" },
