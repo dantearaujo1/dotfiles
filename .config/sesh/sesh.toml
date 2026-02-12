@@ -1,0 +1,17 @@
+# open the file manager
+[[session]]
+name = "Downloads 📥"
+path = "~/Downloads"
+startup_command = "yazi"
+
+# open a file
+[[session]]
+name = "tmux config 🔧"
+path = "~/"
+startup_command = "nvim tmux.conf"
+
+[[session]]
+name = "nvim config 🔧"
+path = "~/.config/nvim"
+startup_command = "nvim tmux.conf"
+
